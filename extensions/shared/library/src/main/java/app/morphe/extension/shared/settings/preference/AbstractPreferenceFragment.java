@@ -11,6 +11,7 @@
 package app.morphe.extension.shared.settings.preference;
 
 import static app.morphe.extension.shared.StringRef.str;
+import static io.github.nexalloy.morphe.shared.settings.PreferencesKt.getPreferences;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -54,6 +55,7 @@ import app.morphe.extension.shared.settings.BaseSettings;
 import app.morphe.extension.shared.settings.BooleanSetting;
 import app.morphe.extension.shared.settings.Setting;
 import app.morphe.extension.shared.ui.CustomDialog;
+import io.github.nexalloy.morphe.shared.misc.settings.preference.BasePreference;
 
 @SuppressWarnings("deprecation")
 public abstract class AbstractPreferenceFragment extends PreferenceFragment {
@@ -192,20 +194,33 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment {
      * so all app specific {@link Setting} instances are loaded before this method returns.
      */
     protected void initialize() {
-        String preferenceResourceName;
-        if (BaseSettings.SHOW_MENU_ICONS.get()) {
-            preferenceResourceName = Utils.appIsUsingBoldIcons()
-                    ? "morphe_prefs_icons_bold"
-                    : "morphe_prefs_icons";
-        } else {
-            preferenceResourceName = "morphe_prefs";
-        }
 
-        final var identifier = ResourceUtils.getIdentifier(ResourceType.XML, preferenceResourceName);
-        if (identifier == 0) return;
-        addPreferencesFromResource(identifier);
+        //region rewrite
+        Activity context = getActivity();
+        PreferenceManager manager = getPreferenceManager();
+        manager.setSharedPreferencesName(Setting.preferences.name);
+        PreferenceScreen screen = manager.createPreferenceScreen(context);
+        setPreferenceScreen(screen);
+        var preferencesBuilder = getPreferences();
+        preferencesBuilder.forEach(builder -> screen.addPreference(builder.build(context, manager)));
+        preferencesBuilder.forEach(BasePreference::onAttachedToHierarchy);
+        screen.setKey("revanced_settings_root_screen_sort_by_key");
+        //endregion
 
-        PreferenceScreen screen = getPreferenceScreen();
+//        String preferenceResourceName;
+//        if (BaseSettings.SHOW_MENU_ICONS.get()) {
+//            preferenceResourceName = Utils.appIsUsingBoldIcons()
+//                    ? "morphe_prefs_icons_bold"
+//                    : "morphe_prefs_icons";
+//        } else {
+//            preferenceResourceName = "morphe_prefs";
+//        }
+//
+//        final var identifier = ResourceUtils.getIdentifier(ResourceType.XML, preferenceResourceName);
+//        if (identifier == 0) return;
+//        addPreferencesFromResource(identifier);
+
+//        PreferenceScreen screen = getPreferenceScreen();
         Utils.sortPreferenceGroups(screen);
         Utils.setPreferenceTitlesToMultiLineIfNeeded(screen);
     }

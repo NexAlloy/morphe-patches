@@ -49,7 +49,7 @@ import app.morphe.extension.youtube.shared.PlayerType;
  * - When using whole word syntax, some keywords may need additional pluralized variations.
  */
 @SuppressWarnings("unused")
-final class KeywordContentFilter extends Filter {
+public final class KeywordContentFilter extends Filter {
 
     /**
      * Strings found in the buffer for every video. Full strings should be specified.

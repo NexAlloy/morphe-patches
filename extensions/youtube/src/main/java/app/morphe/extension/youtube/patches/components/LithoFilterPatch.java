@@ -121,15 +121,6 @@ public final class LithoFilterPatch {
     }
 
     /**
-     * Placeholder for actual filters.
-     */
-    private static final class DummyFilter extends Filter { }
-
-    private static final Filter[] filters = new Filter[] {
-            new DummyFilter() // Replaced during patching, do not touch.
-    };
-
-    /**
      * Litho layout fixed thread pool size override.
      * <p>
      * Unpatched YouTube uses a layout fixed thread pool between 1 and 3 threads:
@@ -158,14 +149,12 @@ public final class LithoFilterPatch {
     private static final StringTrieSearch pathSearchTree = new StringTrieSearch();
     private static final StringTrieSearch identifierSearchTree = new StringTrieSearch();
 
-    static {
-
-        for (Filter filter : filters) {
-            filterUsingCallbacks(identifierSearchTree, filter,
-                    filter.identifierCallbacks, Filter.FilterContentType.IDENTIFIER);
-            filterUsingCallbacks(pathSearchTree, filter,
-                    filter.pathCallbacks, Filter.FilterContentType.PATH);
-        }
+    // custom change
+    public static void addFilter(Filter filter) {
+        filterUsingCallbacks(identifierSearchTree, filter,
+                filter.identifierCallbacks, Filter.FilterContentType.IDENTIFIER);
+        filterUsingCallbacks(pathSearchTree, filter,
+                filter.pathCallbacks, Filter.FilterContentType.PATH);
 
         Logger.printDebug(() -> "Using: "
                 + identifierSearchTree.numberOfPatterns() + " identifier filters"

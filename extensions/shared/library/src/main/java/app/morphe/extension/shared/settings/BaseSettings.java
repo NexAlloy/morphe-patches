@@ -5,6 +5,7 @@ import static java.lang.Boolean.TRUE;
 import static app.morphe.extension.shared.settings.Setting.parent;
 
 import app.morphe.extension.shared.Logger;
+import io.github.nexalloy.BuildConfig;
 
 /**
  * Settings shared across multiple apps.
@@ -13,7 +14,7 @@ import app.morphe.extension.shared.Logger;
  * or reference this class.
  */
 public class BaseSettings {
-    public static final BooleanSetting DEBUG = new BooleanSetting("morphe_debug", FALSE);
+    public static final BooleanSetting DEBUG = new BooleanSetting("morphe_debug", BuildConfig.DEBUG);
     public static final BooleanSetting DEBUG_STACKTRACE = new BooleanSetting("morphe_debug_stacktrace", FALSE, parent(DEBUG));
     public static final BooleanSetting DEBUG_TOAST_ON_ERROR = new BooleanSetting("morphe_debug_toast_on_error", TRUE, "morphe_debug_toast_on_error_user_dialog_message");
 

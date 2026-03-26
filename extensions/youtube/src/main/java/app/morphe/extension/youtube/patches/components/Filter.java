@@ -20,7 +20,7 @@ import app.morphe.extension.youtube.shared.ConversionContext.ContextInterface;
  * <p>
  * All callbacks must be registered before the constructor completes.
  */
-abstract class Filter {
+public abstract class Filter {
 
     public enum FilterContentType {
         IDENTIFIER,

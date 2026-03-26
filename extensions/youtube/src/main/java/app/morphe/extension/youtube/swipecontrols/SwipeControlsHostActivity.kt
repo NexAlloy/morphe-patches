@@ -1,3 +1,6 @@
+/*
+* Custom changes: Composition Over Inheritance
+* */
 package app.morphe.extension.youtube.swipecontrols
 
 import android.app.Activity
@@ -20,13 +23,17 @@ import app.morphe.extension.youtube.swipecontrols.controller.gesture.PressToSwip
 import app.morphe.extension.youtube.swipecontrols.controller.gesture.core.GestureController
 import app.morphe.extension.youtube.swipecontrols.misc.Rectangle
 import app.morphe.extension.youtube.swipecontrols.views.SwipeControlsOverlayLayout
+import de.robv.android.xposed.XC_MethodHook
+import de.robv.android.xposed.XC_MethodHook.MethodHookParam
+import de.robv.android.xposed.XposedBridge
+import de.robv.android.xposed.XposedHelpers
 import java.lang.ref.WeakReference
 
 /**
  * The main controller for volume and brightness swipe controls.
  * note that the superclass is overwritten to the superclass of the MainActivity at patch time.
  */
-class SwipeControlsHostActivity : Activity() {
+class SwipeControlsHostActivity(val activity: Activity) {
     /**
      * current instance of [AudioVolumeController]
      */
@@ -66,35 +73,13 @@ class SwipeControlsHostActivity : Activity() {
      * current content view with id [android.R.id.content]
      */
     private val contentRoot
-        get() = window.decorView.findViewById<ViewGroup>(android.R.id.content)
+        get() = activity.window.decorView.findViewById<ViewGroup>(android.R.id.content)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        initialize()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        reAttachOverlays()
-    }
-
-    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        ensureInitialized()
-        return if ((ev != null) && gesture.submitTouchEvent(ev)) {
-            true
-        } else {
-            super.dispatchTouchEvent(ev)
-        }
-    }
-
-    override fun dispatchKeyEvent(ev: KeyEvent?): Boolean {
-        ensureInitialized()
-        return if ((ev != null) && keys.onKeyEvent(ev)) {
-            true
-        } else {
-            super.dispatchKeyEvent(ev)
-        }
-    }
+    private val dispatchDownstreamTouchEventMethod = XposedHelpers.findMethodExact(
+        Activity::class.java,
+        "dispatchTouchEvent",
+        MotionEvent::class.java
+    )
 
     /**
      * dispatch a touch event to downstream views
@@ -102,8 +87,13 @@ class SwipeControlsHostActivity : Activity() {
      * @param event the event to dispatch
      * @return was the event consumed?
      */
-    fun dispatchDownstreamTouchEvent(event: MotionEvent) =
-        super.dispatchTouchEvent(event)
+    fun dispatchDownstreamTouchEvent(event: MotionEvent): Boolean {
+        return XposedBridge.invokeOriginalMethod(
+            dispatchDownstreamTouchEventMethod,
+            activity,
+            arrayOf(event)
+        ) as Boolean
+    }
 
     /**
      * ensures that swipe controllers are initialized and attached.
@@ -132,13 +122,13 @@ class SwipeControlsHostActivity : Activity() {
         screen = createScreenController()
 
         // create overlay
-        SwipeControlsOverlayLayout(this, config).let {
+        SwipeControlsOverlayLayout(activity, config).let {
             overlay = it
             contentRoot.addView(it)
         }
 
         // create swipe zone controller
-        zones = SwipeZonesController(this) {
+        zones = SwipeZonesController(activity) {
             Rectangle(
                 contentRoot.x.toInt(),
                 contentRoot.y.toInt(),
@@ -197,32 +187,29 @@ class SwipeControlsHostActivity : Activity() {
     /**
      * create the audio volume controller
      */
-    private fun createAudioController() =
-        if (config.enableVolumeControls) {
-            AudioVolumeController(this)
-        } else {
-            null
-        }
+    private fun createAudioController() = if (config.enableVolumeControls) {
+        AudioVolumeController(activity)
+    } else {
+        null
+    }
 
     /**
      * create the screen brightness controller instance
      */
-    private fun createScreenController() =
-        if (config.enableBrightnessControl) {
-            ScreenBrightnessController(this)
-        } else {
-            null
-        }
+    private fun createScreenController() = if (config.enableBrightnessControl) {
+        ScreenBrightnessController(this)
+    } else {
+        null
+    }
 
     /**
      * create the gesture controller based on settings
      */
-    private fun createGestureController() =
-        if (config.shouldEnablePressToSwipe) {
-            PressToSwipeController(this)
-        } else {
-            ClassicSwipeController(this)
-        }
+    private fun createGestureController() = if (config.shouldEnablePressToSwipe) {
+        PressToSwipeController(this)
+    } else {
+        ClassicSwipeController(this)
+    }
 
     companion object {
         /**
@@ -241,5 +228,74 @@ class SwipeControlsHostActivity : Activity() {
         fun allowSwipeChangeVideo(original: Boolean): Boolean =
             // Feature can cause crashing if forced in newer targets.
             !VersionCheckPatch.IS_20_22_OR_GREATER && Settings.SWIPE_CHANGE_VIDEO.get()
+
+        private val MethodHookParam.swipeControlsHost
+            get() = XposedHelpers.getAdditionalInstanceField(
+                thisObject, "swipeControlsHost"
+            ) as SwipeControlsHostActivity
+
+        @JvmStatic
+        fun hookActivity(activityClass: Class<*>) {
+            XposedBridge.hookAllConstructors(activityClass, object : XC_MethodHook() {
+                override fun afterHookedMethod(param: MethodHookParam) {
+                    val mainActivity = param.thisObject as Activity
+                    val swipeControlsHost = SwipeControlsHostActivity(mainActivity)
+                    XposedHelpers.setAdditionalInstanceField(
+                        mainActivity, "swipeControlsHost", swipeControlsHost
+                    )
+                }
+            })
+            XposedHelpers.findAndHookMethod(
+                activityClass, "onCreate", Bundle::class.java, object : XC_MethodHook() {
+                    override fun afterHookedMethod(param: MethodHookParam) {
+                        param.swipeControlsHost.apply {
+                            initialize()
+                        }
+                    }
+                })
+            XposedHelpers.findAndHookMethod(
+                activityClass, "onStart", object : XC_MethodHook() {
+                    override fun afterHookedMethod(param: MethodHookParam) {
+                        param.swipeControlsHost.reAttachOverlays()
+                    }
+                })
+            XposedHelpers.findAndHookMethod(
+                activityClass,
+                "dispatchTouchEvent",
+                MotionEvent::class.java,
+                object : XC_MethodHook() {
+                    override fun beforeHookedMethod(param: MethodHookParam) {
+                        val ev = param.args[0] as MotionEvent?
+                        param.swipeControlsHost.apply {
+                            ensureInitialized()
+                            if ((ev != null) && gesture.submitTouchEvent(ev)) {
+                                param.result = true
+                            }
+                        }
+                    }
+                })
+            // To invoke a super method, the super method must be hooked too.
+            XposedHelpers.findAndHookMethod(
+                Activity::class.java,
+                "dispatchTouchEvent",
+                MotionEvent::class.java,
+                object : XC_MethodHook() {})
+
+            XposedHelpers.findAndHookMethod(
+                activityClass,
+                "dispatchKeyEvent",
+                KeyEvent::class.java,
+                object : XC_MethodHook() {
+                    override fun beforeHookedMethod(param: MethodHookParam) {
+                        val ev = param.args[0] as KeyEvent?
+                        param.swipeControlsHost.apply {
+                            ensureInitialized()
+                            if ((ev != null) && keys.onKeyEvent(ev)) {
+                                param.result = true
+                            }
+                        }
+                    }
+                })
+        }
     }
 }

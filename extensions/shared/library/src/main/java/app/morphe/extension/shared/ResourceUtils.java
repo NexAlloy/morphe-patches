@@ -18,6 +18,9 @@ import app.morphe.extension.shared.settings.Setting;
 @SuppressWarnings({"unused", "deprecation", "DiscouragedApi"})
 public class ResourceUtils {
 
+    // custom change: fallback package for Xposed module resources
+    public static String fallbackPackageName;
+
     public static boolean useActivityContextIfAvailable = true;
 
     private ResourceUtils() {
@@ -59,6 +62,13 @@ public class ResourceUtils {
      */
     public static int getIdentifier(Context context, @Nullable ResourceType type, String name) {
         try {
+            // custom change: search with fallback package first
+            if (fallbackPackageName != null) {
+                int result = context.getResources().getIdentifier(name,
+                        type == null ? null : type.type,
+                        fallbackPackageName);
+                if (result != 0) return result;
+            }
             return context.getResources().getIdentifier(name,
                     type == null ? null : type.type,
                     context.getPackageName());

@@ -61,6 +61,7 @@ import app.morphe.extension.shared.settings.BooleanSetting;
 import app.morphe.extension.shared.settings.StringSetting;
 import app.morphe.extension.shared.settings.preference.about.MorpheAboutPreference;
 import app.morphe.extension.shared.ui.Dim;
+import io.github.nexalloy.BuildConfig;
 
 @SuppressWarnings("NewApi")
 public class Utils {
@@ -101,7 +102,7 @@ public class Utils {
      */
     @SuppressWarnings("SameReturnValue")
     public static String getPatchesReleaseVersion() {
-        return ""; // Value is replaced during patching.
+        return BuildConfig.PATCH_VERSION;
     }
 
     public static boolean isPreReleasePatches() {

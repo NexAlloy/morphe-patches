@@ -35,6 +35,7 @@ import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.ResourceType;
 import app.morphe.extension.shared.ResourceUtils;
 import app.morphe.extension.shared.Utils;
+import io.github.nexalloy.BuildConfig;
 
 /**
  * Opens a dialog showing official links.
@@ -340,6 +341,51 @@ public class MorpheAboutPreference extends Preference {
                 morpheBlue, foregroundColorHex,
                 foregroundColorHex, foregroundColorHex, foregroundColorHex
         ));
+
+
+        //region Add NexAlloy
+        // Header section.
+        html.append("<div class=\"about-header\">");
+
+        html.append("<div class=\"app-name\">NexAlloy</div>");
+
+        html.append(String.format("""
+                    <div class="info-card">
+                        <p>Version <i>%s</i></p>
+                    </div>
+                    """,
+                    useNonBreakingHyphens(BuildConfig.VERSION_NAME)
+            ));
+
+        html.append("</div>"); // end .about-header
+
+        // Links section.
+        html.append("""
+                <div class="links-section">
+                    <div class="section-label">Links</div>
+                """);
+
+        var myLinks = new WebLink[]{
+                new WebLink("GitHub", null, "https://github.com/NexAlloy/NexAlloy"),
+                new WebLink("Discord", null, "https://discord.gg/QWUrAA2mKq"),
+                new WebLink("Telegram", null, "https://t.me/ReVancedXposed"),
+                new WebLink("Donate", null, "https://afdian.com/a/ChsBuffer"),
+        };
+
+        // Link buttons with per-URL SVG icons.
+        for (WebLink link : myLinks) {
+            String icon = getLinkIcon(link.url);
+            html.append("<a href=\"").append(link.url).append("\" class=\"link-button\">")
+                    .append("<span class=\"link-icon\">").append(icon).append("</span>")
+                    .append("<span class=\"link-label\">").append(link.name).append("</span>")
+                    .append("<span class=\"link-chevron\">&#x203A;</span>")
+                    .append("</a>");
+        }
+
+        html.append("</div>"); // end .links-section
+        html.append("</hr>");
+
+        //endregion
 
         // Header section.
         html.append("<div class=\"about-header\">");
