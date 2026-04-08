@@ -13,6 +13,7 @@ package app.morphe.extension.youtube.patches.playback.speed;
 import static app.morphe.extension.shared.StringRef.str;
 import static app.morphe.extension.youtube.videoplayer.PlayerControlButton.fadeInDuration;
 import static app.morphe.extension.youtube.videoplayer.PlayerControlButton.getDialogBackgroundColor;
+import static io.github.nexalloy.morphe.youtube.video.speed.custom.CustomPlaybackSpeedPatchKt.doShowOldPlaybackSpeedMenu;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -294,6 +295,7 @@ public class CustomPlaybackSpeedPatch {
     public static void showOldPlaybackSpeedMenu() {
         // Rest of the implementation added by patch.
         Logger.printDebug(() -> "showOldPlaybackSpeedMenu");
+        doShowOldPlaybackSpeedMenu();
     }
 
     /**

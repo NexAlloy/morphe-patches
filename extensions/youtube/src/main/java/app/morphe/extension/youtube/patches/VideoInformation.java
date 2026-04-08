@@ -1,5 +1,7 @@
 package app.morphe.extension.youtube.patches;
 
+import static io.github.nexalloy.morphe.youtube.video.information.VideoInformationPatchKt.doOverridePlaybackSpeed;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -461,6 +463,7 @@ public final class VideoInformation {
      * Rest of the implementation added by patch.
      */
     public static void overridePlaybackSpeed(float speedOverride) {
+        doOverridePlaybackSpeed(speedOverride);
         Logger.printDebug(() -> "Overriding playback speed to: " + speedOverride);
     }
 
