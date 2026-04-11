@@ -2,6 +2,8 @@ package app.morphe.extension.youtube.patches;
 
 import static app.morphe.extension.youtube.patches.VersionCheckPatch.IS_20_31_OR_GREATER;
 import static app.morphe.extension.youtube.patches.spoof.SpoofAppVersionPatch.isSpoofingToLessThan;
+import static io.github.nexalloy.morphe.youtube.misc.playercontrols.LegacyPlayerControlsPatchKt.onFullscreenButtonVisibilityChanged;
+import static io.github.nexalloy.morphe.youtube.misc.playercontrols.LegacyPlayerControlsPatchKt.visibilityImmediateCallbacksExistModified;
 
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -31,7 +33,8 @@ public class LegacyPlayerControlsPatch {
     public static WeakReference<View> fullscreenButtonRef = new WeakReference<>(null);
 
     private static boolean fullscreenButtonVisibilityCallbacksExist() {
-        return false; // Modified during patching if needed.
+        // custom change
+        return visibilityImmediateCallbacksExistModified;
     }
 
     /**
@@ -87,7 +90,8 @@ public class LegacyPlayerControlsPatch {
 
     // noinspection EmptyMethod
     private static void fullscreenButtonVisibilityChanged(boolean isVisible) {
-        // Code added during patching.
+        // custom change
+        onFullscreenButtonVisibilityChanged(isVisible);
     }
 
 
