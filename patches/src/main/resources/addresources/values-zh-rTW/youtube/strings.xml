@@ -37,7 +37,7 @@ Second \"item\" text"</string>
   <string name="morphe_shorts_disable_background_playback_summary_on">已停用背景播放 Shorts</string>
   <string name="morphe_shorts_disable_background_playback_summary_off">已啟用背景播放 Shorts</string>
   <!-- misc.debugging.enableDebuggingPatch -->
-  <string name="morphe_debug_protobuffer_title">記錄檔協定緩衝區</string>
+  <string name="morphe_debug_protobuffer_title">除錯記錄檔協定緩衝區</string>
   <string name="morphe_debug_protobuffer_summary_on">除錯記錄檔會包含協定緩衝資訊</string>
   <string name="morphe_debug_protobuffer_summary_off">除錯記錄檔不會包含協定緩衝資訊</string>
   <string name="morphe_debug_protobuffer_user_dialog_message">"啟用這項設定將會記錄額外的版面配置資料，包括部分使用者介面元件上的螢幕文字。
@@ -119,6 +119,9 @@ Second \"item\" text"</string>
   <string name="morphe_hide_playables_title">隱藏遊戲角落</string>
   <string name="morphe_hide_playables_summary_on">已隱藏遊戲角落</string>
   <string name="morphe_hide_playables_summary_off">已顯示遊戲角落</string>
+  <string name="morphe_hide_search_term_thumbnails_title">隱藏搜尋詞縮圖</string>
+  <string name="morphe_hide_search_term_thumbnails_summary_on">搜尋詞縮圖已隱藏</string>
+  <string name="morphe_hide_search_term_thumbnails_summary_off">搜尋詞縮圖已顯示</string>
   <!-- 'Show more' should be translated using the same localized wording YouTube displays for the button.
           This button usually appears when searching for a YouTube creator. -->
   <string name="morphe_hide_show_more_button_title">隱藏「顯示更多」按鈕</string>
@@ -453,9 +456,9 @@ Second \"item\" text"</string>
   <string name="morphe_copy_video_url_title">顯示複製影片網址按鈕</string>
   <string name="morphe_copy_video_url_summary_on">已顯示按鈕。輕觸以複製影片網址。按住以複製包含時間戳記的影片網址</string>
   <string name="morphe_copy_video_url_summary_off">不顯示「複製影片網址」按鈕</string>
-  <string name="morphe_copy_video_url_timestamp_title">顯示複製時間戳記網址按鈕</string>
-  <string name="morphe_copy_video_url_timestamp_summary_on">已顯示按鈕。輕觸以複製包含時間戳記的影片網址。按住以複製不包含時間戳記的影片網址</string>
-  <string name="morphe_copy_video_url_timestamp_summary_off">不顯示「複製時間戳記」按鈕</string>
+  <string name="morphe_copy_video_url_timestamp_title">複製時間戳記</string>
+  <string name="morphe_copy_video_url_timestamp_summary_on">複製影片網址按鈕會包含時間戳記。長按則不包含時間戳記</string>
+  <string name="morphe_copy_video_url_timestamp_summary_off">複製影片網址按鈕不包含時間戳記。長按則包含時間戳記</string>
   <!-- interaction.dialog.removeViewerDiscretionDialogPatch -->
   <string name="morphe_remove_viewer_discretion_dialog_title">移除觀眾謹慎觀看對話方塊</string>
   <string name="morphe_remove_viewer_discretion_dialog_summary_on">將移除對話方塊</string>
@@ -499,6 +502,25 @@ Second \"item\" text"</string>
   <string name="morphe_loop_video_button_summary_off">不顯示「循環播放影片」選單</string>
   <string name="morphe_loop_video_button_toast_on">已開啟循環播放影片</string>
   <string name="morphe_loop_video_button_toast_off">已關閉循環播放影片</string>
+  <!-- interaction.playall.playAllButtonPatch -->
+  <string name="morphe_play_all_button_title">顯示播放全部按鈕</string>
+  <string name="morphe_play_all_button_summary_on">"顯示播放全部按鈕\n點擊以產生頻道中所有影片的播放清單\n長按以取消\n\n資訊：可能無法在直播中運作"</string>
+  <string name="morphe_play_all_button_summary_off">不顯示播放全部按鈕</string>
+  <string name="morphe_play_all_button_type_title">產生播放清單模式</string>
+  <string name="morphe_play_all_button_type_entry_0">所有內容 (依時間排序，遞增)</string>
+  <string name="morphe_play_all_button_type_entry_1">所有內容 (依時間排序)</string>
+  <string name="morphe_play_all_button_type_entry_2">所有內容 (依熱門程度排序)</string>
+  <string name="morphe_play_all_button_type_entry_3">影片內容 (依時間排序)</string>
+  <string name="morphe_play_all_button_type_entry_4">影片內容 (依熱門程度排序)</string>
+  <string name="morphe_play_all_button_type_entry_5">Shorts內容 (依時間排序)</string>
+  <string name="morphe_play_all_button_type_entry_6">Shorts內容 (依熱門程度排序)</string>
+  <string name="morphe_play_all_button_type_entry_7">直播影片內容 (依時間排序)</string>
+  <string name="morphe_play_all_button_type_entry_8">直播影片內容 (依熱門程度排序)</string>
+  <string name="morphe_play_all_button_type_entry_9">僅限所有會員內容</string>
+  <string name="morphe_play_all_button_type_entry_10">僅限會員影片</string>
+  <string name="morphe_play_all_button_type_entry_11">僅限會員Shorts</string>
+  <string name="morphe_play_all_button_type_entry_12">僅限會員直播</string>
+  <string name="morphe_play_all_button_not_available_toast">由於頻道 ID 資訊不符，無法產生播放清單</string>
   <!-- interaction.reload.reloadVideoPatch -->
   <string name="morphe_reload_video_title">顯示重新載入影片按鈕</string>
   <string name="morphe_reload_video_summary_on">已顯示重新載入影片按鈕</string>
@@ -508,6 +530,12 @@ Second \"item\" text"</string>
   <string name="morphe_disable_precise_seeking_gesture_title">停用精準跳轉手勢</string>
   <string name="morphe_disable_precise_seeking_gesture_summary_on">已停用精準跳轉手勢</string>
   <string name="morphe_disable_precise_seeking_gesture_summary_off">已啟用精準跳轉手勢</string>
+  <!-- interaction.seekbar.livestreamDvrPatch -->
+  <string name="morphe_livestream_dvr_title">啟用直播 DVR</string>
+  <string name="morphe_livestream_dvr_summary_on">可在所有直播中尋找</string>
+  <string name="morphe_livestream_dvr_summary_off">直播中可能無法尋找</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_livestream_dvr_user_dialog_message">啟用此功能可能會導致影片串流回溯行為出乎意料，除非已啟用「偽造影片串流」。</string>
   <!-- interaction.seekbar.enableSlideToSeekPatch -->
   <string name="morphe_slide_to_seek_title">啟用滑動預覽</string>
   <string name="morphe_slide_to_seek_summary_on">已啟用滑動預覽</string>
@@ -720,7 +748,7 @@ Second \"item\" text"</string>
   <string name="morphe_navigation_bar_animations_summary_off">導覽轉換不會進行動畫</string>
   <string name="morphe_disable_auto_hide_navigation_bar_title">停用自動隱藏導航欄</string>
   <string name="morphe_disable_auto_hide_navigation_bar_summary_on">瀏覽時導航欄不會隱藏</string>
-  <string name="morphe_disable_auto_hide_navigation_bar_summary_off">瀏覽時導航欄會隱藏</string>
+  <string name="morphe_disable_auto_hide_navigation_bar_summary_off">瀏覽時導覽列可能會隱藏</string>
   <string name="morphe_disable_translucent_status_bar_title">停用半透明狀態列</string>
   <string name="morphe_disable_translucent_status_bar_summary_on">狀態列為不透明</string>
   <string name="morphe_disable_translucent_status_bar_summary_off">狀態列為不透明或半透明</string>
@@ -1032,8 +1060,8 @@ Second \"item\" text"</string>
   <string name="morphe_hide_timestamp_summary_on">已隱藏時間戳記</string>
   <string name="morphe_hide_timestamp_summary_off">已顯示時間戳記</string>
   <!-- layout.panels.popup.disablePlayerPopupPanelsPatch -->
-  <string name="morphe_disable_player_popup_panels_title">禁用播放器彈出面板</string>
-  <string name="morphe_disable_player_popup_panels_summary_on">已禁用播放器彈出面板</string>
+  <string name="morphe_disable_player_popup_panels_title">停用播放器彈出面板</string>
+  <string name="morphe_disable_player_popup_panels_summary_on">已停用播放器彈出面板</string>
   <string name="morphe_disable_player_popup_panels_summary_off">已啟用播放器彈出面板</string>
   <!-- layout.player.fullscreen.exitFullscreenPatch -->
   <string name="morphe_exit_fullscreen_title">視窗模式結束後退出全螢幕</string>
@@ -1352,9 +1380,9 @@ Second \"item\" text"</string>
   <!-- layout.music.overrideYouTubeMusicActionsPatch -->
   <string name="morphe_override_youtube_music_button_title">覆蓋 YouTube Music 按鈕</string>
   <string name="morphe_override_youtube_music_button_summary_on">YouTube Music 按鈕會開啟您的目標音樂應用程式</string>
-  <string name="morphe_override_youtube_music_button_summary_off">YouTube 音樂按鈕開啟原生應用程序</string>
+  <string name="morphe_override_youtube_music_button_summary_off">YouTube Music 按鈕會開啟原生應用程式</string>
   <string name="morphe_music_package_name_title">Morphe Music 套件名稱</string>
-  <string name="morphe_music_package_name_summary">目標 Music 應用程式的套件名稱</string>
+  <string name="morphe_music_package_name_summary">目標音樂應用程式的套件名稱</string>
   <!-- layout.startpage.changeStartPagePatch -->
   <string name="morphe_change_start_page_title">變更起始頁面</string>
   <string name="morphe_change_start_page_entry_default">預設</string>
@@ -1418,12 +1446,6 @@ Second \"item\" text"</string>
   <string name="morphe_miniplayer_disable_rounded_corners_title">停用圓角</string>
   <string name="morphe_miniplayer_disable_rounded_corners_summary_on">已將角落設為方角</string>
   <string name="morphe_miniplayer_disable_rounded_corners_summary_off">已將角落設為圓角</string>
-  <string name="morphe_miniplayer_double_tap_action_title">啟用輕觸兩下動作和雙指撥動調整大小</string>
-  <string name="morphe_miniplayer_double_tap_action_summary_on">"已啟用輕觸兩下動作和雙指撥動調整大小
-
-• 輕觸兩下以放大迷你播放器
-• 再次輕觸兩下以還原原始大小"</string>
-  <string name="morphe_miniplayer_double_tap_action_summary_off">已停用輕觸兩下動作和雙指撥動調整大小</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_title">停用拖放</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_summary_on">已停用拖曳功能</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_summary_off">"已啟用拖曳功能
@@ -1437,11 +1459,6 @@ Second \"item\" text"</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_title">隱藏暫停時顯示的按鈕</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_summary_on">已隱藏暫停時顯示的按鈕</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_summary_off">已顯示暫停時顯示的按鈕</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_title">隱藏展開和關閉按鈕</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_summary_on">"已隱藏按鈕
-
-滑動即可展開或關閉"</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_summary_off">已顯示展開和關閉按鈕</string>
   <string name="morphe_miniplayer_hide_subtext_title">隱藏字幕</string>
   <string name="morphe_miniplayer_hide_subtext_summary_on">已隱藏字幕</string>
   <string name="morphe_miniplayer_hide_subtext_summary_off">已顯示字幕</string>
@@ -1523,6 +1540,10 @@ Second \"item\" text"</string>
   <string name="morphe_alt_thumbnail_dearrow_error">DeArrow 暫時無法使用（狀態碼：%s）</string>
   <string name="morphe_alt_thumbnail_dearrow_error_generic">DeArrow 暫時無法使用</string>
   <!-- misc.announcements.announcementsPatch -->
+  <!-- misc.playercontrols.playerControlsPatch -->
+  <string name="morphe_restore_old_player_buttons_title">還原舊播放器按鈕樣式</string>
+  <string name="morphe_restore_old_player_buttons_summary_on">玩家細框樣式已顯示</string>
+  <string name="morphe_restore_old_player_buttons_summary_off">玩家粗框樣式已顯示</string>
   <!-- misc.dimensions.spoof.spoofDeviceDimensionsPatch -->
   <string name="morphe_spoof_device_dimensions_title">偽裝裝置尺寸</string>
   <string name="morphe_spoof_device_dimensions_summary_on">"已偽裝裝置尺寸
@@ -1629,6 +1650,14 @@ Second \"item\" text"</string>
 • 影片播放將比 VP9 或 AV1 消耗更多網路資料
 • HDR 影片將不會使用 AVC
 • 部分裝置無法強制使用 AVC"</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_force_avc_codec_not_available">若要使用此功能，請將「偽造視訊串流」變更為 Android VR 或 Android Studio</string>
+  <!-- interaction.seekbar.expandLivestreamDvrDurationPatch -->
+  <string name="morphe_expand_livestream_dvr_duration_title">擴展直播 DVR 錄製時長</string>
+  <string name="morphe_expand_livestream_dvr_duration_summary_on">直播 DVR 錄製時長已擴展至 7 天</string>
+  <string name="morphe_expand_livestream_dvr_duration_summary_off">直播 DVR 錄製時長已限制為伺服器預設值</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_expand_livestream_dvr_duration_user_dialog_message">如果未啟用「偽造影片串流」，此設定可能會導致意外行為。</string>
   <!-- video.quality.advancedVideoQualityMenuPatch -->
   <string name="morphe_advanced_video_quality_menu_title">顯示進階影片畫質選單</string>
   <string name="morphe_advanced_video_quality_menu_summary_on">已顯示進階影片畫質選單</string>

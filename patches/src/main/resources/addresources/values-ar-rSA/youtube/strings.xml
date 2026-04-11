@@ -37,7 +37,7 @@ Second \"item\" text"</string>
   <string name="morphe_shorts_disable_background_playback_summary_on">تم تعطيل تشغيل Shorts بالخلفية</string>
   <string name="morphe_shorts_disable_background_playback_summary_off">تم تمكين تشغيل Shorts بالخلفية</string>
   <!-- misc.debugging.enableDebuggingPatch -->
-  <string name="morphe_debug_protobuffer_title">سجل بروتوكول التخزين المؤقت</string>
+  <string name="morphe_debug_protobuffer_title">ذاكرة بروتوكول سجل التصحيح</string>
   <string name="morphe_debug_protobuffer_summary_on">تتضمن سجلات التصحيح التخزين المؤقت</string>
   <string name="morphe_debug_protobuffer_summary_off">لا تتضمن سجلات التصحيح التخزين المؤقت</string>
   <string name="morphe_debug_protobuffer_user_dialog_message">"سيؤدي تمكين هذا الإعداد إلى تسجيل بيانات تخطيط إضافية، بما في ذلك النص المعروض على الشاشة لبعض مكونات واجهة المستخدم.
@@ -119,6 +119,9 @@ Second \"item\" text"</string>
   <string name="morphe_hide_playables_title">إخفاء هيّا نلعب</string>
   <string name="morphe_hide_playables_summary_on">تم إخفاء هيّا نلعب</string>
   <string name="morphe_hide_playables_summary_off">يتم عرض هيّا نلعب</string>
+  <string name="morphe_hide_search_term_thumbnails_title">إخفاء مصغرات مصطلحات البحث</string>
+  <string name="morphe_hide_search_term_thumbnails_summary_on">تم إخفاء مصغرات مصطلحات البحث</string>
+  <string name="morphe_hide_search_term_thumbnails_summary_off">يتم عرض مصغرات مصطلحات البحث</string>
   <!-- 'Show more' should be translated using the same localized wording YouTube displays for the button.
           This button usually appears when searching for a YouTube creator. -->
   <string name="morphe_hide_show_more_button_title">إخفاء زر \'عرض المزيد\'</string>
@@ -453,9 +456,9 @@ Second \"item\" text"</string>
   <string name="morphe_copy_video_url_title">عرض زر نسخ عنوان URL للفيديو</string>
   <string name="morphe_copy_video_url_summary_on">يتم عرض الزر. انقر لنسخ عنوان URL للفيديو. انقر مع الاستمرار للنسخ مع الطابع الزمني</string>
   <string name="morphe_copy_video_url_summary_off">لا يتم عرض زر نسخ رابط الفيديو</string>
-  <string name="morphe_copy_video_url_timestamp_title">عرض زر نسخ URL مع الطابع الزمني</string>
-  <string name="morphe_copy_video_url_timestamp_summary_on">يتم عرض الزر. انقر لنسخ عنوان URL للفيديو مع الطابع الزمني. انقر مع الاستمرار للنسخ بدون الطابع الزمني</string>
-  <string name="morphe_copy_video_url_timestamp_summary_off">لا يتم عرض زر نسخ URL مع الطابع الزمني</string>
+  <string name="morphe_copy_video_url_timestamp_title">نسخ الطابع الزمني</string>
+  <string name="morphe_copy_video_url_timestamp_summary_on">ينسخ زر رابط الفيديو الرابط مع الطابع الزمني. اضغط مطوّلًا للنسخ بدونه</string>
+  <string name="morphe_copy_video_url_timestamp_summary_off">ينسخ زر رابط الفيديو الرابط بدون الطابع الزمني. اضغط مطوّلًا للنسخ مع الطابع الزمني</string>
   <!-- interaction.dialog.removeViewerDiscretionDialogPatch -->
   <string name="morphe_remove_viewer_discretion_dialog_title">إزالة مربع حوار تقدير المشاهد</string>
   <string name="morphe_remove_viewer_discretion_dialog_summary_on">سيتم إزالة مربع الحوار</string>
@@ -499,6 +502,25 @@ Second \"item\" text"</string>
   <string name="morphe_loop_video_button_summary_off">لا يتم عرض زر تكرار الفيديو</string>
   <string name="morphe_loop_video_button_toast_on">تكرار الفيديو قيد التشغيل</string>
   <string name="morphe_loop_video_button_toast_off">تكرار الفيديو متوقف</string>
+  <!-- interaction.playall.playAllButtonPatch -->
+  <string name="morphe_play_all_button_title">عرض زر تشغيل الكل</string>
+  <string name="morphe_play_all_button_summary_on">"يتم عرض زر تشغيل الكل\nاضغط لإنشاء قائمة تشغيل لجميع فيديوهات القناة\nاضغط مع الاستمرار للتراجع\n\nمعلومة: قد لا يعمل على البث المباشر"</string>
+  <string name="morphe_play_all_button_summary_off">لا يتم عرض زر تشغيل الكل</string>
+  <string name="morphe_play_all_button_type_title">وضع إنشاء قائمة تشغيل</string>
+  <string name="morphe_play_all_button_type_entry_0">كل المحتوى (فرز حسب الوقت، تصاعدي)</string>
+  <string name="morphe_play_all_button_type_entry_1">كل المحتوى (فرز حسب الوقت)</string>
+  <string name="morphe_play_all_button_type_entry_2">كل المحتوى (فرز حسب الأكثر شيوعًا)</string>
+  <string name="morphe_play_all_button_type_entry_3">الفيديوهات فقط (فرز حسب الوقت)</string>
+  <string name="morphe_play_all_button_type_entry_4">الفيديوهات فقط (فرز حسب الأكثر شيوعًا)</string>
+  <string name="morphe_play_all_button_type_entry_5">Shorts فقط (فرز حسب الوقت)</string>
+  <string name="morphe_play_all_button_type_entry_6">Shorts فقط (فرز حسب الأكثر شيوعًا)</string>
+  <string name="morphe_play_all_button_type_entry_7">الفيديوهات التي تم بثها فقط (فرز حسب الوقت)</string>
+  <string name="morphe_play_all_button_type_entry_8">الفيديوهات التي تم بثها فقط (فرز حسب الأكثر شيوعًا)</string>
+  <string name="morphe_play_all_button_type_entry_9">محتوى الأعضاء فقط</string>
+  <string name="morphe_play_all_button_type_entry_10">فيديوهات الأعضاء فقط</string>
+  <string name="morphe_play_all_button_type_entry_11">Shorts الأعضاء فقط</string>
+  <string name="morphe_play_all_button_type_entry_12">بث مباشر للأعضاء فقط</string>
+  <string name="morphe_play_all_button_not_available_toast">تعذر إنشاء قائمة تشغيل بسبب عدم تطابق معرّف القناة</string>
   <!-- interaction.reload.reloadVideoPatch -->
   <string name="morphe_reload_video_title">عرض زر إعادة تحميل الفيديو</string>
   <string name="morphe_reload_video_summary_on">يتم عرض زر إعادة تحميل الفيديو</string>
@@ -508,6 +530,12 @@ Second \"item\" text"</string>
   <string name="morphe_disable_precise_seeking_gesture_title">تعطيل إيماءة التمرير الدقيقة</string>
   <string name="morphe_disable_precise_seeking_gesture_summary_on">تم تعطيل إيماءة التمرير الدقيقة</string>
   <string name="morphe_disable_precise_seeking_gesture_summary_off">تم تمكين إيماءة التمرير الدقيقة</string>
+  <!-- interaction.seekbar.livestreamDvrPatch -->
+  <string name="morphe_livestream_dvr_title">تمكين التنقل في البث المباشر</string>
+  <string name="morphe_livestream_dvr_summary_on">يُسمح بالتقديم والتأخير في جميع البثوث المباشرة</string>
+  <string name="morphe_livestream_dvr_summary_off">قد لا يكون التقديم والتأخير متاحًا في البثوث المباشرة</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_livestream_dvr_user_dialog_message">تمكين هذا قد يتسبب في سلوك بحث غير متوقع للبث المباشر إذا لم يتم تمكين \"تزييف تدفقات الفيديو\".</string>
   <!-- interaction.seekbar.enableSlideToSeekPatch -->
   <string name="morphe_slide_to_seek_title">تمكين التمرير للتقديم أو الترجيع</string>
   <string name="morphe_slide_to_seek_summary_on">تم تمكين التمرير للتقديم أو الترجيع</string>
@@ -721,7 +749,7 @@ Second \"item\" text"</string>
   <string name="morphe_navigation_bar_animations_summary_off">تم تعطيل تأثير حركة التنقل في شريط التنقل</string>
   <string name="morphe_disable_auto_hide_navigation_bar_title">تعطيل إخفاء شريط التنقل تلقائيًا</string>
   <string name="morphe_disable_auto_hide_navigation_bar_summary_on">لن يتم إخفاء شريط التنقل أثناء التمرير</string>
-  <string name="morphe_disable_auto_hide_navigation_bar_summary_off">سيتم إخفاء شريط التنقل أثناء التمرير</string>
+  <string name="morphe_disable_auto_hide_navigation_bar_summary_off">قد يختفي شريط التنقل أثناء التمرير</string>
   <string name="morphe_disable_translucent_status_bar_title">تعطيل شريط الحالة الشفاف</string>
   <string name="morphe_disable_translucent_status_bar_summary_on">شريط الحالة غير شفاف</string>
   <string name="morphe_disable_translucent_status_bar_summary_off">شريط الحالة معتم أو شفاف</string>
@@ -1419,12 +1447,6 @@ Second \"item\" text"</string>
   <string name="morphe_miniplayer_disable_rounded_corners_title">تعطيل الزوايا الدائرية</string>
   <string name="morphe_miniplayer_disable_rounded_corners_summary_on">الزوايا مربعة</string>
   <string name="morphe_miniplayer_disable_rounded_corners_summary_off">الزوايا مستديرة</string>
-  <string name="morphe_miniplayer_double_tap_action_title">تمكين النقر المزدوج والضغط لتغيير الحجم</string>
-  <string name="morphe_miniplayer_double_tap_action_summary_on">"تم تمكين إجراء الضغط المزدوج والضغط لتغيير الحجم
-
-• النقر المزدوج لزيادة حجم المشغل المصغر
-• النقر المزدوج مرة أخرى لاستعادة الحجم الأصلي"</string>
-  <string name="morphe_miniplayer_double_tap_action_summary_off">إجراء النقر المزدوج والضغط لتغيير الحجم معطل</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_title">تعطيل السحب والإفلات</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_summary_on">تم تعطيل السحب والإفلات</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_summary_off">"السحب والإفلات مفعلان
@@ -1438,11 +1460,6 @@ Second \"item\" text"</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_title">إخفاء أزرار الواجهة</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_summary_on">تم إخفاء أزرار الواجهة</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_summary_off">يتم عرض أزرار الواجهة</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_title">إخفاء أزرار التوسيع والإغلاق</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_summary_on">"الأزرار مخفية
-
-اسحب للتوسيع أو الإغلاق"</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_summary_off">أزرار التوسيع والإغلاق معروضة</string>
   <string name="morphe_miniplayer_hide_subtext_title">إخفاء النصوص الفرعية</string>
   <string name="morphe_miniplayer_hide_subtext_summary_on">تم إخفاء النصوص الفرعية</string>
   <string name="morphe_miniplayer_hide_subtext_summary_off">يتم عرض النصوص الفرعية</string>
@@ -1520,6 +1537,10 @@ Second \"item\" text"</string>
   <string name="morphe_alt_thumbnail_dearrow_error">DeArrow غير متوفر مؤقتًا (رمز الحالة: %s)</string>
   <string name="morphe_alt_thumbnail_dearrow_error_generic">DeArrow غير متوفر مؤقتًا</string>
   <!-- misc.announcements.announcementsPatch -->
+  <!-- misc.playercontrols.playerControlsPatch -->
+  <string name="morphe_restore_old_player_buttons_title">استعادة نمط أزرار المشغل القديم</string>
+  <string name="morphe_restore_old_player_buttons_summary_on">يتم عرض نمط المشغل النحيف</string>
+  <string name="morphe_restore_old_player_buttons_summary_off">يتم عرض نمط المشغل العريض</string>
   <!-- misc.dimensions.spoof.spoofDeviceDimensionsPatch -->
   <string name="morphe_spoof_device_dimensions_title">تزوير أبعاد الجهاز</string>
   <string name="morphe_spoof_device_dimensions_summary_on">"تم تزييف أبعاد الجهاز
@@ -1624,6 +1645,14 @@ Second \"item\" text"</string>
 • تشغيل الفيديو سيستهلك المزيد من بيانات الإنترنت مقارنةً بـ VP9 أو AV1
 • لن تستخدم فيديوهات HDR ترميز AVC
 • لا يمكن لبعض الأجهزة فرض AVC"</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_force_avc_codec_not_available">لاستخدام هذه الميزة، غيّر \'Spoof video streams\' إلى Android VR أو Android Studio</string>
+  <!-- interaction.seekbar.expandLivestreamDvrDurationPatch -->
+  <string name="morphe_expand_livestream_dvr_duration_title">توسيع مدة تسجيل البث المباشر</string>
+  <string name="morphe_expand_livestream_dvr_duration_summary_on">تم توسيع مدة تسجيل البث المباشر لتصل إلى 7 أيام</string>
+  <string name="morphe_expand_livestream_dvr_duration_summary_off">مدة تسجيل البث المباشر محدودة إلى الإعداد الافتراضي للخادم</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_expand_livestream_dvr_duration_user_dialog_message">قد يتسبب هذا الإعداد في سلوك غير متوقع إذا لم يتم تمكين \"تزييف تدفقات الفيديو\".</string>
   <!-- video.quality.advancedVideoQualityMenuPatch -->
   <string name="morphe_advanced_video_quality_menu_title">عرض قائمة جودة الفيديو المتقدمة</string>
   <string name="morphe_advanced_video_quality_menu_summary_on">يتم عرض قائمة جودة الفيديو المتقدمة</string>

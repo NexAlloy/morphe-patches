@@ -1,4 +1,16 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-patches
+ *
+ * Original hard forked code:
+ * https://github.com/ReVanced/revanced-patches/commit/724e6d61b2ecd868c1a9a37d465a688e83a74799
+ *
+ * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to Morphe contributions.
+ */
+
 package app.morphe.extension.youtube.videoplayer;
+
+import static app.morphe.extension.youtube.patches.LegacyPlayerControlsPatch.RESTORE_OLD_PLAYER_BUTTONS;
 
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
@@ -12,13 +24,14 @@ import androidx.annotation.Nullable;
 import java.lang.ref.WeakReference;
 
 import app.morphe.extension.shared.Logger;
+import app.morphe.extension.shared.ResourceType;
 import app.morphe.extension.shared.ResourceUtils;
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.youtube.shared.PlayerControlsVisibility;
 import app.morphe.extension.youtube.shared.PlayerType;
 import kotlin.Unit;
 
-public class PlayerControlButton {
+public class LegacyPlayerControlButton {
 
     public interface PlayerControlButtonStatus {
         /**
@@ -27,16 +40,21 @@ public class PlayerControlButton {
         boolean buttonEnabled();
     }
 
-    public static final int fadeInDuration;
+    public static final int buttonWidth = (int) ResourceUtils.getDimension("controls_overlay_action_button_size");
+    public static final int fadeInDuration = ResourceUtils.getInteger("fade_duration_fast");
+    private static final int fadeOutDuration = ResourceUtils.getInteger("fade_duration_scheduled");
 
-    static {
-        fadeInDuration = ResourceUtils.getInteger("fade_duration_fast");
+    /**
+     * Number of Morphe legacy upper buttons that are enabled.
+     */
+    private static int totalUpperButtonCount;
+
+    public static void incrementUpperButtonCount() {
+        totalUpperButtonCount++;
     }
 
-    private static final int fadeOutDuration;
-
-    static {
-        fadeOutDuration = ResourceUtils.getInteger("fade_duration_scheduled");
+    public static int getTotalUpperButtonCount() {
+        return totalUpperButtonCount;
     }
 
     private final WeakReference<View> containerRef;
@@ -46,28 +64,39 @@ public class PlayerControlButton {
     private boolean isVisible;
     private long lastTimeSetVisible;
 
-    public PlayerControlButton(View controlsViewGroup,
-                               String buttonId,
-                               @Nullable String textOverlayId,
-                               PlayerControlButtonStatus enabledStatus,
-                               View.OnClickListener onClickListener,
-                               @Nullable View.OnLongClickListener longClickListener) {
-        this(controlsViewGroup, buttonId, buttonId, textOverlayId,
+    public LegacyPlayerControlButton(View controlsViewGroup,
+                                     String buttonId,
+                                     @Nullable String textOverlayId,
+                                     @Nullable String imageResourceName,
+                                     PlayerControlButtonStatus enabledStatus,
+                                     View.OnClickListener onClickListener,
+                                     @Nullable View.OnLongClickListener longClickListener) {
+        this(controlsViewGroup, buttonId, buttonId, textOverlayId, imageResourceName,
                 enabledStatus, onClickListener, longClickListener);
     }
 
-    public PlayerControlButton(View controlsViewGroup,
-                               String viewToHide,
-                               String buttonId,
-                               @Nullable String textOverlayId,
-                               PlayerControlButtonStatus enabledStatus,
-                               View.OnClickListener onClickListener,
-                               @Nullable View.OnLongClickListener longClickListener) {
+    public LegacyPlayerControlButton(View controlsViewGroup,
+                                     String viewToHide,
+                                     String buttonId,
+                                     @Nullable String textOverlayId,
+                                     @Nullable String imageResourceName,
+                                     PlayerControlButtonStatus enabledStatus,
+                                     View.OnClickListener onClickListener,
+                                     @Nullable View.OnLongClickListener longClickListener) {
         View containerView = Utils.getChildViewByResourceName(controlsViewGroup, viewToHide);
         containerView.setVisibility(View.GONE);
         containerRef = new WeakReference<>(containerView);
 
         View button = Utils.getChildViewByResourceName(controlsViewGroup, buttonId);
+
+        if (imageResourceName != null) {
+            final int iconResourceId = ResourceUtils.getIdentifierOrThrow(ResourceType.DRAWABLE,
+                    RESTORE_OLD_PLAYER_BUTTONS
+                            ? imageResourceName
+                            : imageResourceName + "_bold"
+            );
+            ((ImageView) button).setImageResource(iconResourceId);
+        }
 
         // Wrap click listener to trigger animation.
         button.setOnClickListener(view -> {

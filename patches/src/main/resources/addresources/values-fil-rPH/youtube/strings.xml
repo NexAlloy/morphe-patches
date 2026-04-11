@@ -120,6 +120,9 @@ Kasama sa mga pagbabago ang:
   <string name="morphe_hide_playables_title">Itago ang Mga Playable</string>
   <string name="morphe_hide_playables_summary_on">Nakatago ang Mga Playable</string>
   <string name="morphe_hide_playables_summary_off">Ipinapakita ang Mga Playable</string>
+  <string name="morphe_hide_search_term_thumbnails_title">Itago ang mga thumbnail ng termino sa paghahanap</string>
+  <string name="morphe_hide_search_term_thumbnails_summary_on">Nakatago ang mga thumbnail ng termino sa paghahanap</string>
+  <string name="morphe_hide_search_term_thumbnails_summary_off">Ipinapakita ang mga thumbnail ng termino sa paghahanap</string>
   <!-- 'Show more' should be translated using the same localized wording YouTube displays for the button.
           This button usually appears when searching for a YouTube creator. -->
   <string name="morphe_hide_show_more_button_title">Itago ang button na \'Magpakita ng higit pa\'</string>
@@ -454,9 +457,9 @@ Mga Limitasyon:
   <string name="morphe_copy_video_url_title">Ipakita ang button na kopyahin ang video URL</string>
   <string name="morphe_copy_video_url_summary_on">Ipinapakita ang button na Kopyahin ang video URL. Pindutin upang kopyahin ang video URL. Pindutin at pindutin nang matagal upang kopyahin na may kasamang timestamp</string>
   <string name="morphe_copy_video_url_summary_off">Hindi ipinapakita ang button na Kopyahin ang video URL</string>
-  <string name="morphe_copy_video_url_timestamp_title">Ipakita ang button na Kopyahin ang URL ng timestamp</string>
-  <string name="morphe_copy_video_url_timestamp_summary_on">Ipinapakita ang button na Kopyahin ang URL ng timestamp. Pindutin upang kopyahin ang URL ng video na may timestamp. Pindutin at pindutin nang matagal upang kopyahin na walang kasamang timestamp</string>
-  <string name="morphe_copy_video_url_timestamp_summary_off">Hindi ipinapakita ang button na Kopyahin ang timestamp ng URL</string>
+  <string name="morphe_copy_video_url_timestamp_title">Kopyahin ang timestamp</string>
+  <string name="morphe_copy_video_url_timestamp_summary_on">Kinokopya ng button ng URL ng video kasama ang timestamp. Ang mahabang pagpindot ay kumokopya nang walang timestamp</string>
+  <string name="morphe_copy_video_url_timestamp_summary_off">Kinokopya ng button ng URL ng video nang walang timestamp. Ang mahabang pagpindot ay kumokopya kasama ang timestamp</string>
   <!-- interaction.dialog.removeViewerDiscretionDialogPatch -->
   <string name="morphe_remove_viewer_discretion_dialog_title">Alisin ang diyalogo ng pagpapasya ng manonood</string>
   <string name="morphe_remove_viewer_discretion_dialog_summary_on">Aalisin ang diyalogo</string>
@@ -500,6 +503,25 @@ Suriin kung tama ang pangalan ng package at naka-install ang app"</string>
   <string name="morphe_loop_video_button_summary_off">Hindi ipinapakita ang button ng loop ng video</string>
   <string name="morphe_loop_video_button_toast_on">Naka-on ang loop video</string>
   <string name="morphe_loop_video_button_toast_off">Naka-off ang loop video</string>
+  <!-- interaction.playall.playAllButtonPatch -->
+  <string name="morphe_play_all_button_title">Ipakita ang button na \'Play all\'</string>
+  <string name="morphe_play_all_button_summary_on">"Ipinapakita ang button na 'Play all'\nI-tap para bumuo ng playlist ng lahat ng video mula sa channel\nI-tap nang matagal para i-undo\n\nImpormasyon: Maaaring hindi gumana sa live streams"</string>
+  <string name="morphe_play_all_button_summary_off">Hindi ipinapakita ang button na \'Play all\'</string>
+  <string name="morphe_play_all_button_type_title">Mode ng pagbuo ng playlist</string>
+  <string name="morphe_play_all_button_type_entry_0">Lahat ng nilalaman (Pagbukud-bukurin ayon sa oras, Papataas)</string>
+  <string name="morphe_play_all_button_type_entry_1">Lahat ng nilalaman (Pagbukud-bukurin ayon sa oras)</string>
+  <string name="morphe_play_all_button_type_entry_2">Lahat ng nilalaman (Pagbukud-bukurin ayon sa sikat)</string>
+  <string name="morphe_play_all_button_type_entry_3">Mga bidyo lamang (Pagbukud-bukurin ayon sa oras)</string>
+  <string name="morphe_play_all_button_type_entry_4">Mga bidyo lamang (Pagbukud-bukurin ayon sa sikat)</string>
+  <string name="morphe_play_all_button_type_entry_5">Shorts lamang (Pagbukud-bukurin ayon sa oras)</string>
+  <string name="morphe_play_all_button_type_entry_6">Shorts lamang (Pagbukud-bukurin ayon sa sikat)</string>
+  <string name="morphe_play_all_button_type_entry_7">Mga na-stream na bidyo lamang (Pagbukud-bukurin ayon sa oras)</string>
+  <string name="morphe_play_all_button_type_entry_8">Mga na-stream na bidyo lamang (Pagbukud-bukurin ayon sa sikat)</string>
+  <string name="morphe_play_all_button_type_entry_9">Lahat ng nilalaman ng miyembro lamang</string>
+  <string name="morphe_play_all_button_type_entry_10">Mga bidyo ng miyembro lamang</string>
+  <string name="morphe_play_all_button_type_entry_11">Mga Shorts ng miyembro lamang</string>
+  <string name="morphe_play_all_button_type_entry_12">Mga live stream ng miyembro lamang</string>
+  <string name="morphe_play_all_button_not_available_toast">Hindi maaring buuin ang playlist dahil sa hindi tugmang ID ng channel</string>
   <!-- interaction.reload.reloadVideoPatch -->
   <string name="morphe_reload_video_title">Ipakita ang button na i-reload ang video</string>
   <string name="morphe_reload_video_summary_on">Ipinapakita ang button na i-reload ang video</string>
@@ -509,6 +531,12 @@ Suriin kung tama ang pangalan ng package at naka-install ang app"</string>
   <string name="morphe_disable_precise_seeking_gesture_title">I-disable ang tumpak na pag-ugong ng pag-ugong</string>
   <string name="morphe_disable_precise_seeking_gesture_summary_on">Naka-disable ang tumpak na pag-ugong ng pag-ugong</string>
   <string name="morphe_disable_precise_seeking_gesture_summary_off">Naka-enable ang tumpak na pag-ugong ng pag-ugong</string>
+  <!-- interaction.seekbar.livestreamDvrPatch -->
+  <string name="morphe_livestream_dvr_title">I-enable ang livestream DVR</string>
+  <string name="morphe_livestream_dvr_summary_on">Pinapayagan ang paghahanap sa lahat ng livestreams</string>
+  <string name="morphe_livestream_dvr_summary_off">Maaaring hindi available ang paghahanap sa mga livestreams</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_livestream_dvr_user_dialog_message">Ang pag-e-enable nito ay maaaring magdulot ng hindi inaasahang paghahanap sa livestream kung hindi naka-enable ang \'Spoof video streams\'.</string>
   <!-- interaction.seekbar.enableSlideToSeekPatch -->
   <string name="morphe_slide_to_seek_title">Paganahin ang slide to seek</string>
   <string name="morphe_slide_to_seek_summary_on">Ang slide to seek ay pinagana</string>
@@ -721,7 +749,7 @@ Upang ma-access ang Settings, i-enable ang Settings button sa pamamagitan ng Gen
   <string name="morphe_navigation_bar_animations_summary_off">Ang mga transition ng Navigation ay walang animasyon</string>
   <string name="morphe_disable_auto_hide_navigation_bar_title">I-disable ang auto-hiding navigation bar</string>
   <string name="morphe_disable_auto_hide_navigation_bar_summary_on">Ang navigation bar ay hindi magtatago habang nag-scroll</string>
-  <string name="morphe_disable_auto_hide_navigation_bar_summary_off">Ang navigation bar ay magtatago habang nag-scroll</string>
+  <string name="morphe_disable_auto_hide_navigation_bar_summary_off">Maaaring itago ang navigation bar habang nag-scroll</string>
   <string name="morphe_disable_translucent_status_bar_title">I-disable ang translucent status bar</string>
   <string name="morphe_disable_translucent_status_bar_summary_on">Ang status bar ay opaque</string>
   <string name="morphe_disable_translucent_status_bar_summary_off">Ang status bar ay opaque o translucent</string>
@@ -1418,12 +1446,6 @@ Limitasyon: Ang paggamit ng pindutan ng back sa toolbar ay maaaring hindi gumana
   <string name="morphe_miniplayer_disable_rounded_corners_title">I-disable ang bilog na sulok</string>
   <string name="morphe_miniplayer_disable_rounded_corners_summary_on">Parisukat ang mga sulok</string>
   <string name="morphe_miniplayer_disable_rounded_corners_summary_off">Bilog ang mga sulok</string>
-  <string name="morphe_miniplayer_double_tap_action_title">I-enable ang double-tap at pinch para i-resize</string>
-  <string name="morphe_miniplayer_double_tap_action_summary_on">"Naka-enable ang aksyon ng double-tap at pinch para i-resize
-
-• I-double tap para palakihin ang miniplayer
-• I-double tap ulit para ibalik sa orihinal na sukat"</string>
-  <string name="morphe_miniplayer_double_tap_action_summary_off">Naka-disable ang aksyon ng double-tap at pinch para i-resize</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_title">I-disable ang pag-drag at drop</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_summary_on">Naka-disable ang pag-drag at drop</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_summary_off">"Naka-enable ang pag-drag at drop
@@ -1437,11 +1459,6 @@ Ang miniplayer ay maaaring i-drag palabas ng screen sa kaliwa o kanan"</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_title">Itago ang mga overlay button</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_summary_on">Nakatago ang mga overlay button</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_summary_off">Ipinapakita ang mga overlay button</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_title">Itago ang mga expand at close button</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_summary_on">"Nakatago ang mga button
-
-I-swipe para i-expand o isara"</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_summary_off">Ipinapakita ang mga expand at close button</string>
   <string name="morphe_miniplayer_hide_subtext_title">Itago ang mga subtext</string>
   <string name="morphe_miniplayer_hide_subtext_summary_on">Nakatago ang mga subtext</string>
   <string name="morphe_miniplayer_hide_subtext_summary_off">Ipinapakita ang mga subtext</string>
@@ -1519,6 +1536,10 @@ I-tap dito upang matuto nang higit pa tungkol sa DeArrow"</string>
   <string name="morphe_alt_thumbnail_dearrow_error">Ang DeArrow ay pansamantalang hindi magagamit (status code: %s)</string>
   <string name="morphe_alt_thumbnail_dearrow_error_generic">Ang DeArrow ay pansamantalang hindi magagamit</string>
   <!-- misc.announcements.announcementsPatch -->
+  <!-- misc.playercontrols.playerControlsPatch -->
+  <string name="morphe_restore_old_player_buttons_title">Ibalik ang lumang estilo ng button ng player</string>
+  <string name="morphe_restore_old_player_buttons_summary_on">Ipinapakita ang estilo ng manlalaro na manipis</string>
+  <string name="morphe_restore_old_player_buttons_summary_off">Ipinapakita ang estilo ng manlalaro na matapang</string>
   <!-- misc.dimensions.spoof.spoofDeviceDimensionsPatch -->
   <string name="morphe_spoof_device_dimensions_title">I-spoof ang device dimensions</string>
   <string name="morphe_spoof_device_dimensions_summary_on">"Sine-spoof ang sukat ng device
@@ -1625,6 +1646,14 @@ Mga limitasyon:
 • Ang pag-playback ng video ay gumagamit ng mas maraming data sa internet kaysa sa VP9 o AV1
 • Ang HDR video ay hindi gagamit ng AVC
 • Ang ilang device ay hindi mapipilitan ng AVC"</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_force_avc_codec_not_available">Upang gamitin ang tampok na ito, baguhin ang \'Gayahin ang mga video stream\' sa Android VR o Android Studio</string>
+  <!-- interaction.seekbar.expandLivestreamDvrDurationPatch -->
+  <string name="morphe_expand_livestream_dvr_duration_title">Palawakin ang tagal ng livestream DVR</string>
+  <string name="morphe_expand_livestream_dvr_duration_summary_on">Ang tagal ng livestream DVR ay pinalawak nang hanggang 7 araw</string>
+  <string name="morphe_expand_livestream_dvr_duration_summary_off">Ang tagal ng livestream DVR ay limitado sa default ng server</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_expand_livestream_dvr_duration_user_dialog_message">Ang setting na ito ay maaaring magdulot ng hindi inaasahang pag-uugali kung ang \'Spoof video streams\' ay hindi naka-enable.</string>
   <!-- video.quality.advancedVideoQualityMenuPatch -->
   <string name="morphe_advanced_video_quality_menu_title">Ipakita ang advanced na menu ng kalidad ng video</string>
   <string name="morphe_advanced_video_quality_menu_summary_on">Ipinapakita ang advanced na menu ng kalidad ng video</string>

@@ -37,7 +37,7 @@ Second \"item\" text"</string>
   <string name="morphe_shorts_disable_background_playback_summary_on">Baggrundsafspilning af Shorts er deaktiveret</string>
   <string name="morphe_shorts_disable_background_playback_summary_off">Baggrundsafspilning af Shorts er aktiveret</string>
   <!-- misc.debugging.enableDebuggingPatch -->
-  <string name="morphe_debug_protobuffer_title">Logprotokolbuffer</string>
+  <string name="morphe_debug_protobuffer_title">Debug log protokolbuffer</string>
   <string name="morphe_debug_protobuffer_summary_on">Fejlfindingslogge inkluderer protobuffer</string>
   <string name="morphe_debug_protobuffer_summary_off">Fejlfindingslogge inkluderer ikke protobuffer</string>
   <string name="morphe_debug_protobuffer_user_dialog_message">"Aktivering af denne indstilling logger yderligere layoutdata, inklusive tekst på skærmen for nogle UI-komponenter.
@@ -120,6 +120,9 @@ Nogle server-side layouts kan ikke vende tilbage.
   <string name="morphe_hide_playables_title">Skjul Spilleobjekter</string>
   <string name="morphe_hide_playables_summary_on">Spilleobjekter er skjult</string>
   <string name="morphe_hide_playables_summary_off">Afspilningstabeller vises</string>
+  <string name="morphe_hide_search_term_thumbnails_title">Skjul miniaturebilleder for søgeord</string>
+  <string name="morphe_hide_search_term_thumbnails_summary_on">Miniaturebilleder for søgeord er skjult</string>
+  <string name="morphe_hide_search_term_thumbnails_summary_off">Miniaturebilleder for søgeord er vist</string>
   <!-- 'Show more' should be translated using the same localized wording YouTube displays for the button.
           This button usually appears when searching for a YouTube creator. -->
   <string name="morphe_hide_show_more_button_title">Skjul knappen \'Vis mere\'</string>
@@ -454,9 +457,9 @@ Begrænsninger:
   <string name="morphe_copy_video_url_title">Vis kopiér video URL knap</string>
   <string name="morphe_copy_video_url_summary_on">Kopier video-URL knappen er vist. Tryk for at kopiere videoens URL. Tryk og hold for at kopiere med tidsstempel</string>
   <string name="morphe_copy_video_url_summary_off">Kopier video-URL knappen er ikke vist</string>
-  <string name="morphe_copy_video_url_timestamp_title">Vis kopi tidsstempel URL knap</string>
-  <string name="morphe_copy_video_url_timestamp_summary_on">Kopier video-URL med tidsstempel knappen er vist. Tryk for at kopiere videoens URL med tidsstempel. Tryk og hold for at kopiere uden tidsstempel</string>
-  <string name="morphe_copy_video_url_timestamp_summary_off">Kopier video-URL med tidsstempel knappen er ikke vist</string>
+  <string name="morphe_copy_video_url_timestamp_title">Kopiér tidsstempel</string>
+  <string name="morphe_copy_video_url_timestamp_summary_on">Knappen til at kopiere videolink kopierer med tidsstempel. Langt tryk kopierer uden tidsstempel</string>
+  <string name="morphe_copy_video_url_timestamp_summary_off">Knappen til at kopiere videolink kopierer uden tidsstempel. Langt tryk kopierer med tidsstempel</string>
   <!-- interaction.dialog.removeViewerDiscretionDialogPatch -->
   <string name="morphe_remove_viewer_discretion_dialog_title">Fjern visningsdialog</string>
   <string name="morphe_remove_viewer_discretion_dialog_summary_on">Dialog vil blive fjernet</string>
@@ -500,6 +503,29 @@ Kontrollér, at pakkenavnet er korrekt, og at appen er installeret"</string>
   <string name="morphe_loop_video_button_summary_off">Loop video menu er vist</string>
   <string name="morphe_loop_video_button_toast_on">Loop-video er slået til</string>
   <string name="morphe_loop_video_button_toast_off">Loop-video er slået fra</string>
+  <!-- interaction.playall.playAllButtonPatch -->
+  <string name="morphe_play_all_button_title">Vis afspil alle-knap</string>
+  <string name="morphe_play_all_button_summary_on">"Afspil alle-knappen vises
+Tryk for at generere en afspilleliste over alle videoer fra kanalen
+Tryk og hold for at fortryde
+
+Info: Fungerer muligvis ikke på live-streams"</string>
+  <string name="morphe_play_all_button_summary_off">Afspil alle-knappen vises ikke</string>
+  <string name="morphe_play_all_button_type_title">Generer afspilleliste-tilstand</string>
+  <string name="morphe_play_all_button_type_entry_0">Alle indhold (Sorter efter tid, stigende)</string>
+  <string name="morphe_play_all_button_type_entry_1">Alle indhold (Sorter efter tid)</string>
+  <string name="morphe_play_all_button_type_entry_2">Alle indhold (Sorter efter popularitet)</string>
+  <string name="morphe_play_all_button_type_entry_3">Videoer (Sorter efter tid)</string>
+  <string name="morphe_play_all_button_type_entry_4">Videoer (Sorter efter popularitet)</string>
+  <string name="morphe_play_all_button_type_entry_5">Shorts (Sorter efter tid)</string>
+  <string name="morphe_play_all_button_type_entry_6">Shorts (Sorter efter popularitet)</string>
+  <string name="morphe_play_all_button_type_entry_7">Streamede videoer (Sorter efter tid)</string>
+  <string name="morphe_play_all_button_type_entry_8">Streamede videoer (Sorter efter popularitet)</string>
+  <string name="morphe_play_all_button_type_entry_9">Kun medlemmers indhold</string>
+  <string name="morphe_play_all_button_type_entry_10">Kun medlemmers videoer</string>
+  <string name="morphe_play_all_button_type_entry_11">Kun medlemmers Shorts</string>
+  <string name="morphe_play_all_button_type_entry_12">Kun medlemmers live streams</string>
+  <string name="morphe_play_all_button_not_available_toast">Kunne ikke generere afspilningsliste på grund af mismatch i kanal-id</string>
   <!-- interaction.reload.reloadVideoPatch -->
   <string name="morphe_reload_video_title">Vis knap for at indlæse video</string>
   <string name="morphe_reload_video_summary_on">Indlæs video knap vises</string>
@@ -509,6 +535,12 @@ Kontrollér, at pakkenavnet er korrekt, og at appen er installeret"</string>
   <string name="morphe_disable_precise_seeking_gesture_title">Deaktivér præcis søgemåde</string>
   <string name="morphe_disable_precise_seeking_gesture_summary_on">Bevægelse er deaktiveret</string>
   <string name="morphe_disable_precise_seeking_gesture_summary_off">Bevægelse er aktiveret</string>
+  <!-- interaction.seekbar.livestreamDvrPatch -->
+  <string name="morphe_livestream_dvr_title">Aktivér livestream DVR</string>
+  <string name="morphe_livestream_dvr_summary_on">Afspilning er tilladt på alle livestreams</string>
+  <string name="morphe_livestream_dvr_summary_off">Afspilning er muligvis ikke tilgængelig på livestreams</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_livestream_dvr_user_dialog_message">Aktivering af denne funktion kan medføre uventet søgning i livestream, hvis \'Spoof videostrømme\' ikke er aktiveret.</string>
   <!-- interaction.seekbar.enableSlideToSeekPatch -->
   <string name="morphe_slide_to_seek_title">Aktivér dias for at søge</string>
   <string name="morphe_slide_to_seek_summary_on">Dias for at søge er aktiveret</string>
@@ -721,7 +753,7 @@ For at få adgang til Indstillinger skal du aktivere knappen Indstillinger via G
   <string name="morphe_navigation_bar_animations_summary_off">Navigationsovergange animeres ikke</string>
   <string name="morphe_disable_auto_hide_navigation_bar_title">Deaktiver automatisk skjuling af navigationslinjen</string>
   <string name="morphe_disable_auto_hide_navigation_bar_summary_on">Navigation bar vil ikke skjules ved scrolling</string>
-  <string name="morphe_disable_auto_hide_navigation_bar_summary_off">Navigation bar vil skjules ved scrolling</string>
+  <string name="morphe_disable_auto_hide_navigation_bar_summary_off">Navigation bar kan skjules ved scrolling</string>
   <string name="morphe_disable_translucent_status_bar_title">Deaktiver gennemsigtig statuslinje</string>
   <string name="morphe_disable_translucent_status_bar_summary_on">Statuslinjen er opak</string>
   <string name="morphe_disable_translucent_status_bar_summary_off">Statuslinjen er opak eller gennemsigtig</string>
@@ -1418,12 +1450,6 @@ Begrænsning: Brug af tilbage-knappen på værktøjslinjen fungerer muligvis ikk
   <string name="morphe_miniplayer_disable_rounded_corners_title">Deaktiver afrundede hjørner</string>
   <string name="morphe_miniplayer_disable_rounded_corners_summary_on">Hjørner er firkantede</string>
   <string name="morphe_miniplayer_disable_rounded_corners_summary_off">Hjørner er afrundede</string>
-  <string name="morphe_miniplayer_double_tap_action_title">Aktiver dobbelttryk og klemme for at ændre størrelse</string>
-  <string name="morphe_miniplayer_double_tap_action_summary_on">"Dobbelttrykshandling og knib for at ændre størrelse er aktiveret
-
-● Dobbelttryk for at øge miniafspillerstørrelsen
-● Dobbelttryk igen for at gendanne den oprindelige størrelse"</string>
-  <string name="morphe_miniplayer_double_tap_action_summary_off">Dobbelttryk handling og klemme for at ændre størrelse er deaktiveret</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_title">Deaktiver træk og slip</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_summary_on">Træk og slip er deaktiveret</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_summary_off">"Træk og slip er aktiveret
@@ -1437,11 +1463,6 @@ Miniafspiller kan trækkes ud over skærmen til venstre eller højre"</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_title">Skjul overlay-knapper</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_summary_on">Overlay-knapper er skjult</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_summary_off">Overlay-knapper vises</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_title">Skjul knapperne Udvid og Luk</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_summary_on">"Knapperne er skjult
-
-Skub for at udvide eller lukke"</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_summary_off">Knapperne Udvid og Luk vises</string>
   <string name="morphe_miniplayer_hide_subtext_title">Skjul undertekster</string>
   <string name="morphe_miniplayer_hide_subtext_summary_on">Undertekster er skjult</string>
   <string name="morphe_miniplayer_hide_subtext_summary_off">Undertekster er vist</string>
@@ -1519,6 +1540,10 @@ Tryk her for at lære mere om DeArrow"</string>
   <string name="morphe_alt_thumbnail_dearrow_error">DeArrow er midlertidigt ikke tilgængelig (statuskode: %s)</string>
   <string name="morphe_alt_thumbnail_dearrow_error_generic">DeArrow er midlertidigt ikke tilgængelig</string>
   <!-- misc.announcements.announcementsPatch -->
+  <!-- misc.playercontrols.playerControlsPatch -->
+  <string name="morphe_restore_old_player_buttons_title">Gendan knapstil for den gamle afspiller</string>
+  <string name="morphe_restore_old_player_buttons_summary_on">Spillerens tynde stil vises</string>
+  <string name="morphe_restore_old_player_buttons_summary_off">Spillerens fede stil vises</string>
   <!-- misc.dimensions.spoof.spoofDeviceDimensionsPatch -->
   <string name="morphe_spoof_device_dimensions_title">Spoof enhedens dimensioner</string>
   <string name="morphe_spoof_device_dimensions_summary_on">"Enhedens dimensioner er forfalsket
@@ -1625,6 +1650,14 @@ Begrænsninger:
 • Videoafspilning vil bruge mere internetdata end VP9 eller AV1
 • HDR-videoer vil ikke bruge AVC
 • Nogle enheder kan ikke tvinge AVC"</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_force_avc_codec_not_available">For at bruge denne funktion skal du ændre \'Spoof video streams\' til Android VR eller Android Studio</string>
+  <!-- interaction.seekbar.expandLivestreamDvrDurationPatch -->
+  <string name="morphe_expand_livestream_dvr_duration_title">Udvid livestream DVR-varighed</string>
+  <string name="morphe_expand_livestream_dvr_duration_summary_on">Livestream DVR-varighed er udvidet op til 7 dage</string>
+  <string name="morphe_expand_livestream_dvr_duration_summary_off">Livestream DVR-varighed er begrænset til standardserverindstillingen</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_expand_livestream_dvr_duration_user_dialog_message">Denne indstilling kan medføre uventet adfærd, hvis \'Spoof video streams\' ikke er slået til.</string>
   <!-- video.quality.advancedVideoQualityMenuPatch -->
   <string name="morphe_advanced_video_quality_menu_title">Vis avanceret menu for videokvalitet</string>
   <string name="morphe_advanced_video_quality_menu_summary_on">Avanceret menu for videokvalitet vises</string>

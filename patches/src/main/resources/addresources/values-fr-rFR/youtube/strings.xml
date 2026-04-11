@@ -37,9 +37,9 @@ Second \"item\" text"</string>
   <string name="morphe_shorts_disable_background_playback_summary_on">La lecture en arrière-plan des Shorts est désactivée</string>
   <string name="morphe_shorts_disable_background_playback_summary_off">La lecture en arrière-plan des Shorts est activée</string>
   <!-- misc.debugging.enableDebuggingPatch -->
-  <string name="morphe_debug_protobuffer_title">Journaliser le protocole buffer</string>
-  <string name="morphe_debug_protobuffer_summary_on">Les journaux de débogage incluent le protocole buffer</string>
-  <string name="morphe_debug_protobuffer_summary_off">Les journaux de débogage n\'incluent pas le protocole buffer</string>
+  <string name="morphe_debug_protobuffer_title">Journal de débogage du protocol buffer</string>
+  <string name="morphe_debug_protobuffer_summary_on">Les journaux de débogage incluent les protocol buffers</string>
+  <string name="morphe_debug_protobuffer_summary_off">Les journaux de débogage n\'incluent pas les protocol buffers</string>
   <string name="morphe_debug_protobuffer_user_dialog_message">"L’activation de ce paramètre enregistrera des données supplémentaires sur la mise en page, y compris le texte affiché à l’écran pour certains composants de l’interface.
 
 Cela peut aider à identifier les composants lors de la création de filtres personnalisés.
@@ -121,6 +121,9 @@ Les changements incluent :
   <string name="morphe_hide_playables_title">Masquer \'Jeux intégrés\'</string>
   <string name="morphe_hide_playables_summary_on">Les jeux intégrés sont masqués</string>
   <string name="morphe_hide_playables_summary_off">Les jeux intégrés sont affichés</string>
+  <string name="morphe_hide_search_term_thumbnails_title">Masquer les miniatures des termes de recherche</string>
+  <string name="morphe_hide_search_term_thumbnails_summary_on">Les miniatures des termes de recherche sont masquées</string>
+  <string name="morphe_hide_search_term_thumbnails_summary_off">Les miniatures des termes de recherche sont affichées</string>
   <!-- 'Show more' should be translated using the same localized wording YouTube displays for the button.
           This button usually appears when searching for a YouTube creator. -->
   <string name="morphe_hide_show_more_button_title">Masquer le bouton \'Voir plus\'</string>
@@ -455,9 +458,9 @@ Limitations :
   <string name="morphe_copy_video_url_title">Afficher un bouton \'Copier l\'URL de la vidéo\'</string>
   <string name="morphe_copy_video_url_summary_on">Le bouton \'Copier l\'URL de la vidéo\' est affiché. Appuyez pour copier l\'URL de la vidéo. Appuyez longuement pour copier avec horodatage.</string>
   <string name="morphe_copy_video_url_summary_off">Le bouton \'Copier l\'URL de la vidéo\' n\'est pas affiché</string>
-  <string name="morphe_copy_video_url_timestamp_title">Afficher un bouton \'Copier l\'URL horodaté\'</string>
-  <string name="morphe_copy_video_url_timestamp_summary_on">Le bouton \'Copier l\'URL horodaté\' est affiché. Appuyez pour copier l\'URL de la vidéo avec un horodatage. Appuyez longuement pour copier sans horodatage</string>
-  <string name="morphe_copy_video_url_timestamp_summary_off">Le bouton \'Copier l\'URL horodaté\' n\'est pas affiché</string>
+  <string name="morphe_copy_video_url_timestamp_title">Copier l\'horodatage</string>
+  <string name="morphe_copy_video_url_timestamp_summary_on">Le bouton \'Copier l\'URL de la vidéo\' copie avec l\'horodatage. Un appui long copie sans horodatage</string>
+  <string name="morphe_copy_video_url_timestamp_summary_off">Le bouton \'Copier l\'URL de la vidéo\' copie sans l\'horodatage. Un appui long copie avec l\'horodatage</string>
   <!-- interaction.dialog.removeViewerDiscretionDialogPatch -->
   <string name="morphe_remove_viewer_discretion_dialog_title">Supprimer le message \'Confirmer votre âge\'</string>
   <string name="morphe_remove_viewer_discretion_dialog_summary_on">Le message sera supprimé</string>
@@ -501,6 +504,29 @@ Vérifiez que le nom du package est correct et que l’application est bien inst
   <string name="morphe_loop_video_button_summary_off">Le bouton \'Lecture en boucle\' n\'est pas affiché</string>
   <string name="morphe_loop_video_button_toast_on">La lecture en boucle est activée</string>
   <string name="morphe_loop_video_button_toast_off">La lecture en boucle est désactivée</string>
+  <!-- interaction.playall.playAllButtonPatch -->
+  <string name="morphe_play_all_button_title">Afficher un bouton \'Tout lire\'</string>
+  <string name="morphe_play_all_button_summary_on">"Le bouton 'Tout lire' est affiché
+Appuyez pour générer une playlist de toutes les vidéos de la chaîne
+Appuyez longuement pour annuler
+
+Info : Peut ne pas fonctionner sur les diffusions en direct"</string>
+  <string name="morphe_play_all_button_summary_off">Le bouton \'Tout lire\' n\'est pas affiché</string>
+  <string name="morphe_play_all_button_type_title">Mode de génération de playlist</string>
+  <string name="morphe_play_all_button_type_entry_0">Tout le contenu (Tri par date, par ordre croissant)</string>
+  <string name="morphe_play_all_button_type_entry_1">Tout le contenu (Tri par date)</string>
+  <string name="morphe_play_all_button_type_entry_2">Tout le contenu (Tri par popularité)</string>
+  <string name="morphe_play_all_button_type_entry_3">Vidéos uniquement (Tri par date)</string>
+  <string name="morphe_play_all_button_type_entry_4">Vidéos uniquement (Tri par popularité)</string>
+  <string name="morphe_play_all_button_type_entry_5">Shorts uniquement (Tri par date)</string>
+  <string name="morphe_play_all_button_type_entry_6">Shorts uniquement (Tri par popularité)</string>
+  <string name="morphe_play_all_button_type_entry_7">Vidéos en direct uniquement (Tri par date)</string>
+  <string name="morphe_play_all_button_type_entry_8">Vidéos en direct uniquement (Tri par popularité)</string>
+  <string name="morphe_play_all_button_type_entry_9">Contenu réservé aux membres uniquement</string>
+  <string name="morphe_play_all_button_type_entry_10">Vidéos réservés aux membres uniquement</string>
+  <string name="morphe_play_all_button_type_entry_11">Shorts réservés aux membres uniquement</string>
+  <string name="morphe_play_all_button_type_entry_12">Diffusion en direct réservé aux membres uniquement</string>
+  <string name="morphe_play_all_button_not_available_toast">Impossible de générer la playlist en raison d’une incompatibilité d’identifiant de chaîne</string>
   <!-- interaction.reload.reloadVideoPatch -->
   <string name="morphe_reload_video_title">Afficher un bouton \'Recharger la vidéo\'</string>
   <string name="morphe_reload_video_summary_on">Le bouton \'Recharger la vidéo\' est affiché</string>
@@ -510,6 +536,12 @@ Vérifiez que le nom du package est correct et que l’application est bien inst
   <string name="morphe_disable_precise_seeking_gesture_title">Désactiver le geste de barre de progression précise</string>
   <string name="morphe_disable_precise_seeking_gesture_summary_on">Le geste est désactivé</string>
   <string name="morphe_disable_precise_seeking_gesture_summary_off">Le geste est activé</string>
+  <!-- interaction.seekbar.livestreamDvrPatch -->
+  <string name="morphe_livestream_dvr_title">Activer le DVR des diffusions en direct</string>
+  <string name="morphe_livestream_dvr_summary_on">La barre de progression est disponible sur toutes les diffusions en direct</string>
+  <string name="morphe_livestream_dvr_summary_off">La barre de progression peut ne pas être disponible sur les diffusions en direct</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_livestream_dvr_user_dialog_message">Activer ceci peut entraîner un comportement inattendu lors du déplacement dans la barre de progression de la diffusion en direct si \'Falsifier les flux vidéo\' n’est pas activé.</string>
   <!-- interaction.seekbar.enableSlideToSeekPatch -->
   <string name="morphe_slide_to_seek_title">Activer \'Faites glisser pour rechercher\'</string>
   <string name="morphe_slide_to_seek_summary_on">Faites glisser pour rechercher est activé</string>
@@ -858,7 +890,7 @@ Pour afficher le menu 'Pste audio', modifier 'Falsifier les flux vidéo' en 'And
   <string name="morphe_bypass_ambient_mode_restrictions_title">Contourner les restrictions du Mode Ambiant</string>
   <string name="morphe_bypass_ambient_mode_restrictions_summary_on">Les restrictions d’économie d’énergie du mode Ambiant sont contournées</string>
   <string name="morphe_bypass_ambient_mode_restrictions_summary_off">Les restrictions d’économie d’énergie du mode Ambiant ne sont pas contournées</string>
-  <string name="morphe_bypass_ambient_mode_restrictions_user_dialog_message">L’activation de cette option peut réduire l’autonomie de la batterie</string>
+  <string name="morphe_bypass_ambient_mode_restrictions_user_dialog_message">Activer ceci peut réduire l’autonomie de la batterie</string>
   <string name="morphe_disable_ambient_mode_title">Désactiver le mode Ambiant</string>
   <string name="morphe_disable_ambient_mode_summary_on">Le mode Ambiant est désactivé</string>
   <string name="morphe_disable_ambient_mode_summary_off">Le mode Ambiant est activé</string>
@@ -1374,7 +1406,7 @@ Si cette option est désactivée ultérieurement, il est recommandé de vider le
   <string name="morphe_change_start_page_entry_news">Actualités</string>
   <string name="morphe_change_start_page_entry_notifications">Notifications</string>
   <string name="morphe_change_start_page_entry_playlists">Playlists</string>
-  <string name="morphe_change_start_page_entry_search">Recherche</string>
+  <string name="morphe_change_start_page_entry_search">Rechercher</string>
   <string name="morphe_change_start_page_entry_shopping">Produits</string>
   <string name="morphe_change_start_page_entry_shorts">Shorts</string>
   <string name="morphe_change_start_page_entry_sports">Sports</string>
@@ -1419,12 +1451,6 @@ Limitation : Le bouton 'Retour' de la barre d'outils peut ne pas fonctionner."</
   <string name="morphe_miniplayer_disable_rounded_corners_title">Désactiver les coins arrondis</string>
   <string name="morphe_miniplayer_disable_rounded_corners_summary_on">Les coins sont carrés</string>
   <string name="morphe_miniplayer_disable_rounded_corners_summary_off">Les coins sont arrondis</string>
-  <string name="morphe_miniplayer_double_tap_action_title">Activer le double-appui et pincer pour redimensionner</string>
-  <string name="morphe_miniplayer_double_tap_action_summary_on">"L'action du double appui et du pincement pour redimensionner est activée.
-
-• Double appui pour augmenter la taille du minilecteur.
-• Double appui à nouveau pour rétablir la taille d'origine."</string>
-  <string name="morphe_miniplayer_double_tap_action_summary_off">L\'action du double appui et du pincement pour redimensionner est désactivée.</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_title">Désactiver le glisser-déposer</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_summary_on">Le glisser-déposer est désactivé</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_summary_off">"Le gliser-déposer est activé.
@@ -1438,11 +1464,6 @@ Le mini-lecteur peut être glissé hors de l'écran vers la gauche ou la droite"
   <string name="morphe_miniplayer_hide_overlay_buttons_title">Masquer l\'overlay des boutons</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_summary_on">L\'orvelay des boutons est masqué</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_summary_off">L\'orvelay des boutons est affiché</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_title">Masquer les boutons agrandir et fermer</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_summary_on">"Les boutons sont masqués
-
-Balayer le mini-lecteur pour agrandir ou fermer"</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_summary_off">Les boutons agrandir et fermer sont affichés</string>
   <string name="morphe_miniplayer_hide_subtext_title">Masquer les sous-textes</string>
   <string name="morphe_miniplayer_hide_subtext_summary_on">Les sous-textes sont masqués</string>
   <string name="morphe_miniplayer_hide_subtext_summary_off">Les sous-textes sont affichés</string>
@@ -1461,7 +1482,7 @@ Balayer le mini-lecteur pour agrandir ou fermer"</string>
   <string name="morphe_gradient_loading_screen_summary_off">Le fond de l\'écran de chargement sera une couleur unie</string>
   <string name="morphe_splash_screen_animation_style_title">Style de l\'écran de lancement</string>
   <string name="morphe_splash_screen_animation_style_entry_1">Désactivé</string>
-  <string name="morphe_splash_screen_animation_style_entry_2">Couleur </string>
+  <string name="morphe_splash_screen_animation_style_entry_2">Coloré</string>
   <string name="morphe_splash_screen_animation_style_entry_3">Noir et blanc</string>
   <string name="morphe_seekbar_custom_color_title">Activer une couleur perso. pour la barre de progression</string>
   <string name="morphe_seekbar_custom_color_summary_on">La couleur personnalisée de la barre de progression est activée</string>
@@ -1520,6 +1541,10 @@ Appuyez ici pour en savoir plus sur DeArrow"</string>
   <string name="morphe_alt_thumbnail_dearrow_error">DeArrow est temporairement indisponible (statut : %s)</string>
   <string name="morphe_alt_thumbnail_dearrow_error_generic">DeArrow est temporairement indisponible</string>
   <!-- misc.announcements.announcementsPatch -->
+  <!-- misc.playercontrols.playerControlsPatch -->
+  <string name="morphe_restore_old_player_buttons_title">Restaurer l\'ancien style de bouton du lecteur</string>
+  <string name="morphe_restore_old_player_buttons_summary_on">Le style fin du lecteur est affiché</string>
+  <string name="morphe_restore_old_player_buttons_summary_off">Le style gras du lecteur est affiché</string>
   <!-- misc.dimensions.spoof.spoofDeviceDimensionsPatch -->
   <string name="morphe_spoof_device_dimensions_title">Falsifier les dimensions de l\'appareil</string>
   <string name="morphe_spoof_device_dimensions_summary_on">"Dimensions de l’appareil falsifiées
@@ -1528,9 +1553,9 @@ Des qualités vidéo plus élevées pourraient être débloquées, mais vous ris
 "</string>
   <string name="morphe_spoof_device_dimensions_summary_off">"Dimensions de l’appareil non falsifiées
 
-L’activation de cette option peut débloquer des qualités vidéo plus élevées
+Activer ceci peut débloquer des qualités vidéo plus élevées
 "</string>
-  <string name="morphe_spoof_device_dimensions_user_dialog_message">L’activation de cette option peut entraîner des saccades lors de la lecture vidéo, une autonomie de batterie réduite et d’autres effets secondaires imprévus.</string>
+  <string name="morphe_spoof_device_dimensions_user_dialog_message">Activer ceci peut entraîner des saccades lors de la lecture vidéo, une autonomie de batterie réduite et d’autres effets secondaires imprévus.</string>
   <!-- misc.hapticfeedback.disableHapticFeedbackPatch -->
   <string name="morphe_disable_haptic_feedback_title">Retour haptique</string>
   <string name="morphe_disable_haptic_feedback_summary">Modifier le retour haptique</string>
@@ -1630,6 +1655,14 @@ Limitations :
 • Certains appareils ne permettent pas de forcer AVC
 
 "</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_force_avc_codec_not_available">Pour utiliser cette fonctionnalité, remplacez \'Falsifier les flux vidéo\' par Android VR ou Android Studio</string>
+  <!-- interaction.seekbar.expandLivestreamDvrDurationPatch -->
+  <string name="morphe_expand_livestream_dvr_duration_title">Étendre la durée du DVR des diffusions en direct</string>
+  <string name="morphe_expand_livestream_dvr_duration_summary_on">La durée du DVR des diffusions en direct est étendue jusqu’à 7 jours</string>
+  <string name="morphe_expand_livestream_dvr_duration_summary_off">La durée du DVR des diffusions en direct est limitée à la valeur par défaut du serveur</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_expand_livestream_dvr_duration_user_dialog_message">Ce paramètre peut entraîner un comportement inattendu si “Falsifier les flux vidéo” n’est pas activé.</string>
   <!-- video.quality.advancedVideoQualityMenuPatch -->
   <string name="morphe_advanced_video_quality_menu_title">Afficher le menu de qualité vidéo avancé</string>
   <string name="morphe_advanced_video_quality_menu_summary_on">Le menu de qualité vidéo avancé est affiché</string>

@@ -40,11 +40,11 @@ Second \"item\" text"</string>
   <string name="morphe_settings_search_clear_history">زمووكی به‌ژياره‌كه‌كه‌يه‌كه‌ سه‌ره‌ده‌كامه‌</string>
   <string name="morphe_settings_search_clear_history_message">ئایا خؤت به‌خۆشه‌وه‌ده‌يكه‌ى زه‌مه‌نوه‌كانه‌ به‌ده‌سته؟</string>
   <string name="morphe_settings_search_tips_title">رزگارێ لێکدان</string>
-  <string name="morphe_settings_search_tips_summary">"•  سێرا پێڵیکە بۆ ئەوەی بگەی بەو ڕێگەوانە
-•  سێرا دێركە بۆ ئەوەی بگەی بەو ڕێکدالە
-•  دابەزینەکە پاڵە بۆ پاراستنی لێکدانەکان لە ناسینە
-•  لێکدان پێشێلی ڕێگە و ڕێوشکە دەوێت
-•  ڕێکارە سەرەکیەکان دەربارە دەوێ ڕێکارە خۆش ئەنجام بدەن"</string>
+  <string name="morphe_settings_search_tips_summary">"• ڕێگایەکی خەوەڵدانێ بۆی چێبکە
+• ناخیستنێک دەربارەوێ بۆی خەوەڵدانێ
+• هەڵکەوتینێ دەربارەوێ بپارێزە بابەتەکە بۆ مێشەڕە
+• لێکۆڵینەوێک نەخوێندراوێتە سەرەتایەک و نیشانەیەک
+• دەستکارییەکانی باوک دەلێن سەردا دەستکارییەکانی منداڵێ نەبێت"</string>
   <string name="morphe_settings_search_empty_history_title">ڕاسته‌ بدره‌، له‌گه‌عى ті بانه‌ لاسه‌ یاێت؟</string>
   <string name="morphe_settings_search_empty_history_summary">بۆو زه‌مه‌نوه‌كه‌ ڕژازكه‌يه‌كه كه‌وه‌، وتاره‌يه‌ك بRoh رباشه‌كه‌ بهدینه‌ه تا هێلفه‌ر تهزتی بالانه‌كه‌ دا lepاهار بهنگرئ</string>
   <string name="morphe_settings_search_history_title">تنتینگِ بهژوکى كه‌ سكيّاره مِن ركبتانكه‌كتانكه‌ كه‌ لاوه‌كانա տրա պեռթըն վեղտερ տሩթռլ</string>
@@ -64,8 +64,8 @@ Da zanîn zimanên nû wergerin an jî wergeranên hebin çêbibin, serdana morp
   <string name="morphe_settings_import_file_success">Sazkar ji pelê serketin, kilîna Çeke da bi kar bîne</string>
   <string name="morphe_settings_import_file_failed">ຂ້ອຍບໍ່ສາມາດຈະເບິ່ງຫຍັງໄດ້</string>
   <string name="morphe_settings_export_file">Bo pelê derxistin</string>
-  <string name="morphe_settings_export_file_success">Sazkar serketin bo pelê derxistine</string>
-  <string name="morphe_settings_export_file_failed">Nekirine serketin ji bo sazkarê derxistine</string>
+  <string name="morphe_settings_export_file_success">ئەم فێڵانەی دەستخاتن سەرکەوتێت</string>
+  <string name="morphe_settings_export_file_failed">\"نەگەشت بە دەربازبوونی ڕێکخستنەکان\"</string>
   <!-- String is also duplicated in Reddit about preference -->
   <string name="morphe_settings_about_links_body_version_current">هاتوو ئەڤدە ئەڤ ژ هەند سەركەفتو  %s <i> </i>ڕشتە هەبوو</string>
   <string name="morphe_settings_about_links_dev_header">نوسین</string>
@@ -91,33 +91,15 @@ Da zanîn zimanên nû wergerin an jî wergeranên hebin çêbibin, serdana morp
   <string name="morphe_debug_title">خه‌ت ووتاره‌</string>
   <string name="morphe_debug_summary_on">خه‌ت ووتاره‌ى دروۇرته</string>
   <string name="morphe_debug_summary_off">خه‌ت ووتاره‌ى دروزمايانا</string>
-  <string name="morphe_debug_stacktrace_title">ده‌روكه‌ره‌ وتننڵүһ現場.</string>
-  <string name="morphe_debug_stacktrace_summary_on">خه‌ت ووتاره‌ى जгт चагप በսխալել ւբլ нོྭәر الآخر* sharper յոյз I.</string>
-  <string name="morphe_debug_stacktrace_summary_off">خه‌ت ووتاره‌ى नضոհะயşkܫէ,ye מאד.</string>
   <string name="morphe_debug_toast_on_error_title"> Reproducedrh जए रहखम् Յ․.“</string>
   <string name="morphe_debug_toast_on_error_summary_on">ئاگاداری دەبیندرێت ئەگەر ڕەشە بێت</string>
   <string name="morphe_debug_toast_on_error_summary_off">ئاگاداری نەبیندرێت ئەگەر ڕەشە بێت</string>
   <string name="morphe_debug_toast_on_error_user_dialog_message">"خواردنی ڕەشە ئاگاداری ڕەشە ڕاخشایە.
 
 هیچ ڕاستی ڕاشخراو نەکریتەوە."</string>
-  <string name="morphe_debug_export_logs_to_clipboard_title">هێنانی ڕەگەزە دەستوڕانەکان</string>
-  <string name="morphe_debug_export_logs_to_clipboard_summary">خستنی ڕەگەزەکانی ڕەشە دەستوڕانە بۆ سیخێکە</string>
   <string name="morphe_debug_logs_disabled">سەرپێچوání دەستوڕانە ڕاخشابن</string>
-  <string name="morphe_debug_logs_none_found">هیچ دەستوڕانە نەدۆزرا</string>
-  <string name="morphe_debug_logs_copied_to_clipboard">دەستوڕانە خسترانە سیخێکە</string>
-  <string name="morphe_debug_logs_failed_to_export">نەیتوانران دەستوڕانە خانە: %s</string>
-  <string name="morphe_debug_logs_clear_buffer_title">پاکەدانی دەستوڕانە ڕەشەکانی ڕپەڕاندن</string>
-  <string name="morphe_debug_logs_clear_buffer_summary">خەڵاتە دەستوڕانەکانی ڕەشە دەهیژرێن</string>
-  <string name="morphe_debug_logs_clear_toast">خەڵاتە دەستوڕانە ڕاخشابن</string>
   <string name="morphe_debug_feature_flags_manager_title">دابەرێوەبەرێ فیزەری فڵاگەکان</string>
   <string name="morphe_debug_feature_flags_manager_summary">ڕێکخستنی خەڵاتە بە ئەزموونی زمان</string>
-  <string name="morphe_debug_feature_flags_manager_active_header">خەڵاتە وەرگرتنە (%d)</string>
-  <string name="morphe_debug_feature_flags_manager_blocked_header">خەڵاتە بێ تۆمه ( %d )</string>
-  <string name="morphe_debug_feature_flags_manager_search_hint">خەڵاتە…</string>
-  <string name="morphe_debug_feature_flags_manager_toast_saved">خەڵاتە دەوsplitextن</string>
-  <string name="morphe_debug_feature_flags_manager_toast_reset">خەڵاتە ڕەدا ڕەشین</string>
-  <string name="morphe_debug_feature_flags_manager_toast_copied">خەڵاتە سیخیکەشە خسترا</string>
-  <string name="morphe_debug_feature_flags_manager_toast_no_flags">Ji bo dananê sererîyê appê saz bike da ku ev taybetmendî bi kar bîne</string>
   <!-- Could be its own resource file, but for simplicity it's shared among all apps. -->
   <!-- misc.gms.gmsCoreSupportResourcePatch -->
   <string name="microg_settings_summary">Sazkarên MicroG-ê veke</string>

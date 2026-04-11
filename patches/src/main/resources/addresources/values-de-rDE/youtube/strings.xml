@@ -37,9 +37,9 @@ Second \"item\" text"</string>
   <string name="morphe_shorts_disable_background_playback_summary_on">Hintergrundwiedergabe von Shorts ist deaktiviert</string>
   <string name="morphe_shorts_disable_background_playback_summary_off">Hintergrundwiedergabe von Shorts ist aktiviert</string>
   <!-- misc.debugging.enableDebuggingPatch -->
-  <string name="morphe_debug_protobuffer_title">Protokollpuffer protokollieren</string>
-  <string name="morphe_debug_protobuffer_summary_on">Debug-Protokolle enthalten Protokollpuffer</string>
-  <string name="morphe_debug_protobuffer_summary_off">Debug-Protokolle enthalten kein Protokollpuffer</string>
+  <string name="morphe_debug_protobuffer_title">Debug-Protokollpuffer</string>
+  <string name="morphe_debug_protobuffer_summary_on">Debug-Logs enthalten Protokollpuffer</string>
+  <string name="morphe_debug_protobuffer_summary_off">Debug-Logs enthalten keine Protokollpuffer</string>
   <string name="morphe_debug_protobuffer_user_dialog_message">"Wenn diese Einstellung aktiv ist werden zusätzliche Layoutdaten protokolliert, einschließlich Text auf dem Bildschirm für einige UI-Komponenten.
 
 Dies kann helfen, Komponenten bei der Erstellung benutzerdefinierter Filter zu identifizieren.
@@ -121,6 +121,9 @@ Folgende Änderungen werden vorgenommen:
   <string name="morphe_hide_playables_title">Playables ausblenden</string>
   <string name="morphe_hide_playables_summary_on">Playables sind ausgeblendet</string>
   <string name="morphe_hide_playables_summary_off">Playables werden angezeigt</string>
+  <string name="morphe_hide_search_term_thumbnails_title">Suchbegriff-Miniaturen ausblenden</string>
+  <string name="morphe_hide_search_term_thumbnails_summary_on">Suchbegriff-Miniaturen sind ausgeblendet</string>
+  <string name="morphe_hide_search_term_thumbnails_summary_off">Suchbegriff-Miniaturen sind sichtbar</string>
   <!-- 'Show more' should be translated using the same localized wording YouTube displays for the button.
           This button usually appears when searching for a YouTube creator. -->
   <string name="morphe_hide_show_more_button_title">Schaltfläche \'Mehr anzeigen\' ausblenden</string>
@@ -455,9 +458,9 @@ Einschränkungen:
   <string name="morphe_copy_video_url_title">Video-URL-Schaltfläche kopieren anzeigen</string>
   <string name="morphe_copy_video_url_summary_on">Kopier-Button für Video-URL ist angezeigt. Tippen, um die Video-URL zu kopieren. Tippen und halten, um mit Zeitstempel zu kopieren</string>
   <string name="morphe_copy_video_url_summary_off">Kopier-Button für Video-URL ist nicht angezeigt</string>
-  <string name="morphe_copy_video_url_timestamp_title">Kopiere Zeitstempel URL-Schaltfläche anzeigen</string>
-  <string name="morphe_copy_video_url_timestamp_summary_on">Kopier-Button für Video-URL mit Zeitstempel ist angezeigt. Tippen, um die Video-URL mit Zeitstempel zu kopieren. Tippen und halten, um ohne Zeitstempel zu kopieren</string>
-  <string name="morphe_copy_video_url_timestamp_summary_off">Kopier-Button für Video-URL mit Zeitstempel ist nicht angezeigt</string>
+  <string name="morphe_copy_video_url_timestamp_title">Zeitstempel kopieren</string>
+  <string name="morphe_copy_video_url_timestamp_summary_on">Der Button zum Kopieren der Video-URL kopiert mit Zeitstempel. Durch langes Drücken wird ohne Zeitstempel kopiert</string>
+  <string name="morphe_copy_video_url_timestamp_summary_off">Der Button zum Kopieren der Video-URL kopiert ohne Zeitstempel. Durch langes Drücken wird mit Zeitstempel kopiert</string>
   <!-- interaction.dialog.removeViewerDiscretionDialogPatch -->
   <string name="morphe_remove_viewer_discretion_dialog_title">Diskretion des Betrachters entfernen</string>
   <string name="morphe_remove_viewer_discretion_dialog_summary_on">Dialog wird entfernt</string>
@@ -501,6 +504,29 @@ Stellen Sie sicher, dass der Paketname korrekt ist und die App installiert ist"<
   <string name="morphe_loop_video_button_summary_off">Schaltfläche „Video wiederholen“ ist ausgeblendet</string>
   <string name="morphe_loop_video_button_toast_on">Loop-Video ist aktiviert</string>
   <string name="morphe_loop_video_button_toast_off">Loop-Video ist deaktiviert</string>
+  <!-- interaction.playall.playAllButtonPatch -->
+  <string name="morphe_play_all_button_title">Zeige Alle-Wiedergeben-Button</string>
+  <string name="morphe_play_all_button_summary_on">"Der Alle-Wiedergeben-Button wird angezeigt.
+Tippen Sie, um eine Wiedergabeliste mit allen Videos aus dem Kanal zu generieren.
+Tippen und halten Sie gedrückt, um die Aktion rückgängig zu machen.
+
+Info: Funktioniert möglicherweise nicht bei Live-Stream"</string>
+  <string name="morphe_play_all_button_summary_off">Der Alle-Wiedergeben-Button wird nicht angezeigt</string>
+  <string name="morphe_play_all_button_type_title">Playliste erstellen Modus</string>
+  <string name="morphe_play_all_button_type_entry_0">Alle Inhalte (Sortieren nach Zeit, Aufsteigend)</string>
+  <string name="morphe_play_all_button_type_entry_1">Alle Inhalte (Sortieren nach Zeit)</string>
+  <string name="morphe_play_all_button_type_entry_2">Alle Inhalte (Sortieren nach Beliebtheit)</string>
+  <string name="morphe_play_all_button_type_entry_3">Nur Videos (Sortieren nach Zeit)</string>
+  <string name="morphe_play_all_button_type_entry_4">Nur Videos (Sortieren nach Beliebtheit)</string>
+  <string name="morphe_play_all_button_type_entry_5">Nur Shorts (Sortieren nach Zeit)</string>
+  <string name="morphe_play_all_button_type_entry_6">Nur Shorts (Sortieren nach Beliebtheit)</string>
+  <string name="morphe_play_all_button_type_entry_7">Nur gestreamte Video (Sortieren nach Zeit)</string>
+  <string name="morphe_play_all_button_type_entry_8">Nur gestreamte Videos (Sortieren nach Beliebtheit)</string>
+  <string name="morphe_play_all_button_type_entry_9">Nur Inhalte aller Mitglieder</string>
+  <string name="morphe_play_all_button_type_entry_10">Nur Mitglieder-Videos</string>
+  <string name="morphe_play_all_button_type_entry_11">Nur Mitglieder-Shorts</string>
+  <string name="morphe_play_all_button_type_entry_12">Nur Mitglieder-Live-Streams</string>
+  <string name="morphe_play_all_button_not_available_toast">Fehler beim Generieren der Playlist aufgrund von Kanal-ID-Diskrepanz</string>
   <!-- interaction.reload.reloadVideoPatch -->
   <string name="morphe_reload_video_title">Video-Wiederholschaltfläche anzeigen</string>
   <string name="morphe_reload_video_summary_on">Schaltfläche „Video wiederholen“ wird angezeigt</string>
@@ -510,6 +536,12 @@ Stellen Sie sicher, dass der Paketname korrekt ist und die App installiert ist"<
   <string name="morphe_disable_precise_seeking_gesture_title">Genaue Suchgeste deaktivieren</string>
   <string name="morphe_disable_precise_seeking_gesture_summary_on">Geste ist deaktiviert</string>
   <string name="morphe_disable_precise_seeking_gesture_summary_off">Geste ist aktiviert</string>
+  <!-- interaction.seekbar.livestreamDvrPatch -->
+  <string name="morphe_livestream_dvr_title">Livestream-DVR aktivieren</string>
+  <string name="morphe_livestream_dvr_summary_on">Das Vorspulen ist in allen Livestreams erlaubt</string>
+  <string name="morphe_livestream_dvr_summary_off">Das Vorspulen ist in Livestreams möglicherweise nicht verfügbar</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_livestream_dvr_user_dialog_message">Das Aktivieren kann zu unerwartetem Suchtverhalten von Livestreams führen, wenn \'Videostreams fälschen\' nicht aktiviert ist.</string>
   <!-- interaction.seekbar.enableSlideToSeekPatch -->
   <string name="morphe_slide_to_seek_title">Slide zum Suchen aktivieren</string>
   <string name="morphe_slide_to_seek_summary_on">Slide zum Suchen ist aktiviert</string>
@@ -720,7 +752,7 @@ Um auf Einstellungen zuzugreifen, aktivieren Sie die Einstellungen Schaltfläche
   <string name="morphe_navigation_bar_animations_summary_off">Navigationen werden nicht animiert</string>
   <string name="morphe_disable_auto_hide_navigation_bar_title">Auto-Ausblenden der Navigationsleiste deaktivieren</string>
   <string name="morphe_disable_auto_hide_navigation_bar_summary_on">Die Navigationsleiste wird beim Scrollen nicht ausgeblendet</string>
-  <string name="morphe_disable_auto_hide_navigation_bar_summary_off">Die Navigationsleiste wird beim Scrollen ausgeblendet</string>
+  <string name="morphe_disable_auto_hide_navigation_bar_summary_off">Die Navigationsleiste blendet sich beim Scrollen möglicherweise aus</string>
   <string name="morphe_disable_translucent_status_bar_title">Transluzente Statusleiste deaktivieren</string>
   <string name="morphe_disable_translucent_status_bar_summary_on">Statusleiste ist undurchsichtig</string>
   <string name="morphe_disable_translucent_status_bar_summary_off">Die Statusleiste ist undurchsichtig oder durchscheinend</string>
@@ -807,7 +839,7 @@ Tippen und halten Sie, um die Morphe-Einstellungen zu öffnen"</string>
           'Android Reel' and 'TV' must be kept untranslated. -->
   <string name="morphe_hide_player_flyout_audio_track_not_available">"Menü \"Audio-Track\" ist ausgeblendet
 
-Um das Menü anzuzeigen, ändern Sie \"Video-Streams fingieren\" in \"Android Reel\" oder \"TV\""</string>
+Um das Menü anzuzeigen, ändern Sie \"Video-Streams fälschen\" in \"Android Reel\" oder \"TV\""</string>
   <!-- 'Watch in VR' should be translated using the same localized wording YouTube displays for the menu item. -->
   <string name="morphe_hide_player_flyout_watch_in_vr_title">„In VR ansehen“ ausblenden</string>
   <string name="morphe_hide_player_flyout_watch_in_vr_summary_on">Schaltfläche „In VR ansehen“ ist ausgeblendet</string>
@@ -1417,12 +1449,6 @@ Einschränkung: Die Verwendung der Zurück-Taste auf der Symbolleiste funktionie
   <string name="morphe_miniplayer_disable_rounded_corners_title">Abgerundete Ecken deaktivieren</string>
   <string name="morphe_miniplayer_disable_rounded_corners_summary_on">Ecken sind Quadrat</string>
   <string name="morphe_miniplayer_disable_rounded_corners_summary_off">Ecken sind abgerundet</string>
-  <string name="morphe_miniplayer_double_tap_action_title">Aktiviere doppeltes Tippen und Pratzen um die Größe zu ändern</string>
-  <string name="morphe_miniplayer_double_tap_action_summary_on">"Doppeltippen und mit zwei Fingern vergrößern/verkleinern ist aktiviert
-
-• Doppeltippen, um die Größe des Mini-Players zu vergrößern
-• Nochmals doppeltippen, um die ursprüngliche Größe wiederherzustellen"</string>
-  <string name="morphe_miniplayer_double_tap_action_summary_off">Doppel-Tipp-Aktion und Pinch um die Größe zu verändern, ist deaktiviert</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_title">Ziehen und Ablegen deaktivieren</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_summary_on">Drag and Drop ist deaktiviert</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_summary_off">"Drag-and-Drop ist aktiviert
@@ -1436,11 +1462,6 @@ Der Mini-Player kann mit einer Wischgeste vom Bildschirm nach links oder rechts 
   <string name="morphe_miniplayer_hide_overlay_buttons_title">Overlay-Buttons ausblenden</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_summary_on">Overlay-Buttons sind ausgeblendet</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_summary_off">Overlay-Buttons werden angezeigt</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_title">Erweitern- und Schließen-Schaltflächen ausblenden</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_summary_on">"Schaltflächen sind ausgeblendet
-
-Wischen, um zu erweitern oder zu schließen"</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_summary_off">Erweitern und schließen Schaltflächen werden angezeigt</string>
   <string name="morphe_miniplayer_hide_subtext_title">Untertexte ausblenden</string>
   <string name="morphe_miniplayer_hide_subtext_summary_on">Subtexte sind ausgeblendet</string>
   <string name="morphe_miniplayer_hide_subtext_summary_off">Untertexte werden angezeigt</string>
@@ -1518,6 +1539,10 @@ Tippen Sie hier, um mehr über DeArrow zu erfahren"</string>
   <string name="morphe_alt_thumbnail_dearrow_error">DeArrow ist vorübergehend nicht verfügbar (Statuscode: %s)</string>
   <string name="morphe_alt_thumbnail_dearrow_error_generic">DeArrow ist vorübergehend nicht verfügbar</string>
   <!-- misc.announcements.announcementsPatch -->
+  <!-- misc.playercontrols.playerControlsPatch -->
+  <string name="morphe_restore_old_player_buttons_title">Alten Player-Button-Stil wiederherstellen</string>
+  <string name="morphe_restore_old_player_buttons_summary_on">Player wird im schlanken Stil angezeigt</string>
+  <string name="morphe_restore_old_player_buttons_summary_off">Player wird im fetten Stil angezeigt</string>
   <!-- misc.dimensions.spoof.spoofDeviceDimensionsPatch -->
   <string name="morphe_spoof_device_dimensions_title">Spoof-Gerätegröße</string>
   <string name="morphe_spoof_device_dimensions_summary_on">"Gerätemessungen gefälscht
@@ -1624,6 +1649,14 @@ Einschränkungen:
 • Die Videowiedergabe verbraucht mehr Internetdaten als VP9 oder AV1
 • HDR-Videos verwenden kein AVC
 • Einige Geräte können AVC nicht erzwingen"</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_force_avc_codec_not_available">Um diese Funktion zu nutzen, ändern Sie \"Video-Streams fälschen\" auf Android VR oder Android Studio</string>
+  <!-- interaction.seekbar.expandLivestreamDvrDurationPatch -->
+  <string name="morphe_expand_livestream_dvr_duration_title">Livestream DVR-Dauer erweitern</string>
+  <string name="morphe_expand_livestream_dvr_duration_summary_on">Die Livestream DVR-Dauer wurde auf bis zu 7 Tage erweitert</string>
+  <string name="morphe_expand_livestream_dvr_duration_summary_off">Die Livestream DVR-Dauer ist auf den Serversstandard beschränkt</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_expand_livestream_dvr_duration_user_dialog_message">Diese Einstellung kann zu unerwartetem Verhalten führen, wenn \'Videostreams fälschen\' nicht aktiviert ist.</string>
   <!-- video.quality.advancedVideoQualityMenuPatch -->
   <string name="morphe_advanced_video_quality_menu_title">Erweitertes Videoqualitätsmenü anzeigen</string>
   <string name="morphe_advanced_video_quality_menu_summary_on">Erweitertes Videoqualitätsmenü wird angezeigt</string>

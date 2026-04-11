@@ -11,7 +11,6 @@
 package app.morphe.extension.youtube.patches.components;
 
 import static app.morphe.extension.shared.Utils.getFilterStrings;
-import static app.morphe.extension.youtube.patches.VersionCheckPatch.IS_20_10_OR_GREATER;
 import static app.morphe.extension.youtube.shared.NavigationBar.NavigationButton;
 
 import android.graphics.drawable.Drawable;
@@ -103,20 +102,21 @@ public final class LayoutComponentsFilter extends Filter {
 
         communityPosts = new StringFilterGroup(
                 Settings.HIDE_COMMUNITY_POSTS,
-                "post_base_wrapper", // may be obsolete and no longer needed.
-                "text_post_root.e",
                 "images_post_root.e",
-                "images_post_slim.e", // may be obsolete and no longer needed.
                 "images_post_root_slim.e",
-                "text_post_root_slim.e",
-                "post_base_wrapper_slim.e",
-                "poll_post_root.e",
-                "videos_post_root.e",
-                "post_shelf_slim.e",
-                "videos_post_responsive_root.e",
-                "text_post_responsive_root.e",
+                "images_post_slim.e", // may be obsolete and no longer needed.
                 "poll_post_responsive_root.e",
-                "shared_post_root.e"
+                "poll_post_root.e",
+                "post_base_wrapper", // may be obsolete and no longer needed.
+                "post_base_wrapper_slim.e",
+                "post_shelf_slim.e",
+                "shared_post_responsive_root.e",
+                "shared_post_root.e",
+                "text_post_responsive_root.e",
+                "text_post_root.e",
+                "text_post_root_slim.e",
+                "videos_post_responsive_root.e",
+                "videos_post_root.e"
         );
 
         final var subscribersCommunityGuidelines = new StringFilterGroup(
@@ -509,11 +509,7 @@ public final class LayoutComponentsFilter extends Filter {
      * Injection point.
      */
     public static void hideInRelatedVideos(View chipView) {
-        if (IS_20_10_OR_GREATER) {
-            Utils.hideViewUnderCondition(HIDE_FILTER_BAR_FEED_IN_RELATED_VIDEOS_ENABLED, chipView);
-        } else {
-            Utils.hideViewBy0dpUnderCondition(HIDE_FILTER_BAR_FEED_IN_RELATED_VIDEOS_ENABLED, chipView);
-        }
+        Utils.hideViewUnderCondition(HIDE_FILTER_BAR_FEED_IN_RELATED_VIDEOS_ENABLED, chipView);
     }
 
     private static final boolean HIDE_YOUTUBE_DOODLES_ENABLED = Settings.HIDE_YOUTUBE_DOODLES.get();
@@ -765,6 +761,13 @@ public final class LayoutComponentsFilter extends Filter {
         }
 
         return false;
+    }
+
+    /**
+     * Injection point.
+     */
+    public static boolean hideSearchTermThumbnails() {
+        return Settings.HIDE_SEARCH_TERM_THUMBNAILS.get();
     }
 
     /**

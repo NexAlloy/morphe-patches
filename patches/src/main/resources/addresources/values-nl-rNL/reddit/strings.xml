@@ -30,10 +30,10 @@ Second \"item\" text"</string>
   <string name="morphe_hide_answers_button_summary">Verbergt de Antwoordenknop in de navigatiebalk</string>
   <string name="morphe_hide_chat_button_title">Chatknop verbergen</string>
   <string name="morphe_hide_chat_button_summary">Verbergt de Chatknop in de navigatiebalk</string>
-  <string name="morphe_hide_create_button_title">Maakknop verbergen</string>
-  <string name="morphe_hide_create_button_summary">Verbergt de Maakknop in de navigatiebalk</string>
-  <string name="morphe_hide_discover_button_title">Ontdek- of Communityknop verbergen</string>
-  <string name="morphe_hide_discover_button_summary">Verbergt de Ontdek- of Communityknop in de navigatiebalk</string>
+  <string name="morphe_hide_create_button_title">Knop Maken verbergen</string>
+  <string name="morphe_hide_create_button_summary">Verbergt de knop \'Maken\' in de navigatiebalk</string>
+  <string name="morphe_hide_discover_button_title">Verberg de Discover- of Communities-knop</string>
+  <string name="morphe_hide_discover_button_summary">Verbergt de knop \'Ontdekken\' of \'Communities\' in de navigatiebalk</string>
   <string name="morphe_hide_games_button_title">Gamesknop verbergen</string>
   <string name="morphe_hide_games_button_summary">Verbergt de Gamesknop in de navigatiebalk</string>
   <string name="morphe_hide_recently_visited_shelf_title">Recent bezocht plank verbergen</string>

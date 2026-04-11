@@ -37,9 +37,6 @@ Second \"item\" text"</string>
   <string name="morphe_shorts_disable_background_playback_summary_on">Reprodukcija Shorts videozapisa u pozadini onemogućena </string>
   <string name="morphe_shorts_disable_background_playback_summary_off">Reprodukcija Shorts videozapisa u pozadini omogućena </string>
   <!-- misc.debugging.enableDebuggingPatch -->
-  <string name="morphe_debug_protobuffer_title">Međuspremnik protokola zapisnika</string>
-  <string name="morphe_debug_protobuffer_summary_on">Zapisnici o otklanjanju pogrešaka uključuju proto međuspremnik</string>
-  <string name="morphe_debug_protobuffer_summary_off">Zapisnici o otklanjanju pogrešaka ne uključuju proto međuspremnik</string>
   <string name="morphe_debug_protobuffer_user_dialog_message">"Omogućavanjem ove postavke zabilježit će se dodatni podaci o rasporedu, uključujući tekst na zaslonu za neke komponente korisničkog sučelja.
 
 To može pomoći u identificiranju komponenti prilikom izrade prilagođenih filtera.
@@ -450,9 +447,6 @@ Ograničenja:
   <string name="morphe_copy_video_url_title">Prikaz dugme za kopiranje URL-a</string>
   <string name="morphe_copy_video_url_summary_on">Tipka za kopiranje URL-a videa je prikazana. Tikni da kopiraš URL videa. Tikni i drži da kopiraš s time-stampom</string>
   <string name="morphe_copy_video_url_summary_off">Tipka za kopiranje URL-a videa nije prikazana</string>
-  <string name="morphe_copy_video_url_timestamp_title">Prikaz dugme za kopiranje vremenske oznake URL-a</string>
-  <string name="morphe_copy_video_url_timestamp_summary_on">Tipka za kopiranje URL-a videa s time-stampom je prikazana. Tikni da kopiraš URL videa s time-stampom. Tikni i drži da kopiraš bez time-stampa</string>
-  <string name="morphe_copy_video_url_timestamp_summary_off">Tipka za kopiranje URL-a videa s time-stampom nije prikazana</string>
   <!-- interaction.dialog.removeViewerDiscretionDialogPatch -->
   <string name="morphe_remove_viewer_discretion_dialog_title">Ukloni prozor za potvrdu o dozvoljenom prikazu</string>
   <string name="morphe_remove_viewer_discretion_dialog_summary_on">Prozor će biti skriven</string>
@@ -496,6 +490,7 @@ Potvrdite da naziv paketa je tačan i da je aplikacija instalirana."</string>
   <string name="morphe_loop_video_button_summary_off">Tipka za petljanje videa nije prikazana</string>
   <string name="morphe_loop_video_button_toast_on">Petljati video je uključen</string>
   <string name="morphe_loop_video_button_toast_off">Petljati video je isključen</string>
+  <!-- interaction.playall.playAllButtonPatch -->
   <!-- interaction.reload.reloadVideoPatch -->
   <string name="morphe_reload_video_title">Prikaži tipku za ponovno pokretanje videa</string>
   <string name="morphe_reload_video_summary_on">Tipka za učitavanje videozapisa je prikazana</string>
@@ -505,6 +500,8 @@ Potvrdite da naziv paketa je tačan i da je aplikacija instalirana."</string>
   <string name="morphe_disable_precise_seeking_gesture_title">Onemogu precizan pritisak</string>
   <string name="morphe_disable_precise_seeking_gesture_summary_on">Precizan pritisak je onemogu</string>
   <string name="morphe_disable_precise_seeking_gesture_summary_off">Precizan pritisak je omogućeno</string>
+  <!-- interaction.seekbar.livestreamDvrPatch -->
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
   <!-- interaction.seekbar.enableSlideToSeekPatch -->
   <string name="morphe_slide_to_seek_title">Omogu slide to seek</string>
   <string name="morphe_slide_to_seek_summary_on">Slide to seek je omogućeno</string>
@@ -1408,12 +1405,6 @@ Ograničenje: Koristeći dugme nazad na traci može ne funkcionirati"</string>
   <string name="morphe_miniplayer_disable_rounded_corners_title">Onemogućite zaokrugljene uglove</string>
   <string name="morphe_miniplayer_disable_rounded_corners_summary_on">Uglove su kvadratne</string>
   <string name="morphe_miniplayer_disable_rounded_corners_summary_off">Uglove su zaokrugljene</string>
-  <string name="morphe_miniplayer_double_tap_action_title">Omogući dvostruko pritisak i pinzanje da promijenite veličinu mini pregleđa</string>
-  <string name="morphe_miniplayer_double_tap_action_summary_on">"Dvostruko pritisanje je omogućeno
-
-• Dvostrukim pritisakom se povećava veličina mini pregleđa
-• Dvostrukim pritisakom se vraća na originalnu veličinu"</string>
-  <string name="morphe_miniplayer_double_tap_action_summary_off">Dvostavljanje dvotapni akcije i pinzanje za promjenu veličine je onemogućeno</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_title">Onemogu drag and drop</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_summary_on">Drag and drop je onemogućeno</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_summary_off">"Drag and drop je omogućeno
@@ -1427,11 +1418,6 @@ Miniplayer se može povući s lijeva ili desna strane zaslona"</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_title">Sakrij dugmice za nadogradnju</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_summary_on">Dugmici za nadogradnju su sakrivene</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_summary_off">Dugmici za nadogradnju su prikazane</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_title">Sakrij dugmice za širenje i zatvaranje</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_summary_on">"Dugmici su sakrivene
-
-Wipe za širenje ili zatvaranje"</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_summary_off">Dugmice za širenje i zatvaranje su prikazane</string>
   <string name="morphe_miniplayer_hide_subtext_title">Sakrij podnaslove</string>
   <string name="morphe_miniplayer_hide_subtext_summary_on">Podnaslove su sakrivene</string>
   <string name="morphe_miniplayer_hide_subtext_summary_off">Podnaslove su prikazane</string>
@@ -1509,6 +1495,7 @@ Tapajte ovdje da saznajte više o DeArrow"</string>
   <string name="morphe_alt_thumbnail_dearrow_error">DeArrow privremeno nije dostupan (status kod: %s)</string>
   <string name="morphe_alt_thumbnail_dearrow_error_generic">DeArrow privremeno nije dostupan</string>
   <!-- misc.announcements.announcementsPatch -->
+  <!-- misc.playercontrols.playerControlsPatch -->
   <!-- misc.dimensions.spoof.spoofDeviceDimensionsPatch -->
   <string name="morphe_spoof_device_dimensions_title">Simuliraj dimenzije uređaja</string>
   <string name="morphe_spoof_device_dimensions_summary_on">"Dimenzije uređaja su lažirane
@@ -1615,6 +1602,9 @@ Ograničenja:
 • Video playback će koristiti više internet podataka nego VP9 ili AV1
 • HDR video neće koristiti AVC
 • Neke uređaji ne mogu forceirati AVC"</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <!-- interaction.seekbar.expandLivestreamDvrDurationPatch -->
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
   <!-- video.quality.advancedVideoQualityMenuPatch -->
   <string name="morphe_advanced_video_quality_menu_title">Pokaži napredni video kvalitetni meni</string>
   <string name="morphe_advanced_video_quality_menu_summary_on">Napredni video kvalitetni meni je prikazan</string>

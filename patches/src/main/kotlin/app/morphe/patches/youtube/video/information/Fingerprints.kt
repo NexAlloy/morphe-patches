@@ -1,3 +1,5 @@
+@file:Suppress("SpellCheckingInspection")
+
 package app.morphe.patches.youtube.video.information
 
 import app.morphe.patcher.Fingerprint
@@ -37,6 +39,13 @@ internal object PlayerControllerSetTimeReferenceFingerprint : Fingerprint(
 internal object PlayerInitFingerprint : Fingerprint(
     filters = listOf(
         string("playVideo called on player response with no videoStreamingData."),
+    )
+)
+
+internal object ChannelInformationFingerprint : Fingerprint(
+    classFingerprint = PlayerInitFingerprint,
+    filters = listOf(
+        string("loadVideo() called on LocalDirector in wrong state"),
     )
 )
 
@@ -151,20 +160,6 @@ internal object PlaybackSpeedClassFingerprint : Fingerprint(
         Opcode.RETURN_OBJECT
     ),
     strings = listOf("PLAYBACK_RATE_MENU_BOTTOM_SHEET_FRAGMENT")
-)
-
-/**
- * YouTube 20.19 and lower.
- */
-internal object VideoQualityLegacyFingerprint : Fingerprint(
-    definingClass = "Lcom/google/android/libraries/youtube/innertube/model/media/VideoQuality;",
-    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.CONSTRUCTOR),
-    parameters = listOf(
-        "I", // Resolution.
-        "Ljava/lang/String;", // Human readable resolution: "480p", "1080p Premium", etc
-        "Z",
-        "L"
-    )
 )
 
 internal object PlaybackStartDescriptorToStringFingerprint : Fingerprint(

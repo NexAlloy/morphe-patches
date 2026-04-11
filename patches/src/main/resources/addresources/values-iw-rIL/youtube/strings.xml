@@ -37,9 +37,9 @@ Second \"item\" text"</string>
   <string name="morphe_shorts_disable_background_playback_summary_on">הפעלה ברקע של Shorts מושבתת</string>
   <string name="morphe_shorts_disable_background_playback_summary_off">הפעלה ברקע של Shorts מופעלת</string>
   <!-- misc.debugging.enableDebuggingPatch -->
-  <string name="morphe_debug_protobuffer_title">רשום פרוטוקול חוצץ</string>
-  <string name="morphe_debug_protobuffer_summary_on">יומני איתור באגים כוללים פרוטוקול חוצץ</string>
-  <string name="morphe_debug_protobuffer_summary_off">יומני איתור באגים אינם כוללים פרוטוקול חוצץ</string>
+  <string name="morphe_debug_protobuffer_title">Debug log protocol buffer</string>
+  <string name="morphe_debug_protobuffer_summary_on">Debug logs include protocol buffers</string>
+  <string name="morphe_debug_protobuffer_summary_off">Debug logs do not include protocol buffers</string>
   <string name="morphe_debug_protobuffer_user_dialog_message">"הפעלת הגדרה זו תתעד נתוני פריסה נוספים, כולל טקסט שעל המסך עבור רכיבי ממשק משתמש מסוימים.
 
 זה יכול לעזור לזהות רכיבים בעת יצירת מסננים מותאמים אישית.
@@ -119,6 +119,9 @@ Second \"item\" text"</string>
   <string name="morphe_hide_playables_title">הסתר משחקייה</string>
   <string name="morphe_hide_playables_summary_on">המשחקייה מוסתרת</string>
   <string name="morphe_hide_playables_summary_off">המשחקייה מוצגת</string>
+  <string name="morphe_hide_search_term_thumbnails_title">הסתר תמונות ממוזערות של מונחי חיפוש</string>
+  <string name="morphe_hide_search_term_thumbnails_summary_on">תמונות ממוזערות של מונחי החיפוש מוסתרות</string>
+  <string name="morphe_hide_search_term_thumbnails_summary_off">תמונות ממוזערות של מונחי החיפוש מוצגות</string>
   <!-- 'Show more' should be translated using the same localized wording YouTube displays for the button.
           This button usually appears when searching for a YouTube creator. -->
   <string name="morphe_hide_show_more_button_title">הסתר לחצן \'הצג עוד\'</string>
@@ -453,9 +456,9 @@ Second \"item\" text"</string>
   <string name="morphe_copy_video_url_title">הצג לחצן העתקת כתובת ה-URL של הסרטון</string>
   <string name="morphe_copy_video_url_summary_on">הלחצן מוצג. הקש כדי להעתיק את כתובת ה-URL של הסרטון. הקש והחזק כדי להעתיק עם חותמת זמן</string>
   <string name="morphe_copy_video_url_summary_off">לחצן העתקה של כתובת וידאו אינו מוצג</string>
-  <string name="morphe_copy_video_url_timestamp_title">הצג לחצן העתקת כתובת ה-URL של הסרטון עם חותמת זמן</string>
-  <string name="morphe_copy_video_url_timestamp_summary_on">הלחצן מוצג. הקש כדי להעתיק את כתובת ה-URL של הסרטון עם חותמת זמן. הקש והחזק כדי להעתיק ללא חותמת זמן</string>
-  <string name="morphe_copy_video_url_timestamp_summary_off">לחצן העתקה של כתובת טיימסטמפ אינו מוצג</string>
+  <string name="morphe_copy_video_url_timestamp_title">העתקת חותמת זמן</string>
+  <string name="morphe_copy_video_url_timestamp_summary_on">כפתור העתקת כתובת האתר יוצר העתקה עם חותמת זמן. לחיצה ארוכה יוצרת העתקה ללא חותמת זמן</string>
+  <string name="morphe_copy_video_url_timestamp_summary_off">כפתור העתקת כתובת האתר יוצר העתקה ללא חותמת זמן. לחיצה ארוכה יוצרת העתקה עם חותמת זמן</string>
   <!-- interaction.dialog.removeViewerDiscretionDialogPatch -->
   <string name="morphe_remove_viewer_discretion_dialog_title">הסר דו-שיח שיקול דעת הצופים</string>
   <string name="morphe_remove_viewer_discretion_dialog_summary_on">דו-שיח יוסר</string>
@@ -499,6 +502,27 @@ Second \"item\" text"</string>
   <string name="morphe_loop_video_button_summary_off">תפריט סרטון בלופ מוצג</string>
   <string name="morphe_loop_video_button_toast_on">הפעלת סרטון בלולאה מופעלת</string>
   <string name="morphe_loop_video_button_toast_off">הפעלת סרטון בלולאה כבויה</string>
+  <!-- interaction.playall.playAllButtonPatch -->
+  <string name="morphe_play_all_button_title">הצג כפתור השמעה</string>
+  <string name="morphe_play_all_button_summary_on">"כפתור השמעה מוצג\nהקש כדי ליצור רשימת השמעה של כל הסרטונים מהערוץ\nהקש והחזק כדי לבטל פעולה
+
+מידע: ייתכן שלא יעבוד בשידורי חי"</string>
+  <string name="morphe_play_all_button_summary_off">כפתור השמעה אינו מוצג</string>
+  <string name="morphe_play_all_button_type_title">מצב יצירת רשימת השמעה</string>
+  <string name="morphe_play_all_button_type_entry_0">כל התוכן (מיון לפי זמן, עולה)</string>
+  <string name="morphe_play_all_button_type_entry_1">כל התוכן (מיון לפי זמן)</string>
+  <string name="morphe_play_all_button_type_entry_2">כל התוכן (מיון לפי פופולריות)</string>
+  <string name="morphe_play_all_button_type_entry_3">סרטונים בלבד (מיון לפי זמן)</string>
+  <string name="morphe_play_all_button_type_entry_4">סרטונים בלבד (מיון לפי פופולריות)</string>
+  <string name="morphe_play_all_button_type_entry_5">Shorts בלבד (מיון לפי זמן)</string>
+  <string name="morphe_play_all_button_type_entry_6">Shorts בלבד (מיון לפי פופולריות)</string>
+  <string name="morphe_play_all_button_type_entry_7">סרטונים מועברים בלבד (מיון לפי זמן)</string>
+  <string name="morphe_play_all_button_type_entry_8">סרטונים מועברים בלבד (מיון לפי פופולריות)</string>
+  <string name="morphe_play_all_button_type_entry_9">תכנים של כל החברים בלבד</string>
+  <string name="morphe_play_all_button_type_entry_10">סרטוני חברים בלבד</string>
+  <string name="morphe_play_all_button_type_entry_11">Shorts של חברים בלבד</string>
+  <string name="morphe_play_all_button_type_entry_12">שידורי חיים של חברים בלבד</string>
+  <string name="morphe_play_all_button_not_available_toast">לא ניתן ליצור רשימת השמעה עקב אי התאמת מזהה ערוץ</string>
   <!-- interaction.reload.reloadVideoPatch -->
   <string name="morphe_reload_video_title">הצג לחצן טעינת סרטון</string>
   <string name="morphe_reload_video_summary_on">לחצן טעינת סרטון מוצג</string>
@@ -508,6 +532,12 @@ Second \"item\" text"</string>
   <string name="morphe_disable_precise_seeking_gesture_title">השבת מחוות דילוג מדויקת</string>
   <string name="morphe_disable_precise_seeking_gesture_summary_on">מחווה מושבתת</string>
   <string name="morphe_disable_precise_seeking_gesture_summary_off">מחווה מופעלת</string>
+  <!-- interaction.seekbar.livestreamDvrPatch -->
+  <string name="morphe_livestream_dvr_title">הפעל DVR לשידור חי</string>
+  <string name="morphe_livestream_dvr_summary_on">ניתן לחפש בכל שידורים חיים</string>
+  <string name="morphe_livestream_dvr_summary_off">ייתכן שלא ניתן יהיה לחפש בשידורים חיים</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_livestream_dvr_user_dialog_message">הפעלת התכונה הזו עלולה לגרום להתנהגות חיפוש לא צפויה בשידורי חיים, אם \'הדמיית זרמי וידאו\' לא מופעלת.</string>
   <!-- interaction.seekbar.enableSlideToSeekPatch -->
   <string name="morphe_slide_to_seek_title">הפעל החלק כדי לדלג</string>
   <string name="morphe_slide_to_seek_summary_on">החלק כדי לדלג מופעל</string>
@@ -720,7 +750,7 @@ Second \"item\" text"</string>
   <string name="morphe_navigation_bar_animations_summary_off">מעברי ניווט אינם מונפשים</string>
   <string name="morphe_disable_auto_hide_navigation_bar_title">השבת הסתרת אוטומטית של סרגל הניווט</string>
   <string name="morphe_disable_auto_hide_navigation_bar_summary_on">סרגל הניווט לא יתכסה בזמן גלילה</string>
-  <string name="morphe_disable_auto_hide_navigation_bar_summary_off">סרגל הניווט יתכסה בזמן גלילה</string>
+  <string name="morphe_disable_auto_hide_navigation_bar_summary_off">סרגל הניווט עשוי להסתתר בזמן גלילה</string>
   <string name="morphe_disable_translucent_status_bar_title">השבת שורת מצב שקופה</string>
   <string name="morphe_disable_translucent_status_bar_summary_on">שורת מצב אטומה</string>
   <string name="morphe_disable_translucent_status_bar_summary_off">שורת מצב אטומה או שקופה</string>
@@ -1417,12 +1447,6 @@ Second \"item\" text"</string>
   <string name="morphe_miniplayer_disable_rounded_corners_title">בטל פינות מעוגלות</string>
   <string name="morphe_miniplayer_disable_rounded_corners_summary_on">הפינות מרובעות</string>
   <string name="morphe_miniplayer_disable_rounded_corners_summary_off">הפינות מעוגלות</string>
-  <string name="morphe_miniplayer_double_tap_action_title">הפעל הקשה כפולה וצביטה לשינוי גודל</string>
-  <string name="morphe_miniplayer_double_tap_action_summary_on">"פעולת הקשה כפולה וצביטה לשינוי גודל מופעלת
-
-• הקש פעמיים כדי להגדיל את גודל המיני-נגן
-• הקש פעמיים שוב כדי לשחזר את הגודל המקורי"</string>
-  <string name="morphe_miniplayer_double_tap_action_summary_off">פעולת הקשה כפולה וצביטה לשינוי גודל מושבתת</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_title">בטל גרירה ושחרור</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_summary_on">גרירה ושחרור מושבת</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_summary_off">"גרירה ושחרור מופעלים
@@ -1436,11 +1460,6 @@ Second \"item\" text"</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_title">הסתר לחצני שכבת-על</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_summary_on">לחצני שכבת-על מוסתרים</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_summary_off">לחצני שכבת-על מוצגים</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_title">הסתר כפתורי הרחבה וסגירה</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_summary_on">"הכפתורים מוסתרים
-
-החלק להרחבה או סגירה"</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_summary_off">כפתורי הרחבה וסגירה מוצגים</string>
   <string name="morphe_miniplayer_hide_subtext_title">הסתר תת-טקסטים</string>
   <string name="morphe_miniplayer_hide_subtext_summary_on">תת-טקסטים מוסתרים</string>
   <string name="morphe_miniplayer_hide_subtext_summary_off">תת-טקסטים מוצגים</string>
@@ -1518,6 +1537,10 @@ Second \"item\" text"</string>
   <string name="morphe_alt_thumbnail_dearrow_error">השירות DeArrow אינו זמין באופן זמני (קוד מצב: %s)</string>
   <string name="morphe_alt_thumbnail_dearrow_error_generic">השירות DeArrow אינו זמין באופן זמני</string>
   <!-- misc.announcements.announcementsPatch -->
+  <!-- misc.playercontrols.playerControlsPatch -->
+  <string name="morphe_restore_old_player_buttons_title">שחזור סגנון כפתורי נגן ישן</string>
+  <string name="morphe_restore_old_player_buttons_summary_on">סגנון דק של השחקן מוצג</string>
+  <string name="morphe_restore_old_player_buttons_summary_off">סגנון מודגש של השחקן מוצג</string>
   <!-- misc.dimensions.spoof.spoofDeviceDimensionsPatch -->
   <string name="morphe_spoof_device_dimensions_title">זייף ממדי מכשיר</string>
   <string name="morphe_spoof_device_dimensions_summary_on">"מימדי המכשיר מזויפים
@@ -1623,6 +1646,14 @@ Second \"item\" text"</string>
 • הפעלת וידאו תשתמש ביותר נתוני אינטרנט מאשר VP9 או AV1
 • סרטוני HDR לא ישתמשו ב-AVC
 • התקנים מסוימים אינם יכולים לאכוף AVC"</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_force_avc_codec_not_available">כדי להשתמש בתכונה זו, שנה את \'זיוף זרמי וידאו\' ל-Android VR או Android Studio</string>
+  <!-- interaction.seekbar.expandLivestreamDvrDurationPatch -->
+  <string name="morphe_expand_livestream_dvr_duration_title">הרחב את משך ה-DVR בשידור חי</string>
+  <string name="morphe_expand_livestream_dvr_duration_summary_on">משך ה-DVR בשידור חי הורחב עד 7 ימים</string>
+  <string name="morphe_expand_livestream_dvr_duration_summary_off">משך ה-DVR בשידור חי מוגבל לברירת המחדל של השרת</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_expand_livestream_dvr_duration_user_dialog_message">הגדרת זו עלולה לגרום להתנהגות בלתי צפויה אם \'הפעלת זרמי וידאו מדומים\' אינה מופעלת.</string>
   <!-- video.quality.advancedVideoQualityMenuPatch -->
   <string name="morphe_advanced_video_quality_menu_title">הצג תפריט איכות סרטון מתקדם</string>
   <string name="morphe_advanced_video_quality_menu_summary_on">תפריט איכות סרטון מתקדם מוצג</string>

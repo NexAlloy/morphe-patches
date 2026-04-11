@@ -37,9 +37,9 @@ Second \"item\" text"</string>
   <string name="morphe_shorts_disable_background_playback_summary_on">Pemutaran Shorts di latar belakang dinonaktifkan</string>
   <string name="morphe_shorts_disable_background_playback_summary_off">Pemutaran Shorts di latar belakang diaktifkan</string>
   <!-- misc.debugging.enableDebuggingPatch -->
-  <string name="morphe_debug_protobuffer_title">Buffer protokol log</string>
-  <string name="morphe_debug_protobuffer_summary_on">Pencatatan debug termasuk buffer proto</string>
-  <string name="morphe_debug_protobuffer_summary_off">Pencatatan debug tidak menyertakan buffer proto</string>
+  <string name="morphe_debug_protobuffer_title">Catatan debug buffer protokol</string>
+  <string name="morphe_debug_protobuffer_summary_on">Pencatatan debug termasuk buffer protokol</string>
+  <string name="morphe_debug_protobuffer_summary_off">Pencatatan debug tidak menyertakan buffer protokol</string>
   <string name="morphe_debug_protobuffer_user_dialog_message">"Mengaktifkan pengaturan ini akan mencatat data tata letak tambahan, termasuk teks pada layar untuk beberapa komponen UI.
 
 Ini dapat membantu mengidentifikasi komponen saat membuat penyaring khusus.
@@ -119,6 +119,9 @@ Perubahan termasuk:
   <string name="morphe_hide_playables_title">Sembunyikan Permainan</string>
   <string name="morphe_hide_playables_summary_on">Permainan disembunyikan</string>
   <string name="morphe_hide_playables_summary_off">Permainan ditampilkan</string>
+  <string name="morphe_hide_search_term_thumbnails_title">Sembunyikan thumbnail frasa pencarian</string>
+  <string name="morphe_hide_search_term_thumbnails_summary_on">Thumbnail frasa pencarian disembunyikan</string>
+  <string name="morphe_hide_search_term_thumbnails_summary_off">Thumbnail frasa pencarian ditampilkan</string>
   <!-- 'Show more' should be translated using the same localized wording YouTube displays for the button.
           This button usually appears when searching for a YouTube creator. -->
   <string name="morphe_hide_show_more_button_title">Sembunyikan tombol \'Tampilkan selengkapnya\'</string>
@@ -338,9 +341,9 @@ Menampilkan YouTube Doodles mungkin mencegah menampilkan header khusus."</string
   <string name="morphe_hide_comments_create_a_short_button_title">Sembunyikan tombol \'Buat Short\'</string>
   <string name="morphe_hide_comments_create_a_short_button_summary_on">Tombol Buat Short disembunyikan</string>
   <string name="morphe_hide_comments_create_a_short_button_summary_off">Tombol Buat Short ditampilkan</string>
-  <string name="morphe_hide_comments_emoji_and_timestamp_buttons_title">Sembunyikan tombol Emoji dan Penanda Waktu</string>
-  <string name="morphe_hide_comments_emoji_and_timestamp_buttons_summary_on">Tombol Emoji dan Penanda Waktu disembunyikan</string>
-  <string name="morphe_hide_comments_emoji_and_timestamp_buttons_summary_off">Tombol Emoji dan Penanda Waktu ditampilkan</string>
+  <string name="morphe_hide_comments_emoji_and_timestamp_buttons_title">Sembunyikan tombol Emoji dan Stempel waktu</string>
+  <string name="morphe_hide_comments_emoji_and_timestamp_buttons_summary_on">Tombol Emoji dan Stempel waktu disembunyikan</string>
+  <string name="morphe_hide_comments_emoji_and_timestamp_buttons_summary_off">Tombol Emoji dan Stempel waktu ditampilkan</string>
   <string name="morphe_hide_comments_info_button_title">Sembunyikan tombol Info</string>
   <string name="morphe_hide_comments_info_button_summary_on">Tombol Info disembunyikan</string>
   <string name="morphe_hide_comments_info_button_summary_off">Tombol Info ditampilkan</string>
@@ -449,13 +452,13 @@ Keterbatasan
   <!-- interaction.doubletap.doubleTapLengthPatch -->
   <!-- interaction.copyvideourl.copyVideoURLResourcePatch -->
   <string name="morphe_share_copy_url_success">URL disalin ke papan klip</string>
-  <string name="morphe_share_copy_url_timestamp_success">URL dengan penanda waktu telah disalin</string>
+  <string name="morphe_share_copy_url_timestamp_success">URL dengan stempel waktu telah disalin</string>
   <string name="morphe_copy_video_url_title">Tampilkan tombol salin URL video</string>
   <string name="morphe_copy_video_url_summary_on">Tombol salin URL video ditampilkan. Ketuk untuk menyalin URL video. Ketuk dan tahan untuk menyalin dengan stempel waktu</string>
   <string name="morphe_copy_video_url_summary_off">Tombol salin URL video tidak ditampilkan</string>
-  <string name="morphe_copy_video_url_timestamp_title">Tampilkan tombol salin penanda waktu URL</string>
-  <string name="morphe_copy_video_url_timestamp_summary_on">Tombol salin URL stempel waktu ditampilkan. Ketuk untuk menyalin URL video dengan stempel waktu. Ketuk dan tahan untuk menyalin tanpa stempel waktu</string>
-  <string name="morphe_copy_video_url_timestamp_summary_off">Tombol salin URL stempel waktu tidak ditampilkan</string>
+  <string name="morphe_copy_video_url_timestamp_title">Salin stempel waktu</string>
+  <string name="morphe_copy_video_url_timestamp_summary_on">Tombol Salin URL video menyalin dengan stempel waktu. Tekan lama menyalin tanpa stempel waktu</string>
+  <string name="morphe_copy_video_url_timestamp_summary_off">Tombol Salin URL video menyalin tanpa stempel waktu. Tekan lama menyalin dengan stempel waktu</string>
   <!-- interaction.dialog.removeViewerDiscretionDialogPatch -->
   <string name="morphe_remove_viewer_discretion_dialog_title">Hapus dialog pembatasan penonton</string>
   <string name="morphe_remove_viewer_discretion_dialog_summary_on">Dialog akan dihapus</string>
@@ -499,6 +502,29 @@ Verifikasi nama paket sudah benar dan aplikasi sudah terpasang"</string>
   <string name="morphe_loop_video_button_summary_off">Tombol ulangi video tidak ditampilkan</string>
   <string name="morphe_loop_video_button_toast_on">Pengulangan video aktif</string>
   <string name="morphe_loop_video_button_toast_off">Pengulangan video tidak aktif</string>
+  <!-- interaction.playall.playAllButtonPatch -->
+  <string name="morphe_play_all_button_title">Tampilkan tombol putar semua</string>
+  <string name="morphe_play_all_button_summary_on">"Tombol putar semua ditampilkan
+Ketuk untuk membuat daftar putar semua video dari saluran ini
+Ketuk dan tahan untuk membatalkan
+
+Info: Mungkin tidak berfungsi pada siaran langsung"</string>
+  <string name="morphe_play_all_button_summary_off">Tombol putar semua tidak ditampilkan</string>
+  <string name="morphe_play_all_button_type_title">Membuat mode daftar putar</string>
+  <string name="morphe_play_all_button_type_entry_0">Semua konten (Urutkan berdasarkan waktu, dari yang terbaru ke yang terlama)</string>
+  <string name="morphe_play_all_button_type_entry_1">Semua konten (Urutkan berdasarkan waktu)</string>
+  <string name="morphe_play_all_button_type_entry_2">Semua konten (Urutkan berdasarkan popularitas)</string>
+  <string name="morphe_play_all_button_type_entry_3">Hanya video (Urutkan berdasarkan waktu)</string>
+  <string name="morphe_play_all_button_type_entry_4">Hanya video (Urutkan berdasarkan popularitas)</string>
+  <string name="morphe_play_all_button_type_entry_5">Hanya Shorts (Urutkan berdasarkan waktu)</string>
+  <string name="morphe_play_all_button_type_entry_6">Hanya Shorts (Urutkan berdasarkan popularitas)</string>
+  <string name="morphe_play_all_button_type_entry_7">Hanya video yang sedang ditayangkan (Urutkan berdasarkan waktu)</string>
+  <string name="morphe_play_all_button_type_entry_8">Hanya video yang sedang ditayangkan (Urutkan berdasarkan popularitas)</string>
+  <string name="morphe_play_all_button_type_entry_9">Konten hanya untuk Semua Anggota</string>
+  <string name="morphe_play_all_button_type_entry_10">Video hanya untuk anggota</string>
+  <string name="morphe_play_all_button_type_entry_11">Shorts hanya untuk Anggota</string>
+  <string name="morphe_play_all_button_type_entry_12">Siaran langsung hanya untuk Anggota</string>
+  <string name="morphe_play_all_button_not_available_toast">Tidak dapat membuat daftar putar karena ID saluran tidak cocok</string>
   <!-- interaction.reload.reloadVideoPatch -->
   <string name="morphe_reload_video_title">Tampilkan tombol muat ulang video</string>
   <string name="morphe_reload_video_summary_on">Tombol muat ulang video ditampilkan</string>
@@ -508,6 +534,12 @@ Verifikasi nama paket sudah benar dan aplikasi sudah terpasang"</string>
   <string name="morphe_disable_precise_seeking_gesture_title">Nonaktifkan gerakan pencarian presisi</string>
   <string name="morphe_disable_precise_seeking_gesture_summary_on">Gerakan pencarian yang presisi dinonaktifkan</string>
   <string name="morphe_disable_precise_seeking_gesture_summary_off">Gerakan pencarian yang presisi diaktifkan</string>
+  <!-- interaction.seekbar.livestreamDvrPatch -->
+  <string name="morphe_livestream_dvr_title">Aktifkan siaran langsung DVR</string>
+  <string name="morphe_livestream_dvr_summary_on">Mencari diperbolehkan di semua siaran langsung</string>
+  <string name="morphe_livestream_dvr_summary_off">Mencari mungkin tidak tersedia di siaran langsung</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_livestream_dvr_user_dialog_message">Mengaktifkan ini mungkin menyebabkan perilaku pencarian livestream yang tidak terduga jika \'Palsukan aliran video\' tidak diaktifkan.</string>
   <!-- interaction.seekbar.enableSlideToSeekPatch -->
   <string name="morphe_slide_to_seek_title">Aktifkan geser untuk mencari</string>
   <string name="morphe_slide_to_seek_summary_on">Geser untuk mencari diaktifkan</string>
@@ -720,7 +752,7 @@ Untuk mengakses Pengaturan, aktifkan tombol Pengaturan melalui Umum → Bilah Al
   <string name="morphe_navigation_bar_animations_summary_off">Transisi navigasi tidak dianimasikan</string>
   <string name="morphe_disable_auto_hide_navigation_bar_title">Nonaktifkan otomatis menyembunyikan bilah navigasi</string>
   <string name="morphe_disable_auto_hide_navigation_bar_summary_on">Bilah navigasi tidak akan tersembunyi saat menggulir</string>
-  <string name="morphe_disable_auto_hide_navigation_bar_summary_off">Bilah navigasi akan tersembunyi saat menggulir</string>
+  <string name="morphe_disable_auto_hide_navigation_bar_summary_off">Bilah navigasi mungkin tersembunyi saat menggulir</string>
   <string name="morphe_disable_translucent_status_bar_title">Nonaktifkan bilah status tembus cahaya</string>
   <string name="morphe_disable_translucent_status_bar_summary_on">Bilah status buram</string>
   <string name="morphe_disable_translucent_status_bar_summary_off">Bilah status buram atau tembus pandang</string>
@@ -1028,9 +1060,9 @@ Pengaturan → Pemutaran (atau Putar otomatis) → Putar otomatis video berikutn
   <string name="morphe_hide_player_related_videos_overlay_summary_on">Hamparan video terkait dalam layar penuh disembunyikan</string>
   <string name="morphe_hide_player_related_videos_overlay_summary_off">Hamparan video terkait dalam layar penuh ditampilkan</string>
   <!-- layout.hide.time.hideTimestampPatch -->
-  <string name="morphe_hide_timestamp_title">Sembunyikan penanda waktu video</string>
-  <string name="morphe_hide_timestamp_summary_on">Penanda waktu disembunyikan</string>
-  <string name="morphe_hide_timestamp_summary_off">Penanda waktu ditampilkan</string>
+  <string name="morphe_hide_timestamp_title">Sembunyikan stempel waktu video</string>
+  <string name="morphe_hide_timestamp_summary_on">Stempel waktu disembunyikan</string>
+  <string name="morphe_hide_timestamp_summary_off">Stempel waktu ditampilkan</string>
   <!-- layout.panels.popup.disablePlayerPopupPanelsPatch -->
   <string name="morphe_disable_player_popup_panels_title">Nonaktifkan panel pesan timbul pemutar</string>
   <string name="morphe_disable_player_popup_panels_summary_on">Panel pesan timbul pemutar dinonaktifkan</string>
@@ -1417,12 +1449,6 @@ Batasan: Menggunakan tombol kembali pada toolbar mungkin tidak berfungsi"</strin
   <string name="morphe_miniplayer_disable_rounded_corners_title">Nonaktifkan sudut membulat</string>
   <string name="morphe_miniplayer_disable_rounded_corners_summary_on">Sudutnya persegi</string>
   <string name="morphe_miniplayer_disable_rounded_corners_summary_off">Sudutnya membulat</string>
-  <string name="morphe_miniplayer_double_tap_action_title">Aktifkan ketuk dua kali dan cubit untuk mengubah ukuran</string>
-  <string name="morphe_miniplayer_double_tap_action_summary_on">"Tindakan ketuk dua kali dan cubit untuk mengubah ukuran diaktifkan
-
-• Ketuk dua kali untuk memperbesar ukuran miniplayer
-• Ketuk dua kali lagi untuk mengembalikan ukuran asli"</string>
-  <string name="morphe_miniplayer_double_tap_action_summary_off">Tindakan ketuk dua kali dan cubit untuk mengubah ukuran dinonaktifkan</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_title">Nonaktifkan seret dan lepas</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_summary_on">Seret dan lepas dinonaktifkan</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_summary_off">"Seret dan lepas diaktifkan
@@ -1436,11 +1462,6 @@ Pemutar mini dapat diseret keluar layar ke kiri atau kanan"</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_title">Sembunyikan tombol hamparan</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_summary_on">Tombol hamparan disembunyikan</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_summary_off">Tombol hamparan ditampilkan</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_title">Sembunyikan tombol perluas dan tutup</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_summary_on">"Tombol disembunyikan
-
-Gesek untuk memperluas atau menutup"</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_summary_off">Tombol perluas dan tutup ditampilkan</string>
   <string name="morphe_miniplayer_hide_subtext_title">Sembunyikan subteks</string>
   <string name="morphe_miniplayer_hide_subtext_summary_on">Subteks disembunyikan</string>
   <string name="morphe_miniplayer_hide_subtext_summary_off">Subteks ditampilkan</string>
@@ -1518,6 +1539,10 @@ Ketuk di sini untuk mempelajari lebih lanjut tentang DeArrow"</string>
   <string name="morphe_alt_thumbnail_dearrow_error">DeArrow sementara tidak tersedia (kode status: %s)</string>
   <string name="morphe_alt_thumbnail_dearrow_error_generic">DeArrow sementara tidak tersedia</string>
   <!-- misc.announcements.announcementsPatch -->
+  <!-- misc.playercontrols.playerControlsPatch -->
+  <string name="morphe_restore_old_player_buttons_title">Pulihkan gaya tombol pemutar lama</string>
+  <string name="morphe_restore_old_player_buttons_summary_on">Gaya pemutar tipis ditampilkan</string>
+  <string name="morphe_restore_old_player_buttons_summary_off">Gaya pemutar tebal ditampilkan</string>
   <!-- misc.dimensions.spoof.spoofDeviceDimensionsPatch -->
   <string name="morphe_spoof_device_dimensions_title">Palsukan dimensi perangkat</string>
   <string name="morphe_spoof_device_dimensions_summary_on">"Dimensi perangkat dipalsukan
@@ -1624,6 +1649,14 @@ Batasan:
 • Pemutaran video akan menggunakan lebih banyak data internet dibandingkan VP9 atau AV1
 • Video HDR tidak akan menggunakan AVC
 • Beberapa perangkat tidak dapat memaksakan AVC"</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_force_avc_codec_not_available">Untuk menggunakan fitur ini, ubah \'Palsukan aliran video\' ke Android VR atau Android Studio</string>
+  <!-- interaction.seekbar.expandLivestreamDvrDurationPatch -->
+  <string name="morphe_expand_livestream_dvr_duration_title">Perluas durasi siaran langsung DVR</string>
+  <string name="morphe_expand_livestream_dvr_duration_summary_on">Durasi siaran langsung DVR diperluas hingga 7 hari</string>
+  <string name="morphe_expand_livestream_dvr_duration_summary_off">Durasi siaran langsung DVR terbatas pada bawaan server</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_expand_livestream_dvr_duration_user_dialog_message">Pengaturan ini dapat menyebabkan perilaku tak terduga jika \'Palsukan aliran video\' tidak diaktifkan.</string>
   <!-- video.quality.advancedVideoQualityMenuPatch -->
   <string name="morphe_advanced_video_quality_menu_title">Tampilkan menu kualitas video lanjutan</string>
   <string name="morphe_advanced_video_quality_menu_summary_on">Menu kualitas video lanjutan ditampilkan</string>

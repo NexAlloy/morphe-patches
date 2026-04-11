@@ -37,9 +37,9 @@ Second \"item\" text"</string>
   <string name="morphe_shorts_disable_background_playback_summary_on">Přehrávání Shorts na pozadí je zakázáno</string>
   <string name="morphe_shorts_disable_background_playback_summary_off">Přehrávání Shorts na pozadí je povoleno</string>
   <!-- misc.debugging.enableDebuggingPatch -->
-  <string name="morphe_debug_protobuffer_title">Zaznamenat buffer protokolu</string>
-  <string name="morphe_debug_protobuffer_summary_on">Debugovací záznamy obsahují buffer protokolu</string>
-  <string name="morphe_debug_protobuffer_summary_off">Debugovací záznamy neobsahují buffer protokolu</string>
+  <string name="morphe_debug_protobuffer_title">Protokolový buffer pro ladění</string>
+  <string name="morphe_debug_protobuffer_summary_on">Debugovací záznamy obsahují protokolové buffery</string>
+  <string name="morphe_debug_protobuffer_summary_off">Debugovací záznamy neobsahují protokolové buffery</string>
   <string name="morphe_debug_protobuffer_user_dialog_message">"Povolením tohoto nastavení se bude zaznamenávat další data rozvržení, včetně textu na obrazovce pro některé komponenty uživatelského rozhraní.
 
 To může pomoci identifikovat komponenty při vytváření vlastních filtrů.
@@ -120,6 +120,9 @@ Změny zahrnují:
   <string name="morphe_hide_playables_title">Skrýt Playables</string>
   <string name="morphe_hide_playables_summary_on">Playables jsou skryté</string>
   <string name="morphe_hide_playables_summary_off">Playables jsou zobrazené</string>
+  <string name="morphe_hide_search_term_thumbnails_title">Skrýt náhledy vyhledávacích výrazů</string>
+  <string name="morphe_hide_search_term_thumbnails_summary_on">Náhledy vyhledávacích výrazů jsou skryté</string>
+  <string name="morphe_hide_search_term_thumbnails_summary_off">Náhledy vyhledávacích výrazů jsou zobrazeny</string>
   <!-- 'Show more' should be translated using the same localized wording YouTube displays for the button.
           This button usually appears when searching for a YouTube creator. -->
   <string name="morphe_hide_show_more_button_title">Skrýt tlačítko „Zobrazit více“</string>
@@ -455,9 +458,9 @@ Omezení:
   <string name="morphe_copy_video_url_title">Zobrazit tlačítko pro kopírování URL videa</string>
   <string name="morphe_copy_video_url_summary_on">Zobrazí se tlačítko. Klepnutím zkopírujete URL videa. Klepnutím a podržením zkopírujete s časovou značkou</string>
   <string name="morphe_copy_video_url_summary_off">Tlačítko pro hlasování segmentu není zobrazeno</string>
-  <string name="morphe_copy_video_url_timestamp_title">Zobrazit tlačítko pro kopírování URL videa s časovou značkou</string>
-  <string name="morphe_copy_video_url_timestamp_summary_on">Zobrazí se tlačítko. Klepnutím zkopírujete URL videa s časovou značkou. Klepnutím a podržením zkopírujete bez časové značky</string>
-  <string name="morphe_copy_video_url_timestamp_summary_off">Tlačítko pro hlasování segmentu není zobrazeno</string>
+  <string name="morphe_copy_video_url_timestamp_title">Zkopírovat časové razítko</string>
+  <string name="morphe_copy_video_url_timestamp_summary_on">Tlačítko Zkopírovat video URL kopíruje s časovým razítkem. Dlouhým stiskem se kopíruje bez časového razítka</string>
+  <string name="morphe_copy_video_url_timestamp_summary_off">Tlačítko Zkopírovat video URL kopíruje bez časového razítka. Dlouhým stiskem se kopíruje s časovým razítkem</string>
   <!-- interaction.dialog.removeViewerDiscretionDialogPatch -->
   <string name="morphe_remove_viewer_discretion_dialog_title">Odstranit dialog s upozorněním na věkové omezení</string>
   <string name="morphe_remove_viewer_discretion_dialog_summary_on">Dialog bude odstraněn</string>
@@ -501,6 +504,25 @@ Zkontrolujte, zda je název balíčku správný a aplikace je nainstalována"</s
   <string name="morphe_loop_video_button_summary_off">Menu Opakování videa je zobrazeno</string>
   <string name="morphe_loop_video_button_toast_on">Smyčka videa je zapnuta</string>
   <string name="morphe_loop_video_button_toast_off">Smyčka videa je vypnuta</string>
+  <!-- interaction.playall.playAllButtonPatch -->
+  <string name="morphe_play_all_button_title">Zobrazit tlačítko přehrát vše</string>
+  <string name="morphe_play_all_button_summary_on">"Tlačítko přehrát vše je zobrazeno\nKlepněte pro vygenerování seznamu přehrávání všech videí z kanálu\nKlepněte a podržte pro zrušení\n\nInfo: Možná nebude fungovat u živých přenosů"</string>
+  <string name="morphe_play_all_button_summary_off">Tlačítko přehrát vše není zobrazeno</string>
+  <string name="morphe_play_all_button_type_title">Režim generování seznamu přehrávání</string>
+  <string name="morphe_play_all_button_type_entry_0">Všechny položky (Seřadit podle času, vzestupně)</string>
+  <string name="morphe_play_all_button_type_entry_1">Všechny položky (Seřadit podle času)</string>
+  <string name="morphe_play_all_button_type_entry_2">Všechny položky (Seřadit podle oblíbenosti)</string>
+  <string name="morphe_play_all_button_type_entry_3">Pouze videa (Seřadit podle času)</string>
+  <string name="morphe_play_all_button_type_entry_4">Pouze videa (Seřadit podle oblíbenosti)</string>
+  <string name="morphe_play_all_button_type_entry_5">Pouze Shorts (Seřadit podle času)</string>
+  <string name="morphe_play_all_button_type_entry_6">Pouze Shorts (Seřadit podle oblíbenosti)</string>
+  <string name="morphe_play_all_button_type_entry_7">Pouze streamovaná videa (Seřadit podle času)</string>
+  <string name="morphe_play_all_button_type_entry_8">Pouze streamovaná videa (Seřadit podle oblíbenosti)</string>
+  <string name="morphe_play_all_button_type_entry_9">Pouze obsah od všech členů</string>
+  <string name="morphe_play_all_button_type_entry_10">Pouze videa pro členy</string>
+  <string name="morphe_play_all_button_type_entry_11">Pouze Shorts pro členy</string>
+  <string name="morphe_play_all_button_type_entry_12">Pouze živé streamy pro členy</string>
+  <string name="morphe_play_all_button_not_available_toast">Nelze vygenerovat seznam přehrávání kvůli nesouladu ID kanálu</string>
   <!-- interaction.reload.reloadVideoPatch -->
   <string name="morphe_reload_video_title">Zobrazit tlačítko pro obnovení videa</string>
   <string name="morphe_reload_video_summary_on">Tlačítko pro obnovení videa je zobrazeno</string>
@@ -510,6 +532,12 @@ Zkontrolujte, zda je název balíčku správný a aplikace je nainstalována"</s
   <string name="morphe_disable_precise_seeking_gesture_title">Zakázat přesné gesto pro vyhledávání</string>
   <string name="morphe_disable_precise_seeking_gesture_summary_on">Přesné gesto pro vyhledávání je zakázáno</string>
   <string name="morphe_disable_precise_seeking_gesture_summary_off">Přesné gesto pro vyhledávání je povoleno</string>
+  <!-- interaction.seekbar.livestreamDvrPatch -->
+  <string name="morphe_livestream_dvr_title">Povolit záznam přímého přenosu</string>
+  <string name="morphe_livestream_dvr_summary_on">Posouvání je povoleno u všech živých přenosů</string>
+  <string name="morphe_livestream_dvr_summary_off">Posouvání nemusí být dostupné u živých přenosů</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_livestream_dvr_user_dialog_message">Povolení této funkce může způsobit neočekávané chování při přechodu ve živém streamu, pokud není povolena možnost \'Simulovat video streamy\'.</string>
   <!-- interaction.seekbar.enableSlideToSeekPatch -->
   <string name="morphe_slide_to_seek_title">Povolit posun pro hledání</string>
   <string name="morphe_slide_to_seek_summary_on">Posun pro hledání je povolen</string>
@@ -722,7 +750,7 @@ Pro přístup k Nastavení povolte tlačítko Nastavení přes Obecné → Nást
   <string name="morphe_navigation_bar_animations_summary_off">Přechody navigace nejsou animované</string>
   <string name="morphe_disable_auto_hide_navigation_bar_title">Vypněte automatické skrytí navigační lišty</string>
   <string name="morphe_disable_auto_hide_navigation_bar_summary_on">Navigační lišta se při posouvání nebude schovávat</string>
-  <string name="morphe_disable_auto_hide_navigation_bar_summary_off">Navigační lišta se při posouvání bude schovávat</string>
+  <string name="morphe_disable_auto_hide_navigation_bar_summary_off">Navigač ní panel se mūž měž při scrollingu</string>
   <string name="morphe_disable_translucent_status_bar_title">Deaktivovat průsvitný stavový řádek</string>
   <string name="morphe_disable_translucent_status_bar_summary_on">Stavový řádek je neprůhledný</string>
   <string name="morphe_disable_translucent_status_bar_summary_off">Stavový řádek je neprůhledný nebo průsvitný</string>
@@ -1419,12 +1447,6 @@ Omezení: Použití tlačítka zpět na panelu nástrojů nemusí fungovat"</str
   <string name="morphe_miniplayer_disable_rounded_corners_title">Zakázat zaoblené rohy</string>
   <string name="morphe_miniplayer_disable_rounded_corners_summary_on">Rohy jsou čtvercové</string>
   <string name="morphe_miniplayer_disable_rounded_corners_summary_off">Rohy jsou zaoblené</string>
-  <string name="morphe_miniplayer_double_tap_action_title">Povolit dvojitý klepnutí a přiblížení pro změnu velikosti</string>
-  <string name="morphe_miniplayer_double_tap_action_summary_on">"Dvojitý klepnutí a přiblížení pro změnu velikosti je povoleno
-
-• Dvojitým klepnutím zvětšíte velikost minihráče
-• Dvojitým klepnutím znovu obnovíte původní velikost"</string>
-  <string name="morphe_miniplayer_double_tap_action_summary_off">Dvojitý klepnutí a přiblížení pro změnu velikosti je zakázáno</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_title">Zakázat přetažení</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_summary_on">Přetažení je zakázáno</string>
   <string name="morphe_miniplayer_disable_drag_and_drop_summary_off">"Přetažení je povoleno
@@ -1438,11 +1460,6 @@ Miniplayer lze přetáhnout z obrazovky doleva nebo doprava"</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_title">Skrýt tlačítka překrytí</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_summary_on">Tlačítka překrytí jsou skrytá</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_summary_off">Tlačítka překrytí jsou zobrazena</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_title">Skrýt tlačítka rozbalit a zavřít</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_summary_on">"Tlačítka jsou skrytá
-
-Přetáhnutím rozbalit nebo zavřít"</string>
-  <string name="morphe_miniplayer_hide_overlay_buttons_legacy_summary_off">Tlačítka rozbalit a zavřít jsou zobrazena</string>
   <string name="morphe_miniplayer_hide_subtext_title">Skrýt podtexty</string>
   <string name="morphe_miniplayer_hide_subtext_summary_on">Podtexty jsou skryty</string>
   <string name="morphe_miniplayer_hide_subtext_summary_off">Podtexty jsou zobrazeny</string>
@@ -1520,6 +1537,10 @@ Klepnutím sem se dozvíte více o DeArrow"</string>
   <string name="morphe_alt_thumbnail_dearrow_error">DeArrow je dočasně nedostupný (kód stavu: %s)</string>
   <string name="morphe_alt_thumbnail_dearrow_error_generic">DeArrow je dočasně nedostupný</string>
   <!-- misc.announcements.announcementsPatch -->
+  <!-- misc.playercontrols.playerControlsPatch -->
+  <string name="morphe_restore_old_player_buttons_title">Obnovit starý styl tlačítek přehrávače</string>
+  <string name="morphe_restore_old_player_buttons_summary_on">Zobrazuje se tenký styl přehrávače</string>
+  <string name="morphe_restore_old_player_buttons_summary_off">Zobrazuje se tučný styl přehrávače</string>
   <!-- misc.dimensions.spoof.spoofDeviceDimensionsPatch -->
   <string name="morphe_spoof_device_dimensions_title">Napodobovat rozměry zařízení</string>
   <string name="morphe_spoof_device_dimensions_summary_on">"Rozměry zařízení jsou zfalšovány
@@ -1626,6 +1647,14 @@ Omezení:
 • Přehrávání videa spotřebuje více internetových dat než VP9 nebo AV1
 • HDR videa nebudou používat AVC
 • Některá zařízení nemohou vynutit AVC"</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_force_avc_codec_not_available">Chcete-li použít tuto funkci, změňte \'Zfalšovat video streamy\' na Android VR nebo Android Studio</string>
+  <!-- interaction.seekbar.expandLivestreamDvrDurationPatch -->
+  <string name="morphe_expand_livestream_dvr_duration_title">Rozšířit dobu záznamu živého vysílání</string>
+  <string name="morphe_expand_livestream_dvr_duration_summary_on">Doba záznamu živého vysílání je rozšířena až na 7 dní</string>
+  <string name="morphe_expand_livestream_dvr_duration_summary_off">Doba záznamu živého vysílání je omezena na výchozí hodnotu serveru</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_expand_livestream_dvr_duration_user_dialog_message">Toto nastavení může způsobovat neočekávané chování, pokud není povolena možnost \'Nahrávat falešné video streamy\'.</string>
   <!-- video.quality.advancedVideoQualityMenuPatch -->
   <string name="morphe_advanced_video_quality_menu_title">Zobrazit rozšířené menu kvality videa</string>
   <string name="morphe_advanced_video_quality_menu_summary_on">Zobrazuje se rozšířené menu kvality videa</string>
