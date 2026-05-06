@@ -20,12 +20,12 @@ import app.morphe.patches.shared.misc.settings.preference.TextPreference
 import app.morphe.patches.youtube.misc.extension.sharedExtensionPatch
 import app.morphe.patches.youtube.misc.playservice.is_20_31_or_greater
 import app.morphe.patches.youtube.misc.playservice.is_20_37_or_greater
+import app.morphe.patches.youtube.misc.playservice.is_21_17_or_greater
 import app.morphe.patches.youtube.misc.settings.PreferenceScreen
 import app.morphe.patches.youtube.misc.settings.settingsPatch
 import app.morphe.patches.youtube.shared.Constants.COMPATIBILITY_YOUTUBE
 import app.morphe.util.addInstructionsAtControlFlowLabel
 import app.morphe.util.findInstructionIndicesReversedOrThrow
-import app.morphe.util.getMutableMethod
 import app.morphe.util.getReference
 import app.morphe.util.indexOfFirstInstructionOrThrow
 import app.morphe.util.indexOfFirstLiteralInstructionOrThrow
@@ -34,7 +34,6 @@ import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.Method
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
-import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
@@ -72,7 +71,7 @@ val miniplayerPatch = bytecodePatch(
                 )
             }
 
-
+        preferences += SwitchPreference("morphe_miniplayer_disable_resuming")
         preferences += SwitchPreference("morphe_miniplayer_disable_drag_and_drop")
         preferences += SwitchPreference("morphe_miniplayer_disable_horizontal_drag")
         preferences += SwitchPreference("morphe_miniplayer_disable_rounded_corners")
@@ -159,6 +158,25 @@ val miniplayerPatch = bytecodePatch(
             )
         }
 
+        // region Disable resuming miniplayer (Continue watching)
+
+        ShowMiniplayerCommandFingerprint.let {
+            it.method.apply {
+                val index = it.instructionMatches[1].index
+                val register = getInstruction<OneRegisterInstruction>(index).registerA
+
+                addInstructions(
+                    index,
+                    """
+                        invoke-static { v$register }, $EXTENSION_CLASS->disableResumingStartupMiniPlayer(Z)Z
+                        move-result v$register
+                    """
+                )
+            }
+        }
+
+        // endregion
+
         // region Enable tablet miniplayer.
         // Parts of the YT code is removed in 20.37+ and the legacy player no longer works.
 
@@ -174,18 +192,10 @@ val miniplayerPatch = bytecodePatch(
             // endregion
 
             // region Legacy tablet miniplayer hooks.
-            MiniplayerOverrideFingerprint.let {
-                it.instructionMatches.last()
-                    .getInstruction<ReferenceInstruction>()
-                    .getReference<MethodReference>()!!
-                    .getMutableMethod()
-                    .apply {
-                        findReturnIndicesReversed().forEach { index ->
-                            insertLegacyTabletMiniplayerOverride(
-                                index
-                            )
-                        }
-                    }
+            MiniplayerOverrideFingerprint.instructionMatches.last().getMethodCalled().apply {
+                findReturnIndicesReversed().forEach { index ->
+                    insertLegacyTabletMiniplayerOverride(index)
+                }
             }
 
             MiniplayerResponseModelSizeCheckFingerprint.let {
@@ -285,7 +295,9 @@ val miniplayerPatch = bytecodePatch(
 
         // region fix minimal miniplayer using the wrong pause/play bold icons.
 
-        if (is_20_31_or_greater) {
+        if (is_20_31_or_greater && !is_21_17_or_greater) {
+            // 21.17+ removed the code to set the non-bold miniplayer pause/play icon,
+            // and removed the non bold yt_fill_pause_white_36 icons.
             MiniplayerSetIconsFingerprint.method.apply {
                 findInstructionIndicesReversedOrThrow {
                     val reference = getReference<MethodReference>()

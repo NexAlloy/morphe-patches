@@ -100,9 +100,9 @@ Tryck på Fortsätt nedan för att logga in"</string>
   <string name="morphe_spoof_video_streams_player_js_hash_value_title">JavaScript-hash för spelaren</string>
   <string name="morphe_spoof_video_streams_player_js_hash_value_summary">Ange en giltig JavaScript-hash för spelaren</string>
   <!-- misc.quic.disableQUICProtocolPatch -->
-  <string name="morphe_disable_quic_protocol_title">Inaktivera QUIC-protokollet</string>
-  <string name="morphe_disable_quic_protocol_summary_on">QUIC-protokollet är inaktiverat</string>
-  <string name="morphe_disable_quic_protocol_summary_off">QUIC-protokollet är aktiverat</string>
+  <string name="morphe_disable_quic_protocol_title">Inaktivera QUIC-protokoll</string>
+  <string name="morphe_disable_quic_protocol_summary_on">QUIC-protokoll är inaktiverat</string>
+  <string name="morphe_disable_quic_protocol_summary_off">QUIC-protokoll är aktiverat</string>
   <!-- misc.audio.drc.disableDRCAudioPatch  -->
   <string name="morphe_disable_drc_audio_title">Inaktivera dynamisk intervallkomprimering för ljud</string>
   <string name="morphe_disable_drc_audio_summary_on">Dynamisk intervallkomprimering för ljud är inaktiverad</string>
@@ -113,6 +113,7 @@ Tryck på Fortsätt nedan för att logga in"</string>
   <string name="morphe_force_original_audio_summary_off">Använder standardljud</string>
   <!-- ad.hideFullscreenAdsPatch -->
   <string name="morphe_hide_fullscreen_ads_title">Dölj helskärmsannonser</string>
+  <string name="morphe_hide_fullscreen_ads_summary_on">Helskärmsannonser är dolda</string>
   <string name="morphe_hide_fullscreen_ads_summary_off">Helskärmsannonser visas</string>
   <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
   <string name="morphe_force_original_audio_not_available">Om du vill använda den här funktionen ändrar du Förfalska videoströmmar till Android Reel eller TV</string>
@@ -123,4 +124,7 @@ Tryck på Fortsätt nedan för att logga in"</string>
   <string name="morphe_replace_music_with_youtube_title">Ändra delningslänkar till youtube.com</string>
   <string name="morphe_replace_music_with_youtube_summary_on">Delade länkar använder youtube.com</string>
   <string name="morphe_replace_music_with_youtube_summary_off">Delade länkar använder music.youtube.com</string>
+  <string name="morphe_replace_links_with_shortener_title">Ändra delningslänkar till youtu.be</string>
+  <string name="morphe_replace_links_with_shortener_summary_on">Delade livestream- och Shorts-länkar använder youtu.be</string>
+  <string name="morphe_replace_links_with_shortener_summary_off">Delade livestream- och Shorts-länkar använder sina ursprungliga webbadresser</string>
 </resources>

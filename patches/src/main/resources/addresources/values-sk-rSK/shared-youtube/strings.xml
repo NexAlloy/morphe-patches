@@ -27,9 +27,11 @@ Second \"item\" text"</string>
   <string name="morphe_custom_branding_icon_entry_2">Morphe čierna</string>
   <string name="morphe_custom_branding_icon_entry_3">Morphe tmavá</string>
   <string name="morphe_custom_branding_icon_entry_4">Morphe svetlá</string>
+  <string name="morphe_custom_branding_icon_entry_5">Morphe hra</string>
   <!-- Translations of this should be identical to morphe_custom_branding_name_entry_5 -->
   <string name="morphe_custom_branding_icon_entry_6">Vlastná</string>
   <string name="morphe_custom_branding_notification_icon_title">Ikona upozornenia</string>
+  <string name="morphe_custom_branding_notification_icon_entry_1">Ikona aplikácie</string>
   <!-- misc.dns.checkWatchHistoryDomainNameResolutionPatch -->
   <string name="morphe_check_watch_history_domain_name_dialog_title">Upozornenie Morphe</string>
   <string name="morphe_check_watch_history_domain_name_dialog_message">Vaša história sledovania sa neukladá.&lt;br&gt;&lt;br&gt;Toto je s najväčšou pravdepodobnosťou spôsobené DNS blokovačom reklám alebo sieťovým proxy.&lt;br&gt;&lt;br&gt;Ak to chcete vyriešiť, pridajte &lt;b&gt;s.youtube.com&lt;/b&gt; do whitelistu alebo vypnite všetky DNS blokovače a proxy servery.</string>
@@ -122,4 +124,7 @@ Ak sa chcete prihlásiť, stlačte tlačidlo Pokračovať"</string>
   <string name="morphe_replace_music_with_youtube_title">Zmeniť odkazy na zdieľanie na youtube.com</string>
   <string name="morphe_replace_music_with_youtube_summary_on">Zdieľané odkazy používajú youtube.com</string>
   <string name="morphe_replace_music_with_youtube_summary_off">Zdieľané odkazy používajú music.youtube.com</string>
+  <string name="morphe_replace_links_with_shortener_title">Zmeniť odkazy na zdieľanie na youtu.be</string>
+  <string name="morphe_replace_links_with_shortener_summary_on">Zdieľané odkazy na živé prenosy a Shorts používajú youtu.be</string>
+  <string name="morphe_replace_links_with_shortener_summary_off">Zdieľané odkazy na živé vysielanie a Shorts používajú ich pôvodné URL adresy</string>
 </resources>

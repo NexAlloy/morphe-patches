@@ -3,6 +3,7 @@
 package app.morphe.patches.youtube.layout.miniplayer
 
 import app.morphe.patcher.Fingerprint
+import app.morphe.patcher.InstructionLocation.MatchAfterImmediately
 import app.morphe.patcher.InstructionLocation.MatchAfterWithin
 import app.morphe.patcher.OpcodesFilter
 import app.morphe.patcher.anyInstruction
@@ -198,18 +199,26 @@ internal object MiniplayerOnCloseHandlerFingerprint : Fingerprint(
     )
 )
 
-internal const val YOUTUBE_PLAYER_OVERLAYS_LAYOUT_CLASS_NAME =
-    "Lcom/google/android/apps/youtube/app/common/player/overlay/YouTubePlayerOverlaysLayout;"
-
-//internal object PlayerOverlaysLayoutFingerprint : Fingerprint(
-//    definingClass = YOUTUBE_PLAYER_OVERLAYS_LAYOUT_CLASS_NAME
-//)
-
 internal object MiniplayerSetIconsFingerprint : Fingerprint(
     returnType = "V",
     parameters = listOf("I", "Ljava/lang/Runnable;"),
     filters = listOf(
         resourceLiteral(ResourceType.DRAWABLE, "yt_fill_pause_white_36"),
         resourceLiteral(ResourceType.DRAWABLE, "yt_fill_pause_black_36")
+    )
+)
+
+internal object ShowMiniplayerCommandFingerprint: Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "V",
+    parameters = listOf("L", "Ljava/util/Map;"),
+    filters = listOf(
+        opcode(Opcode.IF_NEZ),
+        opcode(
+            opcode = Opcode.IF_EQZ,
+            location = MatchAfterImmediately()
+        ),
+        literal(164817L),
+        literal(121253L)
     )
 )

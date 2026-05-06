@@ -114,7 +114,7 @@ Second \"item\" text"</string>
   <!-- ad.hideFullscreenAdsPatch -->
   <string name="morphe_hide_fullscreen_ads_title">Скрыть полноэкранную рекламу</string>
   <string name="morphe_hide_fullscreen_ads_summary_on">Полноэкранная реклама скрыта</string>
-  <string name="morphe_hide_fullscreen_ads_summary_off">Полноэкранная реклама при запуске приложения показана</string>
+  <string name="morphe_hide_fullscreen_ads_summary_off">Полноэкранная реклама показана</string>
   <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
   <string name="morphe_force_original_audio_not_available">Чтобы использовать эту функцию, измените \"Подмена видео потоков\" на Android Reel или TV</string>
   <!-- misc.privacy.sanitizeSharingLinksPatch -->
@@ -124,4 +124,7 @@ Second \"item\" text"</string>
   <string name="morphe_replace_music_with_youtube_title">Изменить ссылки для обмена на youtube.com</string>
   <string name="morphe_replace_music_with_youtube_summary_on">Общие ссылки используют youtube.com</string>
   <string name="morphe_replace_music_with_youtube_summary_off">Общие ссылки используют music.youtube.com</string>
+  <string name="morphe_replace_links_with_shortener_title">Изменить ссылки для обмена на youtu.be</string>
+  <string name="morphe_replace_links_with_shortener_summary_on">Ссылки на прямые трансляции и Shorts используют youtu.be</string>
+  <string name="morphe_replace_links_with_shortener_summary_off">Ссылки на прямые трансляции и Shorts используют свои исходные URL-адреса</string>
 </resources>

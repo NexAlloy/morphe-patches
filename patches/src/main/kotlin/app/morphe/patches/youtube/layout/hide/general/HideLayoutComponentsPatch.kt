@@ -167,10 +167,9 @@ val hideLayoutComponentsPatch = bytecodePatch(
             SwitchPreference("morphe_hide_emergency_box"),
             SwitchPreference("morphe_hide_info_panels"),
             SwitchPreference("morphe_hide_join_membership_button"),
+            SwitchPreference("morphe_hide_live_chat_donators_bar"),
             SwitchPreference("morphe_hide_live_chat_replay_button"),
             SwitchPreference("morphe_hide_medical_panels"),
-            SwitchPreference("morphe_hide_quick_actions"),
-            SwitchPreference("morphe_hide_quick_actions_related_videos"),
             SwitchPreference("morphe_hide_subscribers_community_guidelines"),
             SwitchPreference("morphe_hide_timed_reactions"),
             SwitchPreference("morphe_hide_video_title"),
@@ -482,6 +481,18 @@ val hideLayoutComponentsPatch = bytecodePatch(
 
         // endregion
 
+        // region hide live chat donators bar
+
+        LiveChatDonatorsBarFingerprint.let {
+            it.method.injectHideViewCall(
+                it.instructionMatches.last().index,
+                LAYOUT_COMPONENTS_FILTER,
+                "hideLiveChatDonatorsBar"
+            )
+        }
+
+        // endregion
+
         // region hide floating microphone
 
         val showFloatingMicrophoneButtonFingerprintMatch = if (is_21_11_or_greater)
@@ -720,18 +731,20 @@ val hideLayoutComponentsPatch = bytecodePatch(
 
         // region hide flyout menu items
 
-        BottomSheetMenuItemBuilderFingerprint.let {
-            it.method.apply {
-                val index = it.instructionMatches[1].index
-                val register = getInstruction<OneRegisterInstruction>(index).registerA
+        BottomSheetMenuItemBuilderFingerprint.matchAll().forEach { match ->
+            match.let {
+                it.method.apply {
+                    val index = it.instructionMatches[1].index
+                    val register = getInstruction<OneRegisterInstruction>(index).registerA
 
-                addInstructions(
-                    index + 1,
-                    """
-                        invoke-static { v$register }, $LAYOUT_COMPONENTS_FILTER->hideFlyoutMenu(Ljava/lang/CharSequence;)Ljava/lang/CharSequence;
-                        move-result-object v$register      
-                    """
-                )
+                    addInstructions(
+                        index + 1,
+                        """
+                            invoke-static { v$register }, $LAYOUT_COMPONENTS_FILTER->hideFlyoutMenu(Ljava/lang/CharSequence;)Ljava/lang/CharSequence;
+                            move-result-object v$register      
+                        """
+                    )
+                }
             }
         }
 

@@ -33,9 +33,9 @@ import app.morphe.patches.youtube.misc.playservice.versionCheckPatch
 import app.morphe.patches.youtube.misc.settings.PreferenceScreen
 import app.morphe.patches.youtube.misc.settings.settingsPatch
 import app.morphe.patches.youtube.shared.Constants.COMPATIBILITY_YOUTUBE
+import app.morphe.util.addInstructionsAtControlFlowLabel
 import app.morphe.util.findElementByAttributeValueOrThrow
 import app.morphe.util.forEachLiteralValueInstruction
-import app.morphe.util.getMutableMethod
 import app.morphe.util.getReference
 import app.morphe.util.indexOfFirstInstructionOrThrow
 import app.morphe.util.removeFromParent
@@ -75,6 +75,7 @@ private val hideShortsComponentsResourcePatch = resourcePatch {
             SwitchPreference("morphe_hide_shorts_subscriptions"),
             SwitchPreference("morphe_hide_shorts_video_description"),
             SwitchPreference("morphe_hide_shorts_history"),
+            SwitchPreference("morphe_disable_shorts_double_tap_to_like"),
 
             PreferenceScreenPreference(
                 key = "morphe_shorts_player_screen",
@@ -125,7 +126,7 @@ private val hideShortsComponentsResourcePatch = resourcePatch {
                     SwitchPreference("morphe_hide_shorts_video_title"),
                     SwitchPreference("morphe_hide_shorts_sound_metadata_label"),
                     SwitchPreference("morphe_hide_shorts_navigation_bar"),
-                ),
+                )
             )
         )
 
@@ -227,10 +228,7 @@ val hideShortsComponentsPatch = bytecodePatch(
         }
 
         // Hook to hide the pivotBar when the Shorts player is opened.
-        ReelWatchFragmentInitPlaybackFingerprint.instructionMatches.last()
-            .instruction
-            .getReference<MethodReference>()!!
-            .getMutableMethod()
+        ReelWatchFragmentInitPlaybackFingerprint.instructionMatches.last().getMethodCalled()
             .addInstruction(
                 0,
                 "invoke-static { p1 }, $EXTENSION_FILTER->hidePivotBar(Ljava/lang/String;)V",
@@ -275,5 +273,20 @@ val hideShortsComponentsPatch = bytecodePatch(
         RenderNextUIFeatureFlagFingerprint.method.returnLate(false)
 
         // endregion
+
+        DoubleTapToLikeLogicFingerprint.let {
+            it.method.apply {
+                val index = it.instructionMatches.last().index
+                val register = getInstruction<OneRegisterInstruction>(index).registerA
+
+                addInstructionsAtControlFlowLabel(
+                    index,
+                    """
+                        invoke-static { v$register }, $EXTENSION_FILTER->allowDoubleTapToLike(Z)Z
+                        move-result v$register
+                    """
+                )
+            }
+        }
     }
 }
