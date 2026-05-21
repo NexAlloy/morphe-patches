@@ -68,6 +68,8 @@ public final class LayoutComponentsFilter extends Filter {
     private final StringFilterGroup chipBar;
     private final StringFilterGroup channelProfile;
     private final StringFilterGroupList channelProfileGroupList;
+    private final StringFilterGroup videoLabels;
+    private final ByteArrayFilterGroupList videoLabelsGroupList = new ByteArrayFilterGroupList();
 
     public enum ExpandableCardStyle {
         SHOW_ALL,
@@ -119,6 +121,7 @@ public final class LayoutComponentsFilter extends Filter {
                 "images_post_root.e",
                 "images_post_root_slim.e",
                 "images_post_slim.e", // may be obsolete and no longer needed.
+                "options_post_root.e",
                 "poll_post_responsive_root.e",
                 "poll_post_root.e",
                 "post_base_wrapper", // may be obsolete and no longer needed.
@@ -178,11 +181,6 @@ public final class LayoutComponentsFilter extends Filter {
         final var medicalPanel = new StringFilterGroup(
                 Settings.HIDE_MEDICAL_PANELS,
                 "medical_panel"
-        );
-
-        final var paidPromotion = new StringFilterGroup(
-                Settings.HIDE_PAID_PROMOTION_LABEL,
-                "paid_content_overlay"
         );
 
         final var infoPanel = new StringFilterGroup(
@@ -275,7 +273,8 @@ public final class LayoutComponentsFilter extends Filter {
 
         compactChannelBarInner = new StringFilterGroup(
                 Settings.HIDE_JOIN_MEMBERSHIP_BUTTON,
-                "compact_channel_bar_inner"
+                "compact_channel_bar_inner",
+                "video_description_header"
         );
 
         compactChannelBarInnerButton = new StringFilterGroup(
@@ -314,13 +313,31 @@ public final class LayoutComponentsFilter extends Filter {
                 "web_result_panel"
         );
 
+        videoLabels = new StringFilterGroup(
+                null,
+                "|badge.e"
+        );
+        videoLabelsGroupList.addAll(
+                new ByteArrayFilterGroup(
+                        Settings.HIDE_AUTO_DUBBED_LABEL,
+                        "yt_outline_person_radar",
+                        "yt_outline_experimental_person_waves"
+                ),
+                new ByteArrayFilterGroup(
+                        Settings.HIDE_HYPED_LABEL,
+                        "yt_fill_star_shooting",
+                        "yt_fill_experimental_hype"
+                )
+        );
+
         channelProfile = new StringFilterGroup(
                 null,
                 "channel_profile.e",
                 "page_header.e"
         );
         channelProfileGroupList = new StringFilterGroupList();
-        channelProfileGroupList.addAll(new StringFilterGroup(
+        channelProfileGroupList.addAll(
+                new StringFilterGroup(
                         Settings.HIDE_COMMUNITY_BUTTON,
                         "community_button"
                 ),
@@ -358,7 +375,6 @@ public final class LayoutComponentsFilter extends Filter {
                 infoPanel,
                 medicalPanel,
                 notifyMe,
-                paidPromotion,
                 playables,
                 postsShelf,
                 searchFriction,
@@ -368,6 +384,7 @@ public final class LayoutComponentsFilter extends Filter {
                 subscriptionsChipBar,
                 surveys,
                 timedReactions,
+                videoLabels,
                 videoTitle,
                 videoRecommendationLabels,
                 webLinkPanel
@@ -430,6 +447,10 @@ public final class LayoutComponentsFilter extends Filter {
                     return false;
                 }
             }
+        }
+
+        if (matchedGroup == videoLabels) {
+            return videoLabelsGroupList.check(buffer).isFiltered();
         }
 
         if (matchedGroup == channelProfile) {

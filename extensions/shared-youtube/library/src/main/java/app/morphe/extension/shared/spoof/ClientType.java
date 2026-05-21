@@ -23,6 +23,8 @@ import java.util.Objects;
 
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
+import app.morphe.extension.shared.requests.Route;
+import app.morphe.extension.shared.spoof.requests.PlayerRoutes;
 
 @SuppressWarnings("ConstantLocale")
 public enum ClientType {
@@ -53,7 +55,7 @@ public enum ClientType {
             true,
             false,
             false,
-            false,
+            PlayerRoutes.GET_REEL_STREAMING_DATA,
             "Android Reel"
     ),
     /**
@@ -76,7 +78,7 @@ public enum ClientType {
             false,
             false,
             false,
-            true,
+            PlayerRoutes.GET_PLAYER_STREAMING_DATA,
             "Android Music No SDK"
     ),
     /**
@@ -102,7 +104,7 @@ public enum ClientType {
             false,
             true,
             false,
-            true,
+            PlayerRoutes.GET_PLAYER_STREAMING_DATA,
             "Android VR 1.65"
     ),
     /**
@@ -127,7 +129,7 @@ public enum ClientType {
             ANDROID_VR_1_65.supportsMultiAudioTracks,
             ANDROID_VR_1_65.supportsOAuth2,
             ANDROID_VR_1_65.requireJS,
-            ANDROID_VR_1_65.usePlayerEndpoint,
+            ANDROID_VR_1_65.endpoint,
             "Android VR 1.64"
     ),
     /**
@@ -153,7 +155,7 @@ public enum ClientType {
             false,
             false,
             false,
-            true,
+            PlayerRoutes.GET_PLAYER_STREAMING_DATA,
             "Android Studio"
     ),
     /**
@@ -176,7 +178,7 @@ public enum ClientType {
             true,
             false,
             true,
-            true,
+            PlayerRoutes.GET_PLAYER_STREAMING_DATA,
             "TV"
     ),
     /**
@@ -196,7 +198,7 @@ public enum ClientType {
             false,
             false,
             false,
-            true,
+            PlayerRoutes.GET_PLAYER_STREAMING_DATA,
             "visionOS"
     ),
     /**
@@ -218,8 +220,37 @@ public enum ClientType {
             true,
             false,
             true,
-            true,
+            PlayerRoutes.GET_PLAYER_STREAMING_DATA,
             "TV Simply"
+    ),
+    GET_CHANNEL_FROM_ID(
+            29,
+            "WEB_REMIX",
+            "1.20241218.01.00",
+            PlayerRoutes.GET_CHANNEL_FROM_ID,
+            "Mozilla/5.0 (iPad; CPU OS 16_7_10 like Mac OS X) AppleWebKit/605.1.15 " +
+                    "(KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1,gzip(gfe)",
+            "Get Channel From ID"
+    ),
+    SAVE_TO_WATCH_LATER(
+            ANDROID_REEL.id,
+            ANDROID_REEL.clientName,
+            Objects.requireNonNull(ANDROID_REEL.packageName),
+            ANDROID_REEL.deviceMake,
+            ANDROID_REEL.deviceModel,
+            ANDROID_REEL.osName,
+            ANDROID_REEL.osVersion,
+            Objects.requireNonNull(ANDROID_REEL.androidSdkVersion),
+            ANDROID_REEL.buildID,
+            ANDROID_REEL.clientVersion,
+            ANDROID_REEL.clientPlatform,
+            true,
+            true,
+            false,
+            ANDROID_REEL.supportsOAuth2,
+            ANDROID_REEL.requireJS,
+            PlayerRoutes.SEND_SAVE_VIDEO_TO_WATCH_LATER,
+            "Save To Watch Later"
     );
 
     /**
@@ -269,6 +300,11 @@ public enum ClientType {
     public final String androidSdkVersion;
 
     /**
+     * Device Build id.
+     */
+    public final String buildID;
+
+    /**
      * App version.
      */
     public final String clientVersion;
@@ -307,7 +343,7 @@ public enum ClientType {
     /**
      * Whether to use the '/player' endpoint.
      */
-    public final boolean usePlayerEndpoint;
+    public final Route.CompiledRoute endpoint;
 
     /**
      * Friendly name displayed in stats for nerds.
@@ -333,7 +369,7 @@ public enum ClientType {
                boolean supportsMultiAudioTracks,
                boolean supportsOAuth2,
                boolean requireJS,
-               boolean usePlayerEndpoint,
+               Route.CompiledRoute endpoint,
                String friendlyName) {
         this.id = id;
         this.clientName = clientName;
@@ -343,6 +379,7 @@ public enum ClientType {
         this.osName = osName;
         this.osVersion = osVersion;
         this.androidSdkVersion = androidSdkVersion;
+        this.buildID = buildId;
         this.clientVersion = clientVersion;
         this.clientPlatform = clientPlatform;
         this.canLogin = canLogin;
@@ -350,7 +387,7 @@ public enum ClientType {
         this.supportsMultiAudioTracks = supportsMultiAudioTracks;
         this.supportsOAuth2 = supportsOAuth2;
         this.requireJS = requireJS;
-        this.usePlayerEndpoint = usePlayerEndpoint;
+        this.endpoint = endpoint;
         this.friendlyName = friendlyName;
 
         Locale defaultLocale = Locale.getDefault();
@@ -368,6 +405,36 @@ public enum ClientType {
 
     ClientType(int id,
                String clientName,
+               String clientVersion,
+               Route.CompiledRoute endpoint,
+               String userAgent,
+               String friendlyName) {
+        this.id = id;
+        this.clientName = clientName;
+        this.clientVersion = clientVersion;
+        this.endpoint = endpoint;
+        this.userAgent = userAgent;
+        this.friendlyName = friendlyName;
+
+        packageName = null;
+        deviceMake = null;
+        deviceModel = null;
+        osName = null;
+        osVersion = null;
+        androidSdkVersion = null;
+        buildID = null;
+        clientPlatform = null;
+        canLogin = false;
+        requireLogin = false;
+        supportsOAuth2 = false;
+        supportsMultiAudioTracks = false;
+        requireJS = false;
+
+        Logger.printDebug(() -> "userAgent: " + this.userAgent);
+    }
+
+    ClientType(int id,
+               String clientName,
                String deviceMake,
                String deviceModel,
                String osName,
@@ -380,7 +447,7 @@ public enum ClientType {
                boolean supportsMultiAudioTracks,
                boolean supportsOAuth2,
                boolean requireJS,
-               boolean usePlayerEndpoint,
+               Route.CompiledRoute endpoint,
                String friendlyName) {
         this.id = id;
         this.clientName = clientName;
@@ -388,6 +455,7 @@ public enum ClientType {
         this.deviceModel = deviceModel;
         this.osName = osName;
         this.osVersion = osVersion;
+        buildID = null;
         this.clientVersion = clientVersion;
         this.clientPlatform = clientPlatform;
         this.userAgent = userAgent;
@@ -396,9 +464,10 @@ public enum ClientType {
         this.supportsMultiAudioTracks = supportsMultiAudioTracks;
         this.supportsOAuth2 = supportsOAuth2;
         this.requireJS = requireJS;
-        this.usePlayerEndpoint = usePlayerEndpoint;
+        this.endpoint = endpoint;
         this.friendlyName = friendlyName;
-        this.packageName = null;
-        this.androidSdkVersion = null;
+
+        packageName = null;
+        androidSdkVersion = null;
     }
 }

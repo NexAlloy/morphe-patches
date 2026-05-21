@@ -32,6 +32,7 @@ import app.morphe.extension.youtube.patches.VersionCheckPatch;
 import app.morphe.extension.youtube.settings.Settings;
 
 public class PlayerOverlayButton {
+    private static boolean skipFirstCall = true;
 
     /**
      * Tracks a single container view whose end margin must be kept clear of overlay buttons.
@@ -55,6 +56,7 @@ public class PlayerOverlayButton {
          */
         void updateContainerRef(ViewGroup sourceButtonViewGroup) {
             if (containerRef.get() != null) return;
+            lastMarginEnd = -1;
 
             final int id = ResourceUtils.getIdentifier(ResourceType.ID, resourceName);
             if (id != 0) {
@@ -64,6 +66,7 @@ public class PlayerOverlayButton {
                     View found = parent.findViewById(id);
                     if (found != null) {
                         containerRef = new WeakReference<>(found);
+                        skipFirstCall = true;
                         return;
                     }
                 }
@@ -142,7 +145,7 @@ public class PlayerOverlayButton {
                     // Fullscreen button has a custom margin layout parameters class
                     // and if used directly causes a broken layout with 21.15+
                     // if quality and speed button are shown. Older app targets
-                    // must use the original layut otherwise app crashes with a cast exception.
+                    // must use the original layout otherwise app crashes with a cast exception.
                     layoutParams = new ViewGroup.MarginLayoutParams(layoutParams);
                 }
                 button.setLayoutParams(layoutParams);
@@ -236,6 +239,25 @@ public class PlayerOverlayButton {
         videoHeadingContainer.updateMargin(LegacyPlayerControlButton.buttonWidth, getTotalUpperButtonCount());
     }
 
+    /**
+     * Called from each {@link LegacyPlayerControlButton} constructor so that the
+     * video-heading end margin is initialized and kept correct even when no lower
+     * overlay buttons (speed, quality, etc.) have been added.
+     */
+    public static void initializeHeadingFromUpperButton(View sourceButton) {
+        // Useful to prevent initial null error in updateContainerRef() method
+        if (skipFirstCall) {
+            skipFirstCall = false;
+            return;
+        }
+
+        Utils.verifyOnMainThread();
+
+        if (!(sourceButton.getParent() instanceof ViewGroup sourceButtonViewGroup)) return;
+
+        videoHeadingContainer.updateContainerRef(sourceButtonViewGroup);
+        videoHeadingContainer.updateMargin(LegacyPlayerControlButton.buttonWidth, getTotalUpperButtonCount());
+    }
 
     @Nullable
     private static ViewGroup updateRefsFromSourceButton(View sourceButton) {
@@ -251,9 +273,8 @@ public class PlayerOverlayButton {
             ytSourceButtonRef = new WeakReference<>(sourceButton);
         }
 
-        // Locate each container once; subsequent calls are no-ops.
+        // Locate chapter container once; subsequent calls are no-ops.
         chapterTitleContainer.updateContainerRef(sourceButtonViewGroup);
-        videoHeadingContainer.updateContainerRef(sourceButtonViewGroup);
 
         return sourceButtonViewGroup;
     }

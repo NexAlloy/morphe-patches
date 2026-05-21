@@ -1,3 +1,172 @@
+## [1.28.0](https://github.com/MorpheApp/morphe-patches/compare/v1.27.0...v1.28.0) (2026-05-17)
+
+### 🐛 Bug Fixes
+
+* Update Crowdin translations ([b652e67](https://github.com/MorpheApp/morphe-patches/commit/b652e6731eebe67f1c20cb0e0d83ace9a94167cb))
+* **YouTube - Hide ads:** Hide new type of product sticker ([#1484](https://github.com/MorpheApp/morphe-patches/issues/1484)) ([aa3637d](https://github.com/MorpheApp/morphe-patches/commit/aa3637ddb2470ad5147ebb1ccad10311d366571a)), closes [#1481](https://github.com/MorpheApp/morphe-patches/issues/1481)
+* **YouTube - Hide layout components:** Hide new type of community post ([#1476](https://github.com/MorpheApp/morphe-patches/issues/1476)) ([50085da](https://github.com/MorpheApp/morphe-patches/commit/50085dab0ceed84778d40b40150f7a16c5ea18ec))
+* **YouTube - Open channel of live avatar:** Add missing resources ([#1463](https://github.com/MorpheApp/morphe-patches/issues/1463)) ([0870e3c](https://github.com/MorpheApp/morphe-patches/commit/0870e3c3dc8a3ec3bd42af174bb7d63106658d29))
+* **YouTube - Open channel of live avatar:** Fixed remaining translations ([#1491](https://github.com/MorpheApp/morphe-patches/issues/1491)) ([d3433ab](https://github.com/MorpheApp/morphe-patches/commit/d3433ab92a8bad7af00c795de44f943136dd2987))
+* **YouTube - Open channel of live avatar:** patch doesn't work for arabic/korean localizations ([ff16083](https://github.com/MorpheApp/morphe-patches/commit/ff160839fdcc03e24c9eff3eec4499b58febc26a))
+* **YouTube - Open channel of live avatar:** patch doesn't work for vietnamese localization ([#1479](https://github.com/MorpheApp/morphe-patches/issues/1479)) ([2a5979e](https://github.com/MorpheApp/morphe-patches/commit/2a5979ee3184ea4ca7a045c61363c853e6cbea15))
+* **YouTube - Open channel of live avatar:** patch doesn't work in video player ([3f03a18](https://github.com/MorpheApp/morphe-patches/commit/3f03a184d9997f844a934b76a05fd6b228d38529))
+* **YouTube - Open channel of live avatar:** Patch may not work when app is using non English language ([#1459](https://github.com/MorpheApp/morphe-patches/issues/1459)) ([34d55c2](https://github.com/MorpheApp/morphe-patches/commit/34d55c27d9f915cc39bed37af5a9a4c1e28a3e0f))
+* **YouTube - PlayerOverlayButton:** reset skipFirstCall for next updateRef attempts ([9d12346](https://github.com/MorpheApp/morphe-patches/commit/9d12346c17a11fd9c4452ba14ee5e96312b760e8))
+* **YouTube - PlayerOverlayButton:** set videoHeading container ref only in upper bar constructor to avoid race condition ([#1478](https://github.com/MorpheApp/morphe-patches/issues/1478)) ([93c6300](https://github.com/MorpheApp/morphe-patches/commit/93c6300450a5fafbb815a79d112707880109f358))
+* **YouTube - PlayerOverlayButton:** Video heading margin not applied when no bottom buttons present ([#1472](https://github.com/MorpheApp/morphe-patches/issues/1472)) ([12bee40](https://github.com/MorpheApp/morphe-patches/commit/12bee40312e040c7bccd17f9d1af2e56d3214972))
+
+### ✨ New Features
+
+* Add miscellaneous link handling preference to help change 'open with' links ([#1389](https://github.com/MorpheApp/morphe-patches/issues/1389)) ([c364ced](https://github.com/MorpheApp/morphe-patches/commit/c364ced39ccbe5a4183cb07c2e70d4a666b08c46))
+* Simplify settings summary text ([#1366](https://github.com/MorpheApp/morphe-patches/issues/1366)) ([67576a8](https://github.com/MorpheApp/morphe-patches/commit/67576a8ffd2c81326acc178454148bbca315a855))
+* **YouTube Music:** Add experimental support for `9.19.50` ([a2c0681](https://github.com/MorpheApp/morphe-patches/commit/a2c06815d0c3345bfc29aac0f7d555ac03f1f543))
+* **YouTube:** Add experimental support for `21.20.400` ([a4d1412](https://github.com/MorpheApp/morphe-patches/commit/a4d1412849e578189adb04130f8559905cfe8f8f))
+
+## [1.28.0-dev.4](https://github.com/MorpheApp/morphe-patches/compare/v1.28.0-dev.3...v1.28.0-dev.4) (2026-05-16)
+
+### 🐛 Bug Fixes
+
+* **YouTube - Hide ads:** Hide new type of product sticker ([#1484](https://github.com/MorpheApp/morphe-patches/issues/1484)) ([aa3637d](https://github.com/MorpheApp/morphe-patches/commit/aa3637ddb2470ad5147ebb1ccad10311d366571a)), closes [#1481](https://github.com/MorpheApp/morphe-patches/issues/1481)
+* **YouTube - PlayerOverlayButton:** reset skipFirstCall for next updateRef attempts ([9d12346](https://github.com/MorpheApp/morphe-patches/commit/9d12346c17a11fd9c4452ba14ee5e96312b760e8))
+
+# [1.28.0-dev.3](https://github.com/MorpheApp/morphe-patches/compare/v1.28.0-dev.2...v1.28.0-dev.3) (2026-05-15)
+
+
+### Bug Fixes
+
+* **YouTube - Hide layout components:** Hide new type of community post ([#1476](https://github.com/MorpheApp/morphe-patches/issues/1476)) ([50085da](https://github.com/MorpheApp/morphe-patches/commit/50085dab0ceed84778d40b40150f7a16c5ea18ec))
+* **YouTube - Open channel of live avatar:** patch doesn't work for arabic/korean localizations ([ff16083](https://github.com/MorpheApp/morphe-patches/commit/ff160839fdcc03e24c9eff3eec4499b58febc26a))
+* **YouTube - Open channel of live avatar:** patch doesn't work for vietnamese localization ([#1479](https://github.com/MorpheApp/morphe-patches/issues/1479)) ([2a5979e](https://github.com/MorpheApp/morphe-patches/commit/2a5979ee3184ea4ca7a045c61363c853e6cbea15))
+* **YouTube - PlayerOverlayButton:** set videoHeading container ref only in upper bar constructor to avoid race condition ([#1478](https://github.com/MorpheApp/morphe-patches/issues/1478)) ([93c6300](https://github.com/MorpheApp/morphe-patches/commit/93c6300450a5fafbb815a79d112707880109f358))
+* **YouTube - PlayerOverlayButton:** Video heading margin not applied when no bottom buttons present ([#1472](https://github.com/MorpheApp/morphe-patches/issues/1472)) ([12bee40](https://github.com/MorpheApp/morphe-patches/commit/12bee40312e040c7bccd17f9d1af2e56d3214972))
+
+
+### Features
+
+* **YouTube:** Add experimental support for `21.20.400` ([a4d1412](https://github.com/MorpheApp/morphe-patches/commit/a4d1412849e578189adb04130f8559905cfe8f8f))
+
+# [1.28.0-dev.2](https://github.com/MorpheApp/morphe-patches/compare/v1.28.0-dev.1...v1.28.0-dev.2) (2026-05-14)
+
+
+### Bug Fixes
+
+* Update Crowdin translations ([b652e67](https://github.com/MorpheApp/morphe-patches/commit/b652e6731eebe67f1c20cb0e0d83ace9a94167cb))
+
+# [1.28.0-dev.1](https://github.com/MorpheApp/morphe-patches/compare/v1.27.1-dev.2...v1.28.0-dev.1) (2026-05-14)
+
+
+### Features
+
+* Add miscellaneous link handling preference to help change 'open with' links ([#1389](https://github.com/MorpheApp/morphe-patches/issues/1389)) ([c364ced](https://github.com/MorpheApp/morphe-patches/commit/c364ced39ccbe5a4183cb07c2e70d4a666b08c46))
+* Simplify settings summary text ([#1366](https://github.com/MorpheApp/morphe-patches/issues/1366)) ([67576a8](https://github.com/MorpheApp/morphe-patches/commit/67576a8ffd2c81326acc178454148bbca315a855))
+* **YouTube Music:** Add experimental support for `9.19.50` ([a2c0681](https://github.com/MorpheApp/morphe-patches/commit/a2c06815d0c3345bfc29aac0f7d555ac03f1f543))
+
+## [1.27.1-dev.2](https://github.com/MorpheApp/morphe-patches/compare/v1.27.1-dev.1...v1.27.1-dev.2) (2026-05-13)
+
+
+### Bug Fixes
+
+* **YouTube - Open channel of live avatar:** Add missing resources ([#1463](https://github.com/MorpheApp/morphe-patches/issues/1463)) ([0870e3c](https://github.com/MorpheApp/morphe-patches/commit/0870e3c3dc8a3ec3bd42af174bb7d63106658d29))
+
+## [1.27.1-dev.1](https://github.com/MorpheApp/morphe-patches/compare/v1.27.0...v1.27.1-dev.1) (2026-05-13)
+
+
+### Bug Fixes
+
+* **YouTube - Open channel of live avatar:** Patch may not work when app is using non English language ([#1459](https://github.com/MorpheApp/morphe-patches/issues/1459)) ([34d55c2](https://github.com/MorpheApp/morphe-patches/commit/34d55c27d9f915cc39bed37af5a9a4c1e28a3e0f))
+
+# [1.27.0](https://github.com/MorpheApp/morphe-patches/compare/v1.26.0...v1.27.0) (2026-05-12)
+
+
+### Bug Fixes
+
+* Add patch exception message for users who ignore the Manager update prompt ([87beb32](https://github.com/MorpheApp/morphe-patches/commit/87beb32f10b05fd960e86cf393bbd14bba9460b5))
+* Add Reddit patch exception message for users who ignore the Manager update prompt ([875f10a](https://github.com/MorpheApp/morphe-patches/commit/875f10ab1bc502a73e271c407138511e37b90fba))
+* Add YouTube patch exception message for users who ignore the Manager update prompt ([296e137](https://github.com/MorpheApp/morphe-patches/commit/296e137e63f79493fedea773c1d415cc1da94064))
+* **Spoof video streams:** Change default client to Android VR ([cafec9c](https://github.com/MorpheApp/morphe-patches/commit/cafec9c61ec65740358777121172896ed7efdf18))
+* **YouTube - Save to watch later:** Support saving videos to 'brand' accounts, prevent opening live shorts from live avatar ([#1438](https://github.com/MorpheApp/morphe-patches/issues/1438)) ([0b12c81](https://github.com/MorpheApp/morphe-patches/commit/0b12c81793aac544f83aa36ee0c19c88cf81cbda))
+* **YouTube - Spoof video streams:** Resolve Shorts freezing and feed scrolling issues ([#1433](https://github.com/MorpheApp/morphe-patches/issues/1433)) ([85e0b0c](https://github.com/MorpheApp/morphe-patches/commit/85e0b0c08f465e067716d52c66af396f28b267b0))
+
+
+### Features
+
+* **Reddit:** Add experimental support for `2026.19.0` ([c4f6058](https://github.com/MorpheApp/morphe-patches/commit/c4f6058872a007624aaafc1456f46733ec6e2212))
+* **YouTube - Hide layout components:** Add "Hide Auto-dubbed label", "Hide Corrections section", "Hide Hyped label",  and "Hide Video details section" settings ([#1367](https://github.com/MorpheApp/morphe-patches/issues/1367)) ([43b79c6](https://github.com/MorpheApp/morphe-patches/commit/43b79c6b4679eb7bd5d9983aa4d4e3f8d2ffbb21))
+* **YouTube Music:** Add experimental support for `9.18.50` ([5a9ca78](https://github.com/MorpheApp/morphe-patches/commit/5a9ca78ed1354ec415592c63d532bf8d09fb3032))
+* **YouTube:** Add `Open channel of live avatar` patch ([#1408](https://github.com/MorpheApp/morphe-patches/issues/1408)) ([b221097](https://github.com/MorpheApp/morphe-patches/commit/b221097be8f1422f35f69b10d94775a2e245b01b))
+* **YouTube:** Add `Save to watch later` patch ([#1274](https://github.com/MorpheApp/morphe-patches/issues/1274)) ([45cea2c](https://github.com/MorpheApp/morphe-patches/commit/45cea2c860f7447d643c3c0af59d4517989c9306))
+* **YouTube:** Add experimental support for `21.19.280` ([d1c7ac7](https://github.com/MorpheApp/morphe-patches/commit/d1c7ac7b1580ddcc5a2e47211cfb572106b5ffce))
+
+# [1.27.0-dev.6](https://github.com/MorpheApp/morphe-patches/compare/v1.27.0-dev.5...v1.27.0-dev.6) (2026-05-12)
+
+
+### Bug Fixes
+
+* **YouTube - Save to watch later:** Support saving videos to 'brand' accounts, prevent opening live shorts from live avatar ([#1438](https://github.com/MorpheApp/morphe-patches/issues/1438)) ([0b12c81](https://github.com/MorpheApp/morphe-patches/commit/0b12c81793aac544f83aa36ee0c19c88cf81cbda))
+
+
+### Features
+
+* **YouTube:** Add `Open channel of live avatar` patch ([#1408](https://github.com/MorpheApp/morphe-patches/issues/1408)) ([b221097](https://github.com/MorpheApp/morphe-patches/commit/b221097be8f1422f35f69b10d94775a2e245b01b))
+
+# [1.27.0-dev.5](https://github.com/MorpheApp/morphe-patches/compare/v1.27.0-dev.4...v1.27.0-dev.5) (2026-05-11)
+
+
+### Bug Fixes
+
+* **Spoof video streams:** Change default client to Android VR ([cafec9c](https://github.com/MorpheApp/morphe-patches/commit/cafec9c61ec65740358777121172896ed7efdf18))
+
+# [1.27.0-dev.4](https://github.com/MorpheApp/morphe-patches/compare/v1.27.0-dev.3...v1.27.0-dev.4) (2026-05-11)
+
+
+### Bug Fixes
+
+* **YouTube - Spoof video streams:** Resolve Shorts freezing and feed scrolling issues ([#1433](https://github.com/MorpheApp/morphe-patches/issues/1433)) ([85e0b0c](https://github.com/MorpheApp/morphe-patches/commit/85e0b0c08f465e067716d52c66af396f28b267b0))
+
+# [1.27.0-dev.3](https://github.com/MorpheApp/morphe-patches/compare/v1.27.0-dev.2...v1.27.0-dev.3) (2026-05-10)
+
+
+### Features
+
+* **Reddit:** Add experimental support for `2026.19.0` ([c4f6058](https://github.com/MorpheApp/morphe-patches/commit/c4f6058872a007624aaafc1456f46733ec6e2212))
+* **YouTube Music:** Add experimental support for `9.18.50` ([5a9ca78](https://github.com/MorpheApp/morphe-patches/commit/5a9ca78ed1354ec415592c63d532bf8d09fb3032))
+
+# [1.27.0-dev.2](https://github.com/MorpheApp/morphe-patches/compare/v1.27.0-dev.1...v1.27.0-dev.2) (2026-05-08)
+
+
+### Features
+
+* **YouTube - Hide layout components:** Add "Hide Auto-dubbed label", "Hide Corrections section", "Hide Hyped label",  and "Hide Video details section" settings ([#1367](https://github.com/MorpheApp/morphe-patches/issues/1367)) ([43b79c6](https://github.com/MorpheApp/morphe-patches/commit/43b79c6b4679eb7bd5d9983aa4d4e3f8d2ffbb21))
+* **YouTube:** Add `Save to watch later` patch ([#1274](https://github.com/MorpheApp/morphe-patches/issues/1274)) ([45cea2c](https://github.com/MorpheApp/morphe-patches/commit/45cea2c860f7447d643c3c0af59d4517989c9306))
+
+# [1.27.0-dev.1](https://github.com/MorpheApp/morphe-patches/compare/v1.26.1-dev.3...v1.27.0-dev.1) (2026-05-07)
+
+
+### Features
+
+* **YouTube:** Add experimental support for `21.19.280` ([d1c7ac7](https://github.com/MorpheApp/morphe-patches/commit/d1c7ac7b1580ddcc5a2e47211cfb572106b5ffce))
+
+## [1.26.1-dev.3](https://github.com/MorpheApp/morphe-patches/compare/v1.26.1-dev.2...v1.26.1-dev.3) (2026-05-06)
+
+
+### Bug Fixes
+
+* Add Reddit patch exception message for users who ignore the Manager update prompt ([875f10a](https://github.com/MorpheApp/morphe-patches/commit/875f10ab1bc502a73e271c407138511e37b90fba))
+
+## [1.26.1-dev.2](https://github.com/MorpheApp/morphe-patches/compare/v1.26.1-dev.1...v1.26.1-dev.2) (2026-05-06)
+
+
+### Bug Fixes
+
+* Add YouTube patch exception message for users who ignore the Manager update prompt ([296e137](https://github.com/MorpheApp/morphe-patches/commit/296e137e63f79493fedea773c1d415cc1da94064))
+
+## [1.26.1-dev.1](https://github.com/MorpheApp/morphe-patches/compare/v1.26.0...v1.26.1-dev.1) (2026-05-06)
+
+
+### Bug Fixes
+
+* Add patch exception message for users who ignore the Manager update prompt ([87beb32](https://github.com/MorpheApp/morphe-patches/commit/87beb32f10b05fd960e86cf393bbd14bba9460b5))
+
 # [1.26.0](https://github.com/MorpheApp/morphe-patches/compare/v1.25.0...v1.26.0) (2026-05-05)
 
 
