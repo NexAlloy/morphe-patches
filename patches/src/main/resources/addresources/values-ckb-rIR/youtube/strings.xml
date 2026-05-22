@@ -18,11 +18,11 @@ Second \"item\" text"</string>
 <resources>
   <!-- misc.settings.settingsPatch -->
   <!-- In languages where "About" is ambiguous, translate this as "About Morphe" (i.e., About this app). -->
-  <string name="morphe_settings_screen_00_about_title">دربارە</string>
-  <string name="morphe_settings_screen_01_ads_title">Reklam</string>
-  <string name="morphe_settings_screen_02_alt_thumbnails_title">Wêney goşî yên alternatîf</string>
-  <string name="morphe_settings_screen_03_feed_title">خوارت</string>
-  <string name="morphe_settings_screen_04_general_title">ئاسماني</string>
+  <string name="morphe_settings_screen_00_about_title">دەربارە</string>
+  <string name="morphe_settings_screen_01_ads_title">ڕێکلام</string>
+  <string name="morphe_settings_screen_02_alt_thumbnails_title">وێنە بچووکە جێگرەوەکان</string>
+  <string name="morphe_settings_screen_03_feed_title">پێشهات</string>
+  <string name="morphe_settings_screen_04_general_title">گشتی</string>
   <string name="morphe_settings_screen_05_player_title">خۆسەر</string>
   <string name="morphe_settings_screen_06_shorts_title">Shorts</string>
   <string name="morphe_settings_screen_07_seekbar_title">سيبار</string>

@@ -1180,7 +1180,7 @@ DeArrow에 대해 자세히 알아보려면 여기를 탭하세요"</string>
   <!-- video.quality.hidePremiumVideoQualityPatch -->
   <string name="morphe_hide_premium_video_quality_title">Premium 화질 옵션 숨기기</string>
   <!-- video.quality.prioritizeVideoQualityPatch -->
-  <string name="morphe_prioritize_video_quality_title">동영상 화질 우선순위 지정하기</string>
+  <string name="morphe_prioritize_video_quality_title">동영상 우선순위를 화질로 지정하기</string>
   <string name="morphe_prioritize_video_quality_summary">코덱 효율성보다 최고 화질의 동영상을 우선시합니다</string>
   <!-- misc.fix.playback.spoofVideoStreamsPatch -->
   <string name="morphe_spoof_video_streams_av1_title">Android VR AV1 허용하기</string>

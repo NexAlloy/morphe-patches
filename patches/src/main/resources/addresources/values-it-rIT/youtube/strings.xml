@@ -809,7 +809,7 @@ Il tuo ID utente è come una password e non dovrebbe mai essere condiviso."</str
   <string name="morphe_sb_skip_button_preview_beginning">Salta anteprima</string>
   <string name="morphe_sb_skip_button_preview_middle">Salta anteprima</string>
   <string name="morphe_sb_skip_button_preview_end">Salta riepilogo</string>
-  <string name="morphe_sb_skip_button_filler">Salta tangenziale</string>
+  <string name="morphe_sb_skip_button_filler">Salta tangente</string>
   <string name="morphe_sb_skip_button_nomusic">Salta sezione non-musicale</string>
   <string name="morphe_sb_skip_button_unsubmitted">Salta segmento</string>
   <string name="morphe_sb_skipped_sponsor">Sponsorizzazione saltata</string>
@@ -904,10 +904,10 @@ Se non stai inviando un momento saliente, tocca Annulla e contrassegna la second
   <string name="morphe_sb_stats_saved_summary_zero">Tocca qui per vedere le statistiche globali e i migliori contributori</string>
   <string name="morphe_sb_stats_saved_summary">Questo è &lt;b&gt;%s&lt;/b&gt; della loro vita.&lt;br&gt;Tocca qui per vedere la classifica</string>
   <string name="morphe_sb_stats_self_saved">Hai saltato &lt;b&gt;%s&lt;/b&gt; segmenti</string>
-  <string name="morphe_sb_stats_self_saved_summary">È &lt;b&gt;%s&lt;/b&gt;</string>
+  <string name="morphe_sb_stats_self_saved_summary">Equivalenti a &lt;b&gt;%s&lt;/b&gt;</string>
   <string name="morphe_sb_stats_self_saved_reset_title">Ripristinare il contatore dei segmenti saltati?</string>
-  <string name="morphe_sb_stats_saved_hour_format">%1$s ore %2$s minuti</string>
-  <string name="morphe_sb_stats_saved_minute_format">%1$s minuti %2$s secondi</string>
+  <string name="morphe_sb_stats_saved_hour_format">%1$s ore e %2$s minuti</string>
+  <string name="morphe_sb_stats_saved_minute_format">%1$s minuti e %2$s secondi</string>
   <string name="morphe_sb_stats_saved_second_format">%s secondi</string>
   <string name="morphe_sb_color_opacity_label">Opacità:</string>
   <string name="morphe_sb_color_dot_label">Colore:</string>

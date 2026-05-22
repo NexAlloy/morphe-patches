@@ -166,15 +166,15 @@ A logóanimációk miatt előfordulhat, hogy a saját fejlécek nem látszódnak
   <string name="morphe_hide_filter_bar_feed_in_history_title">Elrejtés a megtekintési előzményekben</string>
   <string name="morphe_channel_screen_title">Csatornaoldal</string>
   <string name="morphe_channel_screen_summary">Válaszd ki, mely elemek jelenjenek meg a csatornaoldalon</string>
-  <string name="morphe_hide_channel_tab_title">Csatornaoldali szűrő engedélyezése</string>
-  <string name="morphe_hide_channel_tab_filter_strings_title">Csatornaoldali szűrő</string>
-  <string name="morphe_hide_channel_tab_filter_strings_summary">Add meg a szűrni kívánt csatornaoldali fülek nevét, új sorokkal elválasztva</string>
+  <string name="morphe_hide_channel_tab_title">Csatornafülek szűrésének engedélyezése</string>
+  <string name="morphe_hide_channel_tab_filter_strings_title">Csatornafülek szűrése</string>
+  <string name="morphe_hide_channel_tab_filter_strings_summary">Add meg a szűrni kívánt csatornafülek nevét, új sorokkal elválasztva</string>
   <!-- 'Community' should be translated using the same localized wording YouTube displays for the button. -->
   <string name="morphe_hide_community_button_title">Közösség gomb elrejtése</string>
   <!-- 'Join' should be translated using the same localized wording YouTube displays for the button. -->
   <string name="morphe_hide_join_button_title">Csatlakozás gomb elrejtése</string>
   <string name="morphe_hide_links_preview_title">Hivatkozások előnézetének elrejtése</string>
-  <string name="morphe_hide_links_preview_summary">Kattintható linkek elrejtése a csatorna fejlécében</string>
+  <string name="morphe_hide_links_preview_summary">Elrejti a csatornafejlécben található, kattintható webes linkeket</string>
   <string name="morphe_hide_members_shelf_title">Csatornatagok polcának elrejtése</string>
   <string name="morphe_hide_members_shelf_summary">Csatornatagok listájának elrejtése</string>
   <string name="morphe_hide_posts_shelf_title">Bejegyzéspolc elrejtése</string>
@@ -183,13 +183,13 @@ A logóanimációk miatt előfordulhat, hogy a saját fejlécek nem látszódnak
   <!-- 'Subscribe' should be translated using the same localized wording YouTube displays for the button. -->
   <string name="morphe_hide_subscribe_button_in_channel_page_title">Feliratkozás gomb elrejtése</string>
   <string name="morphe_comments_screen_title">Megjegyzések</string>
-  <string name="morphe_comments_screen_summary">Válaszd ki, mely elemek jelenjenek meg a hozzászólásoknál</string>
-  <string name="morphe_hide_comments_carousel_title">Hozzászólások gördíthető szűrősávjának engedélyezése</string>
+  <string name="morphe_comments_screen_summary">Válaszd ki, mely elemek jelenjenek meg a megjegyzéseknél</string>
+  <string name="morphe_hide_comments_carousel_title">Kiemelt megjegyzések szűrője</string>
   <string name="morphe_hide_comments_carousel_user_dialog_message">"Megjegyzés:
 Ügyelj arra, hogy a gördíthető sáv elemeinek pontos nevét add meg (pl. Kérdések, Videó hájpolása, Hallgatás a YouTube Music alkalmazásban stb.).
 A sáv elemeinek elrejtése nem várt mellékhatásokkal járhat.
-Ha a sáv összes elemét elrejted, a teljes hozzászólások szakasz is rejtve marad."</string>
-  <string name="morphe_hide_comments_carousel_filter_strings_title">Gördíthető hozzászólás szűrősáv</string>
+Ha a sáv összes elemét elrejted, a teljes megjegyzések szakasz is rejtve marad."</string>
+  <string name="morphe_hide_comments_carousel_filter_strings_title">Kiemelt megjegyzések szűrője</string>
   <string name="morphe_hide_comments_carousel_filter_strings_summary">Add meg a szűrni kívánt gördíthető hozzászólásszűrők nevét, új sorokkal elválasztva</string>
   <string name="morphe_hide_comments_ai_chat_summary_title">AI-csevegésösszefoglaló elrejtése</string>
   <string name="morphe_hide_comments_channel_guidelines_title">Csatornaszabályzat elrejtése</string>

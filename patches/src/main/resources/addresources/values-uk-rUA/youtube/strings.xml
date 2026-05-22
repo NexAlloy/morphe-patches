@@ -83,7 +83,7 @@ Second \"item\" text"</string>
   <!-- 'Latest videos' should be translated using the same localized wording YouTube displays for the button.
           This button usually appears in the Home feed for refreshing the feed. -->
   <string name="morphe_hide_latest_videos_button_title">Приховати кнопку \"Останні відео\"</string>
-  <string name="morphe_hide_latest_videos_button_summary">Приховує синій банер \"Останні відео\", що з\'являється у верхній частині стрічки головної сторінки</string>
+  <string name="morphe_hide_latest_videos_button_summary">Приховує синій банер \"Найновіші відео\", що з\'являється у верхній частині стрічки головної сторінки</string>
   <string name="morphe_hide_mix_playlists_title">Приховати \"Мікс плейлисти\"</string>
   <string name="morphe_hide_movies_section_title">Приховати секцію фільмів</string>
   <!-- 'Notify me' should be translated using the same localized wording YouTube displays for the button.

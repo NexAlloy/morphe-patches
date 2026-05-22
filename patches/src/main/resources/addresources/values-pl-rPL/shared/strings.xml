@@ -40,7 +40,7 @@ Second \"item\" text"</string>
   <string name="morphe_settings_search_clear_history">Wyczyść historię wyszukiwania</string>
   <string name="morphe_settings_search_clear_history_message">Czy na pewno chcesz wyczyścić całą historię wyszukiwania?</string>
   <string name="morphe_settings_search_tips_title">Wskazówki dotyczące wyszukiwania</string>
-  <string name="morphe_settings_search_tips_summary">"• Stuknij wynik, aby do niej przejść
+  <string name="morphe_settings_search_tips_summary">"• Dotknij ścieżkę, aby do niej przejść
 • Przytrzymaj ustawienie, aby do niego przejść
 • Naciśnij Enter, aby zapisać wyszukiwanie w historii
 • Wyszukiwanie ignoruje wielkość liter i interpunkcję
@@ -130,7 +130,7 @@ To jest wymagane, aby aplikacja mogła funkcjonować."</string>
 
 Wyłączenie optymalizacji baterii MicroG nie będzie negatywnie wpływało na zużycie baterii.
 
-Stuknij przycisk Kontynuuj i zezwól na zmiany optymalizacji."</string>
+Dotknij przycisk Kontynuuj i zezwól na zmiany optymalizacji."</string>
   <string name="gms_core_dialog_continue_text">Kontynuuj</string>
   <string name="morphe_gms_core_battery_optimization_dialog_title">Pokaż okno dialogowe optymalizacji baterii</string>
   <string name="morphe_gms_core_battery_optimization_dialog_user_dialog_message">"Wyłączenie tej opcji spowoduje ukrycie ostrzeżeń dotyczących optymalizacji baterii dla MicroG.

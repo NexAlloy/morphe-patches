@@ -134,7 +134,7 @@ Second \"item\" text"</string>
   <string name="morphe_hide_video_title_summary">يخفي عنوان الفيديو في وضع ملء الشاشة</string>
   <string name="morphe_hide_description_components_screen_title">وصف الفيديو</string>
   <string name="morphe_hide_description_components_screen_summary">اختر المكونات التي تظهر في وصف الفيديو</string>
-  <string name="morphe_hide_ai_generated_video_summary_section_title">إخفاء قسم \'ملخص فيديو تم إنشاؤه بواسطة الذكاء الاصطناعي\'</string>
+  <string name="morphe_hide_ai_generated_video_summary_section_title">إخفاء قسم \'ملخّص فيديو من إنشاء الذكاء الاصطناعي\'</string>
   <string name="morphe_hide_ask_section_title">إخفاء قسم طرح سؤال</string>
   <string name="morphe_hide_attributes_section_title">إخفاء قسم السمات</string>
   <string name="morphe_hide_attributes_section_summary">يخفي أقسام الأماكن المميزة، الألعاب، الموسيقى، والأشخاص المذكورين</string>
@@ -173,7 +173,7 @@ Second \"item\" text"</string>
   <string name="morphe_hide_community_button_title">إخفاء زر المنتدى</string>
   <!-- 'Join' should be translated using the same localized wording YouTube displays for the button. -->
   <string name="morphe_hide_join_button_title">إخفاء زر الانضمام</string>
-  <string name="morphe_hide_links_preview_title">إخفاء معاينة الروابط</string>
+  <string name="morphe_hide_links_preview_title">إخفاء عرض الروابط</string>
   <string name="morphe_hide_links_preview_summary">يخفي روابط الويب القابلة للنقر في اعلى صفحة القناة</string>
   <string name="morphe_hide_members_shelf_title">إخفاء رف الأعضاء</string>
   <string name="morphe_hide_members_shelf_summary">يخفي قائمة أعضاء القناة</string>
@@ -191,11 +191,11 @@ Second \"item\" text"</string>
 • إذا تم إخفاء جميع عناصر الشريط، فسيتم إخفاء قسم التعليقات بالكامل أيضًا."</string>
   <string name="morphe_hide_comments_carousel_filter_strings_title">شريط تصفية التعليقات</string>
   <string name="morphe_hide_comments_carousel_filter_strings_summary">أدخل أسماء عناصر شريط التعليقات المراد تصفيتها، بحيث يكون كل اسم في سطر منفصل</string>
-  <string name="morphe_hide_comments_ai_chat_summary_title">إخفاء ملخص محادثات الذكاء الاصطناعي</string>
+  <string name="morphe_hide_comments_ai_chat_summary_title">إخفاء ملخّص محادثة الذكاء الاصطناعي</string>
   <string name="morphe_hide_comments_channel_guidelines_title">إخفاء إرشادات القناة</string>
   <string name="morphe_hide_comments_prompts_title">إخفاء تلميحات التعليقات</string>
   <string name="morphe_hide_comments_prompts_summary">يخفي رسائل المعلومات السياقية في قسم التعليقات</string>
-  <string name="morphe_hide_comments_by_members_header_title">إخفاء علامة \'تعليقات بواسطة الأعضاء\'</string>
+  <string name="morphe_hide_comments_by_members_header_title">إخفاء علامة \'تعليقات الأعضاء\'</string>
   <string name="morphe_hide_comments_section_title">إخفاء قسم التعليقات</string>
   <string name="morphe_hide_comments_section_in_home_feed_title">إخفاء قسم التعليقات في خلاصة الصفحة الرئيسية</string>
   <string name="morphe_hide_comments_community_guidelines_title">إخفاء إرشادات المجتمع</string>
@@ -266,7 +266,7 @@ Second \"item\" text"</string>
   <string name="morphe_share_copy_url_button_success">تم نسخ URL إلى الحافظة</string>
   <string name="morphe_share_copy_url_button_timestamp_success">تم نسخ عنوان URL مع الطابع الزمني إلى الحافظة</string>
   <string name="morphe_copy_video_url_button_title">عرض زر نسخ عنوان URL الفيديو</string>
-  <string name="morphe_copy_video_url_button_summary">انقر لنسخ عنوان URL للفيديو، وانقر مع الاستمرار لنسخه مع الطابع الزمني</string>
+  <string name="morphe_copy_video_url_button_summary">انقر لنسخ عنوان URL للفيديو، واضغط مع الاستمرار لنسخه مع الطابع الزمني</string>
   <string name="morphe_copy_video_url_button_timestamp_title">نسخ الطابع الزمني</string>
   <string name="morphe_copy_video_url_button_timestamp_summary">عند التشغيل، يؤدي النقر إلى نسخ عنوان URL مع الطابع الزمني، بينما يؤدي الضغط المطوّل إلى نسخه بدون طابع زمني. عند الإيقاف، ينعكس السلوك</string>
   <!-- interaction.dialog.removeViewerDiscretionDialogPatch -->
@@ -374,12 +374,12 @@ Second \"item\" text"</string>
   <string name="morphe_swipe_volume_sensitivity_summary">ضبط كيفية تغير مستوى الصوت أثناء التمرير</string>
   <string name="morphe_swipe_overlay_style_title">نمط واجهة التمرير</string>
   <string name="morphe_swipe_overlay_style_entry_1">النمط الافقي</string>
-  <string name="morphe_swipe_overlay_style_entry_2">النمط الأفقي (الأدنى - الأعلى)</string>
-  <string name="morphe_swipe_overlay_style_entry_3">النمط الأفقي (الأدنى - المنتصف)</string>
+  <string name="morphe_swipe_overlay_style_entry_2">النمط الأفقي (أدنى حد - الأعلى)</string>
+  <string name="morphe_swipe_overlay_style_entry_3">النمط الأفقي (بسيط - المنتصف)</string>
   <string name="morphe_swipe_overlay_style_entry_4">النمط الدائري</string>
-  <string name="morphe_swipe_overlay_style_entry_5">النمط الدائري (الأدنى)</string>
+  <string name="morphe_swipe_overlay_style_entry_5">النمط الدائري (بسيط)</string>
   <string name="morphe_swipe_overlay_style_entry_6">النمط العمودي</string>
-  <string name="morphe_swipe_overlay_style_entry_7">النمط العمودي (الأدنى)</string>
+  <string name="morphe_swipe_overlay_style_entry_7">النمط العمودي (بسيط)</string>
   <string name="morphe_swipe_change_video_title">تمكين إيماءة التمرير لتغيير الفيديوهات</string>
   <string name="morphe_swipe_change_video_summary">التمرير في وضع ملء الشاشة للانتقال إلى الفيديو التالي أو السابق</string>
   <!-- layout.buttons.action.hideButtonsPatch -->
@@ -439,7 +439,7 @@ Second \"item\" text"</string>
   <!-- layout.captions.autoCaptionsPatch -->
   <string name="morphe_auto_captions_style_title">إمكانية رؤية الترجمة التلقائية</string>
   <string name="morphe_auto_captions_style_entry_1">العرض دائمًا</string>
-  <string name="morphe_auto_captions_style_entry_2">عدم عرضها أبداً</string>
+  <string name="morphe_auto_captions_style_entry_2">عدم عرضها أبدًا</string>
   <string name="morphe_auto_captions_style_entry_3">عرضها عندما يكون الصوت غير مكتوم</string>
   <string name="morphe_auto_captions_style_entry_4">عرضها عند كتم الصوت</string>
   <string name="morphe_auto_captions_style_legacy_entry_1">عرض الترجمة التلقائية</string>
@@ -897,7 +897,7 @@ Second \"item\" text"</string>
   <string name="morphe_sb_stats_loading">جارٍ التحميل...</string>
   <string name="morphe_sb_stats_sb_disabled">تم تعطيل SponsorBlock</string>
   <string name="morphe_sb_stats_username">اسم المستخدم الخاص بك: &lt;b&gt;%s&lt;/b&gt;</string>
-  <string name="morphe_sb_stats_username_change">اضغط هنا لتغيير اسم المستخدم الخاص بك</string>
+  <string name="morphe_sb_stats_username_change">انقر هنا لتغيير اسم المستخدم الخاص بك</string>
   <string name="morphe_sb_stats_username_change_unknown_error">غير قادر على تغيير اسم المستخدم: الحالة: %1$d %2$s</string>
   <string name="morphe_sb_stats_username_changed">تم تغيير اسم المستخدم بنجاح</string>
   <string name="morphe_sb_stats_reputation">سمعتك &lt;b&gt;%.2f&lt;/b&gt;</string>
@@ -962,27 +962,27 @@ Second \"item\" text"</string>
   <string name="morphe_change_start_page_entry_default">الافتراضي</string>
   <string name="morphe_change_start_page_entry_all_subscriptions">كلّ الاشتراكات</string>
   <string name="morphe_change_start_page_entry_browse">تصفح القنوات</string>
-  <string name="morphe_change_start_page_entry_courses">الدورات / التعلم</string>
+  <string name="morphe_change_start_page_entry_courses">محتوى تعليمي</string>
   <string name="morphe_change_start_page_entry_explore">استكشف</string>
-  <string name="morphe_change_start_page_entry_fashion">الموضة &amp; التجميل</string>
-  <string name="morphe_change_start_page_entry_gaming">ألعاب</string>
+  <string name="morphe_change_start_page_entry_fashion">الموضة والجمال</string>
+  <string name="morphe_change_start_page_entry_gaming">Gaming</string>
   <string name="morphe_change_start_page_entry_history">السجلّ</string>
   <string name="morphe_change_start_page_entry_library">المكتبة</string>
-  <string name="morphe_change_start_page_entry_liked_videos">الفيديوهات التي أعجبتني</string>
-  <string name="morphe_change_start_page_entry_live">مباشر</string>
+  <string name="morphe_change_start_page_entry_liked_videos">فيديوهات أعجبتك</string>
+  <string name="morphe_change_start_page_entry_live">بث مباشر</string>
   <string name="morphe_change_start_page_entry_movies">أفلام</string>
   <string name="morphe_change_start_page_entry_music">الموسيقى</string>
   <string name="morphe_change_start_page_entry_news">الأخبار</string>
   <string name="morphe_change_start_page_entry_notifications">الإشعارات</string>
   <string name="morphe_change_start_page_entry_playlists">قوائم التشغيل</string>
   <string name="morphe_change_start_page_entry_search">البحث</string>
-  <string name="morphe_change_start_page_entry_shopping">تسوق</string>
+  <string name="morphe_change_start_page_entry_shopping">التسوّق</string>
   <string name="morphe_change_start_page_entry_shorts">Shorts</string>
-  <string name="morphe_change_start_page_entry_sports">الرياضة</string>
+  <string name="morphe_change_start_page_entry_sports">رياضة</string>
   <string name="morphe_change_start_page_entry_subscriptions">الاشتراكات</string>
   <string name="morphe_change_start_page_entry_trending">المحتوى الرائج</string>
   <string name="morphe_change_start_page_entry_virtual_reality">الواقع الافتراضي</string>
-  <string name="morphe_change_start_page_entry_watch_later">شاهد لاحقًا</string>
+  <string name="morphe_change_start_page_entry_watch_later">المشاهدة لاحقًا</string>
   <string name="morphe_change_start_page_entry_your_clips">فيديوهاتك</string>
   <string name="morphe_change_start_page_always_title">تغيير صفحة البداية دائمًا</string>
   <string name="morphe_change_start_page_always_summary">"يعيد التوجيه دائمًا إلى صفحة البدء المختارة، وليس فقط عند بدء تشغيل التطبيق
@@ -1023,7 +1023,7 @@ Second \"item\" text"</string>
   <string name="morphe_miniplayer_disable_horizontal_drag_summary">يمنع إغلاق المشغل المصغر عن طريق سحبه أفقيًا خارج الشاشة</string>
   <string name="morphe_miniplayer_hide_overlay_buttons_title">إخفاء أزرار الواجهة</string>
   <string name="morphe_miniplayer_hide_subtext_title">إخفاء النصوص الفرعية</string>
-  <string name="morphe_miniplayer_hide_rewind_forward_title">إخفاء أزرار التخطي للأمام والخلف</string>
+  <string name="morphe_miniplayer_hide_rewind_forward_title">إخفاء أزرار التخطي إلى التالي والسابق</string>
   <string name="morphe_miniplayer_width_dip_title">الحجم الافتراضي</string>
   <string name="morphe_miniplayer_width_dip_summary">تعيين الحجم الأولي على الشاشة، بالبكسل</string>
   <string name="morphe_miniplayer_width_dip_invalid_toast">حجم البكسل يجب أن يكون بين %1$s و %2$s</string>
@@ -1100,7 +1100,7 @@ Second \"item\" text"</string>
   <string name="morphe_disable_haptic_feedback_chapters_title">تعطيل الاهتزاز للفصول</string>
   <string name="morphe_disable_haptic_feedback_precise_seeking_title">تعطيل الاهتزاز عند التمرير بدقة</string>
   <string name="morphe_disable_haptic_feedback_seek_undo_title">تعطيل اهتزاز التراجع عن التمرير</string>
-  <string name="morphe_disable_haptic_feedback_tap_and_hold_title">تعطيل اهتزازات النقر والنقر المطول</string>
+  <string name="morphe_disable_haptic_feedback_tap_and_hold_title">تعطيل اهتزازات النقر والضغط المطول</string>
   <string name="morphe_disable_haptic_feedback_zoom_title">تعطيل الاهتزاز عند التكبير</string>
   <!-- misc.medianotification.mediaNotificationControlsPatch -->
   <string name="morphe_notification_media_screen_title">عناصر تحكم الوسائط في الإشعارات</string>
@@ -1136,10 +1136,10 @@ Second \"item\" text"</string>
   <string name="morphe_remember_video_quality_toast_shorts">تم تغيير جودة Shorts %1$s إلى: %2$s</string>
   <!-- video.speed.button.playbackSpeedButtonPatch -->
   <string name="morphe_playback_speed_dialog_button_title">عرض زر سرعة التشغيل</string>
-  <string name="morphe_playback_speed_dialog_button_summary">انقر مع الاستمرار لإعادة السرعة إلى الوضع الافتراضي</string>
+  <string name="morphe_playback_speed_dialog_button_summary">اضغط مع الاستمرار لإعادة السرعة إلى الوضع الافتراضي</string>
   <!-- video.quality.button.videoQualityDialogButtonPatch -->
   <string name="morphe_video_quality_dialog_button_title">عرض زر الجودة</string>
-  <string name="morphe_video_quality_dialog_button_summary">انقر مع الاستمرار لإعادة الجودة إلى الوضع الافتراضي</string>
+  <string name="morphe_video_quality_dialog_button_summary">اضغط مع الاستمرار لإعادة الجودة إلى الوضع الافتراضي</string>
   <!-- video.speed.custom.customPlaybackSpeedPatch -->
   <string name="morphe_custom_speed_menu_title">قائمة سرعة التشغيل المخصصة</string>
   <string name="morphe_restore_old_speed_menu_title">استعادة قائمة سرعة التشغيل القديمة</string>
@@ -1148,8 +1148,8 @@ Second \"item\" text"</string>
   <string name="morphe_custom_playback_speeds_invalid">يجب أن تكون سرعات التشغيل المخصصة أقل من %s</string>
   <string name="morphe_custom_playback_speeds_parse_exception">سرعات التشغيل المخصصة غير صالحة</string>
   <string name="morphe_custom_playback_speeds_auto">تلقائي</string>
-  <string name="morphe_speed_tap_and_hold_title">سرعة التشغيل بالضغط المطول</string>
-  <string name="morphe_speed_tap_and_hold_summary">تعيين مُضاعِف السرعة عند النقر مع الاستمرار على الشاشة، اضبط على 0 لتعطيله</string>
+  <string name="morphe_speed_tap_and_hold_title">سرعة التشغيل بالضغط مع الاستمرار</string>
+  <string name="morphe_speed_tap_and_hold_summary">تعيين مُضاعِف السرعة عند الضغط مع الاستمرار على الشاشة، اضبط على 0 لتعطيله</string>
   <!-- video.speed.remember.rememberPlaybackSpeedPatch -->
   <string name="morphe_remember_playback_speed_last_selected_title">تذكر سرعة التشغيل</string>
   <string name="morphe_remember_playback_speed_last_selected_summary">يطبق تحديد السرعة اليدوي على جميع الفيديوهات المستقبلية</string>

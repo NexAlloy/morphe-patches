@@ -684,7 +684,7 @@ Ustawienia → Odtwarzanie (lub Autoodtwarzanie) → Autoodtwarzanie następnego
   <string name="morphe_ryd_estimated_like_summary">Wyświetla przybliżoną liczbę polubień w filmach, w których twórca ukrył statystyki</string>
   <string name="morphe_ryd_toast_on_connection_error_title">Pokaż powiadomienia o błędach połączenia</string>
   <string name="morphe_ryd_toast_on_connection_error_summary">Wyświetla powiadomienie, gdy serwer Return YouTube Dislike jest niedostępny</string>
-  <string name="morphe_ryd_attribution_summary">Dane są dostarczane przez API Return YouTube Dislike. Stuknij tutaj, aby dowiedzieć się więcej</string>
+  <string name="morphe_ryd_attribution_summary">Dane są dostarczane przez API Return YouTube Dislike. Dotknij tutaj, aby dowiedzieć się więcej</string>
   <!-- Statistic strings are shown in the settings only when Morphe debug mode is enabled. Typical users will never see these. -->
   <string name="morphe_ryd_statistics_category_title">Statystyki API Return YouTube Dislike tego urządzenia</string>
   <string name="morphe_ryd_statistics_getFetchCallResponseTimeAverage_title">Średni czas odpowiedzi API</string>
@@ -887,7 +887,7 @@ Wysłać?"</string>
 
 %s
 
-Jeśli nie wysyłasz wyróżnienia, stuknij Anuluj i zaznacz drugi punkt"</string>
+Jeśli nie wysyłasz wyróżnienia, dotknij Anuluj i zaznacz drugi punkt"</string>
   <string name="morphe_sb_new_segment_highlight_submit">Wyślij wyróżnienie</string>
   <string name="morphe_sb_stats_title">Statystyki</string>
   <!-- Shown in the settings preferences, and translations can be any text length. -->
@@ -895,7 +895,7 @@ Jeśli nie wysyłasz wyróżnienia, stuknij Anuluj i zaznacz drugi punkt"</strin
   <string name="morphe_sb_stats_loading">Wczytywanie...</string>
   <string name="morphe_sb_stats_sb_disabled">SponsorBlock jest wyłączony</string>
   <string name="morphe_sb_stats_username">Twoja nazwa użytkownika: &lt;b&gt;%s&lt;/b&gt;</string>
-  <string name="morphe_sb_stats_username_change">Stuknij tutaj, aby zmienić nazwę użytkownika</string>
+  <string name="morphe_sb_stats_username_change">Dotknij tutaj, aby zmienić nazwę użytkownika</string>
   <string name="morphe_sb_stats_username_change_unknown_error">Nie można zmienić nazwy użytkownika: Status: %1$d %2$s</string>
   <string name="morphe_sb_stats_username_changed">Nazwa użytkownika została zmieniona</string>
   <string name="morphe_sb_stats_reputation">Twoja reputacja to &lt;b&gt;%.2f&lt;/b&gt;</string>
@@ -914,7 +914,7 @@ Jeśli nie wysyłasz wyróżnienia, stuknij Anuluj i zaznacz drugi punkt"</strin
   <string name="morphe_sb_color_opacity_label">Przezroczystość:</string>
   <string name="morphe_sb_color_dot_label">Kolor:</string>
   <string name="morphe_sb_about_title">Informacje</string>
-  <string name="morphe_sb_about_api_summary">Dane są dostarczane przez API SponsorBlock. Stuknij tutaj, aby dowiedzieć się więcej i pobrać na inne platformy</string>
+  <string name="morphe_sb_about_api_summary">Dane są dostarczane przez API SponsorBlock. Dotknij tutaj, aby dowiedzieć się więcej i pobrać na inne platformy</string>
   <!-- layout.formfactor.changeFormFactorPatch -->
   <string name="morphe_change_form_factor_title">Układ urządzenia</string>
   <string name="morphe_change_form_factor_entry_1">Domyślny</string>
@@ -1068,7 +1068,7 @@ Ograniczenie: Użycie przycisku wstecz na pasku narzędzi może nie działać"</
 
 Jeśli opcja ta jest włączona, do serwera API wysyłane są wyłącznie adresy filmów. W przypadku braku miniaturek DeArrow, wyświetlana jest miniaturka oryginalna lub kadr z filmu
 
-Stuknij tutaj, aby dowiedzieć się więcej o DeArrow"</string>
+Dotknij tutaj, aby dowiedzieć się więcej o DeArrow"</string>
   <string name="morphe_alt_thumbnail_dearrow_connection_toast_title">Pokaż powiadomienia o błędach połączenia</string>
   <string name="morphe_alt_thumbnail_dearrow_connection_toast_summary">Wyświetla powiadomienie, gdy serwer DeArrow jest niedostępny</string>
   <string name="morphe_alt_thumbnail_dearrow_api_url_title">Punkt końcowy API DeArrow</string>

@@ -306,7 +306,8 @@ public class StreamOrDetailsDataRequest {
     private static Object buildPlayerStreamOrDetailsResponse(@Nullable ClientType clientType,
                                                              HttpURLConnection connection) {
         Objects.requireNonNull(clientType);
-        final boolean returnStreamObject = clientType.endpoint == GET_PLAYER_STREAMING_DATA || clientType.endpoint == GET_REEL_STREAMING_DATA;
+        final boolean returnStreamObject = clientType.endpoint == GET_PLAYER_STREAMING_DATA
+                || clientType.endpoint == GET_REEL_STREAMING_DATA;
 
         // gzip encoding doesn't response with content length (-1),
         // but empty response body does.
@@ -387,6 +388,8 @@ public class StreamOrDetailsDataRequest {
         } catch (JSONException ex) {
             Logger.printException(() -> "Failed to create jsonResponse object for video details", ex);
             return null;
+        } catch (Exception ex) {
+            Logger.printDebug(() -> "Failed to fetch stream for client: " + clientType);
         }
         return null;
     }
