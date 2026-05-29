@@ -40,6 +40,8 @@ import app.morphe.extension.shared.settings.LongSetting;
 import app.morphe.extension.shared.settings.Setting;
 import app.morphe.extension.shared.settings.SharedYouTubeSettings;
 import app.morphe.extension.shared.settings.StringSetting;
+import app.morphe.extension.shared.settings.preference.SeekBarPreference;
+import app.morphe.extension.shared.settings.preference.SeekBarPreference.SeekBarConfig;
 import app.morphe.extension.shared.spoof.ClientType;
 import app.morphe.extension.youtube.patches.AlternativeThumbnailsPatch.DeArrowAvailability;
 import app.morphe.extension.youtube.patches.AlternativeThumbnailsPatch.StillImagesAvailability;
@@ -52,7 +54,6 @@ import app.morphe.extension.youtube.patches.components.LayoutComponentsFilter;
 import app.morphe.extension.youtube.sponsorblock.SponsorBlockSettings;
 import app.morphe.extension.youtube.swipecontrols.SwipeControlsConfigurationProvider.SwipeOverlayStyle;
 
-@SuppressWarnings("deprecation")
 public class Settings extends SharedYouTubeSettings {
     // Video
     public static final BooleanSetting ADVANCED_VIDEO_QUALITY_MENU = new BooleanSetting("morphe_advanced_video_quality_menu", TRUE);
@@ -192,7 +193,6 @@ public class Settings extends SharedYouTubeSettings {
     public static final BooleanSetting HIDE_TIMED_REACTIONS = new BooleanSetting("morphe_hide_timed_reactions", TRUE);
     public static final BooleanSetting HIDE_VIDEO_TITLE = new BooleanSetting("morphe_hide_video_title", FALSE);
     public static final BooleanSetting OPEN_VIDEOS_FULLSCREEN_PORTRAIT = new BooleanSetting("morphe_open_videos_fullscreen_portrait", FALSE);
-    public static final BooleanSetting LOOP_VIDEO = new BooleanSetting("morphe_loop_video", FALSE);
 
     // Overlay buttons
     public static final BooleanSetting COPY_VIDEO_URL_BUTTON = new BooleanSetting("morphe_copy_video_url_button", FALSE, true);
@@ -204,7 +204,12 @@ public class Settings extends SharedYouTubeSettings {
     public static final BooleanSetting HIDE_FULLSCREEN_BUTTON = new BooleanSetting("morphe_hide_fullscreen_button", FALSE, true);
     public static final BooleanSetting HIDE_PLAYER_CONTROL_BUTTONS_BACKGROUND = new BooleanSetting("morphe_hide_player_control_buttons_background", FALSE, true);
     public static final BooleanSetting HIDE_PLAYER_PREVIOUS_NEXT_BUTTONS = new BooleanSetting("morphe_hide_player_previous_next_buttons", FALSE, true);
-    public static final BooleanSetting LOOP_VIDEO_BUTTON = new BooleanSetting("morphe_loop_video_button", FALSE);
+    // This following feature require the app reloading, to ensure
+    // stock repeat logic is disabled and hidden, once the
+    // LOOP_VIDEO_BUTTON will be visible.
+    public static final BooleanSetting LOOP_VIDEO_BUTTON = new BooleanSetting("morphe_loop_video_button", FALSE, true);
+    public static final BooleanSetting LOOP_VIDEO = new BooleanSetting("morphe_loop_video", FALSE);
+    public static final BooleanSetting DO_NOT_REMEMBER_LOOP_VIDEO = new BooleanSetting("morphe_do_not_remember_loop_video", FALSE, parent(LOOP_VIDEO_BUTTON));
     public static final BooleanSetting PLAY_ALL_BUTTON = new BooleanSetting("morphe_play_all_button", FALSE);
     public static final EnumSetting<PlaylistIDPrefix> PLAY_ALL_BUTTON_TYPE = new EnumSetting<>("morphe_play_all_button_type", PlaylistIDPrefix.ALL_CONTENTS_WITH_TIME_DESCENDING,  parent(PLAY_ALL_BUTTON));
     public static final BooleanSetting PLAYBACK_SPEED_DIALOG_BUTTON = new BooleanSetting("morphe_playback_speed_dialog_button", FALSE, true);
@@ -228,6 +233,7 @@ public class Settings extends SharedYouTubeSettings {
     public static final BooleanSetting HIDE_QUICK_ACTIONS_PLAYLIST_BUTTON = new BooleanSetting("morphe_hide_quick_actions_playlist_button", FALSE, parentNot(HIDE_QUICK_ACTIONS));
     public static final BooleanSetting HIDE_QUICK_ACTIONS_SAVE_BUTTON = new BooleanSetting("morphe_hide_quick_actions_save_button", FALSE, parentNot(HIDE_QUICK_ACTIONS));
     public static final BooleanSetting HIDE_QUICK_ACTIONS_SHARE_BUTTON = new BooleanSetting("morphe_hide_quick_actions_share_button", FALSE, parentNot(HIDE_QUICK_ACTIONS));
+    public static final IntegerSetting QUICK_ACTIONS_TOP_MARGIN = new IntegerSetting("morphe_quick_actions_top_margin", 0, true);
 
     // Ambient mode
     public static final BooleanSetting DISABLE_AMBIENT_MODE = new BooleanSetting("morphe_disable_ambient_mode", FALSE, true);
@@ -290,6 +296,7 @@ public class Settings extends SharedYouTubeSettings {
     public static final BooleanSetting HIDE_HOW_THIS_WAS_MADE_SECTION = new BooleanSetting("morphe_hide_how_this_was_made_section", FALSE);
     public static final BooleanSetting HIDE_HYPE_POINTS = new BooleanSetting("morphe_hide_hype_points", FALSE);
     public static final BooleanSetting HIDE_INFO_CARDS_SECTION = new BooleanSetting("morphe_hide_info_cards_section", FALSE);
+    public static final BooleanSetting HIDE_FEATURED_CHANNELS_SECTION = new BooleanSetting("morphe_hide_featured_channels_section", FALSE, parentNot(HIDE_INFO_CARDS_SECTION));
     public static final BooleanSetting HIDE_FEATURED_LINKS_SECTION = new BooleanSetting("morphe_hide_featured_links_section", FALSE, parentNot(HIDE_INFO_CARDS_SECTION));
     public static final BooleanSetting HIDE_FEATURED_VIDEOS_SECTION = new BooleanSetting("morphe_hide_featured_videos_section", FALSE, parentNot(HIDE_INFO_CARDS_SECTION));
     public static final BooleanSetting HIDE_SUBSCRIBE_BUTTON = new BooleanSetting("morphe_hide_subscribe_button", FALSE, parentNot(HIDE_INFO_CARDS_SECTION));
@@ -476,30 +483,38 @@ public class Settings extends SharedYouTubeSettings {
     public static final BooleanSetting SWIPE_CHANGE_VIDEO = new BooleanSetting("morphe_swipe_change_video", FALSE, true);
     public static final BooleanSetting SWIPE_BRIGHTNESS = new BooleanSetting("morphe_swipe_brightness", FALSE, true);
     public static final BooleanSetting SWIPE_VOLUME = new BooleanSetting("morphe_swipe_volume", FALSE, true);
+    public static final BooleanSetting SWIPE_SPEED = new BooleanSetting("morphe_swipe_speed", FALSE, true);
     public static final BooleanSetting SWIPE_PRESS_TO_ENGAGE = new BooleanSetting("morphe_swipe_press_to_engage", FALSE, true,
-            parentsAny(SWIPE_BRIGHTNESS, SWIPE_VOLUME));
+            parentsAny(SWIPE_BRIGHTNESS, SWIPE_VOLUME, SWIPE_SPEED));
     public static final BooleanSetting SWIPE_HAPTIC_FEEDBACK = new BooleanSetting("morphe_swipe_haptic_feedback", TRUE, true,
-            parentsAny(SWIPE_BRIGHTNESS, SWIPE_VOLUME));
+            parentsAny(SWIPE_BRIGHTNESS, SWIPE_VOLUME, SWIPE_SPEED));
     public static final IntegerSetting SWIPE_MAGNITUDE_THRESHOLD = new IntegerSetting("morphe_swipe_threshold", 30, true,
-            parentsAny(SWIPE_BRIGHTNESS, SWIPE_VOLUME));
+            parentsAny(SWIPE_BRIGHTNESS, SWIPE_VOLUME, SWIPE_SPEED));
     public static final IntegerSetting SWIPE_VOLUME_SENSITIVITY = new IntegerSetting("morphe_swipe_volume_sensitivity", 1, true, parent(SWIPE_VOLUME));
+    public static final IntegerSetting SWIPE_BRIGHTNESS_SENSITIVITY = new IntegerSetting("morphe_swipe_brightness_sensitivity", 1, true, parent(SWIPE_BRIGHTNESS));
+    public static final IntegerSetting SWIPE_SPEED_SENSITIVITY = new IntegerSetting("morphe_swipe_speed_sensitivity", 10, true, parent(SWIPE_SPEED));
+    public static final IntegerSetting SWIPE_SPEED_ZONE_HEIGHT = new IntegerSetting("morphe_swipe_speed_zone_height", 30, true, parent(SWIPE_SPEED));
     public static final EnumSetting<SwipeOverlayStyle> SWIPE_OVERLAY_STYLE = new EnumSetting<>("morphe_swipe_overlay_style", SwipeOverlayStyle.HORIZONTAL,true,
-            parentsAny(SWIPE_BRIGHTNESS, SWIPE_VOLUME));
+            parentsAny(SWIPE_BRIGHTNESS, SWIPE_VOLUME, SWIPE_SPEED));
     public static final IntegerSetting SWIPE_OVERLAY_TEXT_SIZE = new IntegerSetting("morphe_swipe_text_overlay_size", 14, true,
-            parentsAny(SWIPE_BRIGHTNESS, SWIPE_VOLUME));
+            parentsAny(SWIPE_BRIGHTNESS, SWIPE_VOLUME, SWIPE_SPEED));
     public static final IntegerSetting SWIPE_OVERLAY_OPACITY = new IntegerSetting("morphe_swipe_overlay_background_opacity", 60, true,
-            parentsAny(SWIPE_BRIGHTNESS, SWIPE_VOLUME));
+            parentsAny(SWIPE_BRIGHTNESS, SWIPE_VOLUME, SWIPE_SPEED));
     public static final StringSetting SWIPE_OVERLAY_BRIGHTNESS_COLOR = new StringSetting("morphe_swipe_overlay_progress_brightness_color", "#BFFFFFFF", true,
             parent(SWIPE_BRIGHTNESS));
     public static final StringSetting SWIPE_OVERLAY_VOLUME_COLOR = new StringSetting("morphe_swipe_overlay_progress_volume_color", "#BFFFFFFF", true,
             parent(SWIPE_VOLUME));
+    public static final StringSetting SWIPE_OVERLAY_SPEED_COLOR = new StringSetting("morphe_swipe_overlay_progress_speed_color", "#BFFF9100", true,
+            parent(SWIPE_SPEED));
     public static final LongSetting SWIPE_OVERLAY_TIMEOUT = new LongSetting("morphe_swipe_overlay_timeout", 500L, true,
-            parentsAny(SWIPE_BRIGHTNESS, SWIPE_VOLUME));
+            parentsAny(SWIPE_BRIGHTNESS, SWIPE_VOLUME, SWIPE_SPEED));
     public static final BooleanSetting SWIPE_SAVE_AND_RESTORE_BRIGHTNESS = new BooleanSetting("morphe_swipe_save_and_restore_brightness", TRUE, true,
             parent(SWIPE_BRIGHTNESS));
     public static final FloatSetting SWIPE_BRIGHTNESS_VALUE = new FloatSetting("morphe_swipe_brightness_value", -1f);
     public static final BooleanSetting SWIPE_LOWEST_VALUE_ENABLE_AUTO_BRIGHTNESS = new BooleanSetting("morphe_swipe_lowest_value_enable_auto_brightness", FALSE, true,
             parent(SWIPE_BRIGHTNESS));
+    public static final IntegerSetting SWIPE_ZONE_WIDTH = new IntegerSetting("morphe_swipe_zone_width", 37, true,
+            parentsAny(SWIPE_BRIGHTNESS, SWIPE_VOLUME));
 
     // ReturnYoutubeDislike
     public static final BooleanSetting RYD_ENABLED = new BooleanSetting("morphe_ryd_enabled", TRUE);
@@ -515,6 +530,7 @@ public class Settings extends SharedYouTubeSettings {
     /** Do not use id setting directly. Instead, use {@link SponsorBlockSettings}. */
     public static final StringSetting SB_PRIVATE_USER_ID = new StringSetting("sb_private_user_id_Do_Not_Share", "", true, parent(SB_ENABLED));
     public static final IntegerSetting SB_CREATE_NEW_SEGMENT_STEP = new IntegerSetting("sb_create_new_segment_step", 150, parent(SB_ENABLED));
+    public static final LongSetting SB_NEW_SEGMENT_PANEL_POSITION = new LongSetting("sb_new_segment_panel_position", 0L);
     public static final BooleanSetting SB_VOTING_BUTTON = new BooleanSetting("sb_voting_button", FALSE, parent(SB_ENABLED));
     public static final BooleanSetting SB_CREATE_NEW_SEGMENT = new BooleanSetting("sb_create_new_segment", FALSE, parent(SB_ENABLED));
     public static final BooleanSetting SB_SQUARE_LAYOUT = new BooleanSetting("sb_square_layout", FALSE, parent(SB_ENABLED));
@@ -606,5 +622,30 @@ public class Settings extends SharedYouTubeSettings {
         }
 
         Setting.addImportExportCallback(SponsorBlockSettings.SB_IMPORT_EXPORT_CALLBACK);
+    }
+
+    // Register SeekBar UI configs so the single shared SeekBarPreference class knows the
+    // range, step, unit, integer setting that uses it.
+    static {
+        SeekBarPreference.register(new SeekBarConfig(SWIPE_ZONE_WIDTH,
+                5, 50, 1, "%"));
+        SeekBarPreference.register(new SeekBarConfig(SWIPE_OVERLAY_OPACITY,
+                0, 100, 1, "%"));
+        SeekBarPreference.register(new SeekBarConfig(SWIPE_OVERLAY_TEXT_SIZE,
+                1, 30, 1, "sp"));
+        SeekBarPreference.register(new SeekBarConfig(MINIPLAYER_OPACITY,
+                0, 100, 1, "%"));
+        SeekBarPreference.register(new SeekBarConfig(PLAYER_OVERLAY_OPACITY,
+                0, 100, 1, "%"));
+        SeekBarPreference.register(new SeekBarConfig(SWIPE_VOLUME_SENSITIVITY,
+                1, 10, 1, ""));
+        SeekBarPreference.register(new SeekBarConfig(SWIPE_BRIGHTNESS_SENSITIVITY,
+                1, 10, 1, ""));
+        SeekBarPreference.register(new SeekBarConfig(SWIPE_SPEED_SENSITIVITY,
+                1, 20, 1, ""));
+        SeekBarPreference.register(new SeekBarConfig(SWIPE_SPEED_ZONE_HEIGHT,
+                5, 75, 1, "%"));
+        SeekBarPreference.register(new SeekBarConfig(QUICK_ACTIONS_TOP_MARGIN,
+                0, 32, 1, "dp"));
     }
 }

@@ -34,7 +34,7 @@ Second \"item\" text"</string>
   <string name="morphe_music_hide_video_ads_title">إخفاء إعلانات الفيديو</string>
   <!-- interaction.crossfade.crossfadePatch -->
   <string name="morphe_music_crossfade_screen_title">تلاشي</string>
-  <string name="morphe_music_crossfade_screen_summary">خصّص كيفية انتقال المسارات بسلاسة إلى بعضها البعض</string>
+  <string name="morphe_music_crossfade_screen_summary">امزج المسارات مع بعضها بسلاسة</string>
   <string name="morphe_music_crossfade_enabled_title">تفعيل التلاشي</string>
   <string name="morphe_music_crossfade_curve_title">منحنى التلاشي</string>
   <string name="morphe_music_crossfade_curve_entry_equal_power">قوة متساوية</string>
@@ -42,6 +42,8 @@ Second \"item\" text"</string>
   <string name="morphe_music_crossfade_curve_entry_ease_out_quad">تسهيل لطيف</string>
   <string name="morphe_music_crossfade_curve_entry_smoothstep">منحنى S ناعم</string>
   <!-- Empty string because custom preference handles the title itself -->
+  <string name="morphe_music_crossfade_curve_preview_outgoing">صادر</string>
+  <string name="morphe_music_crossfade_curve_preview_incoming">وارد</string>
   <string name="morphe_music_crossfade_duration_title">مدة التلاشي</string>
   <string name="morphe_crossfade_duration_250ms">250 جزء من الثانية</string>
   <string name="morphe_crossfade_duration_500ms">500 جزء من الثانية</string>
@@ -103,7 +105,7 @@ Second \"item\" text"</string>
   <string name="morphe_music_enable_forced_miniplayer_summary">يمنع المشغل من التوسع تلقائيًا إلى ملء الشاشة عند بدء مسار جديد</string>
   <!-- layout.navigationbar.navigationBarPatch -->
   <string name="morphe_music_navigation_bar_screen_title">شريط التنقل</string>
-  <string name="morphe_music_navigation_bar_screen_summary">اختر الأزرار التي تظهر في شريط التنقل</string>
+  <string name="morphe_music_navigation_bar_screen_summary">اختر الأزرار التي تظهر في شريط التنقل السفلي</string>
   <!-- 'Home' should be translated using the same localized wording YouTube Music displays for the tab. -->
   <string name="morphe_music_hide_navigation_bar_home_button_title">إخفاء زر الصفحة الرئيسية</string>
   <!-- 'Samples' should be translated using the same localized wording YouTube Music displays for the tab. -->

@@ -20,7 +20,7 @@ Second \"item\" text"</string>
   <string name="morphe_hide_post_ads_title">Приховати рекламу у стрічці</string>
   <string name="morphe_hide_post_ads_summary">Приховує рекламу у стрічці</string>
   <string name="morphe_hide_comment_ads_title">Приховати рекламу у коментарях</string>
-  <string name="morphe_hide_comment_ads_summary">Приховує рекламу в розділі коментарів</string>
+  <string name="morphe_hide_comment_ads_summary">Приховує рекламу в секції коментарів</string>
   <string name="morphe_screen_layout_title">Макет</string>
   <string name="morphe_disable_modern_home_title">Вимкнути сучасний домашній екран</string>
   <string name="morphe_disable_modern_home_summary">Вимикає інтерфейс нового домашнього екрана</string>

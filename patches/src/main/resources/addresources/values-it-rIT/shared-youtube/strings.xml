@@ -20,18 +20,22 @@ Second \"item\" text"</string>
   <string name="morphe_restart_first_run">Riavvia per completare la configurazione</string>
   <!-- layout.branding.baseCustomBrandingPatch -->
   <string name="morphe_custom_branding_name_title">Nome dell\'app</string>
-  <!-- Translations of this should be identical to morphe_custom_branding_icon_entry_6 -->
+  <!-- Translations of this should be identical to morphe_custom_branding_icon_entry_7 -->
   <string name="morphe_custom_branding_name_entry_5">Personalizzato</string>
   <string name="morphe_custom_branding_icon_title">Icona dell\'app</string>
   <string name="morphe_custom_branding_icon_entry_1">Originale</string>
   <string name="morphe_custom_branding_icon_entry_2">Morphe nero</string>
   <string name="morphe_custom_branding_icon_entry_3">Morphe scuro</string>
   <string name="morphe_custom_branding_icon_entry_4">Morphe chiaro</string>
-  <string name="morphe_custom_branding_icon_entry_5">Morphe play</string>
+  <!-- Translation should match morphe_custom_branding_notification_icon_entry_3 -->
+  <string name="morphe_custom_branding_icon_entry_5">Morphe chiaro</string>
+  <!-- Translation should match morphe_custom_branding_notification_icon_entry_3 -->
+  <string name="morphe_custom_branding_icon_entry_6">Morphe nero</string>
   <!-- Translations of this should be identical to morphe_custom_branding_name_entry_5 -->
-  <string name="morphe_custom_branding_icon_entry_6">Personalizzato</string>
+  <string name="morphe_custom_branding_icon_entry_7">Personalizzato</string>
   <string name="morphe_custom_branding_notification_icon_title">Icona di notifica</string>
   <string name="morphe_custom_branding_notification_icon_entry_1">Abbina all\'icona dell\'app</string>
+  <string name="morphe_custom_branding_notification_icon_entry_3">Morphe play</string>
   <!-- misc.dns.checkWatchHistoryDomainNameResolutionPatch -->
   <string name="morphe_check_watch_history_domain_name_dialog_title">Avviso Morphe</string>
   <string name="morphe_check_watch_history_domain_name_dialog_message">La tua cronologia di visualizzazione non sta venendo salvata.&lt;br&gt;&lt;br&gt;Questo è molto probabilmente causato da un blocco annunci DNS o da un proxy di rete.&lt;br&gt;&lt;br&gt;Per risolvere, inserisci nella whitelist &lt;b&gt;s.youtube.com&lt;/b&gt; o disattiva tutti i blocchi DNS e proxy.</string>
@@ -40,9 +44,9 @@ Second \"item\" text"</string>
   <string name="morphe_spoof_video_streams_screen_title">Falsificazione dei flussi video</string>
   <string name="morphe_spoof_video_streams_screen_summary">Configura un client simulato per prevenire problemi di riproduzione</string>
   <string name="morphe_spoof_video_streams_title">Utilizza un client simulato per il flusso video</string>
-  <string name="morphe_spoof_video_streams_summary">"Inganna YouTube inducendolo a generare uno stream video compatibile, il che risolve la riproduzione per la maggior parte degli utenti
+  <string name="morphe_spoof_video_streams_summary">"Risolve i problemi di riproduzione per la maggior parte degli utenti richiedendo uno streaming video compatibile.
 
-Se sei un utente di YouTube Premium, questa impostazione potrebbe non essere necessaria"</string>
+Se sei un utente YouTube Premium, questa impostazione potrebbe non essere necessaria."</string>
   <string name="morphe_spoof_video_streams_no_clients_toast">Impossibile recuperare il flusso da qualsiasi client</string>
   <string name="morphe_spoof_video_streams_user_dialog_message">La disattivazione di questa impostazione potrebbe causare problemi di riproduzione.</string>
   <!-- "Spoof video streams" must use the same translation as morphe_spoof_video_streams_title.
@@ -110,6 +114,7 @@ Per accedere, premi su Continua di seguito"</string>
   <string name="morphe_sanitize_sharing_links_title">Sanifica collegamenti di condivisione</string>
   <string name="morphe_sanitize_sharing_links_summary">Rimuove i parametri di query di tracciamento dai link condivisi</string>
   <string name="morphe_replace_music_with_youtube_title">Cambia i link di condivisione in youtube.com</string>
+  <string name="morphe_replace_music_with_youtube_summary">Sostituisce music.youtube.com con youtube.com nei link condivisi.</string>
   <string name="morphe_replace_links_with_shortener_title">Cambia i link di condivisione in youtu.be</string>
-  <string name="morphe_replace_links_with_shortener_summary">Forza gli streaming live e Shorts a utilizzare il formato URL abbreviato youtu.be</string>
+  <string name="morphe_replace_links_with_shortener_summary">Forza i video a utilizzare il formato URL abbreviato youtu.be</string>
 </resources>

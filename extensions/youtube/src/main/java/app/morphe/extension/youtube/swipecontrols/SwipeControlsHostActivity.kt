@@ -33,52 +33,52 @@ import kotlin.concurrent.Volatile
 
 /**
  * The main controller for volume and brightness swipe controls.
- * note that the superclass is overwritten to the superclass of the MainActivity at patch time.
+ * Note that the superclass is overwritten to the superclass of the MainActivity at patch time.
  */
 class SwipeControlsHostActivity(val activity: Activity) {
     /**
-     * current instance of [AudioVolumeController]
+     * Current instance of [AudioVolumeController].
      */
     var audio: AudioVolumeController? = null
 
     /**
-     * current instance of [ScreenBrightnessController]
+     * Current instance of [ScreenBrightnessController].
      */
     var screen: ScreenBrightnessController? = null
 
     /**
-     * current instance of [SwipeControlsConfigurationProvider]
+     * Current instance of [SwipeControlsConfigurationProvider].
      */
     lateinit var config: SwipeControlsConfigurationProvider
 
     /**
-     * current instance of [SwipeControlsOverlayLayout]
+     * Current instance of [SwipeControlsOverlayLayout].
      */
     lateinit var overlay: SwipeControlsOverlayLayout
 
     /**
-     * current instance of [SwipeZonesController]
+     * Current instance of [SwipeZonesController].
      */
     lateinit var zones: SwipeZonesController
 
     /**
-     * main gesture controller
+     * Main gesture controller.
      */
     private lateinit var gesture: GestureController
 
     /**
-     * main volume keys controller
+     * Main volume keys controller.
      */
     private lateinit var keys: VolumeKeysController
 
     /**
-     * current content view with id [android.R.id.content]
+     * Current content view with id [android.R.id.content].
      */
     private val contentRoot
         get() = activity.window.decorView.findViewById<ViewGroup>(android.R.id.content)
 
     /**
-     * whether the status bar is visible on Android 15+ (edge-to-edge display)
+     * Whether the status bar is visible on Android 15+ (edge-to-edge display).
      */
     @Volatile
     var statusBarVisible: Boolean = false
@@ -90,10 +90,10 @@ class SwipeControlsHostActivity(val activity: Activity) {
     )
 
     /**
-     * dispatch a touch event to downstream views
+     * Dispatches a touch event to downstream views.
      *
-     * @param event the event to dispatch
-     * @return was the event consumed?
+     * @param event The event to dispatch.
+     * @return Whether the event was consumed.
      */
     fun dispatchDownstreamTouchEvent(event: MotionEvent): Boolean {
         return XposedBridge.invokeOriginalMethod(
@@ -104,9 +104,9 @@ class SwipeControlsHostActivity(val activity: Activity) {
     }
 
     /**
-     * ensures that swipe controllers are initialized and attached.
-     * on some ROMs with SDK <= 23, [onCreate] and [onStart] may not be called correctly.
-     * see https://github.com/revanced/revanced-patches/issues/446
+     * Ensures that swipe controllers are initialized and attached.
+     * On some ROMs with SDK <= 23, [onCreate] and [onStart] may not be called correctly.
+     * See https://github.com/revanced/revanced-patches/issues/446
      */
     private fun ensureInitialized() {
         if (!this::config.isInitialized) {
@@ -119,7 +119,7 @@ class SwipeControlsHostActivity(val activity: Activity) {
     }
 
     /**
-     * initializes controllers, only call once
+     * Initializes controllers, only call once.
      */
     private fun initialize() {
         // create controllers
@@ -168,7 +168,7 @@ class SwipeControlsHostActivity(val activity: Activity) {
     }
 
     /**
-     * (re) attaches swipe overlays
+     * Re-attaches swipe overlays.
      */
     private fun reAttachOverlays() {
         printDebug { "attaching swipe controls overlay" }
@@ -180,9 +180,9 @@ class SwipeControlsHostActivity(val activity: Activity) {
     private var isBrightnessSaved = false
 
     /**
-     * called when the player type changes
+     * Called when the player type changes.
      *
-     * @param type the new player type
+     * @param type The new player type.
      */
     private fun onPlayerTypeChanged(type: PlayerType) {
         when {
@@ -205,7 +205,7 @@ class SwipeControlsHostActivity(val activity: Activity) {
     }
 
     /**
-     * create the audio volume controller
+     * Creates the audio volume controller.
      */
     private fun createAudioController() = if (config.enableVolumeControls) {
         AudioVolumeController(activity)
@@ -214,7 +214,7 @@ class SwipeControlsHostActivity(val activity: Activity) {
     }
 
     /**
-     * create the screen brightness controller instance
+     * Creates the screen brightness controller instance.
      */
     private fun createScreenController() = if (config.enableBrightnessControl) {
         ScreenBrightnessController(this)
@@ -223,7 +223,7 @@ class SwipeControlsHostActivity(val activity: Activity) {
     }
 
     /**
-     * create the gesture controller based on settings
+     * Creates the gesture controller based on settings.
      */
     private fun createGestureController() = if (config.shouldEnablePressToSwipe) {
         PressToSwipeController(this)
@@ -233,8 +233,8 @@ class SwipeControlsHostActivity(val activity: Activity) {
 
     companion object {
         /**
-         * the currently active swipe controls host.
-         * the reference may be null!
+         * The currently active swipe controls host.
+         * The reference may be null.
          */
         @JvmStatic
         var currentHost: WeakReference<SwipeControlsHostActivity> = WeakReference(null)

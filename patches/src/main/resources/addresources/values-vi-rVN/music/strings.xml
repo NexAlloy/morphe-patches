@@ -34,7 +34,7 @@ Second \"item\" text"</string>
   <string name="morphe_music_hide_video_ads_title">Ẩn video quảng cáo</string>
   <!-- interaction.crossfade.crossfadePatch -->
   <string name="morphe_music_crossfade_screen_title">Chuyển bài</string>
-  <string name="morphe_music_crossfade_screen_summary">Tùy chỉnh cách các bài hát chuyển tiếp mượt mà</string>
+  <string name="morphe_music_crossfade_screen_summary">Trộn các bài hát với nhau khi chuyển bài</string>
   <string name="morphe_music_crossfade_enabled_title">Bật hiệu ứng chuyển bài</string>
   <string name="morphe_music_crossfade_curve_title">Hiệu ứng làm mờ âm thanh</string>
   <string name="morphe_music_crossfade_curve_entry_equal_power">Âm lượng cân bằng</string>
@@ -42,6 +42,8 @@ Second \"item\" text"</string>
   <string name="morphe_music_crossfade_curve_entry_ease_out_quad">Chuyển âm êm</string>
   <string name="morphe_music_crossfade_curve_entry_smoothstep">Đường cong S mượt</string>
   <!-- Empty string because custom preference handles the title itself -->
+  <string name="morphe_music_crossfade_curve_preview_outgoing">Bài hiện tại</string>
+  <string name="morphe_music_crossfade_curve_preview_incoming">Bài tiếp theo</string>
   <string name="morphe_music_crossfade_duration_title">Thời gian chuyển bài</string>
   <string name="morphe_crossfade_duration_250ms">250 mili giây</string>
   <string name="morphe_crossfade_duration_500ms">500 mili giây</string>
@@ -103,7 +105,7 @@ Tính năng do VazerOG phát triển"</string>
   <string name="morphe_music_enable_forced_miniplayer_summary">Không tự động chuyển sang chế độ toàn màn hình khi phát bài hát mới</string>
   <!-- layout.navigationbar.navigationBarPatch -->
   <string name="morphe_music_navigation_bar_screen_title">Thanh điều hướng</string>
-  <string name="morphe_music_navigation_bar_screen_summary">Chọn các nút sẽ hiển thị trên thanh điều hướng</string>
+  <string name="morphe_music_navigation_bar_screen_summary">Chọn các nút sẽ hiển thị trong thanh điều hướng dưới cùng</string>
   <!-- 'Home' should be translated using the same localized wording YouTube Music displays for the tab. -->
   <string name="morphe_music_hide_navigation_bar_home_button_title">Ẩn nút Trang chủ</string>
   <!-- 'Samples' should be translated using the same localized wording YouTube Music displays for the tab. -->

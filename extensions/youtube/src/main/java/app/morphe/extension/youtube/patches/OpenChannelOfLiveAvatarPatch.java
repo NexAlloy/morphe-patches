@@ -12,6 +12,7 @@ import static app.morphe.extension.youtube.settings.Settings.OPEN_CHANNEL_OF_LIV
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.DisplayMetrics;
 
 import com.facebook.litho.ComponentHost;
 
@@ -23,9 +24,7 @@ import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.spoof.SpoofVideoStreamsPatch;
 import app.morphe.extension.shared.spoof.requests.PlayerRoutes;
 import app.morphe.extension.shared.spoof.requests.StreamOrDetailsDataRequest;
-import app.morphe.extension.youtube.shared.CreatorChannelState;
-import app.morphe.extension.youtube.shared.PlayerType;
-import app.morphe.extension.youtube.shared.ShortsPlayerState;
+import app.morphe.extension.shared.ui.Dim;
 
 @SuppressWarnings("unused")
 public final class OpenChannelOfLiveAvatarPatch {
@@ -66,43 +65,43 @@ public final class OpenChannelOfLiveAvatarPatch {
             if (!(componentHost.getParent() instanceof ComponentHost)) {
                 return false;
             }
-            // The Live ring object takes up a small portion of the screen
-            // and an equivalent height and width, compared to thumbnails.
+            // The Live ring object takes up a small portion of the screen and an equivalent
+            // height and width, compared to thumbnails or the header channel avatar.
             // This check will avoid any false positives.
-            int width = componentHost.getWidth();
-            int height = componentHost.getHeight();
-            if (width == 0 ||
-                width != height ||
-                width > componentHost.getContext().getResources().getDisplayMetrics().widthPixels / 4) {
-                    return false;
+            final int width = componentHost.getWidth();
+            final int height = componentHost.getHeight();
+            // The getDisplayMetrics() properties must be retrieved dynamically to avoid false positives when
+            // switching between the inner and outer screens (or vice versa) on foldable devices.
+            DisplayMetrics currentMetrics = Dim.getMetrics();
+            boolean isLandscapeOrTablet = currentMetrics.widthPixels > currentMetrics.heightPixels;
+            int maxAllowedWidth = isLandscapeOrTablet ? Dim.dp40 : Dim.dp48;
+            if (width == 0 || width != height || width > maxAllowedWidth) {
+                return false;
             }
 
-            if (!CreatorChannelState.isOpen() ||
-                (PlayerType.getCurrent() == PlayerType.WATCH_WHILE_MAXIMIZED || ShortsPlayerState.isOpen())) {
-                liveAvatarChannelRequest = SpoofVideoStreamsPatch.fetchDetails(
-                        PlayerRoutes.GET_CHANNEL_FROM_ID,
-                        videoId
-                );
-                Utils.runOnBackgroundThread(() -> {
-                    if (liveAvatarChannelRequest.getStreamDetails() instanceof String channelID && !channelID.isEmpty()) {
-                        Logger.printDebug(() -> "live avatar response: " + channelID);
+            liveAvatarChannelRequest = SpoofVideoStreamsPatch.fetchDetails(
+                    PlayerRoutes.GET_CHANNEL_FROM_ID,
+                    videoId
+            );
+            Utils.runOnBackgroundThread(() -> {
+                if (liveAvatarChannelRequest.getStreamDetails() instanceof String channelID && !channelID.isEmpty()) {
+                    Logger.printDebug(() -> "live avatar response: " + channelID);
 
-                        Utils.runOnMainThread(() -> {
-                            var context = mainActivityRef.get();
-                            if (context != null) {
-                                Intent videoChannelIntent = new Intent(Intent.ACTION_VIEW);
-                                videoChannelIntent.setData(Uri.parse("https://www.youtube.com/channel/" + channelID));
-                                videoChannelIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                videoChannelIntent.setPackage(context.getPackageName());
-                                context.startActivity(videoChannelIntent);
-                            }
-                        });
-                    } else {
-                        Logger.printDebug(() -> "Could not get channel ID, string parameter is null: " + videoId);
-                    }
-                });
-                return true;
-            }
+                    Utils.runOnMainThread(() -> {
+                        var context = mainActivityRef.get();
+                        if (context != null) {
+                            Intent videoChannelIntent = new Intent(Intent.ACTION_VIEW);
+                            videoChannelIntent.setData(Uri.parse("https://www.youtube.com/channel/" + channelID));
+                            videoChannelIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            videoChannelIntent.setPackage(context.getPackageName());
+                            context.startActivity(videoChannelIntent);
+                        }
+                    });
+                } else {
+                    Logger.printDebug(() -> "Could not get channel ID, string parameter is null: " + videoId);
+                }
+            });
+            return true;
         } catch (Exception ex) {
             Logger.printException(() -> "openChannel failure", ex);
         }

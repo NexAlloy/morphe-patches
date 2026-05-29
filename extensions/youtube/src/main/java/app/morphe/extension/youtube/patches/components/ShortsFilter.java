@@ -10,6 +10,7 @@
 
 package app.morphe.extension.youtube.patches.components;
 
+import static app.morphe.extension.shared.ByteTrieSearch.convertStringsToBytes;
 import static app.morphe.extension.youtube.patches.LayoutReloadObserverPatch.isActionBarVisible;
 import static app.morphe.extension.youtube.shared.NavigationBar.NavigationButton;
 
@@ -22,6 +23,7 @@ import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.List;
 
+import app.morphe.extension.shared.ByteTrieSearch;
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.youtube.settings.Settings;
 import app.morphe.extension.youtube.shared.ConversionContext.ContextInterface;
@@ -74,7 +76,7 @@ public final class ShortsFilter extends Filter {
     private static FrameLayout.LayoutParams originalLayoutParams;
 
     private final StringFilterGroup shortsCompactFeedVideo;
-    private final ByteArrayFilterGroup shortsCompactFeedVideoBuffer;
+    private final ByteTrieSearch shortsCompactFeedVideoBuffer;
     private final StringFilterGroup channelProfile;
     private final ByteArrayFilterGroup channelProfileShelfHeader;
 
@@ -142,12 +144,16 @@ public final class ShortsFilter extends Filter {
                 // Search results that appear in a horizontal shelf.
                 "video_card.e");
 
-        // Filter out items that use the 'frame0' thumbnail.
-        // This is a valid thumbnail for both regular videos and Shorts,
-        // but it appears these thumbnails are used only for Shorts.
-        shortsCompactFeedVideoBuffer = new ByteArrayFilterGroup(
-                null,
-                "/frame0.jpg");
+        // Filter out items that use the 'frame0' thumbnail and other Shorts specific images.
+        // 'frame0' is a valid thumbnail for both regular videos and Shorts,
+        // but it appears these thumbnails are only used for Shorts.
+        shortsCompactFeedVideoBuffer = new ByteTrieSearch(convertStringsToBytes(
+                "/frame0.jpg",
+                "/oardefault.jpg", // Vertical orientation video.
+                "/oar1.jpg",
+                "/oar2.jpg",
+                "/oar3.jpg")
+        );
 
         shelfHeaderPath = new StringFilterGroup(
                 null,
@@ -451,15 +457,14 @@ public final class ShortsFilter extends Filter {
 
             if (matchedGroup == shortsCompactFeedVideo) {
                 return shouldHideShortsFeedItems()
-                        && shortsCompactFeedVideoBuffer.check(buffer).isFiltered()
+                        // When a video is autoplaying in the feed, no new components are drawn on the screen.
+                        // Therefore, filtering is skipped when the current PlayerType is [INLINE_MINIMAL].
+                        && PlayerType.getCurrent() != PlayerType.INLINE_MINIMAL
                         // The litho path of the feed video is 'video_lockup_with_attachment.e'.
                         // It appears [shortsCompactFeedVideoBuffer] is used after 20 seconds during autoplay in the feed in YouTube 20.44.38.
                         // If the Shorts shelf is hidden on the Home feed, the video in the feed will be hidden after 20 seconds have passed since autoplay began in the feed.
                         // See: https://github.com/MorpheApp/morphe-patches/issues/773.
-                        //
-                        // When a video is autoplaying in the feed, no new components are drawn on the screen.
-                        // Therefore, filtering is skipped when the current PlayerType is [INLINE_MINIMAL].
-                        && PlayerType.getCurrent() != PlayerType.INLINE_MINIMAL;
+                        && shortsCompactFeedVideoBuffer.matches(buffer);
             }
 
             if (matchedGroup == shelfHeaderPath) {

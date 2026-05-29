@@ -146,6 +146,24 @@ public class SpoofVideoStreamsPatch {
         return playerRequestUri;
     }
 
+    public static Uri.Builder blockGetWatchRequest(Uri.Builder playerRequestBuilder) {
+        if (SPOOF_VIDEO_STREAMS) {
+            try {
+                String path = playerRequestBuilder.build().getPath();
+
+                if (path != null && path.contains("get_watch")) {
+                    Logger.printDebug(() -> "Blocking 'get_watch' by returning internet connection check URI");
+
+                    return INTERNET_CONNECTION_CHECK_URI.buildUpon();
+                }
+            } catch (Exception ex) {
+                Logger.printException(() -> "blockGetWatchRequest failure", ex);
+            }
+        }
+
+        return playerRequestBuilder;
+    }
+
     /**
      * Injection point.
      * <p>

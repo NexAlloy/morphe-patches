@@ -16,7 +16,6 @@ import static app.morphe.extension.youtube.videoplayer.PlayerOverlayButton.initi
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
 import android.widget.ImageView;
 import android.widget.TextView;
