@@ -7,9 +7,9 @@ import app.morphe.patcher.methodCall
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.util.smali.ExternalLabel
 import app.morphe.patches.all.misc.resources.resourceMappingPatch
+import app.morphe.patches.shared.misc.litho.filter.addLithoFilter
 import app.morphe.patches.shared.misc.settings.preference.SwitchPreference
 import app.morphe.patches.youtube.misc.extension.sharedExtensionPatch
-import app.morphe.patches.youtube.misc.litho.filter.addLithoFilter
 import app.morphe.patches.youtube.misc.litho.filter.lithoFilterPatch
 import app.morphe.patches.youtube.misc.settings.PreferenceScreen
 import app.morphe.patches.youtube.misc.settings.settingsPatch
@@ -24,7 +24,7 @@ private const val EXTENSION_FILTER = "Lapp/morphe/extension/youtube/patches/comp
 @Suppress("unused")
 val hideInfoCardsPatch = bytecodePatch(
     name = "Hide info cards",
-    description = "Adds an option to hide info cards that creators add in the video player.",
+    description = "Adds an option to hide info cards that creators add in the video player."
 ) {
     dependsOn(
         sharedExtensionPatch,

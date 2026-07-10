@@ -2,17 +2,21 @@
  * Copyright 2026 Morphe.
  * https://github.com/MorpheApp/morphe-patches
  *
- * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to Morphe contributions.
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
  */
 
 package app.morphe.patches.youtube.layout.player.fullscreen
 
 import app.morphe.patcher.Fingerprint
+import app.morphe.patcher.InstructionLocation.MatchAfterImmediately
 import app.morphe.patcher.InstructionLocation.MatchAfterWithin
+import app.morphe.patcher.OpcodesFilter
+import app.morphe.patcher.fieldAccess
 import app.morphe.patcher.literal
 import app.morphe.patcher.methodCall
 import app.morphe.patcher.opcode
 import app.morphe.patcher.string
+import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
 
 /**
@@ -46,3 +50,35 @@ internal object AdPlayerFullscreenFingerprint : Fingerprint(
         )
     )
 )
+
+internal object PlayerDragGestureTypeFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PRIVATE, AccessFlags.STATIC),
+    returnType = "Ljava/lang/String;",
+    parameters = listOf("I"),
+    strings = listOf(
+        "FULLSCREEN_DRAGGED_DOWN",
+        "MAXIMIZED_PULLED_UP"
+    )
+)
+
+internal object PlayerDragGestureInitFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "I",
+    parameters = listOf("I", "I", "I", "I"),
+    filters = OpcodesFilter.opcodesToFilters(
+        Opcode.IGET_OBJECT,
+        Opcode.IF_EQZ,
+        Opcode.INVOKE_VIRTUAL,
+        Opcode.IGET,
+        Opcode.IF_NE,
+        Opcode.IGET,
+        Opcode.IF_NE,
+        Opcode.CONST_4,
+        Opcode.RETURN
+    ) + fieldAccess(
+        opcode = Opcode.IGET_OBJECT,
+        type = "/NextGenWatchLayout;",
+        location = MatchAfterImmediately()
+    )
+)
+

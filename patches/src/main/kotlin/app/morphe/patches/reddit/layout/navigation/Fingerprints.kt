@@ -2,7 +2,7 @@
  * Copyright 2026 Morphe.
  * https://github.com/MorpheApp/morphe-patches
  *
- * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to this code.
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to this code.
  */
 package app.morphe.patches.reddit.layout.navigation
 
@@ -36,7 +36,7 @@ internal object BottomNavScreenListBuilderFingerprint : Fingerprint(
     )
 )
 
-internal object BottomNavScreenResourceBuilderFingerprint : Fingerprint(
+internal object BottomNavScreenResourceBuilderLegacyFingerprint : Fingerprint(
     definingClass = "Lcom/reddit/launch/bottomnav/BottomNavScreen;",
     returnType = "L",
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),

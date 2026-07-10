@@ -5,7 +5,7 @@
  * Original hard forked code:
  * https://github.com/ReVanced/revanced-patches/commit/724e6d61b2ecd868c1a9a37d465a688e83a74799
  *
- * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to Morphe contributions.
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
  */
 
 package app.morphe.extension.shared.spoof.requests;
@@ -160,7 +160,8 @@ public class StreamOrDetailsDataRequest {
                                        String videoId, Map<String, String> playerHeaders) {
         this.videoId = videoId;
         // Strictly require playerHeaders only if endpoint is null (only for Stream fetching)
-        if (endpoint == null) {
+        // or equals to the one used by the Save Video To Watch Later button.
+        if (endpoint == null || endpoint == PlayerRoutes.SEND_SAVE_VIDEO_TO_WATCH_LATER) {
             Objects.requireNonNull(playerHeaders);
         }
         this.future = submitOnBackgroundThread(() -> fetch(endpoint, videoId, playerHeaders));

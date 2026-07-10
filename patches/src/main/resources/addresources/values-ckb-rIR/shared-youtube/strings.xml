@@ -20,6 +20,9 @@ Second \"item\" text"</string>
   <string name="morphe_restart_first_run">دەستپێکردنەوە بۆ تەواوکردنی ئامادەکردن</string>
   <!-- layout.branding.baseCustomBrandingPatch -->
   <string name="morphe_custom_branding_name_title">ناوی ئەپ</string>
+  <!-- interaction.downloads.downloadsPatch -->
+  <string name="morphe_external_downloader_screen_title">دانه‌کانی دەرەکی</string>
+  <string name="morphe_external_downloader_other_item">دوان</string>
   <!-- Translations of this should be identical to morphe_custom_branding_icon_entry_7 -->
   <string name="morphe_custom_branding_name_entry_5">باو</string>
   <string name="morphe_custom_branding_icon_title">وێنۆکەی ئەپ</string>
@@ -90,6 +93,7 @@ Da te'îl bikin, li ser berdewam bikin xwarê"</string>
   <!-- misc.audio.tracks.forceOriginalAudioPatch -->
   <string name="morphe_force_original_audio_title">به‌زانیشتنی زمانی دەنگی ئەسڵی</string>
   <string name="morphe_force_original_audio_summary">هەمیشە تراکی دەنگی ڕەسەنی ڤیدیۆکە لێدەدات لەجیاتی وەشانی دۆبلاژکراو</string>
+  <!-- misc.proxy.networkProxyPatch -->
   <!-- ad.hideFullscreenAdsPatch -->
   <string name="morphe_hide_fullscreen_ads_title">شاردنەوەی ڕیکلامەکانی پڕ شاشە</string>
   <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
@@ -99,4 +103,14 @@ Da te'îl bikin, li ser berdewam bikin xwarê"</string>
   <string name="morphe_sanitize_sharing_links_summary">پارامیتەرەکانی بەدواکەوتنی پرس لە لینکە هاوبەشەکان لادەبات</string>
   <string name="morphe_replace_music_with_youtube_title">گۆڕینەوەی سیستەمەکانی هەڵواسە بۆ youtube.com</string>
   <string name="morphe_replace_links_with_shortener_title">گۆڕینی لینکەکانی هاوبەشکردن بۆ youtu.be</string>
+  <!-- misc.debugging.enableDebuggingPatch -->
+  <string name="morphe_debug_protobuffer_summary">Adds additional logging information for developers to identify app components</string>
+  <string name="morphe_debug_protobuffer_user_dialog_message">"چالاک کردن ئەم ڕێنماییە زانیاریی چۆر لەسەر دابخستن تۆمار دەکات، دەوێتە سەرەخۆش کردنی دەستکارییەک و نێو نووسراوەکانی بۆ چەندین پێکهاتەی کاربەرەوە. 
+
+ئەمەش دەتوانێت یارمەت بدات لە دروست کردنی فیلترە سەر بەڕێوەکان. 
+
+بەڵام، چالاک کردنەوە ئەمەش ڕەنگە هەندێك لە زانیارییەکانی کاربەر تۆمار بکات وەک: ناوی IP-ت."</string>
+  <!-- Custom filter -->
+  <!-- 'Component path builder strings' is the technical name for identifying the Litho UI layout items to hide. This is an advanced feature and most users will never use this. -->
+  <string name="morphe_custom_filter_strings_summary">List of component path builder strings to filter, separated by new lines</string>
 </resources>

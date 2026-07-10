@@ -2,7 +2,7 @@
  * Copyright 2026 Morphe.
  * https://github.com/MorpheApp/morphe-patches
  *
- * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to this code.
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to this code.
  */
 package app.morphe.extension.reddit.patches;
 
@@ -109,7 +109,9 @@ public final class HideNavigationButtonsPatch {
 
         NavigationButtonLegacy(boolean shouldHide, String resourceName) {
             this.shouldHide = shouldHide;
-            this.label = ResourceUtils.getString(resourceName);
+            this.label = ResourceUtils.getStringIdentifier(resourceName) == 0
+                    ? "dummy_bogus_legacy_label" // Some legacy strings are missing with 2026.26.0+
+                    : ResourceUtils.getString(resourceName);
         }
     }
 }

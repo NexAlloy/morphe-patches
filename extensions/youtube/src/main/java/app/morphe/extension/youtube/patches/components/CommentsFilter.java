@@ -5,7 +5,7 @@
  * Original hard forked code:
  * https://github.com/ReVanced/revanced-patches/commit/724e6d61b2ecd868c1a9a37d465a688e83a74799
  *
- * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to Morphe contributions.
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
  */
 
 package app.morphe.extension.youtube.patches.components;
@@ -23,10 +23,12 @@ import androidx.annotation.NonNull;
 import java.util.List;
 
 import app.morphe.extension.shared.Logger;
+import app.morphe.extension.shared.patches.components.BufferAsciiStrings;
+import app.morphe.extension.shared.patches.components.ContextInterface;
+import app.morphe.extension.shared.patches.components.Filter;
+import app.morphe.extension.shared.patches.components.StringFilterGroup;
 import app.morphe.extension.youtube.innertube.NextResponseOuterClass.NewElement;
-import app.morphe.extension.youtube.patches.components.LithoFilterPatch.BufferAsciiStrings;
 import app.morphe.extension.youtube.settings.Settings;
-import app.morphe.extension.youtube.shared.ConversionContext.ContextInterface;
 import app.morphe.extension.youtube.shared.PlayerType;
 
 @SuppressWarnings("unused")
@@ -42,6 +44,7 @@ public class CommentsFilter extends Filter {
     private final StringFilterGroup comments;
     private final StringFilterGroup emojiAndTimestampButtons;
     private final StringFilterGroup previewCommentDotsSelector;
+    private final StringFilterGroup commentsFilterBar;
     
     public CommentsFilter() {
         var chatSummary = new StringFilterGroup(
@@ -64,6 +67,11 @@ public class CommentsFilter extends Filter {
                 null,
                 "video_metadata_carousel",
                 "_comments"
+        );
+
+        commentsFilterBar = new StringFilterGroup(
+                Settings.HIDE_FILTER_BAR_IN_COMMENTS,
+                CHIP_BAR_PATH_PREFIX
         );
 
         var communityGuidelines = new StringFilterGroup(
@@ -110,6 +118,7 @@ public class CommentsFilter extends Filter {
                 chatSummary,
                 comments,
                 commentsByMembers,
+                commentsFilterBar,
                 commentsPrompts,
                 communityGuidelines,
                 createAShort,
@@ -122,15 +131,15 @@ public class CommentsFilter extends Filter {
     }
 
     @Override
-    boolean isFiltered(ContextInterface contextInterface,
-                       String identifier,
-                       String accessibility,
-                       String path,
-                       byte[] buffer,
-                       BufferAsciiStrings asciiStrings,
-                       StringFilterGroup matchedGroup,
-                       FilterContentType contentType,
-                       int contentIndex) {
+    public boolean isFiltered(ContextInterface contextInterface,
+                              String identifier,
+                              String accessibility,
+                              String path,
+                              byte[] buffer,
+                              BufferAsciiStrings asciiStrings,
+                              StringFilterGroup matchedGroup,
+                              FilterContentType contentType,
+                              int contentIndex) {
         if (matchedGroup == previewCommentDotsSelector) {
             return path.contains("carousel_header")
                         &&
@@ -144,9 +153,29 @@ public class CommentsFilter extends Filter {
             return Settings.HIDE_COMMENTS_SECTION.get();
         } else if (matchedGroup == emojiAndTimestampButtons) {
             return path.startsWith(COMMENT_COMPOSER_PATH);
+        } else if (matchedGroup == commentsFilterBar) {
+            return Settings.HIDE_FILTER_BAR_IN_COMMENTS.get() && PlayerType.getCurrent().isMaximizedOrFullscreen();
         }
 
         return true;
+    }
+
+    /**
+     * Injection point.
+     */
+    public static void hideInComments(View view) {
+        if (view == null || !Settings.HIDE_FILTER_BAR_IN_COMMENTS.get()) {
+            return;
+        }
+
+        if (PlayerType.getCurrent().isMaximizedOrFullscreen()) {
+            ViewGroup.LayoutParams lp = view.getLayoutParams();
+            if (lp != null) {
+                lp.height = 0;
+                view.setLayoutParams(lp);
+            }
+            view.setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -230,10 +259,10 @@ public class CommentsFilter extends Filter {
     /**
      * Injection point.
      */
-    public static void sanitizeCommentsCategoryBar(@NonNull String identifier,
+    public static void hideCommentsFilterBarOptions(@NonNull String identifier,
                                                    @NonNull List<Object> treeNodeResultList) {
         try {
-            if (Settings.SANITIZE_COMMENTS_CATEGORY_BAR.get()
+            if (Settings.HIDE_COMMENTS_FILTER_BAR_OPTIONS.get()
                     && identifier.startsWith(CHIP_BAR_PATH_PREFIX)
                     // Playlist sort button uses same components and must only filter if the player is opened.
                     && PlayerType.getCurrent().isMaximizedOrFullscreen()
@@ -244,7 +273,7 @@ public class CommentsFilter extends Filter {
                 }
             }
         } catch (Exception ex) {
-            Logger.printException(() -> "Failed to sanitize comment category bar", ex);
+            Logger.printException(() -> "Failed to hide comment filter bar options", ex);
         }
     }
 

@@ -20,6 +20,19 @@ Second \"item\" text"</string>
   <string name="morphe_restart_first_run">รีสตาร์ทเพื่อดำเนินการตั้งค่าให้เสร็จสิ้น</string>
   <!-- layout.branding.baseCustomBrandingPatch -->
   <string name="morphe_custom_branding_name_title">ชื่อแอป</string>
+  <!-- interaction.downloads.downloadsPatch -->
+  <string name="morphe_external_downloader_screen_title">การดาวน์โหลดภายนอก</string>
+  <string name="morphe_external_downloader_name_title">ชื่อแพ็คเกจโปรแกรมดาวน์โหลด</string>
+  <string name="morphe_external_downloader_name_summary">ชื่อแพ็คเกจของแอปดาวน์โหลดภายนอกที่คุณติดตั้งไว้</string>
+  <string name="morphe_external_downloader_flyout_button_title">แทนที่ปุ่มการเปิด/ปิดฟีด/การค้นหา</string>
+  <string name="morphe_external_downloader_other_item_hint">ป้อนชื่อแพ็คเกจ</string>
+  <string name="morphe_external_downloader_other_item">อื่น ๆ</string>
+  <string name="morphe_external_downloader_not_found_title">ไม่พบแอป</string>
+  <string name="morphe_external_downloader_not_installed_warning">ไม่ได้ติดตั้ง %s โปรดติดตั้ง</string>
+  <string name="morphe_external_downloader_package_not_found_warning">"ไม่พบแอปที่ติดตั้งด้วยชื่อแพ็คเกจ: %s
+
+ตรวจสอบว่าชื่อแพ็คเกจถูกต้องและแอปได้ถูกติดตั้งแล้ว"</string>
+  <string name="morphe_external_downloader_empty_warning">ชื่อแพ็คเกจต้องไม่ว่างเปล่า</string>
   <!-- Translations of this should be identical to morphe_custom_branding_icon_entry_7 -->
   <string name="morphe_custom_branding_name_entry_5">กำหนดเอง</string>
   <string name="morphe_custom_branding_icon_title">ไอคอนแอป</string>
@@ -109,6 +122,25 @@ Second \"item\" text"</string>
   <!-- misc.audio.tracks.forceOriginalAudioPatch -->
   <string name="morphe_force_original_audio_title">บังคับใช้ภาษาเสียงต้นฉบับ</string>
   <string name="morphe_force_original_audio_summary">เล่นแทร็กเสียงต้นฉบับของวิดีโอเสมอแทนที่จะเป็นฉบับพากย์</string>
+  <!-- misc.proxy.networkProxyPatch -->
+  <string name="morphe_proxy_screen_title">พร็อกซีเครือข่าย</string>
+  <string name="morphe_proxy_screen_summary">กำหนดเส้นทางคำขอเครือข่ายผ่านพร็อกซี</string>
+  <string name="morphe_proxy_enabled_title">เปิดใช้งานพร็อกซี</string>
+  <string name="morphe_proxy_enabled_summary">กำหนดเส้นทางการร้องขอเครือข่ายผ่านพร็อกซี HTTP หรือ HTTPS ที่กำหนดค่าไว้</string>
+  <string name="morphe_proxy_host_title">โฮสต์พร็อกซี</string>
+  <string name="morphe_proxy_host_summary">ชื่อโฮสต์หรือที่อยู่ IP ของเซิร์ฟเวอร์พร็อกซี</string>
+  <string name="morphe_proxy_port_title">พอร์ตพร็อกซี</string>
+  <string name="morphe_proxy_port_summary">พอร์ตของเซิร์ฟเวอร์พร็อกซี</string>
+  <string name="morphe_proxy_https_title">ใช้พร็อกซี HTTPS</string>
+  <string name="morphe_proxy_https_summary">ใช้ HTTPS เพื่อเชื่อมต่อกับเซิร์ฟเวอร์พร็อกซีแทน HTTP</string>
+  <string name="morphe_proxy_auth_enabled_title">การยืนยันตัวตนพร็อกซี</string>
+  <string name="morphe_proxy_auth_enabled_summary">ส่งการยืนยันตัวตนแบบ Basic พร้อมกับคำขอพร็อกซี</string>
+  <string name="morphe_proxy_auth_username_title">ชื่อผู้ใช้พร็อกซี</string>
+  <string name="morphe_proxy_auth_username_summary">ชื่อผู้ใช้สำหรับการยืนยันตัวตนพร็อกซีแบบ Basic</string>
+  <string name="morphe_proxy_auth_password_title">รหัสผ่านพร็อกซี</string>
+  <string name="morphe_proxy_auth_password_summary">รหัสผ่านสำหรับการยืนยันตัวตนพร็อกซีแบบ Basic</string>
+  <string name="morphe_proxy_allow_direct_fallback_title">อนุญาตให้Fallbackโดยตรง</string>
+  <string name="morphe_proxy_allow_direct_fallback_summary">เชื่อมต่อโดยตรงหากพร็อกซีล้มเหลว</string>
   <!-- ad.hideFullscreenAdsPatch -->
   <string name="morphe_hide_fullscreen_ads_title">ซ่อนโฆษณาแบบเต็มหน้าจอ</string>
   <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
@@ -120,4 +152,20 @@ Second \"item\" text"</string>
   <string name="morphe_replace_music_with_youtube_summary">แทนที่ music.youtube.com ด้วย youtube.com ในลิงก์ที่แชร์</string>
   <string name="morphe_replace_links_with_shortener_title">เปลี่ยนลิงก์การแชร์เป็น youtu.be</string>
   <string name="morphe_replace_links_with_shortener_summary">บังคับให้วิดีโอใช้รูปแบบ URL แบบสั้น youtu.be</string>
+  <!-- misc.debugging.enableDebuggingPatch -->
+  <string name="morphe_debug_protobuffer_title">บันทึกโปรโตคอลบัฟเฟอร์</string>
+  <string name="morphe_debug_protobuffer_summary">เพิ่มข้อมูลการบันทึกเพิ่มเติมสำหรับนักพัฒนาเพื่อระบุส่วนประกอบของแอป</string>
+  <string name="morphe_debug_protobuffer_user_dialog_message">"การเปิดใช้งานการตั้งค่านี้จะบันทึกข้อมูลเค้าโครงเพิ่มเติม รวมถึงข้อความบนหน้าจอสำหรับส่วนประกอบ UI บางส่วน
+
+ซึ่งจะช่วยระบุส่วนประกอบเมื่อสร้างตัวกรองที่กำหนดเองได้
+
+อย่างไรก็ตาม การเปิดใช้งานนี้จะบันทึกข้อมูลผู้ใช้บางอย่าง เช่น ที่อยู่ IP ของคุณด้วย"</string>
+  <!-- Custom filter -->
+  <string name="morphe_custom_filter_screen_title">ตัวกรองแบบกำหนดเอง</string>
+  <string name="morphe_custom_filter_screen_summary">กำหนดค่าตัวกรองแบบกำหนดเองเพื่อซ่อนส่วนประกอบใดๆ</string>
+  <string name="morphe_custom_filter_title">เปิดใช้งานตัวกรองแบบกำหนดเอง</string>
+  <string name="morphe_custom_filter_strings_title">ตัวกรองแบบกำหนดเอง</string>
+  <!-- 'Component path builder strings' is the technical name for identifying the Litho UI layout items to hide. This is an advanced feature and most users will never use this. -->
+  <string name="morphe_custom_filter_strings_summary">รายการสตริงตัวสร้างเส้นทางส่วนประกอบที่จะกรอง คั่นด้วยบรรทัดใหม่</string>
+  <string name="morphe_custom_filter_toast_invalid_syntax">ตัวกรองแบบกำหนดเองไม่ถูกต้อง: %s</string>
 </resources>

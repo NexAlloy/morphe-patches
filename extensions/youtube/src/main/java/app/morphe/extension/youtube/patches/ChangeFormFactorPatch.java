@@ -5,7 +5,7 @@
  * Original hard forked code:
  * https://github.com/ReVanced/revanced-patches/commit/724e6d61b2ecd868c1a9a37d465a688e83a74799
  *
- * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to Morphe contributions.
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
  */
 
 package app.morphe.extension.youtube.patches;
@@ -133,5 +133,17 @@ public class ChangeFormFactorPatch {
         } else {
             return original;
         }
+    }
+
+    /**
+     * Injection point.
+     * <p>
+     * This method check whatever the list of player's litho elements is empty, when the tablet
+     * layout setting is set to off but the app is not restarted correctly, by running in
+     * onResume() mode instead of onCreate().
+     * <p>
+     **/
+     public static boolean checkPlayerLithoElementsListSize(List<?> list) {
+        return list.isEmpty();
     }
 }

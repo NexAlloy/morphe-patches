@@ -54,13 +54,15 @@ import app.morphe.extension.youtube.shared.PlayerType;
 public class ReturnYouTubeDislike {
 
     public enum Vote {
-        LIKE(1),
-        DISLIKE(-1),
-        LIKE_REMOVE(0);
+        LIKE("like/like", 1),
+        DISLIKE("like/dislike", -1),
+        LIKE_REMOVE("like/removelike", 0);
 
+        public final String endpoint;
         public final int value;
 
-        Vote(int value) {
+        Vote(String endpoint, int value) {
+            this.endpoint = endpoint;
             this.value = value;
         }
     }
@@ -383,8 +385,16 @@ public class ReturnYouTubeDislike {
         }
     }
 
-    @NonNull
-    public static ReturnYouTubeDislike getFetchForVideoId(@Nullable String videoId) {
+    @Nullable
+    public static ReturnYouTubeDislike getFetchForVideoIdOrNull(String videoId) {
+        return getFetchForVideoId(videoId, false);
+    }
+
+    public static ReturnYouTubeDislike getFetchForVideoId(String videoId) {
+        return getFetchForVideoId(videoId, true);
+    }
+
+    private static ReturnYouTubeDislike getFetchForVideoId(String videoId, boolean createIfNeeded) {
         Objects.requireNonNull(videoId);
         synchronized (fetchCache) {
             // Remove any expired entries.
@@ -397,7 +407,7 @@ public class ReturnYouTubeDislike {
             });
 
             ReturnYouTubeDislike fetch = fetchCache.get(videoId);
-            if (fetch == null) {
+            if (fetch == null && createIfNeeded) {
                 fetch = new ReturnYouTubeDislike(videoId);
                 fetchCache.put(videoId, fetch);
             }

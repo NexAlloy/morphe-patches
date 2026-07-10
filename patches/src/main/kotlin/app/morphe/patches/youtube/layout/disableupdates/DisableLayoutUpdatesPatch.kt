@@ -2,15 +2,16 @@
  * Copyright 2026 Morphe.
  * https://github.com/MorpheApp/morphe-patches
  *
- * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to this code.
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to this code.
  */
 
 package app.morphe.patches.youtube.layout.disableupdates
 
-import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.shared.misc.settings.preference.SwitchPreference
 import app.morphe.patches.youtube.misc.extension.sharedExtensionPatch
+import app.morphe.patches.youtube.misc.headerhook.addHeaderHook
+import app.morphe.patches.youtube.misc.headerhook.cronetHeaderHookPatch
 import app.morphe.patches.youtube.misc.settings.PreferenceScreen
 import app.morphe.patches.youtube.misc.settings.settingsPatch
 import app.morphe.patches.youtube.shared.Constants.COMPATIBILITY_YOUTUBE
@@ -25,7 +26,8 @@ val disableLayoutUpdatesPatch = bytecodePatch(
 ) {
     dependsOn(
         sharedExtensionPatch,
-        settingsPatch
+        settingsPatch,
+        cronetHeaderHookPatch
     )
 
     compatibleWith(COMPATIBILITY_YOUTUBE)
@@ -35,18 +37,6 @@ val disableLayoutUpdatesPatch = bytecodePatch(
             SwitchPreference("morphe_disable_layout_updates", summary = true)
         )
 
-        CronetHeaderFingerprint.let {
-            it.method.apply {
-                val index = it.instructionMatches.first().index
-
-                addInstructions(
-                    index,
-                    """
-                        invoke-static { p1, p2 }, $EXTENSION_CLASS->disableLayoutUpdates(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
-                        move-result-object p2
-                    """
-                )
-            }
-        }
+        addHeaderHook("$EXTENSION_CLASS->disableLayoutUpdates(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;")
     }
 }

@@ -1,22 +1,25 @@
 /*
  * Copyright 2026 Morphe.
- * https://github.com/MorpheApp/morphe-patches
+ * https://github.com/MorpheApp/morphe-patches/pull/1065
  *
- * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to this code.
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to this code.
  */
 package app.morphe.patches.music.interaction.crossfade
 
 import app.morphe.patcher.Fingerprint
+import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.extensions.InstructionExtensions.instructions
 import app.morphe.patcher.literal
 import app.morphe.patcher.methodCall
 import app.morphe.patcher.opcode
 import app.morphe.patcher.patch.bytecodePatch
+import app.morphe.patcher.patch.resourcePatch
+import app.morphe.util.ResourceGroup
+import app.morphe.util.copyResources
 import app.morphe.patcher.util.proxy.mutableTypes.MutableClass
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
 import app.morphe.patches.music.misc.extension.sharedExtensionPatch
-import app.morphe.patches.music.misc.playservice.is_8_05_or_greater
 import app.morphe.patches.music.misc.playservice.is_9_00_or_greater
 import app.morphe.patches.music.misc.playservice.versionCheckPatch
 import app.morphe.patches.music.misc.settings.PreferenceScreen
@@ -152,24 +155,43 @@ private fun MutableClass.addFieldSetter(
 }
 
 
+/**
+ * Ships the crossfade About-screen header graphic: the banner WebP drawable and the
+ * full-width ImageView layout it's shown through.  Kept as a resource patch because
+ * copyResources needs the resource-patch context; crossfadePatch depends on it.
+ */
+private val crossfadeBannerResourcePatch = resourcePatch {
+    execute {
+        copyResources(
+            "crossfade",
+            ResourceGroup("drawable-nodpi", "morphe_crossfade_about_banner.webp"),
+            ResourceGroup("layout", "morphe_crossfade_about_banner.xml"),
+        )
+    }
+}
+
 @Suppress("unused")
 val crossfadePatch = bytecodePatch(
     name = "Track crossfade",
-    description = "Adds a true dual-player crossfade between consecutive tracks.",
+    description = "Adds a true dual-player crossfade between consecutive tracks. " +
+        "Requires YouTube Music 9.00 or newer; on older versions the patch is a no-op.",
 ) {
     dependsOn(
         sharedExtensionPatch,
         settingsPatch,
         versionCheckPatch,
+        crossfadeBannerResourcePatch,
     )
 
     compatibleWith(COMPATIBILITY_YOUTUBE_MUSIC)
 
     execute {
         val log = Logger.getLogger(this::class.java.name)
-        if (!is_8_05_or_greater) {
+        if (!is_9_00_or_greater) {
             return@execute log.warning(
-                "Track crossfade requires YouTube Music 8.05 or newer.",
+                "Track crossfade requires YouTube Music 9.00 or newer. " +
+                    "The 8.x ExoPlayer listener architecture is incompatible " +
+                    "with this patch.",
             )
         }
 
@@ -215,7 +237,28 @@ val crossfadePatch = bytecodePatch(
                     SwitchPreference("morphe_music_crossfade_on_skip", summary = true),
                     SwitchPreference("morphe_music_crossfade_on_auto_advance", summary = true),
                     SwitchPreference("morphe_music_crossfade_session_control", summary = true),
-                    NonInteractivePreference("morphe_music_crossfade_about")
+                    // About: tappable sub-screen explaining how crossfade works, when it
+                    // works best, its quirks, and where it isn't supported at all.
+                    PreferenceScreenPreference(
+                        key = "morphe_music_crossfade_about",
+                        sorting = PreferenceScreenPreference.Sorting.UNSORTED,
+                        preferences = setOf(
+                            // Header banner (full-width crossfade graphic) — custom
+                            // ImageView layout, no title/summary.
+                            NonInteractivePreference(
+                                key = "morphe_music_crossfade_about_banner",
+                                titleKey = "morphe_music_crossfade_about_banner_title",
+                                summaryKey = null,
+                                layout = "@layout/morphe_crossfade_about_banner",
+                            ),
+                            NonInteractivePreference("morphe_music_crossfade_about_how"),
+                            NonInteractivePreference("morphe_music_crossfade_about_best"),
+                            NonInteractivePreference("morphe_music_crossfade_about_quirks"),
+                            NonInteractivePreference("morphe_music_crossfade_about_known"),
+                            NonInteractivePreference("morphe_music_crossfade_about_unsupported"),
+                            NonInteractivePreference("morphe_music_crossfade_about_credit"),
+                        )
+                    )
                 )
             )
         )
@@ -231,6 +274,26 @@ val crossfadePatch = bytecodePatch(
                 nop
             """
         )
+
+        // #1671: notify the crossfade manager the instant a watch-page / queue
+        // dismissal is processed (DismissWatchEvent handler).  This is dismiss-UNIQUE
+        // — the stock "Dismiss queue" menu and swipe-to-dismiss both post a
+        // DismissWatchEvent, while a normal skip never does.  It fires before the
+        // dismiss's stopVideo(5), so onQueueDismissed() arms a window that makes
+        // onBeforeStopVideo pass that stop through instead of starting a phantom
+        // crossfade.  (If this fingerprint ever misses, the poll-STATE_IDLE recovery
+        // still cleans up — just a touch slower.)
+        runCatching {
+            HandleDismissWatchEventFingerprint.method.addInstruction(
+                0,
+                "invoke-static { }, $EXTENSION_CLASS->onQueueDismissed()V"
+            )
+        }.onFailure {
+            log.warning(
+                "DismissWatchEvent handler not found — dismiss handling falls back to " +
+                    "poll-STATE_IDLE recovery (#1671): ${it.message}",
+            )
+        }
 
         PlayNextInQueueFingerprint.method.addInstructions(
             0,
@@ -256,55 +319,62 @@ val crossfadePatch = bytecodePatch(
             """
         )
 
-        PauseVideoFingerprint.method.addInstructions(
+        PauseVideoFingerprint.method.addInstruction(
             0,
-            """
-                invoke-static {}, $EXTENSION_CLASS->onPauseVideo()V
-            """
+            "invoke-static {}, $EXTENSION_CLASS->onPauseVideo()V"
         )
 
         PlayVideoFingerprint.method.addInstructions(
             0,
-            """
-                invoke-static { p0 }, $EXTENSION_CLASS->onPlayVideo(Ljava/lang/Object;)V
-            """
+            "invoke-static { p0 }, $EXTENSION_CLASS->onPlayVideo(Ljava/lang/Object;)V"
         )
 
         // On 9.20.52, atzq.loadVideo has enough locals that `p0` resolves past v15,
         // exceeding invoke-static's 4-bit register limit. Use invoke-static/range
         // which supports 16-bit registers so the injection holds on any version.
-        LoadVideoFingerprint.method.addInstructions(
+        // p0 = atzq (MedialibPlayer), p1 = aues (PlaybackStartDescriptor): pass both
+        // so the manager can cache the current track's descriptor for REPEAT_SINGLE
+        // crossfade-onto-self (re-issued via patch_loadVideo).
+        LoadVideoFingerprint.method.addInstruction(
             0,
-            """
-                invoke-static/range { p0 .. p0 }, $EXTENSION_CLASS->onBeforeLoadVideo(Ljava/lang/Object;)V
-            """
+            "invoke-static/range { p0 .. p1 }, $EXTENSION_CLASS->" +
+                    "onBeforeLoadVideo(Ljava/lang/Object;Ljava/lang/Object;)V"
         )
+
+        // REPEAT_SINGLE detection: capture the live loop-state from the MediaSession
+        // loop adapter so the auto-advance monitor knows when to crossfade the song
+        // onto itself instead of advancing the queue.  Graceful: if the adapter isn't
+        // found, repeat-single simply isn't detected (crossfade behaves as before).
+        runCatching {
+            LoopStateAdapterFingerprint.method.addInstruction(
+                0,
+                " invoke-static/range { p1 .. p1 }, $EXTENSION_CLASS->" +
+                        "onLoopStateChanged(Ljava/lang/Object;)V"
+            )
+        }.onFailure {
+            log.warning("Loop-state adapter not found — REPEAT_SINGLE " +
+                    "crossfade disabled (#repeat): ${it.message}")
+        }
 
         val musicActivityClass = MusicActivityOnCreateFingerprint.classDef
         musicActivityClass.methods.first { it.name == "onStop" && it.parameterTypes.isEmpty() }
-            .addInstructions(
+            .addInstruction(
                 0,
-                """
-                    invoke-static {}, $EXTENSION_CLASS->onActivityStop()V
-                """
+                "invoke-static {}, $EXTENSION_CLASS->onActivityStop()V"
             )
         musicActivityClass.methods.first { it.name == "onStart" && it.parameterTypes.isEmpty() }
-            .addInstructions(
+            .addInstruction(
                 0,
-                """
-                    invoke-static {}, $EXTENSION_CLASS->onActivityStart()V
-                """
+                "invoke-static {}, $EXTENSION_CLASS->onActivityStart()V"
             )
         // Hook onDestroy so we can release in-flight crossfade state when the
         // user swipe-clears from recents (process may survive via foreground
         // service; without cleanup our statics inherit orphaned player refs
         // into the next activity instance).
-        musicActivityClass.methods.firstOrNull { it.name == "onDestroy" && it.parameterTypes.isEmpty() }
-            ?.addInstructions(
+        musicActivityClass.methods.first { it.name == "onDestroy" && it.parameterTypes.isEmpty() }
+            .addInstruction(
                 0,
-                """
-                    invoke-static {}, $EXTENSION_CLASS->onActivityDestroy()V
-                """,
+                "invoke-static {}, $EXTENSION_CLASS->onActivityDestroy()V"
             )
 
         val coordinatorClass = PlayNextInQueueFingerprint.classDef
@@ -325,7 +395,7 @@ val crossfadePatch = bytecodePatch(
         val sessionFieldRef = playNextMethod.implementation!!.instructions
             .filterIsInstance<ReferenceInstruction>()
             .first { it.opcode == Opcode.IGET_OBJECT }
-            .reference as FieldReference
+            .getReference<FieldReference>()!!
         val sessionClass = mutableClassDefBy(sessionFieldRef.type)
 
         val factoryFieldRef = sessionClass.fields.singleOrNull { field ->
@@ -341,16 +411,14 @@ val crossfadePatch = bytecodePatch(
                 "no field whose type declares a ($EXO_PLAYER_TYPE, 3-param) factory method",
         )
         val factoryClass = mutableClassDefBy(factoryFieldRef.type)
-
         val factoryMethod = Fingerprint(
             definingClass = factoryClass.type,
             returnType = EXO_PLAYER_TYPE,
             custom = { method, _ ->
                 method.parameterTypes.size == 3 &&
-                    method.parameterTypes[2].toString() == "I"
+                        method.parameterTypes[2].toString() == "I"
             }
         ).method
-
         // ExoPlayer concrete impl - fingerprinted via the unique "ExoPlayerImpl" log tag.
         val exoPlayerImplClass = ExoPlayerImplFingerprint.classDef
         val exoImplMethods = allMethodsInHierarchy(exoPlayerImplClass.type)
@@ -400,8 +468,8 @@ val crossfadePatch = bytecodePatch(
             Fingerprint(
                 custom = { _, classDef ->
                     !AccessFlags.INTERFACE.isSet(classDef.accessFlags)
-                        && !AccessFlags.ABSTRACT.isSet(classDef.accessFlags)
-                        && sharedStateFieldRef.type in classDef.interfaces
+                            && !AccessFlags.ABSTRACT.isSet(classDef.accessFlags)
+                            && sharedStateFieldRef.type in classDef.interfaces
                 }
             ).classDef
         } else {
@@ -412,7 +480,6 @@ val crossfadePatch = bytecodePatch(
             it.type !in knownFieldTypes && it.type != sharedStateFieldRef.type
         }
         val sharedCallbackInterfaceClass = classDefBy(sharedCallbackFieldRef.type)
-
         // Same for shared callback - resolve abstract/interface to concrete.
         val sharedCallbackClass = if (
             AccessFlags.INTERFACE.isSet(sharedCallbackInterfaceClass.accessFlags)
@@ -421,8 +488,8 @@ val crossfadePatch = bytecodePatch(
             Fingerprint(
                 custom = { _, classDef ->
                     !AccessFlags.INTERFACE.isSet(classDef.accessFlags)
-                        && !AccessFlags.ABSTRACT.isSet(classDef.accessFlags)
-                        && (sharedCallbackFieldRef.type in classDef.interfaces
+                            && !AccessFlags.ABSTRACT.isSet(classDef.accessFlags)
+                            && (sharedCallbackFieldRef.type in classDef.interfaces
                             || classDef.superclass == sharedCallbackFieldRef.type)
                 }
             ).classDef
@@ -465,11 +532,13 @@ val crossfadePatch = bytecodePatch(
         val videoSurfaceClass = Fingerprint(
             custom = { _, classDef ->
                 !AccessFlags.INTERFACE.isSet(classDef.accessFlags)
-                    && classDef.fields.any { it.type == EXO_PLAYER_TYPE }
-                    && coordinatorClass.fields.any { it.type == classDef.type }
-                    && classDef.type !in knownFieldTypes
-                    && classDef.type != sharedStateFieldRef.type
-                    && classDef.type != sharedCallbackFieldRef.type
+                        && classDef.fields.any {
+                    it.type == EXO_PLAYER_TYPE
+                }
+                        && coordinatorClass.fields.map { it.type }.any { it == classDef.type }
+                        && classDef.type !in knownFieldTypes
+                        && classDef.type != sharedStateFieldRef.type
+                        && classDef.type != sharedCallbackFieldRef.type
             }
         ).classDef
         val videoSurfaceField = coordinatorClass.fields.first { it.type == videoSurfaceClass.type }
@@ -593,13 +662,11 @@ val crossfadePatch = bytecodePatch(
             returnType = "V",
             parameters = listOf("F"),
         ).method.name
-
         val setPlayWhenReadyName = Fingerprint(
             definingClass = playerInterfaceType,
             returnType = "V",
             parameters = listOf("Z"),
         ).method.name
-
         val releaseName = Fingerprint(
             definingClass = EXO_PLAYER_TYPE,
             returnType = "V",
@@ -608,41 +675,40 @@ val crossfadePatch = bytecodePatch(
                 !AccessFlags.CONSTRUCTOR.isSet(method.accessFlags)
             }
         ).method.name
-
         // PlaybackInfo class (crf) - field on ExoPlayer impl hierarchy with >=3 int + >=1 long fields
         // and no interfaces (rules out the inner engine handler cqb which also matches field counts).
         val exoImplFields = allFieldsInHierarchy(exoPlayerImplClass.type)
         val playbackInfoClass = Fingerprint(
             custom = { _, classDef ->
                 classDef.interfaces.isEmpty()
-                    && classDef.fields.count { it.type == "I" } >= 3
-                    && classDef.fields.count { it.type == "J" } >= 1
-                    && exoImplFields.any { it.type == classDef.type }
+                        && classDef.fields.count { it.type == "I" } >= 3
+                        && classDef.fields.count { it.type == "J" } >= 1
+                        && exoImplFields.map { it.type }
+                    .any { it == classDef.type }
             }
         ).classDef
         val playbackStateFieldName = playbackInfoClass.fields.first { it.type == "I" }.name
-
         // getPlaybackState - ()I on the ExoPlayer impl hierarchy that reads PlaybackInfo + first int field.
         // Uses Option A: no definingClass, custom checks hierarchy membership.
         val getPlaybackStateName = Fingerprint(
             returnType = "I",
             parameters = emptyList(),
             custom = { method, classDef ->
-                isInHierarchyOf(classDef.type, exoPlayerImplClass.type)
-                    && method.implementation?.instructions?.let { instructions ->
-                        instructions.any { insn ->
-                            insn is ReferenceInstruction
+                isInHierarchyOf(classDef.type, startType = exoPlayerImplClass.type)
+                        // TODO: Replace this with instruction filters
+                        && method.implementation?.instructions?.let { instructions ->
+                    instructions.any { insn ->
+                        insn is ReferenceInstruction
                                 && insn.opcode == Opcode.IGET_OBJECT
                                 && (insn.reference as? FieldReference)?.type == playbackInfoClass.type
-                        } && instructions.any { insn ->
-                            insn is ReferenceInstruction
+                    } && instructions.any { insn ->
+                        insn is ReferenceInstruction
                                 && insn.opcode == Opcode.IGET
                                 && (insn.reference as? FieldReference)?.name == playbackStateFieldName
-                        }
-                    } ?: false
+                    }
+                } ?: false
             }
         ).method.name
-
 
         val getDurationName = Fingerprint(
             returnType = "J",
@@ -652,7 +718,7 @@ val crossfadePatch = bytecodePatch(
                 literal(-9223372036854775807L)
             ),
             custom = { _, classDef ->
-                isInHierarchyOf(classDef.type, exoPlayerImplClass.type)
+                isInHierarchyOf(classDef.type, startType = exoPlayerImplClass.type)
             }
         ).method.name
 
@@ -661,15 +727,15 @@ val crossfadePatch = bytecodePatch(
             returnType = "J",
             parameters = emptyList(),
             custom = { method, classDef ->
-                isInHierarchyOf(classDef.type, exoPlayerImplClass.type)
-                    && method.name != getDurationName
-                    && method.implementation?.instructions?.any { insn ->
-                        insn is ReferenceInstruction
+                isInHierarchyOf(classDef.type, startType = exoPlayerImplClass.type)
+                        && method.name != getDurationName
+                        && method.implementation?.instructions?.any { insn ->
+                    insn is ReferenceInstruction
                             && (insn.opcode == Opcode.INVOKE_DIRECT || insn.opcode == Opcode.INVOKE_VIRTUAL)
                             && insn.reference.toString().let { ref ->
-                                ref.contains("(${playbackInfoClass.type})") && ref.endsWith("J")
-                            }
-                    } ?: false
+                        ref.contains("(${playbackInfoClass.type})") && ref.endsWith("J")
+                    }
+                } ?: false
             }
         ).method.name
 
@@ -679,10 +745,12 @@ val crossfadePatch = bytecodePatch(
             accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
             custom = { _, classDef ->
                 !classDef.type.contains("ExoPlayer")
-                    && classDef.fields.any { it.type == "Ljava/util/concurrent/CopyOnWriteArraySet;" }
-                    && exoPlayerImplClass.fields.any { it.type == classDef.type }
+                        && classDef.fields.any { it.type == "Ljava/util/concurrent/CopyOnWriteArraySet;" }
+                        && exoPlayerImplClass.fields.map { it.type }
+                    .any { it == classDef.type }
             }
         ).classDef
+
         val listenerSetInWrapper = listenerWrapperClass.fields.first {
             it.type == "Ljava/util/concurrent/CopyOnWriteArraySet;"
         }
@@ -820,18 +888,37 @@ val crossfadePatch = bytecodePatch(
                 } == true
         }
 
-        // Delegate base class (atux) - implements the playerChain interface
-        // and has a self-typed delegate field (the decorator pattern base).
+        // Delegate chain classes - every class that DIRECTLY implements the
+        // playerChain interface AND directly holds a self-typed "next" field
+        // (the decorator pattern).  The runtime delegate-walk in
+        // getCoordinatorFromAtad hops chain.patch_getDelegate() until it reaches
+        // a non-DelegateAccess (the coordinator), so EVERY decorator class in the
+        // chain must carry DelegateAccess.
+        //
+        // 9.10-9.21: a single recursively-wrapped decorator (atux/auyx) - one match.
+        // 9.23+: multiple distinct decorators (e.g. avel + avfa) - all must match,
+        // else the walk dies on the first uncovered hop (#9.23 "Traversed 0 → avfa").
+        // Subclasses that only INHERIT the interface+field (e.g. avfg extends avel)
+        // are intentionally NOT matched here - they inherit DelegateAccess and the
+        // delegate field from their injected base.
         val playerChainInterfaceType = playerChainField.type
-        val delegateBaseClass = Fingerprint(
-            custom = { _, classDef ->
-                classDef.type != playerChainInterfaceType
-                    && !AccessFlags.INTERFACE.isSet(classDef.accessFlags)
-                    && playerChainInterfaceType in classDef.interfaces
-                    && classDef.fields.any { it.type == playerChainInterfaceType }
+        val delegateClasses = mutableListOf<Pair<MutableClass, Field>>()
+        classDefForEach { classDef ->
+            if (classDef.type != playerChainInterfaceType &&
+                !AccessFlags.INTERFACE.isSet(classDef.accessFlags) &&
+                playerChainInterfaceType in classDef.interfaces &&
+                classDef.fields.any { it.type == playerChainInterfaceType }
+            ) {
+                val field = classDef.fields.first { it.type == playerChainInterfaceType }
+                delegateClasses.add(mutableClassDefBy(classDef.type) to field)
             }
-        ).classDef
-        val delegateField = delegateBaseClass.fields.first { it.type == playerChainInterfaceType }
+        }
+        if (delegateClasses.isEmpty()) {
+            error(
+                "No delegate chain class implementing $playerChainInterfaceType " +
+                    "with a self-typed field was found"
+            )
+        }
 
         // Listener element class (cat) - stored inside cau's CopyOnWriteArraySet.
         // Found by looking for NEW_INSTANCE instructions in cau's methods.
@@ -874,7 +961,7 @@ val crossfadePatch = bytecodePatch(
                 videoSurface   = ${videoSurfaceClass.type}
                 medialibPlayer = ${medialibPlayerClass.type}
                 videoToggle    = ${videoToggleClass.type}
-                delegateBase   = ${delegateBaseClass.type} (field: $delegateField)
+                delegateChain  = ${delegateClasses.joinToString { "${it.first.type}(${it.second})" }}
                 listenerElem   = ${listenerElementClass.type} (field: $listenerElementField)
                 timelineField  = $timelineField (bxk type: $bxkType)
                 cqbField       = $cqbField (definingClass: ${cqbField.definingClass})
@@ -1377,7 +1464,7 @@ val crossfadePatch = bytecodePatch(
         // the Runnable from ever being posted, leaving cwh.b intact.
         if (is_9_00_or_greater && eventDispatchField9x != null && forwardingPlayerField9x != null) {
             val cgdType = eventDispatchField9x.type
-            val cwhLctrType = forwardingPlayerField9x.type  // = Lctr interface type
+            val cwhLctrType = forwardingPlayerField9x.type
             try {
                 // Find cwh.U()V: the method named "U" with no params/void return on the concrete
                 // class that (a) implements the Lctr interface and (b) has a non-static Lcgd field.
@@ -1392,16 +1479,17 @@ val crossfadePatch = bytecodePatch(
                             f.type == cgdType && !AccessFlags.STATIC.isSet(f.accessFlags)
                         }
                     }
-                ).method.addInstructions(
-                    0,
-                    """
-                        sget-boolean v0, $EXTENSION_CLASS->suppressCwhU:Z
-                        if-eqz v0, :no_suppress
-                        return-void
-                        :no_suppress
-                        nop
-                    """,
                 )
+                    .method.addInstructions(
+                        0,
+                        """
+                            sget-boolean v0, $EXTENSION_CLASS->suppressCwhU:Z
+                            if-eqz v0, :no_suppress
+                            return-void
+                            :no_suppress
+                            nop
+                        """
+                    )
                 log.fine { "9.x: injected suppressCwhU into cwh.U()V (lctrType=$cwhLctrType, cgdType=$cgdType)" }
             } catch (e: Exception) {
                 log.warning("9.x: suppressCwhU injection failed: ${e.message}")
@@ -1544,6 +1632,34 @@ val crossfadePatch = bytecodePatch(
                 )
             }
         )
+        // patch_loadVideoWith: re-issue loadVideo (atzq.o) with a cached descriptor
+        // (the aues PlaybackStartDescriptor).  Used by the REPEAT_SINGLE path to load
+        // the SAME song onto the freshly-swapped crossfade player (crossfade-onto-self)
+        // instead of advancing the queue.  The Object param is cast to the loadVideo
+        // parameter type (the aues descriptor interface).
+        val loadVideoMethod = LoadVideoFingerprint.method
+        val loadVideoDescriptorType = loadVideoMethod.parameterTypes.first().toString()
+        medialibPlayerClass.methods.add(
+            ImmutableMethod(
+                medialibPlayerClass.type,
+                "patch_loadVideoWith",
+                listOf(ImmutableMethodParameter("Ljava/lang/Object;", null, null)),
+                "V",
+                AccessFlags.PUBLIC.value or AccessFlags.FINAL.value,
+                null,
+                null,
+                MutableMethodImplementation(2)
+            ).toMutable().apply {
+                addInstructions(
+                    0,
+                    """
+                        check-cast p1, $loadVideoDescriptorType
+                        invoke-virtual { p0, p1 }, $loadVideoMethod
+                        return-void
+                    """
+                )
+            }
+        )
 
         // --- VideoToggleAccess on nba ---
         videoToggleClass.interfaces.add(VIDEO_TOGGLE_INTERFACE)
@@ -1564,7 +1680,6 @@ val crossfadePatch = bytecodePatch(
             }
         ).method
         val stateType = getStateMethod.returnType
-
         // isAudioMode is the static (stateType)Z method with MORE enum
         // comparisons (checks 3 audio-only states vs 2 video states).
         // We pick the longest implementation among the static (T)Z methods.
@@ -1874,10 +1989,15 @@ val crossfadePatch = bytecodePatch(
                 """,
             ) ?: error("nba <init> not found in ${videoToggleClass.type}")
 
-        // --- DelegateAccess on atux (delegate chain base class) ---
-        delegateBaseClass.apply {
-            interfaces.add(DELEGATE_INTERFACE)
-            addFieldGetter("patch_getDelegate", delegateField)
+        // --- DelegateAccess on every delegate chain class ---
+        // One class on 9.10-9.21 (byte-for-byte identical to the old single-class
+        // injection); multiple on 9.23+ (covers e.g. avel + avfa) so the runtime
+        // delegate-walk can traverse every hop to the coordinator.
+        for ((delegateClass, delegateField) in delegateClasses) {
+            delegateClass.apply {
+                interfaces.add(DELEGATE_INTERFACE)
+                addFieldGetter("patch_getDelegate", delegateField)
+            }
         }
 
         // --- ListenerWrapperAccess on cat (listener element class) ---

@@ -2,7 +2,7 @@
  * Copyright 2026 Morphe.
  * https://github.com/MorpheApp/morphe-patches
  *
- * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to this code.
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to this code.
  */
 package app.morphe.extension.reddit.settings.preference.categories;
 
@@ -14,8 +14,8 @@ import android.preference.PreferenceScreen;
 import app.morphe.extension.reddit.patches.DisableModernHomePatch;
 import app.morphe.extension.reddit.patches.DisableScreenshotPopupPatch;
 import app.morphe.extension.reddit.patches.HideAskButtonPatch;
-import app.morphe.extension.reddit.patches.HideRecommendedCommunitiesShelf;
-import app.morphe.extension.reddit.patches.HideTrendingTodayShelfPatch;
+import app.morphe.extension.reddit.patches.HideCommunitiesShelf;
+import app.morphe.extension.reddit.patches.HideTrendingShelvesPatch;
 import app.morphe.extension.reddit.patches.RemoveSubRedditDialogPatch;
 import app.morphe.extension.reddit.patches.ShowViewCountPatch;
 import app.morphe.extension.reddit.settings.Settings;
@@ -33,8 +33,8 @@ public class LayoutPreferenceCategory extends ConditionalPreferenceCategory {
         return DisableModernHomePatch.isPatchIncluded() ||
                 DisableScreenshotPopupPatch.isPatchIncluded() ||
                 HideAskButtonPatch.isPatchIncluded() ||
-                HideRecommendedCommunitiesShelf.isPatchIncluded() ||
-                HideTrendingTodayShelfPatch.isPatchIncluded() ||
+                HideCommunitiesShelf.isPatchIncluded() ||
+                HideTrendingShelvesPatch.isPatchIncluded() ||
                 RemoveSubRedditDialogPatch.isPatchIncluded();
     }
 
@@ -61,17 +61,17 @@ public class LayoutPreferenceCategory extends ConditionalPreferenceCategory {
             ));
         }
 
-        if (HideRecommendedCommunitiesShelf.isPatchIncluded()) {
+        if (HideCommunitiesShelf.isPatchIncluded()) {
             addPreference(new BooleanSettingPreference(
                     context,
-                    Settings.HIDE_RECOMMENDED_COMMUNITIES_SHELF
+                    Settings.HIDE_COMMUNITIES_SHELF
             ));
         }
 
-        if (HideTrendingTodayShelfPatch.isPatchIncluded()) {
+        if (HideTrendingShelvesPatch.isPatchIncluded()) {
             addPreference(new BooleanSettingPreference(
                     context,
-                    Settings.HIDE_TRENDING_TODAY_SHELF
+                    Settings.HIDE_TRENDING_SHELVES
             ));
         }
 

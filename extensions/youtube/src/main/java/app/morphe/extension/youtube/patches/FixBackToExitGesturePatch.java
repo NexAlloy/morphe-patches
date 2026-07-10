@@ -5,7 +5,7 @@
  * Original hard forked code:
  * https://github.com/ReVanced/revanced-patches/commit/724e6d61b2ecd868c1a9a37d465a688e83a74799
  *
- * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to Morphe contributions.
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
  */
 
 package app.morphe.extension.youtube.patches;
@@ -35,10 +35,14 @@ public class FixBackToExitGesturePatch {
 
     /**
      * Handle the event after clicking the back button.
-     *
-     * @param activity The activity, the app is launched with to finish.
      */
-    public static void onBackPressed(Activity activity) {
+    public static void onBackPressed() {
+        Activity activity = Utils.getActivity();
+
+        if (activity == null) {
+            return;
+        }
+
         if (isTopView) {
             long now = System.currentTimeMillis();
 

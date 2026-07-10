@@ -2,7 +2,7 @@
  * Copyright 2026 Morphe.
  * https://github.com/MorpheApp/morphe-patches
  *
- * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to this code.
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to this code.
  */
 
 package app.morphe.patches.music.layout.startpage
@@ -19,6 +19,10 @@ import app.morphe.patches.music.shared.MusicActivityOnCreateFingerprint
 import app.morphe.patches.shared.misc.settings.preference.ListPreference
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
+import com.android.tools.smali.dexlib2.iface.reference.FieldReference
+import com.android.tools.smali.dexlib2.iface.reference.StringReference
 
 private const val EXTENSION_CLASS = "Lapp/morphe/extension/music/patches/ChangeStartPagePatch;"
 
@@ -46,23 +50,23 @@ val changeStartPagePatch = bytecodePatch(
                 val instructions = implementation!!.instructions.toList()
                 val defaultBrowseIdIndex = instructions.indexOfFirst { instr ->
                     instr.opcode == Opcode.CONST_STRING &&
-                            (instr as? com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction)
+                            (instr as? ReferenceInstruction)
                                 ?.reference.let { ref ->
-                                    (ref as? com.android.tools.smali.dexlib2.iface.reference.StringReference)?.string == "FEmusic_home"
+                                    (ref as? StringReference)?.string == "FEmusic_home"
                                 }
                 }
 
                 val browseIdIndex = instructions.withIndex().reversed().firstOrNull { (index, instr) ->
                     index < defaultBrowseIdIndex &&
                             instr.opcode == Opcode.IGET_OBJECT &&
-                            (instr as? com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction)
+                            (instr as? ReferenceInstruction)
                                 ?.reference.let { ref ->
-                                    (ref as? com.android.tools.smali.dexlib2.iface.reference.FieldReference)?.type == "Ljava/lang/String;"
+                                    (ref as? FieldReference)?.type == "Ljava/lang/String;"
                                 }
                 }?.index ?: -1
 
                 if (browseIdIndex != -1) {
-                    val browseIdRegister = (instructions[browseIdIndex] as com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction).registerA
+                    val browseIdRegister = (instructions[browseIdIndex] as TwoRegisterInstruction).registerA
                     addInstructions(
                         browseIdIndex + 1,
                         "invoke-static/range { v$browseIdRegister .. v$browseIdRegister }, $EXTENSION_CLASS->overrideBrowseId(Ljava/lang/String;)Ljava/lang/String;\n" +

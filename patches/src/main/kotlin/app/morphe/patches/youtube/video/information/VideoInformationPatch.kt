@@ -5,7 +5,7 @@
  * Original hard forked code:
  * https://github.com/ReVanced/revanced-patches/commit/724e6d61b2ecd868c1a9a37d465a688e83a74799
  *
- * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to Morphe contributions.
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
  */
 
 package app.morphe.patches.youtube.video.information
@@ -24,6 +24,7 @@ import app.morphe.patcher.util.proxy.mutableTypes.MutableClass
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
 import app.morphe.patcher.util.smali.toInstructions
+import app.morphe.patches.shared.misc.videoinformation.PlayerControllerSetTimeReferenceFingerprint
 import app.morphe.patches.youtube.misc.extension.sharedExtensionPatch
 import app.morphe.patches.youtube.misc.playservice.is_20_49_or_greater
 import app.morphe.patches.youtube.misc.playservice.versionCheckPatch
@@ -115,7 +116,9 @@ val videoInformationPatch = bytecodePatch(
     )
 
     execute {
-        val playerInitMethod = PlayerInitFingerprint.classDef.methods.first { MethodUtil.isConstructor(it) }
+        val playerInitMethod = PlayerInitFingerprint.classDef.methods.first {
+            MethodUtil.isConstructor(it)
+        }
 
         playerInitMethodRef = WeakReference(playerInitMethod)
 
@@ -175,23 +178,23 @@ val videoInformationPatch = bytecodePatch(
             }
         }
 
-        val playerStatusFingerprint = Fingerprint(
-            classFingerprint = PlayerInitFingerprint,
-            accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
-            returnType = "V",
-            parameters = listOf(PlayerStatusEnumFingerprint.originalClassDef.type),
-            filters = listOf(
-                // The opcode for the first index of the method is sget-object.
-                // Even in sufficiently old versions, such as YT 17.34, the opcode for the first index is sget-object.
-                opcode(Opcode.SGET_OBJECT),
-                methodCall(
-                    definingClass = "Lj$/time/Instant;",
-                    name = "plus"
+        playerStatusMethodRef = WeakReference(
+            Fingerprint(
+                classFingerprint = PlayerInitFingerprint,
+                accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+                returnType = "V",
+                parameters = listOf(PlayerStatusEnumFingerprint.originalClassDef.type),
+                filters = listOf(
+                    // The opcode for the first index of the method is sget-object.
+                    // Even in sufficiently old versions, such as YT 17.34, the opcode for the first index is sget-object.
+                    opcode(Opcode.SGET_OBJECT),
+                    methodCall(
+                        definingClass = "Lj$/time/Instant;",
+                        name = "plus"
+                    )
                 )
-            )
+            ).method
         )
-
-        playerStatusMethodRef = WeakReference(playerStatusFingerprint.method)
 
         /*
          * Inject call for video IDs
@@ -218,8 +221,8 @@ val videoInformationPatch = bytecodePatch(
          * Set the video time method
          */
         timeMethodRef = WeakReference(
-            PlayerControllerSetTimeReferenceFingerprint.instructionMatches.first()
-                .getMethodCalled()
+            PlayerControllerSetTimeReferenceFingerprint
+                .instructionMatches.first().getMethodCalled()
         )
 
         val setPlaybackSpeedMethodReference: MethodReference
@@ -723,4 +726,14 @@ fun userSelectedPlaybackSpeedHook(targetMethodClass: String, targetMethodName: S
         speedSelectionInsertIndex++,
         "invoke-static { v$speedSelectionValueRegister }, $targetMethodClass->$targetMethodName(F)V",
     )
+}
+
+fun playerStatusHook(targetMethodClass: String, targetMethodName: String) {
+    playerStatusMethodRef.get()!!.apply {
+        val insertIndex = indexOfFirstInstructionOrThrow(Opcode.SGET_OBJECT) + 1
+        addInstruction(
+            insertIndex,
+            "invoke-static/range { p1 .. p1 }, $targetMethodClass->$targetMethodName(Ljava/lang/Enum;)V"
+        )
+    }
 }

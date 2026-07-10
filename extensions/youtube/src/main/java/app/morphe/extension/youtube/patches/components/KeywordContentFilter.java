@@ -16,7 +16,7 @@
  * https://github.com/MorpheApp/morphe-patches/commit/f5371ca998c019609c2b5558b3408ab1fec065c8
  * https://github.com/MorpheApp/morphe-patches/commit/017eac71a3f9542b8ad6221e3600797d6b97fae4
  *
- * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to Morphe contributions.
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
  */
 
 package app.morphe.extension.youtube.patches.components;
@@ -46,9 +46,11 @@ import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.StringTrieSearch;
 import app.morphe.extension.shared.TrieSearch;
 import app.morphe.extension.shared.Utils;
-import app.morphe.extension.youtube.patches.components.LithoFilterPatch.BufferAsciiStrings;
+import app.morphe.extension.shared.patches.components.BufferAsciiStrings;
+import app.morphe.extension.shared.patches.components.ContextInterface;
+import app.morphe.extension.shared.patches.components.Filter;
+import app.morphe.extension.shared.patches.components.StringFilterGroup;
 import app.morphe.extension.youtube.settings.Settings;
-import app.morphe.extension.youtube.shared.ConversionContext.ContextInterface;
 import app.morphe.extension.youtube.shared.NavigationBar;
 import app.morphe.extension.youtube.shared.PlayerType;
 
@@ -146,6 +148,11 @@ public final class KeywordContentFilter extends Filter {
             "modern_type_shelf_header_content.e",
             "shorts_lockup_cell.e", // Part of 'shorts_shelf_carousel.e'
             "video_card.e" // Shorts that appear in a horizontal shelf.
+    );
+
+    private final StringFilterGroup commentsFilter = new StringFilterGroup(
+            Settings.HIDE_KEYWORD_CONTENT_COMMENTS,
+                "comment_thread.eml"
     );
 
     /**
@@ -532,7 +539,7 @@ public final class KeywordContentFilter extends Filter {
 
     public KeywordContentFilter() {
         // Keywords are parsed on first call to isFiltered()
-        addPathCallbacks(startsWithFilter, containsFilter);
+        addPathCallbacks(startsWithFilter, containsFilter, commentsFilter);
     }
 
     private boolean hideKeywordSettingIsActive() {
@@ -598,15 +605,15 @@ public final class KeywordContentFilter extends Filter {
     }
 
     @Override
-    boolean isFiltered(ContextInterface contextInterface,
-                       String identifier,
-                       String accessibility,
-                       String path,
-                       byte[] buffer,
-                       BufferAsciiStrings asciiStrings,
-                       StringFilterGroup matchedGroup,
-                       FilterContentType contentType,
-                       int contentIndex) {
+    public boolean isFiltered(ContextInterface contextInterface,
+                              String identifier,
+                              String accessibility,
+                              String path,
+                              byte[] buffer,
+                              BufferAsciiStrings asciiStrings,
+                              StringFilterGroup matchedGroup,
+                              FilterContentType contentType,
+                              int contentIndex) {
         if (contentIndex != 0 && matchedGroup == startsWithFilter) {
             return false;
         }
@@ -618,7 +625,7 @@ public final class KeywordContentFilter extends Filter {
             parseKeywords();
         }
 
-        if (!hideKeywordSettingIsActive()) return false;
+        if (matchedGroup != commentsFilter && !hideKeywordSettingIsActive()) return false;
 
         if (exceptions.matches(path)) {
             return false; // Do not update statistics.

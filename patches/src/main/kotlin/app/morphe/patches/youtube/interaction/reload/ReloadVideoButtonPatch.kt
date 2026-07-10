@@ -2,7 +2,7 @@
  * Copyright 2026 Morphe.
  * https://github.com/MorpheApp/morphe-patches
  *
- * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to Morphe contributions.
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
  */
 
 package app.morphe.patches.youtube.interaction.reload
@@ -33,6 +33,7 @@ import com.android.tools.smali.dexlib2.builder.MutableMethodImplementation
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethod
+import com.android.tools.smali.dexlib2.immutable.ImmutableMethodParameter
 import com.android.tools.smali.dexlib2.util.MethodUtil
 
 private val reloadVideoButtonResourcePatch = resourcePatch {
@@ -42,7 +43,6 @@ private val reloadVideoButtonResourcePatch = resourcePatch {
     )
 
     execute {
-
         copyResources(
             "reloadbutton",
             ResourceGroup(
@@ -55,10 +55,10 @@ private val reloadVideoButtonResourcePatch = resourcePatch {
 }
 
 private const val EXTENSION_CLASS =
-    "Lapp/morphe/extension/youtube/patches/ReloadVideoPatch;"
+    "Lapp/morphe/extension/youtube/patches/LoadVideoPatch;"
 
 private const val EXTENSION_PLAYER_INTERFACE =
-    $$"Lapp/morphe/extension/youtube/patches/ReloadVideoPatch$PlayerInterface;"
+    $$"Lapp/morphe/extension/youtube/patches/LoadVideoPatch$PlayerInterface;"
 
 private const val EXTENSION_BUTTON =
     "Lapp/morphe/extension/youtube/videoplayer/ReloadVideoButton;"
@@ -104,6 +104,8 @@ val reloadVideoButtonPatch = bytecodePatch(
             .instructionMatches.last()
             .getInstruction<ReferenceInstruction>()
             .getReference<MethodReference>()!!
+        val openNewVideoParcelableMethod = OpenNewVideoIntentParcelableFingerprint.method
+        val openNewVideoParcelableDefiningClass = openNewVideoParcelableMethod.definingClass
 
         mutableClassDefBy(dismissPlayerInnerMethod.definingClass).apply {
             // Add interface and helper methods to allow extension code to call obfuscated methods.
@@ -129,6 +131,27 @@ val reloadVideoButtonPatch = bytecodePatch(
                     )
                 }
             )
+            methods.add(
+                ImmutableMethod(
+                    type,
+                    "patch_getIntentParcelable",
+                    listOf(ImmutableMethodParameter("Landroid/content/Intent;", null, null)),
+                    "Landroid/os/Parcelable;",
+                    AccessFlags.PUBLIC.value or AccessFlags.FINAL.value,
+                    null,
+                    null,
+                    MutableMethodImplementation(3),
+                ).toMutable().apply {
+                    addInstructions(
+                        0,
+                        """
+                            invoke-static { p1 }, $openNewVideoParcelableDefiningClass->${openNewVideoParcelableMethod.name}(Landroid/content/Intent;)$openNewVideoParcelableDefiningClass
+                            move-result-object v0
+                            return-object v0
+                        """
+                    )
+                }
+            )
 
             methods.single { method ->
                 MethodUtil.isConstructor(method)
@@ -141,5 +164,10 @@ val reloadVideoButtonPatch = bytecodePatch(
                 )
             }
         }
+
+        BackButtonFinishActivityOnNewVideoIntentFingerprint.method.addInstruction(
+            0,
+            "return-void"
+        )
     }
 }

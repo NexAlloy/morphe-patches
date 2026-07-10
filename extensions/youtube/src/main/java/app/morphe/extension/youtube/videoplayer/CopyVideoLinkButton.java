@@ -5,7 +5,7 @@
  * Original hard forked code:
  * https://github.com/ReVanced/revanced-patches/commit/724e6d61b2ecd868c1a9a37d465a688e83a74799
  *
- * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to Morphe contributions.
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
  */
 
 package app.morphe.extension.youtube.videoplayer;
@@ -115,7 +115,7 @@ public class CopyVideoLinkButton {
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2
                     || (withTimestamp && currentVideoTimeInSeconds > 0)) {
                 Utils.showToastShort(withTimestamp && currentVideoTimeInSeconds > 0
-                        ? str("morphe_share_copy_link_button_timestamp_success")
+                        ? str("morphe_share_copy_link_with_timestamp_button_success")
                         : str("morphe_share_copy_link_button_success"));
             }
         } catch (Exception e) {

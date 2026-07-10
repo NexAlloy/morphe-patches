@@ -5,7 +5,7 @@
  * Original hard forked code:
  * https://github.com/ReVanced/revanced-patches/commit/724e6d61b2ecd868c1a9a37d465a688e83a74799
  *
- * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to Morphe contributions.
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
  */
 
 package app.morphe.extension.youtube.settings;
@@ -32,21 +32,13 @@ import app.morphe.extension.youtube.settings.search.YouTubeSearchViewController;
  * Hooks {@link GoogleApiActivity} to inject a custom {@link YouTubePreferenceFragment}
  * with a toolbar and search functionality.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings({"deprecation", "RedundantSuppression"})
 public class YouTubeActivityHook extends BaseActivityHook {
 
-    /**
-     * How much time has passed since the first launch of the app. Simple check to prevent
-     * forcing bold icons on first launch where the settings menu is partially broken
-     * due to missing icon resources the client has not yet received.
-     */
-    private static final long MINIMUM_TIME_AFTER_FIRST_LAUNCH_BEFORE_ALLOWING_BOLD_ICONS = 30 * 1000; // 30 seconds.
-
-    public static final boolean USE_BOLD_ICONS = VersionCheckPatch.IS_20_31_OR_GREATER
-            && !Settings.RESTORE_OLD_SETTINGS_MENUS.get()
-            && (System.currentTimeMillis() - Settings.FIRST_TIME_APP_LAUNCHED.get())
-                > MINIMUM_TIME_AFTER_FIRST_LAUNCH_BEFORE_ALLOWING_BOLD_ICONS
-            && !SpoofAppVersionPatch.isSpoofingToLessThan("20.31.00");
+    public static final boolean USE_BOLD_ICONS = Settings.SETTINGS_INITIALIZED.get()
+            && VersionCheckPatch.IS_20_31_OR_GREATER
+            && !SpoofAppVersionPatch.isSpoofingToLessThan("20.31.00")
+            && !Settings.RESTORE_OLD_SETTINGS_MENUS.get();
 
     static {
         Utils.setAppIsUsingBoldIcons(USE_BOLD_ICONS);
