@@ -20,15 +20,13 @@ import androidx.annotation.Nullable;
 
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
+import app.morphe.extension.shared.settings.SharedYouTubeSettings;
 import app.morphe.extension.youtube.patches.VideoInformation;
 import app.morphe.extension.youtube.settings.Settings;
 
 @SuppressWarnings("unused")
 public class CopyVideoLinkButton {
     private static final boolean COPY_VIDEO_LINK_WITH_TIMESTAMP_BUTTON = Settings.COPY_VIDEO_LINK_WITH_TIMESTAMP_BUTTON.get();
-
-    @Nullable
-    private static LegacyPlayerControlButton legacy;
 
     /**
      * Injection point.
@@ -62,14 +60,14 @@ public class CopyVideoLinkButton {
                 return;
             }
 
-            legacy = new LegacyPlayerControlButton(
+            new LegacyPlayerControlButton(
                     controlsView,
                     "morphe_copy_video_link_button",
                     null,
                     COPY_VIDEO_LINK_WITH_TIMESTAMP_BUTTON
                             ? "morphe_yt_copy_timestamp"
                             : "morphe_yt_copy",
-                    Settings.COPY_VIDEO_LINK_BUTTON::get,
+                    Settings.COPY_VIDEO_LINK_BUTTON,
                     view -> copyLink(COPY_VIDEO_LINK_WITH_TIMESTAMP_BUTTON),
                     view -> {
                         copyLink(!COPY_VIDEO_LINK_WITH_TIMESTAMP_BUTTON);
@@ -81,30 +79,11 @@ public class CopyVideoLinkButton {
         }
     }
 
-    /**`
-     * injection point.
-     */
-    public static void setVisibilityNegatedImmediate() {
-        if (legacy != null) legacy.setVisibilityNegatedImmediate();
-    }
-
-    /**
-     * injection point.
-     */
-    public static void setVisibilityImmediate(boolean visible) {
-        if (legacy != null) legacy.setVisibilityImmediate(visible);
-    }
-
-    /**
-     * injection point.
-     */
-    public static void setVisibility(boolean visible, boolean animated) {
-        if (legacy != null) legacy.setVisibility(visible, animated);
-    }
-
     public static void copyLink(boolean withTimestamp) {
         try {
-            StringBuilder builder = new StringBuilder("https://youtu.be/");
+            String videoBaseUrl =
+                    SharedYouTubeSettings.REPLACE_LINKS_WITH_SHORTENER.get() ? "https://youtu.be/" : "https://www.youtube.com/watch?v=";
+            StringBuilder builder = new StringBuilder(videoBaseUrl);
             builder.append(VideoInformation.getVideoId());
             final long currentVideoTimeInSeconds = appendCurrentVideoTimeInSeconds(withTimestamp, builder);
 

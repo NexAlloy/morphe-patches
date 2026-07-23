@@ -81,6 +81,7 @@ public final class NavigationBar {
 
     /**
      * Injection point.
+     * custom change
      */
     public static void setToolbar(AppCompatToolbarPatchInterface toolbar) {
         if (toolbar == null) {
@@ -216,6 +217,7 @@ public final class NavigationBar {
 
     /**
      * Injection point.
+     * custom chagne, TODO delete me?
      */
     public static void setLastAppNavigationEnumYou() {
         lastYTNavigationEnumName = NavigationButton.LIBRARY.ytEnumNames.get(0);

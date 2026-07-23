@@ -1,3 +1,13 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-patches
+ *
+ * Original hard forked code:
+ * https://github.com/ReVanced/revanced-patches/commit/724e6d61b2ecd868c1a9a37d465a688e83a74799
+ *
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
+ */
+
 package app.morphe.patches.youtube.video.speed.custom
 
 import app.morphe.patcher.Fingerprint
@@ -10,6 +20,7 @@ import app.morphe.patcher.opcode
 import app.morphe.patcher.string
 import app.morphe.patches.all.misc.resources.ResourceType
 import app.morphe.patches.all.misc.resources.resourceLiteral
+import app.morphe.patches.youtube.shared.InitializePlaybackSpeedValuesFingerprint
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
 
@@ -35,13 +46,8 @@ internal object AudioTrackOldBottomSheetFingerprint : Fingerprint(
     )
 )
 
-internal object GetOldPlaybackSpeedsFingerprint : Fingerprint(
-    parameters = listOf("[L", "I"),
-    strings = listOf("menu_item_playback_speed")
-)
-
 internal object ShowOldPlaybackSpeedMenuFingerprint : Fingerprint(
-    classFingerprint = GetOldPlaybackSpeedsFingerprint,
+    classFingerprint = InitializePlaybackSpeedValuesFingerprint,
     filters = listOf(
         resourceLiteral(ResourceType.STRING, "varispeed_unavailable_message"),
         opcode(Opcode.RETURN_VOID),

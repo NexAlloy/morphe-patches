@@ -14,6 +14,8 @@ import static app.morphe.extension.shared.Utils.getFilterStrings;
 import static app.morphe.extension.youtube.shared.NavigationBar.NavigationButton;
 
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
@@ -66,22 +68,19 @@ public final class LayoutComponentsFilter extends Filter {
     private final StringFilterGroup singleItemInformationPanel;
     private static final AtomicInteger singleItemInformationPanelIndex = new AtomicInteger(-1);
     private final StringFilterGroup expandableMetadata;
-    private final ByteArrayFilterGroup productCardBuffer;
     private final ByteArrayFilterGroup summaryCardBuffer;
     private final StringFilterGroup compactChannelBarInner;
     private final StringFilterGroup compactChannelBarInnerButton;
     private final ByteArrayFilterGroup joinMembershipButton;
     private final StringFilterGroup chipBar;
     private final StringFilterGroup channelProfile;
-    private final StringFilterGroupList channelProfileGroupList;
+    private final StringFilterGroupList channelProfileGroupList = new StringFilterGroupList();
     private final StringFilterGroup videoLabels;
     private final ByteArrayFilterGroupList videoLabelsGroupList = new ByteArrayFilterGroupList();
 
     public enum ExpandableCardStyle {
         SHOW_ALL,
-        HIDE_PRODUCT_ONLY,
         HIDE_SUMMARY_ONLY,
-        HIDE_PRODUCT_AND_SUMMARY,
         HIDE_ALL
     }
 
@@ -124,6 +123,7 @@ public final class LayoutComponentsFilter extends Filter {
                 "images_post_root.e",
                 "images_post_root_slim.e",
                 "images_post_slim.e", // may be obsolete and no longer needed.
+                "options_post_responsive_root.e",
                 "options_post_root.e",
                 "poll_post_responsive_root.e",
                 "poll_post_root.e",
@@ -237,11 +237,6 @@ public final class LayoutComponentsFilter extends Filter {
                 "expandable_metadata"
         );
 
-        productCardBuffer = new ByteArrayFilterGroup(
-                null,
-                "gstatic.com/shopping"
-        );
-
         summaryCardBuffer = new ByteArrayFilterGroup(
                 null,
                 "PAfeedback_genai"
@@ -305,6 +300,11 @@ public final class LayoutComponentsFilter extends Filter {
                 "endorsement_header_footer.e"
         );
 
+        final var videoThumbnail = new StringFilterGroup(
+                Settings.HIDE_VIDEO_THUMBNAIL,
+                "video_lockup_thumbnail.e"
+        );
+
         final var videoTitle = new StringFilterGroup(
                 Settings.HIDE_VIDEO_TITLE,
                 "player_overlay_video_heading.e"
@@ -338,7 +338,6 @@ public final class LayoutComponentsFilter extends Filter {
                 "channel_profile.e",
                 "page_header.e"
         );
-        channelProfileGroupList = new StringFilterGroupList();
         channelProfileGroupList.addAll(
                 new StringFilterGroup(
                         Settings.HIDE_COMMUNITY_BUTTON,
@@ -387,6 +386,7 @@ public final class LayoutComponentsFilter extends Filter {
                 subscriptionsChipBar,
                 surveys,
                 timedReactions,
+                videoThumbnail,
                 videoLabels,
                 videoTitle,
                 videoRecommendationLabels,
@@ -443,15 +443,8 @@ public final class LayoutComponentsFilter extends Filter {
                 case HIDE_ALL -> {
                     return true;
                 }
-                case HIDE_PRODUCT_ONLY -> {
-                    return productCardBuffer.check(buffer).isFiltered();
-                }
                 case HIDE_SUMMARY_ONLY -> {
                     return summaryCardBuffer.check(buffer).isFiltered();
-                }
-                case HIDE_PRODUCT_AND_SUMMARY -> {
-                    return summaryCardBuffer.check(buffer).isFiltered()
-                            || productCardBuffer.check(buffer).isFiltered();
                 }
                 default -> {
                     return false;
@@ -571,24 +564,14 @@ public final class LayoutComponentsFilter extends Filter {
     /**
      * Injection point.
      */
-    public static int hideInRelatedVideos(int height) {
-        return HIDE_FILTER_BAR_IN_RELATED_VIDEOS_ENABLED
-                ? 0
-                : height;
-    }
-
-    /**
-     * Injection point.
-     */
-    public static boolean hideInRelatedVideos(boolean original) {
-        return HIDE_FILTER_BAR_IN_RELATED_VIDEOS_ENABLED || original;
-    }
-
-    /**
-     * Injection point.
-     */
-    public static void hideInRelatedVideos(View chipView) {
-        Utils.hideViewUnderCondition(HIDE_FILTER_BAR_IN_RELATED_VIDEOS_ENABLED, chipView);
+    public static void hideInRelatedVideos(@Nullable RecyclerView chipRecyclerView) {
+        if (chipRecyclerView == null) {
+            return;
+        }
+        
+        if (HIDE_FILTER_BAR_IN_RELATED_VIDEOS_ENABLED) {
+            chipRecyclerView.setVisibility(RecyclerView.GONE);
+        }
     }
 
     private static final boolean HIDE_YOUTUBE_DOODLES_ENABLED = Settings.HIDE_YOUTUBE_DOODLES.get();
@@ -847,8 +830,14 @@ public final class LayoutComponentsFilter extends Filter {
     /**
      * Injection point.
      */
-    public static boolean hideSearchTermThumbnails() {
-        return Settings.HIDE_SEARCH_TERM_THUMBNAILS.get();
+    public static Uri hideSearchTermThumbnails(View view, Uri uri) {
+        if (Settings.HIDE_SEARCH_TERM_THUMBNAILS.get()) {
+            if (view != null) {
+                Utils.hideViewByLayoutParams(view);
+            }
+            return null;
+        }
+        return uri;
     }
 
     /**

@@ -24,15 +24,14 @@ Second \"item\" text"</string>
   <string name="morphe_external_downloader_screen_title">การดาวน์โหลดภายนอก</string>
   <string name="morphe_external_downloader_name_title">ชื่อแพ็คเกจโปรแกรมดาวน์โหลด</string>
   <string name="morphe_external_downloader_name_summary">ชื่อแพ็คเกจของแอปดาวน์โหลดภายนอกที่คุณติดตั้งไว้</string>
-  <string name="morphe_external_downloader_flyout_button_title">แทนที่ปุ่มการเปิด/ปิดฟีด/การค้นหา</string>
-  <string name="morphe_external_downloader_other_item_hint">ป้อนชื่อแพ็คเกจ</string>
+  <string name="morphe_external_downloader_other_item_hint">ใส่ชื่อแพ็คเกจ</string>
   <string name="morphe_external_downloader_other_item">อื่น ๆ</string>
   <string name="morphe_external_downloader_not_found_title">ไม่พบแอป</string>
   <string name="morphe_external_downloader_not_installed_warning">ไม่ได้ติดตั้ง %s โปรดติดตั้ง</string>
   <string name="morphe_external_downloader_package_not_found_warning">"ไม่พบแอปที่ติดตั้งด้วยชื่อแพ็คเกจ: %s
 
 ตรวจสอบว่าชื่อแพ็คเกจถูกต้องและแอปได้ถูกติดตั้งแล้ว"</string>
-  <string name="morphe_external_downloader_empty_warning">ชื่อแพ็คเกจต้องไม่ว่างเปล่า</string>
+  <string name="morphe_external_downloader_empty_warning">ชื่อแพ็คเกจห้ามว่าง</string>
   <!-- Translations of this should be identical to morphe_custom_branding_icon_entry_7 -->
   <string name="morphe_custom_branding_name_entry_5">กำหนดเอง</string>
   <string name="morphe_custom_branding_icon_title">ไอคอนแอป</string>
@@ -53,7 +52,7 @@ Second \"item\" text"</string>
   <string name="morphe_check_watch_history_domain_name_dialog_title">ประกาศ Morphe</string>
   <string name="morphe_check_watch_history_domain_name_dialog_message">ประวัติการรับชมของคุณไม่ได้ถูกบันทึก&lt;br&gt;&lt;br&gt;สาเหตุที่เป็นไปได้มากที่สุดคือตัวบล็อกโฆษณา DNS หรือพร็อกซีเครือข่าย&lt;br&gt;&lt;br&gt;เพื่อแก้ไขปัญหานี้ ให้เพิ่ม &lt;b&gt;s.youtube.com&lt;/b&gt; ในรายการที่อนุญาต หรือปิดตัวบล็อกโฆษณา DNS และพร็อกซีทั้งหมด</string>
   <string name="morphe_check_watch_history_domain_name_dialog_ignore">อย่าแสดงอีก</string>
-  <!-- misc.fix.playback.spoofVideoStreamsPatch -->
+  <!-- misc.spoof.spoofVideoStreamsPatch -->
   <string name="morphe_spoof_video_streams_screen_title">ปลอมแปลงสตรีมวิดีโอ</string>
   <string name="morphe_spoof_video_streams_screen_summary">ปลอมแปลงสตรีมวิดีโอของไคลเอนต์เพื่อป้องกันปัญหาการเล่น</string>
   <string name="morphe_spoof_video_streams_title">วิดีโอปลอม</string>
@@ -143,8 +142,9 @@ Second \"item\" text"</string>
   <string name="morphe_proxy_allow_direct_fallback_summary">เชื่อมต่อโดยตรงหากพร็อกซีล้มเหลว</string>
   <!-- ad.hideFullscreenAdsPatch -->
   <string name="morphe_hide_fullscreen_ads_title">ซ่อนโฆษณาแบบเต็มหน้าจอ</string>
-  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
-  <string name="morphe_force_original_audio_not_available">หากต้องการใช้คุณสมบัตินี้ ให้เปลี่ยน \'Spoof video streams\' เป็น Android Reel หรือ TV</string>
+  <!-- 'Spoof video streams' should match the language used in 'morphe_spoof_video_streams_screen_title'.
+          'Android Studio' must be kept untranslated. -->
+  <string name="morphe_force_original_audio_not_available">หากต้องการใช้คุณสมบัตินี้ ให้เปลี่ยน \'Spoof video streams\' เป็นไคลเอ็นต์อื่น ๆ ยกเว้น Android Studio\'</string>
   <!-- misc.privacy.sanitizeSharingLinksPatch -->
   <string name="morphe_sanitize_sharing_links_title">ล้างข้อมูลลิงก์ที่แชร์</string>
   <string name="morphe_sanitize_sharing_links_summary">พารามิเตอร์การติดตามจะถูกลบออกจากลิงก์ที่แชร์</string>
@@ -168,4 +168,55 @@ Second \"item\" text"</string>
   <!-- 'Component path builder strings' is the technical name for identifying the Litho UI layout items to hide. This is an advanced feature and most users will never use this. -->
   <string name="morphe_custom_filter_strings_summary">รายการสตริงตัวสร้างเส้นทางส่วนประกอบที่จะกรอง คั่นด้วยบรรทัดใหม่</string>
   <string name="morphe_custom_filter_toast_invalid_syntax">ตัวกรองแบบกำหนดเองไม่ถูกต้อง: %s</string>
+  <!-- Settings menu filter -->
+  <string name="morphe_settings_menu_filter_screen_title">ตัวกรองเมนูการตั้งค่า</string>
+  <string name="morphe_settings_menu_filter_screen_summary">ซ่อนรายการบนหน้าจอการตั้งค่าแอปมาตรฐานตามชื่อที่แสดง</string>
+  <string name="morphe_settings_menu_filter_picker_empty">เปิดหน้าจอการตั้งค่าแอปมาตรฐานหนึ่งครั้งเพื่อสร้างรายการ</string>
+  <!-- misc.spoof.appversion.spoofAppVersionPatch -->
+  <string name="morphe_spoof_app_version_title">ปลอมแปลงเวอร์ชันแอป</string>
+  <string name="morphe_spoof_app_version_summary">หลอกให้เซิร์ฟเวอร์คิดว่าคุณกำลังใช้แอปเวอร์ชันเก่าเพื่อเรียกคืนคุณสมบัติ UI แบบเดิม</string>
+  <string name="morphe_spoof_app_version_user_dialog_message">"เวอร์ชันแอปจะถูกปลอมแปลงเป็นเวอร์ชันเก่า
+
+สิ่งนี้จะเปลี่ยนรูปลักษณ์และคุณสมบัติของแอป แต่ผลข้างเคียงที่ไม่คาดคิดอาจเกิดขึ้น
+
+ถ้าปิดในภายหลัง ขอแนะนำให้ล้างข้อมูลแอปเพื่อป้องกันข้อผิดพลาดของ UI"</string>
+  <string name="morphe_spoof_app_version_target_title">เป้าหมายการปลอมแปลงเวอร์ชันแอป</string>
+  <!-- layout.returnyoutubedislike.returnYouTubeDislikePatch -->
+  <!-- Brief notification (toast) shown if network connection times out. Translations of this should not be longer than the original English text, otherwise the text can be clipped and not entirely shown. -->
+  <string name="morphe_ryd_failure_connection_timeout">ไม่สามารถแสดงความไม่ชอบชั่วคราว (API หมดเวลา)</string>
+  <string name="morphe_ryd_failure_connection_status_code">ไม่สามารถแสดงความไม่ชอบได้ (รหัสสถานะ %d)</string>
+  <string name="morphe_ryd_failure_client_rate_limit_requested">ไม่สามารถใช้งานการไม่ถูกใจได้ (ข้อจำกัดของ Client API)</string>
+  <string name="morphe_ryd_failure_generic">ไม่สามารถใช้งาน \"ไม่ชอบ\" ได้ (%s)</string>
+  <!-- Video likes have been set to hidden by the video uploader. -->
+  <string name="morphe_ryd_video_likes_hidden_by_video_owner">ซ่อนโดยเจ้าของ</string>
+  <string name="morphe_ryd_enabled_title">เปิดใช้งาน Return YouTube Dislike</string>
+  <string name="morphe_ryd_dislike_percentage_title">แสดงจำนวนไม่ชอบเป็นเปอร์เซ็นต์</string>
+  <string name="morphe_ryd_dislike_percentage_summary">แสดงจำนวนไม่ชอบเป็นเปอร์เซ็นต์ของจำนวนชอบ แทนที่จะเป็นตัวเลข</string>
+  <!-- Translations should match the language used in 'morphe_sb_enable_compact_skip_button'. -->
+  <string name="morphe_ryd_compact_layout_title">ใช้ปุ่มถูกใจแบบกะทัดรัด</string>
+  <string name="morphe_ryd_compact_layout_summary">ลดความกว้างของปุ่มถูกใจเพื่อประหยัดพื้นที่</string>
+  <string name="morphe_ryd_estimated_like_title">แสดงจำนวนถูกใจโดยประมาณ</string>
+  <string name="morphe_ryd_estimated_like_summary">แสดงจำนวนการถูกใจโดยประมาณในวิดีโอที่ผู้สร้างปิดการนับจำนวนถูกใจ</string>
+  <string name="morphe_ryd_toast_on_connection_error_title">แสดงการแจ้งเตือนข้อผิดพลาดในการเชื่อมต่อ</string>
+  <string name="morphe_ryd_toast_on_connection_error_summary">แสดงการแจ้งเตือนเมื่อเซิร์ฟเวอร์ Return YouTube Dislike ไม่สามารถใช้งานได้</string>
+  <string name="morphe_ryd_attribution_summary">"ข้อมูลนี้จัดทำโดย Return YouTube Dislike API
+
+แตะที่นี่เพื่อเปิด ReturnYouTubeDislike.com"</string>
+  <!-- Statistic strings are shown in the settings only when Morphe debug mode is enabled. Typical users will never see these. -->
+  <string name="morphe_ryd_statistics_category_title">สถิติ API ของ Return YouTube Dislike ของอุปกรณ์นี้</string>
+  <string name="morphe_ryd_statistics_getFetchCallResponseTimeAverage_title">เวลาตอบสนอง API, ค่าเฉลี่ย</string>
+  <string name="morphe_ryd_statistics_getFetchCallResponseTimeMin_title">เวลาตอบสนอง API, ต่ำสุด</string>
+  <string name="morphe_ryd_statistics_getFetchCallResponseTimeMax_title">เวลาตอบสนอง API, สูงสุด</string>
+  <string name="morphe_ryd_statistics_getFetchCallResponseTimeLast_title">เวลาตอบสนอง API, ล่าสุด</string>
+  <string name="morphe_ryd_statistics_getFetchCallResponseTimeLast_rate_limit_summary">ไม่สามารถแสดงความไม่ชอบชั่วคราว - ข้อจำกัดอัตรา API ของไคลเอนต์มีผล</string>
+  <string name="morphe_ryd_statistics_getFetchCallCount_title">API ดึงโหวต จำนวนการเรียก</string>
+  <string name="morphe_ryd_statistics_getFetchCallCount_zero_summary">ไม่มีการเรียกเครือข่าย</string>
+  <string name="morphe_ryd_statistics_getFetchCallCount_non_zero_summary">มีการเรียกเครือข่าย %d ครั้ง</string>
+  <string name="morphe_ryd_statistics_getFetchCallNumberOfFailures_title">API ดึงโหวต จำนวนการหมดเวลา</string>
+  <string name="morphe_ryd_statistics_getFetchCallNumberOfFailures_zero_summary">ไม่มีการเรียกเครือข่ายหมดเวลา</string>
+  <string name="morphe_ryd_statistics_getFetchCallNumberOfFailures_non_zero_summary">มีการเรียกเครือข่ายหมดเวลา %d ครั้ง</string>
+  <string name="morphe_ryd_statistics_getNumberOfRateLimitRequestsEncountered_title">ข้อจำกัดอัตราของไคลเอนต์ API</string>
+  <string name="morphe_ryd_statistics_getNumberOfRateLimitRequestsEncountered_zero_summary">ไม่พบข้อจำกัดอัตราของไคลเอนต์</string>
+  <string name="morphe_ryd_statistics_getNumberOfRateLimitRequestsEncountered_non_zero_summary">พบข้อจำกัดอัตราของไคลเอนต์ %d ครั้ง</string>
+  <string name="morphe_ryd_statistics_millisecond_text">%d มิกเวฮราธี</string>
 </resources>

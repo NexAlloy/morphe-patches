@@ -34,6 +34,7 @@ import app.morphe.patches.youtube.misc.playservice.versionCheckPatch
 import app.morphe.patches.youtube.misc.recyclerviewtree.addRecyclerViewTreeHook
 import app.morphe.patches.youtube.misc.recyclerviewtree.recyclerViewTreeHookPatch
 import app.morphe.patches.youtube.misc.settings.settingsPatch
+import app.morphe.patches.youtube.shared.InitializePlaybackSpeedValuesFingerprint
 import app.morphe.patches.youtube.shared.PlaybackSpeedOnItemClickParentFingerprint
 import app.morphe.patches.youtube.video.speed.settingsMenuVideoSpeedGroup
 import app.morphe.util.addInstructionsAtControlFlowLabel
@@ -136,23 +137,25 @@ internal val customPlaybackSpeedPatch = bytecodePatch(
         // Add a static INSTANCE field to the class.
         // This is later used to call "showOldPlaybackSpeedMenu" on the instance.
 
+        val initializePlaybackSpeedType = InitializePlaybackSpeedValuesFingerprint.originalClassDef.type
         val instanceField = ImmutableField(
-            GetOldPlaybackSpeedsFingerprint.originalClassDef.type,
+            initializePlaybackSpeedType,
             "INSTANCE",
-            GetOldPlaybackSpeedsFingerprint.originalClassDef.type,
+            initializePlaybackSpeedType,
             AccessFlags.PUBLIC.value or AccessFlags.STATIC.value,
             null,
             null,
             null,
         ).toMutable()
 
-        GetOldPlaybackSpeedsFingerprint.classDef.staticFields.add(instanceField)
-        // Set the INSTANCE field to the instance of the class.
-        // In order to prevent a conflict with another patch, add the instruction at index 1.
-        GetOldPlaybackSpeedsFingerprint.method.addInstruction(
-            1,
-            "sput-object p0, $instanceField"
-        )
+        InitializePlaybackSpeedValuesFingerprint.let {
+            it.classDef.staticFields.add(instanceField)
+            // Set the INSTANCE field to the instance of the class.
+            it.method.addInstruction(
+                0,
+                "sput-object p0, $instanceField"
+            )
+        }
 
         // Get the "showOldPlaybackSpeedMenu" method.
         // This is later called on the field INSTANCE.

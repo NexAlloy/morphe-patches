@@ -23,17 +23,20 @@ Second \"item\" text"</string>
   <string name="morphe_header_logo_entry_3">מותג</string>
   <!-- interaction.downloads.downloadsPatch -->
   <string name="morphe_external_downloader_screen_summary">הורד קליפי מוזיקה, פודקאסטים או שירים באמצעות אפליקציות הורדה של צד שלישי</string>
-  <string name="morphe_external_downloader_action_button_title">עקוף את פעולת לחצן ההורדה</string>
-  <string name="morphe_external_downloader_action_button_summary">מחליף את פונקציית ההורדה המובנית של YouTube Music במוריד החיצוני שלך</string>
+  <!-- 'Download' should be translated using the same localized wording YouTube displays for the button. -->
+  <string name="morphe_external_downloader_action_button_title">עקוף את פעולת הורדה</string>
+  <string name="morphe_external_downloader_action_button_summary">משתמש במוריד החיצוני שבחרת במקום בתכונת ההורדה המובנית של YouTube Music</string>
+  <string name="morphe_external_downloader_flyout_menu_title">תפריט עקיפת הורדה</string>
   <!-- misc.settings.settingsPatch -->
   <!-- In languages where "About" is ambiguous, translate this as "About Morphe" (i.e., About this app). -->
   <string name="morphe_settings_music_screen_0_about_title">אודות</string>
   <string name="morphe_settings_music_screen_1_ads_title">מודעות</string>
   <string name="morphe_settings_music_screen_2_general_title">כללי</string>
   <string name="morphe_settings_music_screen_3_player_title">נגן</string>
-  <string name="morphe_settings_music_screen_6_misc_title">שונות</string>
+  <string name="morphe_settings_music_screen_7_misc_title">שונות</string>
   <!-- ad.hideAdsPatch -->
   <string name="morphe_music_hide_get_premium_label_title">הסתר תווית \'קבל Premium למוזיקה\'</string>
+  <string name="morphe_music_hide_music_premium_promotions_title">הסתר קידומי Music Premium</string>
   <string name="morphe_music_hide_video_ads_title">הסתר מודעות וידאו</string>
   <!-- interaction.crossfade.crossfadePatch -->
   <string name="morphe_music_crossfade_screen_title">מעבר הדרגתי</string>
@@ -100,8 +103,13 @@ Second \"item\" text"</string>
 YouTube Music 8.x - מעבר הצלילים פועל רק בגרסה 9.x ומעלה"</string>
   <string name="morphe_music_crossfade_about_credit_title">קרדיט</string>
   <string name="morphe_music_crossfade_about_credit_summary">תכונת מעבר הצלילים על ידי VazerOG</string>
-  <!-- interaction.permanentrepeat.permanentRepeatPatch -->
-  <string name="morphe_music_play_permanent_repeat_title">אפשר חזרה קבועה</string>
+  <!-- interaction.remember.repeatstate.rememberRepeatStatePatch-->
+  <string name="morphe_music_remember_repeat_state_title">זכור מצב חזרה</string>
+  <!-- interaction.remember.shufflestate.rememberShuffleStatePatch -->
+  <string name="morphe_music_remember_shuffle_state_title">זכור מצב ערבוב</string>
+  <!-- interaction.dislikeredirection.disableDislikeRedirectionPatch -->
+  <string name="morphe_music_disable_dislike_redirection_title">ביטול הפנייה בלחיצה על \"דיסלייק\"</string>
+  <string name="morphe_music_disable_dislike_redirection_summary">מניעת דילוג רצועה כאשר לוחצים על \"דיסלייק\"</string>
   <!-- layout.buttons.hideButtonsPatch -->
   <string name="morphe_music_hide_cast_button_title">הסתר לחצן שידור</string>
   <string name="morphe_music_hide_history_button_title">הסתר לחצן היסטוריה</string>
@@ -132,7 +140,9 @@ YouTube Music 8.x - מעבר הצלילים פועל רק בגרסה 9.x ומע�
   <string name="morphe_music_hide_flyout_menu_components_screen_summary">בחר אילו רכיבים יופיעו בתפריטים הנשלפים של הנגן והתור</string>
   <string name="morphe_music_hide_flyout_menu_3_column_component_title">הסתר רכיב 3 עמודות</string>
   <string name="morphe_music_hide_flyout_menu_like_dislike_title">הסתר לחצני אהבתי ודיסלייק</string>
+  <string name="morphe_music_hide_flyout_menu_taste_match_title">הסתר את תפריט \'התאמת טעם\'</string>
   <string name="morphe_music_hide_flyout_menu_add_to_listen_later_title">הסתר את תפריט \'הוסף לרשימת ההשמעה \'להאזנה מאוחר יותר\'</string>
+  <string name="morphe_music_hide_flyout_menu_add_to_queue_title">הסתר את תפריט \'הוסף לתור\'</string>
   <string name="morphe_music_hide_flyout_menu_captions_title">הסתר תפריט כתוביות</string>
   <string name="morphe_music_hide_flyout_menu_delete_playlist_title">הסתר תפריט \'מחק רשימת השמעה\'</string>
   <string name="morphe_music_hide_flyout_menu_dismiss_queue_title">הסתר תפריט \'דחה תור\'</string>
@@ -232,7 +242,7 @@ YouTube Music 8.x - מעבר הצלילים פועל רק בגרסה 9.x ומע�
   <string name="morphe_music_listenbrainz_token_dialog_get_token">קבל אסימון</string>
   <string name="morphe_music_listenbrainz_token_dialog_verify">אמת</string>
   <string name="morphe_music_listenbrainz_token_status_empty">אנא הזן אסימון</string>
-  <string name="morphe_music_listenbrainz_token_status_validating">מאמת...</string>
+  <string name="morphe_music_listenbrainz_token_status_validating">מאמת…</string>
   <string name="morphe_music_listenbrainz_token_status_valid">אסימון חוקי! משתמש: %s</string>
   <string name="morphe_music_listenbrainz_token_status_invalid">אסימון לא חוקי: %s</string>
   <string name="morphe_music_listenbrainz_token_status_invalid_unknown">לא ידוע</string>
@@ -249,7 +259,7 @@ YouTube Music 8.x - מעבר הצלילים פועל רק בגרסה 9.x ומע�
   <string name="morphe_music_lastfm_token_dialog_password_hint">סיסמה</string>
   <string name="morphe_music_lastfm_token_dialog_login">להתחבר</string>
   <string name="morphe_music_lastfm_token_status_empty">אנא הזן שם משתמש וסיסמה</string>
-  <string name="morphe_music_lastfm_token_status_logging_in">מתחבר...</string>
+  <string name="morphe_music_lastfm_token_status_logging_in">מתחבר…</string>
   <string name="morphe_music_lastfm_token_status_success">הכניסה הצליחה!</string>
   <string name="morphe_music_lastfm_token_status_no_session">נכשל לקבל סשן מ-Last.fm</string>
   <string name="morphe_music_lastfm_token_status_failed">הכניסה נכשלה: %s</string>
@@ -267,4 +277,10 @@ YouTube Music 8.x - מעבר הצלילים פועל רק בגרסה 9.x ומע�
   <string name="morphe_music_scrobbling_about_summary">"Scrobbling מסנכרן באופן אוטומטי את השימוש שלך ב-YouTube Music עם פרופיל ה-Last.fm או ListenBrainz שלך.
 
 כדי להבטיח שה-scrobbling יסונכרן במהלך הפעלה ברקע, ודא ששימוש הסוללה של אפליקציית YouTube Music מוגדר ל\"ללא הגבלה\""</string>
+  <!-- misc.spoof.appversion.spoofAppVersionPatch -->
+  <string name="morphe_music_spoof_app_version_target_entry_6_35_52">6.35.52 - שחזור פאנל צד ישן</string>
+  <string name="morphe_music_spoof_app_version_target_entry_6_42_55">6.42.55 - השבת מילות שיר בזמן אמת</string>
+  <string name="morphe_music_spoof_app_version_target_entry_7_12_52">7.12.52 - שחזור מילות שיר דינמיות ישנות</string>
+  <string name="morphe_music_spoof_app_version_target_entry_7_16_53">7.16.53 - שחזור סרגל פעולות ישן</string>
+  <string name="morphe_music_spoof_app_version_target_entry_7_17_52">7.17.52 - סעיף התגובות לא מופיע בהזנת הבית</string>
 </resources>

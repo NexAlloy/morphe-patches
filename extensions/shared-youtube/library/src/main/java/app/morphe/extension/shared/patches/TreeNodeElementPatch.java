@@ -16,6 +16,8 @@ import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.patches.components.ContextInterface;
 
+import io.github.nexalloy.morphe.youtube.misc.litho.node.TreeNodeElementHookPatchKt;
+
 @SuppressWarnings("unused")
 public class TreeNodeElementPatch {
 
@@ -48,10 +50,10 @@ public class TreeNodeElementPatch {
     }
 
     private static void onComponentLoaded(String path, List<Object> treeNodeResultList) {
-        // Code added during patching.
+        TreeNodeElementHookPatchKt.onComponentLoaded(path, treeNodeResultList);
     }
 
     private static void onLazilyConvertedElementLoaded(String identifier, List<Object> treeNodeResultList) {
-        // Code added during patching.
+        TreeNodeElementHookPatchKt.onLazilyConvertedElementLoaded(identifier, treeNodeResultList);
     }
 }

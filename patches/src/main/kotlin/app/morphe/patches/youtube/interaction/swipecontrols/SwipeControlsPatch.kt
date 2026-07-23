@@ -16,6 +16,7 @@ import app.morphe.patches.youtube.misc.settings.PreferenceScreen
 import app.morphe.patches.youtube.misc.settings.settingsPatch
 import app.morphe.patches.youtube.shared.Constants.COMPATIBILITY_YOUTUBE
 import app.morphe.patches.youtube.shared.YouTubeMainActivityConstructorFingerprint
+import app.morphe.patches.youtube.video.information.videoInformationPatch
 import app.morphe.util.ResourceGroup
 import app.morphe.util.copyResources
 import app.morphe.util.insertLiteralOverride
@@ -29,7 +30,7 @@ internal const val EXTENSION_CLASS = "Lapp/morphe/extension/youtube/swipecontrol
 private val swipeControlsResourcePatch = resourcePatch {
     dependsOn(
         settingsPatch,
-        versionCheckPatch,
+        versionCheckPatch
     )
 
     execute {
@@ -48,29 +49,30 @@ private val swipeControlsResourcePatch = resourcePatch {
             SwitchPreference("morphe_swipe_speed", summary = true),
             NonInteractivePreference(
                 key = "morphe_swipe_zone_width",
-                tag = "app.morphe.extension.shared.settings.preference.SeekBarPreference",
+                tag = "app.morphe.extension.shared.settings.preference.SeekBarPreference"
             ),
             NonInteractivePreference(
                 key = "morphe_swipe_speed_zone_height",
-                tag = "app.morphe.extension.shared.settings.preference.SeekBarPreference",
+                tag = "app.morphe.extension.shared.settings.preference.SeekBarPreference"
             ),
             NonInteractivePreference(
                 key = "morphe_swipe_zone_preview",
                 summaryKey = null,
-                tag = "app.morphe.extension.youtube.settings.preference.SwipeZonePreference",
+                tag = "app.morphe.extension.youtube.settings.preference.SwipeZonePreference"
             ),
             NonInteractivePreference(
                 key = "morphe_swipe_brightness_sensitivity",
-                tag = "app.morphe.extension.shared.settings.preference.SeekBarPreference",
+                tag = "app.morphe.extension.shared.settings.preference.SeekBarPreference"
             ),
             NonInteractivePreference(
                 key = "morphe_swipe_volume_sensitivity",
-                tag = "app.morphe.extension.shared.settings.preference.SeekBarPreference",
+                tag = "app.morphe.extension.shared.settings.preference.SeekBarPreference"
             ),
             NonInteractivePreference(
                 key = "morphe_swipe_speed_sensitivity",
-                tag = "app.morphe.extension.shared.settings.preference.SeekBarPreference",
+                tag = "app.morphe.extension.shared.settings.preference.SeekBarPreference"
             ),
+            ListPreference("morphe_swipe_speed_step"),
             SwitchPreference("morphe_swipe_press_to_engage", summary = true),
             SwitchPreference("morphe_swipe_haptic_feedback"),
             SwitchPreference("morphe_swipe_save_and_restore_brightness", summary = true),
@@ -78,23 +80,26 @@ private val swipeControlsResourcePatch = resourcePatch {
             ListPreference("morphe_swipe_overlay_style"),
             NonInteractivePreference(
                 key = "morphe_swipe_overlay_background_opacity",
-                tag = "app.morphe.extension.shared.settings.preference.SeekBarPreference",
+                tag = "app.morphe.extension.shared.settings.preference.SeekBarPreference"
             ),
             TextPreference("morphe_swipe_overlay_progress_brightness_color",
                 tag = "app.morphe.extension.shared.settings.preference.ColorPickerWithOpacitySliderPreference",
-                inputType = InputType.TEXT_CAP_CHARACTERS),
+                inputType = InputType.TEXT_CAP_CHARACTERS
+            ),
             TextPreference("morphe_swipe_overlay_progress_volume_color",
                 tag = "app.morphe.extension.shared.settings.preference.ColorPickerWithOpacitySliderPreference",
-                inputType = InputType.TEXT_CAP_CHARACTERS),
+                inputType = InputType.TEXT_CAP_CHARACTERS
+            ),
             TextPreference("morphe_swipe_overlay_progress_speed_color",
                 tag = "app.morphe.extension.shared.settings.preference.ColorPickerWithOpacitySliderPreference",
-                inputType = InputType.TEXT_CAP_CHARACTERS),
+                inputType = InputType.TEXT_CAP_CHARACTERS
+            ),
             NonInteractivePreference(
                 key = "morphe_swipe_text_overlay_size",
-                tag = "app.morphe.extension.shared.settings.preference.SeekBarPreference",
+                tag = "app.morphe.extension.shared.settings.preference.SeekBarPreference"
             ),
             TextPreference("morphe_swipe_overlay_timeout", inputType = InputType.NUMBER),
-            TextPreference("morphe_swipe_threshold", inputType = InputType.NUMBER),
+            TextPreference("morphe_swipe_threshold", inputType = InputType.NUMBER)
         )
 
         copyResources(
@@ -110,7 +115,7 @@ private val swipeControlsResourcePatch = resourcePatch {
                 "morphe_ic_sc_volume_low.xml",
                 "morphe_ic_sc_volume_mute.xml",
                 "morphe_ic_sc_volume_normal.xml",
-                "morphe_ic_sc_speed.xml",
+                "morphe_ic_sc_speed.xml"
             )
         )
     }
@@ -119,12 +124,13 @@ private val swipeControlsResourcePatch = resourcePatch {
 @Suppress("unused")
 val swipeControlsPatch = bytecodePatch(
     name = "Swipe controls",
-    description = "Adds options to enable and configure volume and brightness swipe controls.",
+    description = "Adds options to enable and configure volume and brightness swipe controls."
 ) {
     dependsOn(
         sharedExtensionPatch,
         playerTypeHookPatch,
         swipeControlsResourcePatch,
+        videoInformationPatch,
     )
 
     compatibleWith(COMPATIBILITY_YOUTUBE)

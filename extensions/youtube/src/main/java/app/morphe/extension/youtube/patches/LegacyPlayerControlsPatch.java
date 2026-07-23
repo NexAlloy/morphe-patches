@@ -1,9 +1,7 @@
 package app.morphe.extension.youtube.patches;
 
+import static app.morphe.extension.shared.spoof.SpoofAppVersionPatch.isSpoofingToLessThan;
 import static app.morphe.extension.youtube.patches.VersionCheckPatch.IS_20_31_OR_GREATER;
-import static app.morphe.extension.youtube.patches.spoof.SpoofAppVersionPatch.isSpoofingToLessThan;
-import static io.github.nexalloy.morphe.youtube.misc.playercontrols.LegacyPlayerControlsPatchKt.onFullscreenButtonVisibilityChanged;
-import static io.github.nexalloy.morphe.youtube.misc.playercontrols.LegacyPlayerControlsPatchKt.visibilityImmediateCallbacksExistModified;
 
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -28,11 +26,6 @@ public class LegacyPlayerControlsPatch {
     public static final boolean RESTORE_OLD_PLAYER_BUTTONS =
             Settings.RESTORE_OLD_PLAYER_BUTTONS.get() || !YouTubeActivityHook.useBoldIcons(true);
 
-    private static boolean fullscreenButtonVisibilityCallbacksExist() {
-        // custom change
-        return visibilityImmediateCallbacksExistModified;
-    }
-
     /**
      * Injection point.
      */
@@ -54,48 +47,6 @@ public class LegacyPlayerControlsPatch {
             });
         }
     }
-
-    /**
-     * Injection point.
-     */
-    public static void setFullscreenCloseButton(View imageButton) {
-        if (!fullscreenButtonVisibilityCallbacksExist()) {
-            return;
-        }
-
-        Logger.printDebug(() -> "Fullscreen button set");
-
-        // Add a global listener, since the protected method
-        // View#onVisibilityChanged() does not have any call backs.
-        imageButton.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            int lastVisibility = View.VISIBLE;
-
-            @Override
-            public void onGlobalLayout() {
-                try {
-                    final int visibility = imageButton.getVisibility();
-                    if (lastVisibility != visibility) {
-                        lastVisibility = visibility;
-
-                        Logger.printDebug(() -> "fullscreen button visibility: "
-                                + (visibility == View.VISIBLE ? "VISIBLE" :
-                                visibility == View.GONE ? "GONE" : "INVISIBLE"));
-
-                        fullscreenButtonVisibilityChanged(visibility == View.VISIBLE);
-                    }
-                } catch (Exception ex) {
-                    Logger.printDebug(() -> "OnGlobalLayoutListener failure", ex);
-                }
-            }
-        });
-    }
-
-    // noinspection EmptyMethod
-    private static void fullscreenButtonVisibilityChanged(boolean isVisible) {
-        // custom change
-        onFullscreenButtonVisibilityChanged(isVisible);
-    }
-
 
     /**
      * Injection point.
