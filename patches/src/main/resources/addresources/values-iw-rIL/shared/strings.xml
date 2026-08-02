@@ -49,6 +49,7 @@ Second \"item\" text"</string>
   <string name="morphe_settings_search_empty_history_summary">כדי לשמור היסטוריית חיפוש, הקלד שאילתת חיפוש ולחץ על Enter</string>
   <string name="morphe_settings_search_history_title">הצג הגדרות היסטוריית חיפוש</string>
   <string name="morphe_show_menu_icons_title">הצג סמלי הגדרות Morphe</string>
+  <string name="morphe_settings_menu_copy_path">הועתק: %s</string>
   <string name="morphe_language_title">שפת Morphe</string>
   <string name="morphe_language_user_dialog_message">"תרגומים עבור שפות מסוימות עשויים להיות חסרים או לא מלאים.
 
@@ -96,7 +97,7 @@ Second \"item\" text"</string>
   <string name="morphe_debug_export_logs_summary">ייצוא יומני איתור באגים Morphe</string>
   <string name="morphe_debug_export_logs_file">ייצוא לקובץ</string>
   <string name="morphe_debug_export_logs_success">יומני איתור באגים יובאו בהצלחה</string>
-  <string name="morphe_debug_export_logs_failed">נכשל לייצא יומני איתור באגים: %s</string>
+  <string name="morphe_debug_export_logs_failed">נכשל לייצא יומני איתור באגים</string>
   <string name="morphe_debug_logs_search_hint">חפש ביומני איתור באגים…</string>
   <string name="morphe_debug_export_logs_clear">נקה</string>
   <string name="morphe_debug_logs_disabled">תיעוד איתור באגים מושבת</string>

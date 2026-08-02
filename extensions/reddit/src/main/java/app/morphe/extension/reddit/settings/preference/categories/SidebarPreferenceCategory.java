@@ -4,15 +4,16 @@
  *
  * See the included NOTICE file for GPLv3 Section 7 terms that apply to this code.
  */
+
 package app.morphe.extension.reddit.settings.preference.categories;
 
-import static app.morphe.extension.reddit.patches.VersionCheckPatch.is_2025_52_or_greater;
 import static app.morphe.extension.shared.StringRef.str;
 
 import android.content.Context;
 import android.preference.PreferenceScreen;
 
 import app.morphe.extension.reddit.patches.HideSidebarComponentsPatch;
+import app.morphe.extension.reddit.patches.VersionCheckPatch;
 import app.morphe.extension.reddit.settings.Settings;
 import app.morphe.extension.reddit.settings.preference.BooleanSettingPreference;
 
@@ -44,7 +45,7 @@ public class SidebarPreferenceCategory extends ConditionalPreferenceCategory {
                     Settings.HIDE_REDDIT_PRO_SHELF
             ));
 
-            if (is_2025_52_or_greater) {
+            if (VersionCheckPatch.is_2025_52_or_greater) {
                 addPreference(new BooleanSettingPreference(
                         context,
                         Settings.HIDE_ABOUT_SHELF

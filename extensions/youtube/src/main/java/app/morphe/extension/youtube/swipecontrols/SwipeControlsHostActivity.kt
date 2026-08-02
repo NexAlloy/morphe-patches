@@ -280,6 +280,12 @@ class SwipeControlsHostActivity(val activity: Activity) {
                     }
                 })
             XposedHelpers.findAndHookMethod(
+                activityClass, "onDestroy", object : XC_MethodHook() {
+                    override fun afterHookedMethod(param: MethodHookParam) {
+                        PlayerType.onChange -= param.swipeControlsHost::onPlayerTypeChanged
+                    }
+                })
+            XposedHelpers.findAndHookMethod(
                 activityClass,
                 "dispatchTouchEvent",
                 MotionEvent::class.java,

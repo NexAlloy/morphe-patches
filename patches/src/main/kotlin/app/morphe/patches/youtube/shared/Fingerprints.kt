@@ -216,6 +216,35 @@ internal object PlaybackSpeedOnItemClickParentFingerprint : Fingerprint(
     }
 )
 
+internal object SpeedLimiterParentFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "V",
+    parameters = listOf("L"),
+    filters = listOf(
+        string("Playback rate: %f"),
+        literal(0.25f),
+        literal(4.0f),
+    )
+)
+
+internal object SpeedLimiterFingerprint : Fingerprint(
+    classFingerprint = SpeedLimiterParentFingerprint,
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "V",
+    filters = listOf(
+        literal(0.25f),
+        literal(4.0f),
+        methodCall(
+            opcode = Opcode.INVOKE_INTERFACE,
+            parameters = listOf("F"),
+            returnType = "V"
+        )
+    ),
+    custom = { method, _ ->
+        method.parameterTypes.firstOrNull() == "F"
+    }
+)
+
 internal object VideoQualityChangedFingerprint : Fingerprint(
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
     returnType = "L",
@@ -240,6 +269,15 @@ internal object VideoQualityChangedFingerprint : Fingerprint(
     )
 )
 
+internal object VideoStreamingDataToStringFingerprint : Fingerprint(
+    name = "toString",
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "Ljava/lang/String;",
+    filters = listOf(
+        string("VideoStreamingData(itags=")
+    )
+)
+
 internal object WatchNextResponseParserFingerprint : Fingerprint(
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
     parameters = listOf("Ljava/lang/Object;"),
@@ -261,15 +299,18 @@ internal object WatchNextResponseParserFingerprint : Fingerprint(
             Opcode.CHECK_CAST,
             location = MatchAfterImmediately()
         ),
-        literal(46659098L),
+        literal(46659098L)
     )
 )
 
 internal object PlatypusVideoQualityFlagFingerprint : Fingerprint(
-    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.CONSTRUCTOR),
-    returnType = "V",
     filters = listOf(
-        literal(45624008L),
-        opcode(Opcode.MOVE_RESULT, location = MatchAfterWithin(2))
+        literal(45624008L)
+    )
+)
+
+internal object VideoQualityBufferingFlagFingerprint : Fingerprint(
+    filters = listOf(
+        literal(45408049L)
     )
 )
