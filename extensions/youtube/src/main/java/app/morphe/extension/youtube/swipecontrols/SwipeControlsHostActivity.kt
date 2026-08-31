@@ -29,7 +29,9 @@ import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XC_MethodHook.MethodHookParam
 import de.robv.android.xposed.XposedBridge
 import de.robv.android.xposed.XposedHelpers
+import io.github.libxposed.api.XposedInterface
 import java.lang.ref.WeakReference
+import java.lang.reflect.Method
 import kotlin.concurrent.Volatile
 
 /**
@@ -84,12 +86,6 @@ class SwipeControlsHostActivity(val activity: Activity) {
     @Volatile
     var statusBarVisible: Boolean = false
 
-    private val dispatchDownstreamTouchEventMethod = XposedHelpers.findMethodExact(
-        Activity::class.java,
-        "dispatchTouchEvent",
-        MotionEvent::class.java
-    )
-
     /**
      * Dispatches a touch event to downstream views.
      *
@@ -97,10 +93,9 @@ class SwipeControlsHostActivity(val activity: Activity) {
      * @return Whether the event was consumed.
      */
     fun dispatchDownstreamTouchEvent(event: MotionEvent): Boolean {
-        return XposedBridge.invokeOriginalMethod(
-            dispatchDownstreamTouchEventMethod,
+        return dispatchDownstreamTouchEventMethod.invokeSpecial(
             activity,
-            arrayOf(event)
+            event
         ) as Boolean
     }
 
@@ -306,7 +301,10 @@ class SwipeControlsHostActivity(val activity: Activity) {
                 thisObject, "swipeControlsHost"
             ) as SwipeControlsHostActivity
 
+        private lateinit var dispatchDownstreamTouchEventMethod: XposedInterface.Invoker<*, Method?>
+
         @JvmStatic
+        context(xposed: XposedInterface)
         fun hookActivity(activityClass: Class<*>) {
             XposedBridge.hookAllConstructors(activityClass, object : XC_MethodHook() {
                 override fun afterHookedMethod(param: MethodHookParam) {
@@ -352,12 +350,14 @@ class SwipeControlsHostActivity(val activity: Activity) {
                         }
                     }
                 })
-            // To invoke a super method, the super method must be hooked too.
-            XposedHelpers.findAndHookMethod(
-                Activity::class.java,
-                "dispatchTouchEvent",
-                MotionEvent::class.java,
-                object : XC_MethodHook() {})
+
+            // invoke super method
+            dispatchDownstreamTouchEventMethod = xposed.getInvoker(
+                Activity::class.java.getDeclaredMethod(
+                    "dispatchTouchEvent",
+                    MotionEvent::class.java
+                )
+            )
 
             XposedHelpers.findAndHookMethod(
                 activityClass,
