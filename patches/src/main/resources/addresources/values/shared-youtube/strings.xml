@@ -1,7 +1,8 @@
 <!-- Shared with YouTube and YT Music -->
 <!--
+
     Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
-    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+    Raw strings still require escaping embedded double quotes but escaping embedded single quotes is optional.
 
     Raw strings are required because Crowdin AI translations regularly gets confused and
     replace \n with an encoded new line character.
@@ -20,6 +21,28 @@ Second \"item\" text"</string>
 
     <!-- layout.branding.baseCustomBrandingPatch -->
     <string name="morphe_custom_branding_name_title">App name</string>
+
+    <!-- layout.theme.baseThemePatch -->
+    <string name="morphe_theme_color_dark_title">Dark theme background</string>
+    <string name="morphe_theme_color_dark_entry_2">Pure black</string>
+    <string name="morphe_theme_color_dark_entry_3">Material You (Pure black)</string>
+    <string name="morphe_theme_color_dark_entry_8" translatable="false">Catppuccin (Mocha)</string>
+    <string name="morphe_theme_color_dark_entry_9">Classic YouTube</string>
+    <string name="morphe_theme_color_dark_entry_10">Dark pink</string>
+    <string name="morphe_theme_color_dark_entry_11">Dark blue</string>
+    <string name="morphe_theme_color_dark_entry_12">Dark green</string>
+    <string name="morphe_theme_color_dark_entry_13">Dark yellow</string>
+    <string name="morphe_theme_color_dark_entry_14">Dark orange</string>
+    <string name="morphe_theme_color_dark_entry_15">Dark red</string>
+    <string name="morphe_theme_color_dark_custom_title">Custom dark background</string>
+    <string name="morphe_theme_color_dark_custom_summary">Set the background color of the dark theme</string>
+
+    <string name="morphe_theme_color_entry_1">App default</string>
+    <string name="morphe_theme_color_entry_4">Material You (Neutral)</string>
+    <string name="morphe_theme_color_entry_5">Material You (Primary)</string>
+    <string name="morphe_theme_color_entry_6">Material You (Secondary)</string>
+    <string name="morphe_theme_color_entry_7">Material You (Tertiary)</string>
+    <string name="morphe_theme_color_custom_entry">Custom</string>
 
     <!-- interaction.downloads.downloadsPatch -->
     <string name="morphe_external_downloader_screen_title">External downloads</string>
@@ -86,11 +109,11 @@ To sign in, press continue below"</string>
     <!-- "Open website" must use the same translation as morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_open_website -->
     <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_message">"Activation code: %s
 
-1. Tap 'Open website' below to open the 'Connect a device' website
+1. Tap \'Open website\' below to open the \'Connect a device\' website
 2. Paste from the clipboard (or type out) the activation code shown above
 3. Sign in to Google if prompted. If you have multiple accounts then choose this YouTube account
-4. Tap 'Allow YouTube VR' access
-5. Return to this app after reaching the 'Device connected' message"</string>
+4. Tap \'Allow YouTube VR\' access
+5. Return to this app after reaching the \'Device connected\' message"</string>
     <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_open_website">Open website</string>
     <string name="morphe_spoof_video_streams_sign_in_android_vr_toast_get_activation_code_failed">Failed to issue an activation code</string>
     <string name="morphe_spoof_video_streams_sign_in_android_vr_toast_get_authorization_code_failed">Failed to issue an authentication token</string>
@@ -143,8 +166,8 @@ To sign in, press continue below"</string>
     <string name="morphe_hide_fullscreen_ads_title">Hide fullscreen ads</string>
 
     <!-- 'Spoof video streams' should match the language used in 'morphe_spoof_video_streams_screen_title'.
-          'Android Studio' must be kept untranslated. -->
-    <string name="morphe_force_original_audio_not_available">To use this feature, change \'Spoof video streams\' to any client except \'Android Studio\'</string>
+          'Android Studio' and 'Android VR Downgraded' must be kept untranslated. -->
+    <string name="morphe_force_original_audio_not_available">To use this feature, change \'Spoof video streams\' to any client except \'Android Studio\' and \'Android VR Downgraded\'</string>
 
     <!-- misc.privacy.sanitizeSharingLinksPatch -->
     <string name="morphe_sanitize_sharing_links_title">Sanitize sharing links</string>
@@ -176,6 +199,10 @@ However, enabling this will also log some user data such as your IP address."</s
     <string name="morphe_settings_menu_filter_screen_title">Settings menu filter</string>
     <string name="morphe_settings_menu_filter_screen_summary">Hide items on the standard app settings screen by their visible name</string>
     <string name="morphe_settings_menu_filter_picker_empty">Open the standard app settings screen once to populate the list</string>
+
+    <!-- interaction.dialog.removeViewerDiscretionDialogPatch -->
+    <string name="morphe_remove_viewer_discretion_dialog_title">Remove viewer discretion dialog</string>
+    <string name="morphe_remove_viewer_discretion_dialog_summary">This does not bypass the age restriction. It just accepts it automatically</string>
 
     <!-- misc.spoof.appversion.spoofAppVersionPatch -->
     <string name="morphe_spoof_app_version_title">Spoof app version</string>

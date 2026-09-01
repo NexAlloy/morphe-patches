@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Shared with YouTube and YT Music -->
 <!--
+
     Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
-    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+    Raw strings still require escaping embedded double quotes but escaping embedded single quotes is optional.
 
     Raw strings are required because Crowdin AI translations regularly gets confused and
     replace \n with an encoded new line character.
@@ -20,6 +21,23 @@ Second \"item\" text"</string>
   <string name="morphe_restart_first_run">Reštartujte aplikáciu, aby sa dokončila konfigurácia</string>
   <!-- layout.branding.baseCustomBrandingPatch -->
   <string name="morphe_custom_branding_name_title">Názov aplikácie</string>
+  <!-- layout.theme.baseThemePatch -->
+  <string name="morphe_theme_color_dark_title">Pozadie tmavého motívu</string>
+  <string name="morphe_theme_color_dark_entry_2">Čistá čierna</string>
+  <string name="morphe_theme_color_dark_entry_3">Material You (čistá čierna)</string>
+  <string name="morphe_theme_color_dark_entry_9">Klasické YouTube</string>
+  <string name="morphe_theme_color_dark_entry_10">Tmavá ružová</string>
+  <string name="morphe_theme_color_dark_entry_11">Tmavomodrá</string>
+  <string name="morphe_theme_color_dark_entry_12">Tmavozelená</string>
+  <string name="morphe_theme_color_dark_entry_13">Tmavožltá</string>
+  <string name="morphe_theme_color_dark_entry_14">Tmavooranžová</string>
+  <string name="morphe_theme_color_dark_entry_15">Tmav červená</string>
+  <string name="morphe_theme_color_entry_1">Predvolené aplikáciou</string>
+  <string name="morphe_theme_color_entry_4">Material You (Neutrálne)</string>
+  <string name="morphe_theme_color_entry_5">Material You (Primárne)</string>
+  <string name="morphe_theme_color_entry_6">Material You (Sekundárne)</string>
+  <string name="morphe_theme_color_entry_7">Material You (Ternárne)</string>
+  <string name="morphe_theme_color_custom_entry">Vlastná</string>
   <!-- interaction.downloads.downloadsPatch -->
   <string name="morphe_external_downloader_screen_title">Externé sťahovanie</string>
   <string name="morphe_external_downloader_name_title">Názov balíka programu na stiahovanie</string>
@@ -132,8 +150,8 @@ Ak sa chcete prihlásiť, stlačte tlačidlo Pokračovať"</string>
   <!-- ad.hideFullscreenAdsPatch -->
   <string name="morphe_hide_fullscreen_ads_title">Skryť reklamy na celú obrazovku</string>
   <!-- 'Spoof video streams' should match the language used in 'morphe_spoof_video_streams_screen_title'.
-          'Android Studio' must be kept untranslated. -->
-  <string name="morphe_force_original_audio_not_available">Na používanie tejto funkcie zmeňte \'Falšovanie toků videa\' na akýkoľvek klienta okrem \'Android Studio\'</string>
+          'Android Studio' and 'Android VR Downgraded' must be kept untranslated. -->
+  <string name="morphe_force_original_audio_not_available">Ak chcete použiť túto funkciu, zmeňte \'Spoofovanie video streamov\' na ľubovoľného klienta okrem \'Android Studio\' a \'Android VR Downgraded\'</string>
   <!-- misc.privacy.sanitizeSharingLinksPatch -->
   <string name="morphe_sanitize_sharing_links_title">Vyčistiť odkazy na zdieľanie</string>
   <string name="morphe_sanitize_sharing_links_summary">Odstráni parametre sledovania dotazov zo zdieľaných odkazov</string>
@@ -161,6 +179,9 @@ Zapnutie tohto nastavenia však zaznamená aj niektoré údaje o používateľov
   <string name="morphe_settings_menu_filter_screen_title">Filter ponuky nastavení</string>
   <string name="morphe_settings_menu_filter_screen_summary">Skryť položky na štandardnej obrazovke nastavení aplikácie podľa ich viditeľného názvu</string>
   <string name="morphe_settings_menu_filter_picker_empty">Otvorte štandardnú obrazovku nastavení aplikácie raz, aby ste vyplnili zoznam</string>
+  <!-- interaction.dialog.removeViewerDiscretionDialogPatch -->
+  <string name="morphe_remove_viewer_discretion_dialog_title">Odstrániť dialóg o upozornení na obsah</string>
+  <string name="morphe_remove_viewer_discretion_dialog_summary">Toto neobchádza vekové obmedzenie. Len ho automaticky prijme</string>
   <!-- misc.spoof.appversion.spoofAppVersionPatch -->
   <string name="morphe_spoof_app_version_title">Falošovať verziu aplikácie</string>
   <string name="morphe_spoof_app_version_summary">Oklame server, aby si myslel, žoužívaš staršiu verziu aplikácie na obnovenie staršieho vzhľadu.</string>

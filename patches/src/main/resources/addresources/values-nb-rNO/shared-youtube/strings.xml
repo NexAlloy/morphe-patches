@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Shared with YouTube and YT Music -->
 <!--
+
     Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
-    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+    Raw strings still require escaping embedded double quotes but escaping embedded single quotes is optional.
 
     Raw strings are required because Crowdin AI translations regularly gets confused and
     replace \n with an encoded new line character.
@@ -20,6 +21,25 @@ Second \"item\" text"</string>
   <string name="morphe_restart_first_run">Start på nytt for å fullføre oppsettet</string>
   <!-- layout.branding.baseCustomBrandingPatch -->
   <string name="morphe_custom_branding_name_title">Appnavn</string>
+  <!-- layout.theme.baseThemePatch -->
+  <string name="morphe_theme_color_dark_title">Bakgrunn for mørkt tema</string>
+  <string name="morphe_theme_color_dark_entry_2">Rent svart</string>
+  <string name="morphe_theme_color_dark_entry_3">Material You (Kremhvit svart)</string>
+  <string name="morphe_theme_color_dark_entry_9">Klassisk YouTube </string>
+  <string name="morphe_theme_color_dark_entry_10">Mørk rosa </string>
+  <string name="morphe_theme_color_dark_entry_11">Mørk blå </string>
+  <string name="morphe_theme_color_dark_entry_12">Mørk grønn </string>
+  <string name="morphe_theme_color_dark_entry_13">Mørk gul </string>
+  <string name="morphe_theme_color_dark_entry_14">Mørk oransje </string>
+  <string name="morphe_theme_color_dark_entry_15">Mørk rød </string>
+  <string name="morphe_theme_color_dark_custom_title">Egendefinert mørk bakgrunn</string>
+  <string name="morphe_theme_color_dark_custom_summary">Angi bakgrunnsfargen for det mørke temaet</string>
+  <string name="morphe_theme_color_entry_1">App-standard</string>
+  <string name="morphe_theme_color_entry_4">Material You (Nøytral) </string>
+  <string name="morphe_theme_color_entry_5">Material You (Primær) </string>
+  <string name="morphe_theme_color_entry_6">Material You (Sekundær) </string>
+  <string name="morphe_theme_color_entry_7">Material You (Tertiær) </string>
+  <string name="morphe_theme_color_custom_entry">Tilpasset</string>
   <!-- interaction.downloads.downloadsPatch -->
   <string name="morphe_external_downloader_screen_title">Eksterne nedlastinger</string>
   <string name="morphe_external_downloader_name_title">Nedlastingspakkenavn</string>
@@ -132,8 +152,8 @@ Trykk på Fortsett nedenfor for å logge på"</string>
   <!-- ad.hideFullscreenAdsPatch -->
   <string name="morphe_hide_fullscreen_ads_title">Skjul reklamer i fullskjerm</string>
   <!-- 'Spoof video streams' should match the language used in 'morphe_spoof_video_streams_screen_title'.
-          'Android Studio' must be kept untranslated. -->
-  <string name="morphe_force_original_audio_not_available">For å bruke denne funksjonen, endre \"Spoof video streams\" til en annen klient enn \"Android Studio\".</string>
+          'Android Studio' and 'Android VR Downgraded' must be kept untranslated. -->
+  <string name="morphe_force_original_audio_not_available">For å bruke denne funksjonen, endre \'Forfalsk videostrømmer\' til en hvilken som helst klient unntatt \'Android Studio\' og \'Android VR Downgraded\'</string>
   <!-- misc.privacy.sanitizeSharingLinksPatch -->
   <string name="morphe_sanitize_sharing_links_title">Sanere delingslenker</string>
   <string name="morphe_sanitize_sharing_links_summary">Fjerner sporingsparametere fra delte lenker</string>
@@ -161,6 +181,9 @@ Men, hvis du aktiverer dette, vil også noe brukerdata, som for eksempel IP-adre
   <string name="morphe_settings_menu_filter_screen_title">Innstillingsmenyfilter</string>
   <string name="morphe_settings_menu_filter_screen_summary">Skjul elementer på appens standardinnstillingsskjerm etter synlig navn</string>
   <string name="morphe_settings_menu_filter_picker_empty">Åpne appens standardinnstillingsskjerm én gang for å fylle listen</string>
+  <!-- interaction.dialog.removeViewerDiscretionDialogPatch -->
+  <string name="morphe_remove_viewer_discretion_dialog_title">Fjern dialog om forholdsregler for seere</string>
+  <string name="morphe_remove_viewer_discretion_dialog_summary">Dette omgår ikke aldersgrensen. Den godtar bare automatisk</string>
   <!-- misc.spoof.appversion.spoofAppVersionPatch -->
   <string name="morphe_spoof_app_version_title">Forfalske app-versjon</string>
   <string name="morphe_spoof_app_version_summary">Lurer serveren til å tro at du bruker en eldre app-versjon for å gjenopprette gamle brukergrensesnittfunksjoner</string>

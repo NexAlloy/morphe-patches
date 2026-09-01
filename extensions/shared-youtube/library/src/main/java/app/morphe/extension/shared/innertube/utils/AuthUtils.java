@@ -10,8 +10,6 @@ package app.morphe.extension.shared.innertube.utils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import org.apache.commons.collections4.MapUtils;
-
 import java.util.Map;
 
 import app.morphe.extension.shared.Logger;
@@ -34,7 +32,7 @@ public class AuthUtils {
      * Injection point.
      */
     public static void setRequestHeaders(String url, Map<String, String> requestHeaders) {
-        if (!MapUtils.isEmpty(requestHeaders)) {
+        if (requestHeaders != null && !requestHeaders.isEmpty()) {
             String newlyLoadedAuthorization = requestHeaders.get(AUTHORIZATION_HEADER);
             String newlyLoadedVisitorId = requestHeaders.get(VISITOR_ID_HEADER);
 
@@ -70,6 +68,16 @@ public class AuthUtils {
             VISITOR_ID_HEADER, visitorId,
             PAGE_ID_HEADER, pageId
         );
+    }
+
+    @NonNull
+    public static String getAuthorization() {
+        return authorization;
+    }
+
+    @NonNull
+    public static String getVisitorId() {
+        return visitorId;
     }
 
     public static boolean isNotLoggedIn() {

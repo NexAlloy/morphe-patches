@@ -21,11 +21,15 @@ import app.morphe.patcher.util.Document
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import app.morphe.patches.all.misc.resources.resourceMappingPatch
 import app.morphe.patches.shared.misc.settings.preference.SwitchPreference
+import app.morphe.patches.youtube.misc.addon.EXTENSION_ADD_ON_API_CLASS_DESCRIPTOR
+import app.morphe.patches.youtube.misc.addon.LEGACY_BUTTON_SLOTS_RESOURCE_DIRECTORY
 import app.morphe.patches.youtube.misc.extension.sharedExtensionPatch
 import app.morphe.patches.youtube.misc.playservice.is_20_28_or_greater
 import app.morphe.patches.youtube.misc.playservice.is_20_30_or_greater
 import app.morphe.patches.youtube.misc.playservice.is_20_31_or_greater
 import app.morphe.patches.youtube.misc.playservice.is_20_40_or_greater
+import app.morphe.patches.youtube.misc.playservice.is_21_08_or_greater
+import app.morphe.patches.youtube.misc.playservice.is_21_15_or_greater
 import app.morphe.patches.youtube.misc.playservice.versionCheckPatch
 import app.morphe.patches.youtube.misc.settings.PreferenceScreen
 import app.morphe.patches.youtube.misc.settings.settingsPatch
@@ -160,6 +164,9 @@ internal val legacyPlayerControlsResourcePatch = resourcePatch {
 
             sourceDocument.close()
         }
+
+        // Button slots of add-on patch bundles, which cannot add a button of their own.
+        addLegacyBottomControl(LEGACY_BUTTON_SLOTS_RESOURCE_DIRECTORY)
     }
 
     finalize {
@@ -186,7 +193,8 @@ internal val legacyPlayerControlsResourcePatch = resourcePatch {
 internal fun initializeTopControl(descriptor: String) {
     inflateTopControlMethodRef.get()!!.addInstruction(
         inflateTopControlInsertIndex++,
-        "invoke-static { v$inflateTopControlRegister }, $descriptor->initializeLegacyButton(Landroid/view/View;)V",
+        "invoke-static { v$inflateTopControlRegister }, $descriptor->" +
+                "initializeLegacyButton(Landroid/view/View;)V",
     )
 }
 
@@ -197,7 +205,8 @@ internal fun initializeTopControl(descriptor: String) {
 fun initializeLegacyBottomControl(descriptor: String) {
     inflateBottomControlMethodRef.get()!!.addInstruction(
         inflateBottomControlInsertIndex++,
-        "invoke-static { v$inflateBottomControlRegister }, $descriptor->initializeLegacyButton(Landroid/view/View;)V",
+        "invoke-static { v$inflateBottomControlRegister }, $descriptor->" +
+                "initializeLegacyButton(Landroid/view/View;)V",
     )
 }
 
@@ -230,32 +239,30 @@ val legacyPlayerControlsPatch = bytecodePatch(
             )
         }
 
-        PlayerBottomControlsInflateFingerprint.let {
-            it.method.apply {
-                inflateBottomControlMethodRef = WeakReference(this)
-
-                val inflateReturnObjectIndex = it.instructionMatches.last().index
-                inflateBottomControlRegister = getInstruction<OneRegisterInstruction>(inflateReturnObjectIndex).registerA
-                inflateBottomControlInsertIndex = inflateReturnObjectIndex + 1
-            }
-        }
-
-        PlayerTopControlsInflateFingerprint.let {
-            it.method.apply {
-                inflateTopControlMethodRef = WeakReference(this)
-
-                val inflateReturnObjectIndex = it.instructionMatches.last().index
-                inflateTopControlRegister = getInstruction<OneRegisterInstruction>(inflateReturnObjectIndex).registerA
-                inflateTopControlInsertIndex = inflateReturnObjectIndex + 1
+        // Override flags that interfere with old player icons override.
+        arrayOf(
+            PlayerControlsModernAccessibilityFeatureFlagFingerprint to is_21_08_or_greater,
+            PlayerCommentTeaserFeatureFlagFingerprint to is_21_15_or_greater,
+            RecycleViewScrollingFlagFingerprint to is_21_15_or_greater
+        ).forEach { (fingerprint, applyChanges) ->
+            if (applyChanges) {
+                fingerprint.matchAll().forEach {
+                    it.method.insertLiteralOverride(
+                        it.instructionMatches.first().index,
+                        "$EXTENSION_CLASS->" +
+                                "allowModernPlayerLayoutFlags(Z)Z"
+                    )
+                }
             }
         }
 
         fun overrideExploderLayout(fingerprint: Fingerprint) {
-            fingerprint.let {
+            fingerprint.matchAll().forEach {
+                // 21.30+ inlines the flag lookup and must patch ~6 places.
                 it.method.insertLiteralOverride(
                     it.instructionMatches.first().index,
                     "$EXTENSION_CLASS->" +
-                            "usePlayerBottomControlsExploderLayout(Z)Z",
+                            "usePlayerBottomControlsExploderLayout(Z)Z"
                 )
             }
         }
@@ -314,5 +321,30 @@ val legacyPlayerControlsPatch = bytecodePatch(
                 }
             }
         }
+
+        // Must get methods after overriding flags,
+        // since flag overrides can add instructions and break the indexes used here.
+        PlayerBottomControlsInflateFingerprint.let {
+            it.method.apply {
+                inflateBottomControlMethodRef = WeakReference(this)
+
+                val inflateReturnObjectIndex = it.instructionMatches.last().index
+                inflateBottomControlRegister = getInstruction<OneRegisterInstruction>(inflateReturnObjectIndex).registerA
+                inflateBottomControlInsertIndex = inflateReturnObjectIndex + 1
+            }
+        }
+
+        PlayerTopControlsInflateFingerprint.let {
+            it.method.apply {
+                inflateTopControlMethodRef = WeakReference(this)
+
+                val inflateReturnObjectIndex = it.instructionMatches.last().index
+                inflateTopControlRegister = getInstruction<OneRegisterInstruction>(inflateReturnObjectIndex).registerA
+                inflateTopControlInsertIndex = inflateReturnObjectIndex + 1
+            }
+        }
+
+        // Buttons of add-on patch bundles, which cannot add a button of their own.
+        initializeLegacyBottomControl(EXTENSION_ADD_ON_API_CLASS_DESCRIPTOR)
     }
 }

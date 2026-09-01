@@ -18,7 +18,6 @@ import java.util.List;
 
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.StringTrieSearch;
-import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.settings.BaseSettings;
 import app.morphe.extension.shared.settings.SharedYouTubeSettings;
 
@@ -160,6 +159,7 @@ public final class LithoFilterPatch {
         try {
             String identifier = contextInterface.patch_getIdentifier();
             StringBuilder pathBuilder = contextInterface.patch_getPathBuilder();
+            //noinspection SizeReplaceableByIsEmpty
             if (identifier.isEmpty() || pathBuilder.length() == 0) {
                 return false;
             }
@@ -175,9 +175,9 @@ public final class LithoFilterPatch {
                 accessibility = "";
             }
 
-            byte[] buffer = is_20_22_or_greater()
-                    ? bytes
-                    : bufferThreadLocal.get();
+            byte[] buffer = useLegacyLithoFiltering()
+                    ? bufferThreadLocal.get()
+                    : bytes;
             // Potentially the buffer may have been null or never set up until now.
             // Use an empty buffer so the litho id/path filters that do not use a buffer still work.
             if (buffer == null) {
@@ -198,8 +198,8 @@ public final class LithoFilterPatch {
         return false;
     }
 
-    private static boolean is_20_22_or_greater() {
-        return Utils.getAppVersionName().compareTo("20.22.00") >= 0;
+    private static boolean useLegacyLithoFiltering() {
+        return false; // Method is modified during patching.
     }
 
     /**

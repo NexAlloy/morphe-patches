@@ -1,6 +1,7 @@
 /*
  * Copyright 2026 Morphe.
  * https://github.com/MorpheApp/morphe-patches
+ * https://github.com/MorpheApp/morphe-patches/pull/2451
  *
  * Original hard forked code:
  * https://github.com/ReVanced/revanced-patches/commit/724e6d61b2ecd868c1a9a37d465a688e83a74799
@@ -16,6 +17,7 @@ import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
 import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
+import app.morphe.patcher.methodCall
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
@@ -36,6 +38,7 @@ import app.morphe.patches.youtube.misc.navigation.hookNavigationButtonCreated
 import app.morphe.patches.youtube.misc.navigation.navigationBarHookPatch
 import app.morphe.patches.youtube.misc.playservice.is_20_31_or_greater
 import app.morphe.patches.youtube.misc.playservice.is_20_46_or_greater
+import app.morphe.patches.youtube.misc.playservice.is_21_30_or_greater
 import app.morphe.patches.youtube.misc.playservice.versionCheckPatch
 import app.morphe.patches.youtube.misc.settings.PreferenceScreen
 import app.morphe.patches.youtube.misc.settings.settingsPatch
@@ -44,6 +47,7 @@ import app.morphe.patches.youtube.misc.toolbar.toolBarHookPatch
 import app.morphe.patches.youtube.shared.ActionBarSearchResultsFingerprint
 import app.morphe.patches.youtube.shared.Constants.COMPATIBILITY_YOUTUBE
 import app.morphe.util.addInstructionsAtControlFlowLabel
+import app.morphe.util.findInstructionIndicesReversedOrThrow
 import app.morphe.util.getFreeRegisterProvider
 import app.morphe.util.getReference
 import app.morphe.util.insertLiteralOverride
@@ -97,19 +101,12 @@ val navigationBarPatch = bytecodePatch(
             ListPreference("morphe_show_settings_button_index"),
             SwitchPreference("morphe_show_settings_button_type", summary = true),
             SwitchPreference("morphe_swap_create_with_notifications_button", summary = true),
-            SwitchPreference("morphe_hide_navigation_button_labels"),
-            SwitchPreference("morphe_narrow_navigation_buttons", summary = true),
             SwitchPreference("morphe_hide_navigation_bar"),
+            SwitchPreference("morphe_narrow_navigation_buttons", summary = true),
+            SwitchPreference("morphe_hide_navigation_button_labels"),
+            SwitchPreference("morphe_navigation_bar_animations", summary = true),
+            SwitchPreference("morphe_disable_translucent_navigation", summary = true)
         )
-
-        navPreferences += SwitchPreference("morphe_disable_translucent_navigation_bar_light", summary = true)
-        navPreferences += SwitchPreference("morphe_disable_translucent_navigation_bar_dark", summary = true)
-
-        PreferenceScreen.GENERAL.addPreferences(
-            SwitchPreference("morphe_disable_translucent_status_bar", summary = true)
-        )
-
-        navPreferences += SwitchPreference("morphe_navigation_bar_animations", summary = true)
 
         if (is_20_31_or_greater) {
             navPreferences += SwitchPreference("morphe_disable_auto_hide_navigation_bar", summary = true)
@@ -126,7 +123,7 @@ val navigationBarPatch = bytecodePatch(
         // Swap create with notifications button.
         addOSNameHook(
             Endpoint.GUIDE,
-            "$EXTENSION_CLASS->swapCreateWithNotificationButton(Ljava/lang/String;)Ljava/lang/String;",
+            "$EXTENSION_CLASS->swapCreateWithNotificationButton(Ljava/lang/String;)Ljava/lang/String;"
         )
 
         // Hide navigation button labels.
@@ -138,7 +135,7 @@ val navigationBarPatch = bytecodePatch(
                 addInstruction(
                     setTextIndex,
                     "invoke-static { v$targetRegister }, " +
-                            "$EXTENSION_CLASS->hideNavigationButtonLabels(Landroid/widget/TextView;)V",
+                            "$EXTENSION_CLASS->hideNavigationButtonLabels(Landroid/widget/TextView;)V"
                 )
             }
         }
@@ -150,42 +147,84 @@ val navigationBarPatch = bytecodePatch(
         addBottomBarContainerHook("$EXTENSION_CLASS->hideNavigationBar(Landroid/view/View;)V")
 
         // Force on/off translucent effect on status bar and navigation buttons.
-        TranslucentNavigationStatusBarFeatureFlagFingerprint.let {
+        if (is_20_31_or_greater) {
+            val translucentStatusBarFilter = if (is_21_30_or_greater) {
+                TRANSLUCENT_STATUS_BAR_FILTER
+            } else {
+                methodCall(TranslucentNavigationStatusBarFeatureFlagFingerprint.originalMethod)
+            }
+
+            arrayOf(
+                translucentImmersiveFingerprint(translucentStatusBarFilter),
+                translucentCheckOnTextFingerprint(translucentStatusBarFilter),
+                translucentYouTabFingerprint(translucentStatusBarFilter),
+                translucentUpdateStatusBarFingerprint(translucentStatusBarFilter)
+            ).forEach { fingerprint ->
+                fingerprint.matchAll().forEach {
+                    if (is_21_30_or_greater) {
+                        it.method.insertLiteralOverride(
+                            it.instructionMatches.last().index,
+                            "$EXTENSION_CLASS->useTranslucentNavigation(Z)Z"
+                        )
+                        return@forEach
+                    }
+
+                    it.method.apply {
+                        findInstructionIndicesReversedOrThrow(translucentStatusBarFilter).forEach { index ->
+                            val instruction = getInstruction(index + 1)
+                            if (instruction.opcode != Opcode.MOVE_RESULT) {
+                                return@forEach
+                            }
+                            val register = (instruction as OneRegisterInstruction).registerA
+                            addInstructions(
+                                index + 2,
+                                """
+                                    invoke-static { v$register }, $EXTENSION_CLASS->useTranslucentNavigation(Z)Z
+                                    move-result v$register
+                                """
+                            )
+                        }
+                    }
+                }
+            }
+        } else {
+            TranslucentNavigationStatusBarFeatureFlagFingerprint.let {
+                it.method.insertLiteralOverride(
+                    it.instructionMatches.first().index,
+                    "$EXTENSION_CLASS->useTranslucentNavigation(Z)Z"
+                )
+            }
+        }
+
+        TranslucentNavigationButtonsSystemFeatureFlagFingerprint.matchAll().forEach {
             it.method.insertLiteralOverride(
                 it.instructionMatches.first().index,
-                "$EXTENSION_CLASS->useTranslucentNavigationStatusBar(Z)Z",
+                "$EXTENSION_CLASS->useTranslucentNavigation(Z)Z"
             )
         }
 
-        TranslucentNavigationButtonsFeatureFlagFingerprint.let {
+        TranslucentNavigationButtonsFeatureFlagFingerprint.matchAll().forEach {
             it.method.insertLiteralOverride(
                 it.instructionMatches.first().index,
-                "$EXTENSION_CLASS->useTranslucentNavigationButtons(Z)Z",
-            )
-        }
-
-        TranslucentNavigationButtonsSystemFeatureFlagFingerprint.let {
-            it.method.insertLiteralOverride(
-                it.instructionMatches.first().index,
-                "$EXTENSION_CLASS->useTranslucentNavigationButtons(Z)Z",
-            )
-        }
-
-        AnimatedNavigationTabsFeatureFlagFingerprint.let {
-            it.method.insertLiteralOverride(
-                it.instructionMatches.first().index,
-                "$EXTENSION_CLASS->useAnimatedNavigationButtons(Z)Z"
+                "$EXTENSION_CLASS->useTranslucentNavigation(Z)Z"
             )
         }
 
         if (is_20_46_or_greater) {
             // Feature interferes with translucent status bar and must be forced off.
-            CollapsingToolbarLayoutFeatureFlagFingerprint.let {
+            CollapsingToolbarLayoutFeatureFlagFingerprint.matchAll().forEach {
                 it.method.insertLiteralOverride(
                     it.instructionMatches.first().index,
                     "$EXTENSION_CLASS->allowCollapsingToolbarLayout(Z)Z"
                 )
             }
+        }
+
+        AnimatedNavigationTabsFeatureFlagFingerprint.matchAll().forEach {
+            it.method.insertLiteralOverride(
+                it.instructionMatches.first().index,
+                "$EXTENSION_CLASS->useAnimatedNavigationButtons(Z)Z"
+            )
         }
 
         arrayOf(
@@ -302,7 +341,7 @@ val navigationBarPatch = bytecodePatch(
                         # Restore MessageLite register one last time for safety
                         move-object/16 v$messageLiteRegister, v$backupRegister
                         nop
-                        """
+                    """
                 )
             }
         }

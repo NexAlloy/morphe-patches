@@ -174,6 +174,7 @@ val hideLayoutComponentsPatch = bytecodePatch(
                     SwitchPreference("morphe_hide_comments_gift_button"),
                     SwitchPreference("morphe_hide_comments_info_button"),
                     SwitchPreference("morphe_hide_comments_live_chat_donators_bar"),
+                    SwitchPreference("morphe_hide_comments_live_chat_tooltips", summary = true),
                     SwitchPreference("morphe_hide_comments_preview_comment", summary = true),
                     SwitchPreference("morphe_hide_comments_thanks_button"),
                     SwitchPreference("morphe_hide_comments_timestamp_button"),
@@ -183,12 +184,14 @@ val hideLayoutComponentsPatch = bytecodePatch(
             ),
             SwitchPreference("morphe_hide_channel_bar"),
             SwitchPreference("morphe_hide_channel_watermark"),
+            SwitchPreference("morphe_hide_chapters_timeline_button"),
             SwitchPreference("morphe_hide_crowdfunding_box"),
             SwitchPreference("morphe_hide_emergency_box"),
             SwitchPreference("morphe_hide_info_panels", summary = true),
             SwitchPreference("morphe_hide_join_membership_button"),
             SwitchPreference("morphe_hide_live_chat_replay_button", summary = true),
             SwitchPreference("morphe_hide_medical_panels"),
+            SwitchPreference("morphe_hide_player_gesture_hints", summary = true),
             SwitchPreference("morphe_hide_snackbar"),
             SwitchPreference("morphe_hide_subscribers_community_guidelines"),
             SwitchPreference("morphe_hide_sync_button"),
@@ -213,6 +216,7 @@ val hideLayoutComponentsPatch = bytecodePatch(
                         SwitchPreference("morphe_hide_news_menu"),
                         SwitchPreference("morphe_hide_sports_menu"),
                         SwitchPreference("morphe_hide_courses_menu"),
+                        SwitchPreference("morphe_hide_learning_menu"),
                         SwitchPreference("morphe_hide_fashion_menu"),
                         SwitchPreference("morphe_hide_podcasts_menu"),
                         SwitchPreference("morphe_hide_playables_menu"),
@@ -222,6 +226,7 @@ val hideLayoutComponentsPatch = bytecodePatch(
                         SwitchPreference("morphe_hide_youtube_music_menu"),
                         SwitchPreference("morphe_hide_youtube_kids_menu"),
                         SwitchPreference("morphe_hide_youtube_create_menu"),
+                        SwitchPreference("morphe_hide_youtube_works_menu"),
                         SwitchPreference("morphe_hide_privacy_tos_footer")
                     )
                 )
@@ -384,9 +389,11 @@ val hideLayoutComponentsPatch = bytecodePatch(
             SwitchPreference("morphe_hide_horizontal_shelves", summary = true),
             SwitchPreference("morphe_hide_hyped_label"),
             SwitchPreference("morphe_hide_image_shelf", summary = true),
+            SwitchPreference("morphe_hide_invite_to_message_card", summary = true),
             SwitchPreference("morphe_hide_latest_videos_button", summary = true),
             SwitchPreference("morphe_hide_mix_playlists"),
             SwitchPreference("morphe_hide_movies_section"),
+            SwitchPreference("morphe_hide_notifications_menu_header", summary = true),
             SwitchPreference("morphe_hide_notify_me_button", summary = true),
             SwitchPreference("morphe_hide_playables", summary = true),
             SwitchPreference("morphe_hide_search_term_thumbnails", summary = true),
@@ -1015,6 +1022,25 @@ val hideLayoutComponentsPatch = bytecodePatch(
 
         // endregion
 
+        // region hide live chat tooltips
+
+        TooltipAnchorViewFingerprint.let {
+            it.method.apply {
+                val anchorFieldGetIndex = it.instructionMatches.first().index
+                val anchorRegister = getInstruction<TwoRegisterInstruction>(anchorFieldGetIndex).registerA
+
+                addInstructions(
+                    anchorFieldGetIndex + 1,
+                    """
+                        invoke-static { v$anchorRegister }, $COMMENTS_FILTER->hideLiveChatTooltip(Landroid/view/View;)Landroid/view/View;
+                        move-result-object v$anchorRegister
+                    """
+                )
+            }
+        }
+
+        // endregion
+
         // region hide live chat emoji button
 
         ThumbnailAndEmojiPickerContainerFingerprint.let {
@@ -1152,6 +1178,22 @@ val hideLayoutComponentsPatch = bytecodePatch(
                 COMMENTS_FILTER,
                 "hideLiveChatGiftButton"
             )
+        }
+
+        // endregion
+
+        // region hide player chapters & timeline button
+
+        HideTimeBarEntryPointContainerFingerprint.let {
+            it.method.apply {
+                val index = it.instructionMatches.last().index
+                val register = getInstruction<OneRegisterInstruction>(index).registerA
+
+                addInstruction(
+                    index + 1,
+                    "invoke-static { v$register }, $LAYOUT_COMPONENTS_FILTER->hideChaptersTimelineButton(Landroid/view/View;)V"
+                )
+            }
         }
 
         // endregion

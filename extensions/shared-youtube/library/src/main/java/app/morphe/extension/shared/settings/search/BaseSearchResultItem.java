@@ -1,7 +1,16 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-patches
+ *
+ * Original hard forked code:
+ * https://github.com/ReVanced/revanced-patches/commit/724e6d61b2ecd868c1a9a37d465a688e83a74799
+ *
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
+ */
+
 package app.morphe.extension.shared.settings.search;
 
 import android.graphics.Color;
-import android.os.Build;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.SwitchPreference;
@@ -23,6 +32,7 @@ import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.settings.preference.ColorPickerPreference;
 import app.morphe.extension.shared.settings.preference.CustomDialogListPreference;
 import app.morphe.extension.shared.settings.preference.URLLinkPreference;
+import app.morphe.extension.shared.theme.ThemeUtils;
 
 /**
  * Abstract base class for search result items, defining common fields and behavior.
@@ -81,7 +91,7 @@ public abstract class BaseSearchResultItem {
         if (TextUtils.isEmpty(text) || queryPattern == null) return text;
 
         final int adjustedColor = Utils.adjustColorBrightness(
-                Utils.getAppBackgroundColor(), 0.95f, 1.20f);
+                ThemeUtils.getAppBackgroundColor(), 0.95f, 1.20f);
         BackgroundColorSpan highlightSpan = new BackgroundColorSpan(adjustedColor);
         SpannableStringBuilder spannable = new SpannableStringBuilder(text);
 
@@ -224,11 +234,9 @@ public abstract class BaseSearchResultItem {
          */
         private void appendText(StringBuilder builder, CharSequence text) {
             if (!TextUtils.isEmpty(text)) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
-                    if (!builder.isEmpty()) builder.append(" ");
-                } else {
-                    //noinspection SizeReplaceableByIsEmpty
-                    if (builder.length() > 0) builder.append(" ");
+                //noinspection SizeReplaceableByIsEmpty
+                if (builder.length() > 0) {
+                    builder.append(" ");
                 }
                 builder.append(Utils.normalizeTextToLowercase(text));
             }

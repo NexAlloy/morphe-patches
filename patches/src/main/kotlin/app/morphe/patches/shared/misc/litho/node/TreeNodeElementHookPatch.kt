@@ -11,12 +11,11 @@ import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
 import app.morphe.patcher.patch.BytecodePatch
+import app.morphe.patcher.patch.BytecodePatchBuilder
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.util.proxy.mutableTypes.MutableClass
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
-import app.morphe.patches.music.layout.buttons.action.TreeNodeListFingerprint
-import app.morphe.patches.music.layout.buttons.action.TreeNodeListHelperConstructorFingerprint
 import app.morphe.patches.shared.misc.litho.context.EXTENSION_CONTEXT_INTERFACE
 import app.morphe.util.addInstructionsAtControlFlowLabel
 import app.morphe.util.getFreeRegisterProvider
@@ -53,7 +52,8 @@ private lateinit var lazilyConvertedElementLoadedMethodRef: WeakReference<Mutabl
 internal fun createTreeNodeElementHookPatch(
     sharedExtensionPatchDep: BytecodePatch,
     conversionContextPatchDep: BytecodePatch,
-    addLithoContainerInterface: Boolean
+    addLithoContainerInterface: Boolean,
+    useLegacyContextRegister: BytecodePatchBuilder.() -> Boolean
 ): BytecodePatch = bytecodePatch(
     description = "Hooks the tree node element lists to the extension."
 ) {
@@ -120,12 +120,18 @@ internal fun createTreeNodeElementHookPatch(
                 addLithoContainerInterface(it.classDef, field)
             }
 
-            // FIXME: This needs an update for 20.51.39 and older.
             TreeNodeListHelperConstructorFingerprint.let {
-                val p2 = it.method.p0Register + 2
-                val index = it.method.indexOfFirstInstructionOrThrow {
-                    opcode == Opcode.IPUT_OBJECT && (this as TwoRegisterInstruction).registerA == p2
+                val index = if (useLegacyContextRegister()) {
+                    val p2 = it.method.p0Register + 2
+                    it.method.indexOfFirstInstructionOrThrow {
+                        opcode == Opcode.IPUT_OBJECT && (this as TwoRegisterInstruction).registerA == p2
+                    }
+                } else {
+                    it.method.indexOfFirstInstructionOrThrow {
+                        opcode == Opcode.IPUT_OBJECT
+                    }
                 }
+
                 val field = it.method.getInstruction<ReferenceInstruction>(index)
                     .getReference<FieldReference>()!!
 

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Shared with YouTube and YT Music -->
 <!--
+
     Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
-    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+    Raw strings still require escaping embedded double quotes but escaping embedded single quotes is optional.
 
     Raw strings are required because Crowdin AI translations regularly gets confused and
     replace \n with an encoded new line character.
@@ -20,6 +21,25 @@ Second \"item\" text"</string>
   <string name="morphe_restart_first_run">הפעל מחדש כדי לסיים את ההגדרות</string>
   <!-- layout.branding.baseCustomBrandingPatch -->
   <string name="morphe_custom_branding_name_title">שם האפליקציה</string>
+  <!-- layout.theme.baseThemePatch -->
+  <string name="morphe_theme_color_dark_title">רקע ערכת נושא כהה</string>
+  <string name="morphe_theme_color_dark_entry_2">שחור טהור</string>
+  <string name="morphe_theme_color_dark_entry_3">Material You (שחור מוחלט)</string>
+  <string name="morphe_theme_color_dark_entry_9">YouTube קלאסי</string>
+  <string name="morphe_theme_color_dark_entry_10">ורוד כהה</string>
+  <string name="morphe_theme_color_dark_entry_11">כחול כהה</string>
+  <string name="morphe_theme_color_dark_entry_12">ירוק כהה</string>
+  <string name="morphe_theme_color_dark_entry_13">צהוב כהה</string>
+  <string name="morphe_theme_color_dark_entry_14">כתום כהה</string>
+  <string name="morphe_theme_color_dark_entry_15">אדום כהה</string>
+  <string name="morphe_theme_color_dark_custom_title">רקע כהה מותאם אישית</string>
+  <string name="morphe_theme_color_dark_custom_summary">הגדר את צבע הרקע של הנושא הכהה</string>
+  <string name="morphe_theme_color_entry_1">ברירת מחדל של האפליקציה</string>
+  <string name="morphe_theme_color_entry_4">Material You (ניטרלי)</string>
+  <string name="morphe_theme_color_entry_5">Material You (ראשוני)</string>
+  <string name="morphe_theme_color_entry_6">Material You (משני)</string>
+  <string name="morphe_theme_color_entry_7">Material You (שלישי)</string>
+  <string name="morphe_theme_color_custom_entry">מותאם אישית</string>
   <!-- interaction.downloads.downloadsPatch -->
   <string name="morphe_external_downloader_screen_title">הורדות חיצוניות</string>
   <string name="morphe_external_downloader_name_title">שם חבילת מוריד</string>
@@ -132,8 +152,8 @@ Second \"item\" text"</string>
   <!-- ad.hideFullscreenAdsPatch -->
   <string name="morphe_hide_fullscreen_ads_title">הסתר מודעות מסך מלא</string>
   <!-- 'Spoof video streams' should match the language used in 'morphe_spoof_video_streams_screen_title'.
-          'Android Studio' must be kept untranslated. -->
-  <string name="morphe_force_original_audio_not_available">כדי להשתמש בתכונה זו, שנה את \'זיוף זרמי וידאו\' לכל לקוח מלבד Android Studio\'</string>
+          'Android Studio' and 'Android VR Downgraded' must be kept untranslated. -->
+  <string name="morphe_force_original_audio_not_available">כדי להשתמש בתכונה זו, שנה את \'זיוף זרמי וידאו\' לכל לקוח מלבד \'Android Studio\' ו\'Android VR Downgraded\'</string>
   <!-- misc.privacy.sanitizeSharingLinksPatch -->
   <string name="morphe_sanitize_sharing_links_title">טיהור קישורי שיתוף</string>
   <string name="morphe_sanitize_sharing_links_summary">מסיר פרמטרים של שאילתות מעקב מקישורי שיתוף</string>
@@ -161,6 +181,9 @@ Second \"item\" text"</string>
   <string name="morphe_settings_menu_filter_screen_title">מסנן תפריט הגדרות</string>
   <string name="morphe_settings_menu_filter_screen_summary">הסתר פריטים ממסך ההגדרות הסטנדרטי של האפליקציה לפי השם הגלוי שלהם</string>
   <string name="morphe_settings_menu_filter_picker_empty">פתח את מסך ההגדרות הסטנדרטי של האפליקציה פעם אחת כדי לאכלס את הרשימה</string>
+  <!-- interaction.dialog.removeViewerDiscretionDialogPatch -->
+  <string name="morphe_remove_viewer_discretion_dialog_title">הסר את תיבת הדו\"ה לגבי התאמת התוכן לצופה</string>
+  <string name="morphe_remove_viewer_discretion_dialog_summary">פעולה זו אינה עוקפת את הגבלת הגיל. היא רק מאשרת אותה באופן אוטומטי</string>
   <!-- misc.spoof.appversion.spoofAppVersionPatch -->
   <string name="morphe_spoof_app_version_title">זייף גרסת אפליקציה</string>
   <string name="morphe_spoof_app_version_summary">מרמה את השרת לחשוב שאתה משתמש בגרסת אפליקציה ישנה יותר כדי לשחזר תכונות ממשק משתמש מדור קודם</string>

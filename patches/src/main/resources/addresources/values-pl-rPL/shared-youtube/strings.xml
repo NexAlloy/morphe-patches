@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Shared with YouTube and YT Music -->
 <!--
+
     Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
-    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+    Raw strings still require escaping embedded double quotes but escaping embedded single quotes is optional.
 
     Raw strings are required because Crowdin AI translations regularly gets confused and
     replace \n with an encoded new line character.
@@ -20,6 +21,25 @@ Second \"item\" text"</string>
   <string name="morphe_restart_first_run">Uruchom ponownie, aby dokończyć konfigurację</string>
   <!-- layout.branding.baseCustomBrandingPatch -->
   <string name="morphe_custom_branding_name_title">Nazwa aplikacji</string>
+  <!-- layout.theme.baseThemePatch -->
+  <string name="morphe_theme_color_dark_title">Tło ciemnego motywu</string>
+  <string name="morphe_theme_color_dark_entry_2">Głęboka czerń</string>
+  <string name="morphe_theme_color_dark_entry_3">Material You (Głęboka czerń)</string>
+  <string name="morphe_theme_color_dark_entry_9">Klasyczny YouTube</string>
+  <string name="morphe_theme_color_dark_entry_10">Ciemnoróżowy</string>
+  <string name="morphe_theme_color_dark_entry_11">Ciemnoniebieski</string>
+  <string name="morphe_theme_color_dark_entry_12">Ciemnozielony</string>
+  <string name="morphe_theme_color_dark_entry_13">Ciemnożółty</string>
+  <string name="morphe_theme_color_dark_entry_14">Ciemnopomarańczowy</string>
+  <string name="morphe_theme_color_dark_entry_15">Ciemnoczerwony</string>
+  <string name="morphe_theme_color_dark_custom_title">Niestandardowe ciemne tło</string>
+  <string name="morphe_theme_color_dark_custom_summary">Ustaw kolor tła dla ciemnego motywu</string>
+  <string name="morphe_theme_color_entry_1">Domyślne aplikacji</string>
+  <string name="morphe_theme_color_entry_4">Material You (Neutralny)</string>
+  <string name="morphe_theme_color_entry_5">Material You (Podstawowy)</string>
+  <string name="morphe_theme_color_entry_6">Material You (Drugorzędny)</string>
+  <string name="morphe_theme_color_entry_7">Material You (Trzeciorzędny)</string>
+  <string name="morphe_theme_color_custom_entry">Własny</string>
   <!-- interaction.downloads.downloadsPatch -->
   <string name="morphe_external_downloader_screen_title">Zewnętrzne pobieranie</string>
   <string name="morphe_external_downloader_name_title">Nazwa pakietu aplikacji do pobierania</string>
@@ -132,8 +152,8 @@ Aby się zalogować, naciśnij \"Kontynuuj\" poniżej"</string>
   <!-- ad.hideFullscreenAdsPatch -->
   <string name="morphe_hide_fullscreen_ads_title">Ukryj reklamy pełnoekranowe</string>
   <!-- 'Spoof video streams' should match the language used in 'morphe_spoof_video_streams_screen_title'.
-          'Android Studio' must be kept untranslated. -->
-  <string name="morphe_force_original_audio_not_available">Aby użyć tej funkcji, zmień opcję \"Fałszowanie strumieni filmów\" na dowolnego klienta z wyjątkiem \"Android Studio\"</string>
+          'Android Studio' and 'Android VR Downgraded' must be kept untranslated. -->
+  <string name="morphe_force_original_audio_not_available">Aby użyć tej funkcji, zmień opcję \"Fałszowanie strumieni filmów\" na dowolnego klienta z wyjątkiem \"Android Studio\" i \"Android VR Downgraded\"</string>
   <!-- misc.privacy.sanitizeSharingLinksPatch -->
   <string name="morphe_sanitize_sharing_links_title">Oczyść udostępniane linki</string>
   <string name="morphe_sanitize_sharing_links_summary">Usuwa parametry śledzące z udostępnianych linków</string>
@@ -161,6 +181,9 @@ Pamiętaj jednak, że rejestrowane będą również niektóre dane użytkownika,
   <string name="morphe_settings_menu_filter_screen_title">Filtr menu ustawień</string>
   <string name="morphe_settings_menu_filter_screen_summary">Ukrywaj elementy na standardowym ekranie ustawień aplikacji na podstawie ich widocznej nazwy</string>
   <string name="morphe_settings_menu_filter_picker_empty">Otwórz standardowy ekran ustawień aplikacji raz, aby wypełnić listę</string>
+  <!-- interaction.dialog.removeViewerDiscretionDialogPatch -->
+  <string name="morphe_remove_viewer_discretion_dialog_title">Usuń okno z ostrzeżeniem dla widzów</string>
+  <string name="morphe_remove_viewer_discretion_dialog_summary">To nie omija ograniczenia wiekowego. Po prostu automatycznie je akceptuje</string>
   <!-- misc.spoof.appversion.spoofAppVersionPatch -->
   <string name="morphe_spoof_app_version_title">Fałszuj wersję aplikacji</string>
   <string name="morphe_spoof_app_version_summary">Oszukuje serwer, że używasz starszej wersji aplikacji, aby przywrócić klasyczne elementy interfejsu</string>

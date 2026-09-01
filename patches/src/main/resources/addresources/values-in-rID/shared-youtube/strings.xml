@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Shared with YouTube and YT Music -->
 <!--
+
     Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
-    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+    Raw strings still require escaping embedded double quotes but escaping embedded single quotes is optional.
 
     Raw strings are required because Crowdin AI translations regularly gets confused and
     replace \n with an encoded new line character.
@@ -20,6 +21,25 @@ Second \"item\" text"</string>
   <string name="morphe_restart_first_run">Mulai ulang untuk menyelesaikan penyiapan</string>
   <!-- layout.branding.baseCustomBrandingPatch -->
   <string name="morphe_custom_branding_name_title">Nama aplikasi</string>
+  <!-- layout.theme.baseThemePatch -->
+  <string name="morphe_theme_color_dark_title">Latar belakang tema gelap</string>
+  <string name="morphe_theme_color_dark_entry_2">Hitam pekat</string>
+  <string name="morphe_theme_color_dark_entry_3">Material You (Hitam murni)</string>
+  <string name="morphe_theme_color_dark_entry_9">Klasik YouTube</string>
+  <string name="morphe_theme_color_dark_entry_10">Pink tua</string>
+  <string name="morphe_theme_color_dark_entry_11">Biru tua</string>
+  <string name="morphe_theme_color_dark_entry_12">Hijau tua</string>
+  <string name="morphe_theme_color_dark_entry_13">Kuning tua</string>
+  <string name="morphe_theme_color_dark_entry_14">Oranye tua</string>
+  <string name="morphe_theme_color_dark_entry_15">Merah tua</string>
+  <string name="morphe_theme_color_dark_custom_title">Latar belakang gelap kustom</string>
+  <string name="morphe_theme_color_dark_custom_summary">Atur warna latar belakang tema gelap</string>
+  <string name="morphe_theme_color_entry_1">Bawaan aplikasi</string>
+  <string name="morphe_theme_color_entry_4">Material You (Netral)</string>
+  <string name="morphe_theme_color_entry_5">Material You (Utama)</string>
+  <string name="morphe_theme_color_entry_6">Material You (Sekunder)</string>
+  <string name="morphe_theme_color_entry_7">Material You (Tersier)</string>
+  <string name="morphe_theme_color_custom_entry">Khusus</string>
   <!-- interaction.downloads.downloadsPatch -->
   <string name="morphe_external_downloader_screen_title">Unduhan eksternal</string>
   <string name="morphe_external_downloader_name_title">Nama paket pengunduh</string>
@@ -132,8 +152,8 @@ Untuk masuk, tekan lanjutkan di bawah ini"</string>
   <!-- ad.hideFullscreenAdsPatch -->
   <string name="morphe_hide_fullscreen_ads_title">Sembunyikan iklan layar penuh</string>
   <!-- 'Spoof video streams' should match the language used in 'morphe_spoof_video_streams_screen_title'.
-          'Android Studio' must be kept untranslated. -->
-  <string name="morphe_force_original_audio_not_available">Untuk menggunakan fitur ini, ubah \'Palsukan aliran video\' ke klien apa pun kecuali Android Studio\'</string>
+          'Android Studio' and 'Android VR Downgraded' must be kept untranslated. -->
+  <string name="morphe_force_original_audio_not_available">Untuk menggunakan fitur ini, ubah \'Palsukan aliran video\' ke klien apa pun kecuali \'Android Studio\' dan \'Android VR Downgraded\'</string>
   <!-- misc.privacy.sanitizeSharingLinksPatch -->
   <string name="morphe_sanitize_sharing_links_title">Bersihkan tautan berbagi</string>
   <string name="morphe_sanitize_sharing_links_summary">Menghapus parameter kueri pelacakan dari tautan yang dibagikan</string>
@@ -161,6 +181,9 @@ Namun, mengaktifkan ini juga akan mencatat beberapa data pengguna seperti alamat
   <string name="morphe_settings_menu_filter_screen_title">Filter menu Pengaturan</string>
   <string name="morphe_settings_menu_filter_screen_summary">Sembunyikan item di layar pengaturan aplikasi standar berdasarkan nama yang terlihat</string>
   <string name="morphe_settings_menu_filter_picker_empty">Buka layar pengaturan aplikasi standar sekali untuk mengisi daftar</string>
+  <!-- interaction.dialog.removeViewerDiscretionDialogPatch -->
+  <string name="morphe_remove_viewer_discretion_dialog_title">Hapus dialog pembatasan penonton</string>
+  <string name="morphe_remove_viewer_discretion_dialog_summary">Ini tidak mengabaikan batasan usia. Hanya otomatis menerimanya</string>
   <!-- misc.spoof.appversion.spoofAppVersionPatch -->
   <string name="morphe_spoof_app_version_title">Palsukan versi aplikasi</string>
   <string name="morphe_spoof_app_version_summary">Mengelabui server agar mengira Anda menggunakan versi aplikasi yang lebih lama untuk mengembalikan fitur UI lama</string>

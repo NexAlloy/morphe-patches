@@ -10,11 +10,9 @@
 
 package app.morphe.patches.youtube.video.quality
 
-import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
-import app.morphe.patcher.fieldAccess
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.shared.misc.settings.preference.ListPreference
 import app.morphe.patches.shared.misc.settings.preference.SwitchPreference
@@ -22,14 +20,10 @@ import app.morphe.patches.youtube.misc.extension.sharedExtensionPatch
 import app.morphe.patches.youtube.misc.playertype.playerTypeHookPatch
 import app.morphe.patches.youtube.misc.playservice.versionCheckPatch
 import app.morphe.patches.youtube.misc.settings.settingsPatch
-import app.morphe.patches.youtube.shared.PlatypusVideoQualityFlagFingerprint
-import app.morphe.patches.youtube.shared.VideoQualityBufferingFlagFingerprint
 import app.morphe.patches.youtube.shared.VideoQualityChangedFingerprint
 import app.morphe.patches.youtube.video.information.onCreateHook
 import app.morphe.patches.youtube.video.information.videoInformationPatch
 import app.morphe.util.findFieldFromToString
-import app.morphe.util.insertLiteralOverride
-import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 
 private const val EXTENSION_CLASS =
@@ -78,16 +72,7 @@ val rememberVideoQualityPatch = bytecodePatch {
                 .findFieldFromToString(FIXED_RESOLUTION_STRING)
 
         // Inject a call to override initial video quality.
-        Fingerprint(
-            classFingerprint = PlaybackStartParametersToStringFingerprint,
-            name = "<init>",
-            filters = listOf(
-                fieldAccess(
-                    opcode = Opcode.IPUT_OBJECT,
-                    reference = initialResolutionField
-                )
-            )
-        ).let {
+        getPlaybackStartParametersConstructorFingerprint(initialResolutionField).let {
             it.method.apply {
                 val index = it.instructionMatches.last().index
                 val register = getInstruction<TwoRegisterInstruction>(index).registerA
@@ -119,16 +104,6 @@ val rememberVideoQualityPatch = bytecodePatch {
                     "invoke-static { v$register }, $EXTENSION_CLASS->userChangedQuality(I)V",
                 )
             }
-        }
-
-        arrayOf(
-            PlatypusVideoQualityFlagFingerprint,
-            VideoQualityBufferingFlagFingerprint
-        ).forEach {
-            it.method.insertLiteralOverride(
-                it.instructionMatches.last().index,
-                "$EXTENSION_CLASS->overrideBufferingVideoQualityFlag(Z)Z"
-            )
         }
     }
 }

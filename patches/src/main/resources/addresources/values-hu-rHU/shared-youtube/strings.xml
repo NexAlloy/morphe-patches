@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Shared with YouTube and YT Music -->
 <!--
+
     Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
-    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+    Raw strings still require escaping embedded double quotes but escaping embedded single quotes is optional.
 
     Raw strings are required because Crowdin AI translations regularly gets confused and
     replace \n with an encoded new line character.
@@ -20,6 +21,25 @@ Second \"item\" text"</string>
   <string name="morphe_restart_first_run">Indíts újra a beállítások befejezéséhez</string>
   <!-- layout.branding.baseCustomBrandingPatch -->
   <string name="morphe_custom_branding_name_title">Alkalmazás neve</string>
+  <!-- layout.theme.baseThemePatch -->
+  <string name="morphe_theme_color_dark_title">Sötét téma háttér</string>
+  <string name="morphe_theme_color_dark_entry_2">Tiszta fekete</string>
+  <string name="morphe_theme_color_dark_entry_3">Material You (Tiszta fekete)</string>
+  <string name="morphe_theme_color_dark_entry_9">Klasszikus YouTube</string>
+  <string name="morphe_theme_color_dark_entry_10">Sötét rózsaszín</string>
+  <string name="morphe_theme_color_dark_entry_11">Sötét kék</string>
+  <string name="morphe_theme_color_dark_entry_12">Sötét zöld</string>
+  <string name="morphe_theme_color_dark_entry_13">Sötét sárga</string>
+  <string name="morphe_theme_color_dark_entry_14">Sötét narancssárga</string>
+  <string name="morphe_theme_color_dark_entry_15">Sötét vörös</string>
+  <string name="morphe_theme_color_dark_custom_title">Egyedi sötét háttér</string>
+  <string name="morphe_theme_color_dark_custom_summary">Sötét téma háttérszínének beállítása</string>
+  <string name="morphe_theme_color_entry_1">Alkalmazás alapértelmezése</string>
+  <string name="morphe_theme_color_entry_4">Material You (Semleges)</string>
+  <string name="morphe_theme_color_entry_5">Material You (Elsődleges)</string>
+  <string name="morphe_theme_color_entry_6">Material You (Másodlagos)</string>
+  <string name="morphe_theme_color_entry_7">Material You (Harmadlagos)</string>
+  <string name="morphe_theme_color_custom_entry">Egyedi</string>
   <!-- interaction.downloads.downloadsPatch -->
   <string name="morphe_external_downloader_screen_title">Külső letöltések</string>
   <string name="morphe_external_downloader_name_title">Letöltő csomagneve</string>
@@ -132,8 +152,8 @@ Belépéshez nyomd meg a folytatást alul"</string>
   <!-- ad.hideFullscreenAdsPatch -->
   <string name="morphe_hide_fullscreen_ads_title">Teljesképernyős-hirdetések elrejtése</string>
   <!-- 'Spoof video streams' should match the language used in 'morphe_spoof_video_streams_screen_title'.
-          'Android Studio' must be kept untranslated. -->
-  <string name="morphe_force_original_audio_not_available">A funkció használatához módosítsa a \"Videóstreamek hamisítása\" beállítást bármely kliensre, kivéve az Android Studiót\'</string>
+          'Android Studio' and 'Android VR Downgraded' must be kept untranslated. -->
+  <string name="morphe_force_original_audio_not_available">A funkció használatához állítsd át a „Spoof video streams” opciót bármelyik kliensre az „Android Studio” és „Android VR Downgraded” kivételével</string>
   <!-- misc.privacy.sanitizeSharingLinksPatch -->
   <string name="morphe_sanitize_sharing_links_title">Megosztási linkek tisztítása</string>
   <string name="morphe_sanitize_sharing_links_summary">Eltávolítja a követési paramétereket a megosztott linkekből</string>
@@ -161,6 +181,9 @@ Belépéshez nyomd meg a folytatást alul"</string>
   <string name="morphe_settings_menu_filter_screen_title">Beállítások menü szűrője</string>
   <string name="morphe_settings_menu_filter_screen_summary">Rejtse el az elemeket a standard alkalmazásbeállítások képernyőn a látható nevük alapján</string>
   <string name="morphe_settings_menu_filter_picker_empty">Nyissa meg a standard alkalmazásbeállítások képernyőjét egyszer a lista feltöltéséhez</string>
+  <!-- interaction.dialog.removeViewerDiscretionDialogPatch -->
+  <string name="morphe_remove_viewer_discretion_dialog_title">Nézői figyelmeztetés pálya eltávolítása</string>
+  <string name="morphe_remove_viewer_discretion_dialog_summary">Ez nem kerüli meg az életkori korlátozást, csak automatikusan elfogadja.</string>
   <!-- misc.spoof.appversion.spoofAppVersionPatch -->
   <string name="morphe_spoof_app_version_title">Alkalmazásverzió hamisítása</string>
   <string name="morphe_spoof_app_version_summary">A szervert tévedésbe vezeti, hogy egy régebbi alkalmazásverziót használ, ezzel helyreállítva a korábbi felhasználói felület funkcióit.</string>
