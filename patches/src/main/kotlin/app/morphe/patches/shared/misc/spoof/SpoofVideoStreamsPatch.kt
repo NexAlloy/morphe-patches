@@ -362,6 +362,50 @@ internal fun spoofVideoStreamsPatch(
 
         // endregion
 
+        // region Request plain streams of other clients as GET requests with a short range.
+        // Streams of other clients are plain urls, which the server rejects or sends slowly if they are
+        // requested like the streams of the app, with a POST body. Saving a video also requests a large
+        // range, which the server sends at about playback speed.
+
+        CronetUrlRequestBuildFingerprint.let {
+            val fields = it.classDef.fields
+            val urlField = fields.first { field ->
+                field.type == "Ljava/lang/String;" && AccessFlags.FINAL.isSet(field.accessFlags)
+            }
+            val uploadField = fields.first { field -> field.type == "Lorg/chromium/net/UploadDataProvider;" }
+            val httpMethodField = CronetUrlRequestSetHttpMethodFingerprint.instructionMatches.first().getFieldAccessed()
+
+            // Insert before the hook at the start of the method, which moves the index of the call.
+            val createRequest = it.instructionMatches.last()
+            val urlRegister = createRequest.instruction.registersUsed[1]
+            it.method.addInstructions(
+                createRequest.index,
+                """
+                    invoke-static/range { v$urlRegister .. v$urlRegister }, $EXTENSION_CLASS->limitPlainStreamRange(Ljava/lang/String;)Ljava/lang/String;
+                    move-result-object v$urlRegister
+                """
+            )
+
+            it.method.addInstructionsWithLabels(
+                0,
+                """
+                    move-object/from16 v0, p0
+                    iget-object v1, v0, $urlField
+                    invoke-static { v1 }, $EXTENSION_CLASS->isPlainStreamRequest(Ljava/lang/String;)Z
+                    move-result v1
+                    if-eqz v1, :keep_request
+                    const-string v1, "GET"
+                    iput-object v1, v0, $httpMethodField
+                    const/4 v1, 0x0
+                    iput-object v1, v0, $uploadField
+                    :keep_request
+                    nop
+                """
+            )
+        }
+
+        // endregion
+
         // region Append spoof info.
 
         NerdsStatsVideoFormatBuilderFingerprint.method.apply {

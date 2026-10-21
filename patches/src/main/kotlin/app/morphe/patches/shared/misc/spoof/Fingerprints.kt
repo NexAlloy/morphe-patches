@@ -319,3 +319,36 @@ internal object ReelItemWatchResponseFeatureFlagFingerprint : Fingerprint(
         literal(45638126L)
     )
 )
+
+/**
+ * Builds a Cronet url request, which every network request of the app is made with.
+ */
+internal object CronetUrlRequestBuildFingerprint : Fingerprint(
+    name = "build",
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "Lorg/chromium/net/ExperimentalUrlRequest;",
+    parameters = listOf(),
+    filters = listOf(
+        // Creates the request with the url and the other values of the builder.
+        methodCall(returnType = "Lorg/chromium/net/ExperimentalUrlRequest;")
+    ),
+    custom = { _, classDef ->
+        // TODO: change to 2.0 superclass check.
+        classDef.superclass == "Lorg/chromium/net/ExperimentalUrlRequest\$Builder;"
+    }
+)
+
+internal object CronetUrlRequestSetHttpMethodFingerprint : Fingerprint(
+    classFingerprint = CronetUrlRequestBuildFingerprint,
+    name = "setHttpMethod",
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "Lorg/chromium/net/ExperimentalUrlRequest\$Builder;",
+    parameters = listOf("Ljava/lang/String;"),
+    filters = listOf(
+        fieldAccess(
+            opcode = Opcode.IPUT_OBJECT,
+            definingClass = "this",
+            type = "Ljava/lang/String;"
+        )
+    )
+)

@@ -1,3 +1,15 @@
+## [1.48.0-dev.17](https://github.com/MorpheApp/morphe-patches/compare/v1.48.0-dev.16...v1.48.0-dev.17) (2026-10-21)
+
+### 🐛 Bug Fixes
+
+* **YouTube - Navigation bar:** bug: Navigation bar is not disabled in shorts player ([03f3aa2](https://github.com/MorpheApp/morphe-patches/commit/03f3aa27bc48cfb23a54c723065c83283eed6bc2))
+* **YouTube - Navigation bar:** Navigation bar grows and covers the page when the keyboard is open ([7ec9a54](https://github.com/MorpheApp/morphe-patches/commit/7ec9a549a75798c76439a38400dbc325b7cd78df))
+* **YouTube - Spoof video streams:** In-app downloads are slow when using spoof streaming ([6a8b5a9](https://github.com/MorpheApp/morphe-patches/commit/6a8b5a976c011ea1d365e90db143c9b4d8745976))
+
+### ✨ New Features
+
+* **YouTube Music - Android Auto:** Add Home, Library, and search features ([#3852](https://github.com/MorpheApp/morphe-patches/issues/3852)) ([65e200f](https://github.com/MorpheApp/morphe-patches/commit/65e200f623efc8b651a338360555884b717e05af))
+
 ## [1.48.0-dev.16](https://github.com/MorpheApp/morphe-patches/compare/v1.48.0-dev.15...v1.48.0-dev.16) (2026-10-20)
 
 ### 🐛 Bug Fixes
