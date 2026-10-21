@@ -19,8 +19,8 @@ import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.util.proxy.mutableTypes.MutableClass
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
-import app.morphe.patcher.util.smali.ExternalLabel
 import app.morphe.patches.music.misc.extension.sharedExtensionPatch
+import app.morphe.patches.music.misc.playservice.is_9_20_or_greater
 import app.morphe.patches.music.misc.settings.settingsPatch
 import app.morphe.patches.music.shared.Constants.COMPATIBILITY_YOUTUBE_MUSIC
 import app.morphe.util.cloneMutable
@@ -35,7 +35,6 @@ import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.builder.MutableMethodImplementation
 import com.android.tools.smali.dexlib2.iface.Method
-import com.android.tools.smali.dexlib2.iface.instruction.Instruction
 import com.android.tools.smali.dexlib2.iface.instruction.RegisterRangeInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
@@ -730,18 +729,18 @@ private fun BytecodePatchContext.addAndroidAutoBrowseRequestInterface(
  */
 private fun BytecodePatchContext.skipPodcastsMediaIdDecoding(requestedMediaIdField: FieldReference) {
     val decodedMediaIdMethod = decodedMediaIdFingerprint(requestedMediaIdField.definingClass).method
-    val mediaIdRegister = decodedMediaIdMethod.findFreeRegister(0)
     decodedMediaIdMethod.addInstructionsWithLabels(
         0,
         """
-            iget-object v$mediaIdRegister, p0, $requestedMediaIdField
-            invoke-static/range { v$mediaIdRegister .. v$mediaIdRegister }, $EXTENSION_CLASS->isAndroidAutoPodcastsMediaId(Ljava/lang/String;)Z
-            move-result v$mediaIdRegister
-            if-eqz v$mediaIdRegister, :resume
-            const/4 v$mediaIdRegister, 0x0
-            return-object v$mediaIdRegister
-        """,
-        ExternalLabel("resume", decodedMediaIdMethod.getInstruction<Instruction>(0)),
+            iget-object v0, p0, $requestedMediaIdField
+            invoke-static { v0 }, $EXTENSION_CLASS->isAndroidAutoPodcastsMediaId(Ljava/lang/String;)Z
+            move-result v0
+            if-eqz v0, :resume
+            const/4 v0, 0x0
+            return-object v0
+            :resume
+            nop
+        """
     )
 }
 
@@ -892,13 +891,12 @@ private fun BytecodePatchContext.hookLibraryChangeCompletion() {
         // Read the endpoint field used to build the request URL, rather than its obfuscated name.
         val endpointField = requestUrlFingerprint(requestDataClass.type, endpointOwnerType)
             .instructionMatches.first().instruction.getReference<FieldReference>()!!
-        val requestRegister = completionMethod.findFreeRegister(0)
         completionMethod.addInstructions(
             0,
             """
-                iget-object v$requestRegister, p0, $requestField
-                iget-object v$requestRegister, v$requestRegister, $endpointField
-                invoke-static/range { v$requestRegister .. v$requestRegister }, $EXTENSION_CLASS->onRequestSucceeded(Ljava/lang/String;)V
+                iget-object v0, p0, $requestField
+                iget-object v0, v0, $endpointField
+                invoke-static { v0 }, $EXTENSION_CLASS->onRequestSucceeded(Ljava/lang/String;)V
             """
         )
     }
@@ -909,9 +907,16 @@ private fun BytecodePatchContext.hookLibraryChangeCompletion() {
 // region Android Auto browse results
 
 /**
- * Passes browse results through Java's `handleAndroidAutoBrowseResult` before YTM sends them to Android Auto.
+ * Applies browse changes before delivery, then limits the result size on 9.15.
  */
 private fun hookAndroidAutoBrowseResults(deliverAndroidAutoMediaItemsMethod: MutableMethod) {
+    if (!is_9_20_or_greater) {
+        deliverAndroidAutoMediaItemsMethod.addInstructions(0, """
+            invoke-static/range { p1 .. p1 }, $EXTENSION_CLASS->limitAndroidAutoBrowseItems(Ljava/util/List;)Ljava/util/List;
+            move-result-object p1
+        """)
+    }
+
     val handleAndroidAutoBrowseResultMethod = "$EXTENSION_CLASS->handleAndroidAutoBrowseResult(" +
             EXTENSION_ANDROID_AUTO_BROWSE_REQUEST_INTERFACE +
             "Ljava/util/List;)Ljava/util/List;"

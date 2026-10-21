@@ -196,11 +196,16 @@ public class StreamingDataRequest {
                         clientOrder, isDownload));
     }
 
+    // Runtime bridge used when downloads are enabled without playback spoofing.
+    public static void setPlayerHeaders(Map<String, String> headers) {
+        if (headers != null && !headers.isEmpty()) {
+            lastPlayerHeaders = new java.util.HashMap<>(headers);
+        }
+    }
+
     public static void fetchRequest(String videoId, boolean isInline, Map<String, String> fetchHeaders) {
         // Keep the latest player headers so downloads can resolve tracks that were never opened.
-        if (fetchHeaders != null && !fetchHeaders.isEmpty()) {
-            lastPlayerHeaders = fetchHeaders;
-        }
+        setPlayerHeaders(fetchHeaders);
         // Always fetch, even if there is an existing request for the same video.
         cache.put(videoId, new StreamingDataRequest(videoId, isInline, fetchHeaders, false,
                 clientOrderToUse, false));
