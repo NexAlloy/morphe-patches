@@ -197,6 +197,8 @@ Second \"item\" text"</string>
   <string name="morphe_hide_shopping_links_title">Скриј линкови за купување</string>
   <string name="morphe_hide_video_ads_title">Скриј реклами во видеа</string>
   <string name="morphe_hide_youtube_premium_promotions_title">Скриј промоции за YouTube Premium</string>
+  <!-- layout.flyout.flyoutPatch -->
+  <!-- Shown instead of the text of a flyout menu item while the data it needs is loading. -->
   <!-- Channel whitelist dialog, shared by ad.hideAdsPatch and layout.sponsorblock.sponsorBlockPatch -->
   <string name="morphe_channel_whitelist_remove">Отстрани</string>
   <!-- interaction.doubletap.doubleTapLengthPatch -->
@@ -205,6 +207,7 @@ Second \"item\" text"</string>
   <string name="morphe_copy_video_link_with_timestamp_button_title">Копирајте го временскиот печат стандардно</string>
   <!-- interaction.copytext.copyTextPatch -->
   <!-- interaction.feedactions.feedVideoActionsPatch -->
+  <!-- interaction.postimages.postImageDownloadPatch -->
   <!-- interaction.ask.askFlyoutMenuPatch -->
   <!-- 'Ask' should be translated using the same localized wording YouTube displays for the Ask button under a video. -->
   <!-- 'Summarize the video' should be translated using the same localized wording YouTube displays for the suggestion of the Ask panel. -->
@@ -219,6 +222,7 @@ Second \"item\" text"</string>
   <string name="morphe_disable_chapter_skip_double_tap_title">Изберете ја надворешната апликација што ќе ги обработува вашите преземања</string>
   <string name="morphe_disable_chapter_skip_double_tap_summary">Ја исклучува двојната допренска гестикулација со два прста што ги прескокнува поглавјата, која може случајно да се активира со еден прст</string>
   <!-- interaction.downloads.downloadsPatch -->
+  <string name="morphe_shorts_download_flyout_title">Преземи</string>
   <!-- video.voiceovertranslation.voiceOverTranslationPatch -->
   <string name="morphe_vot_openrouter_model_custom">По нарачка</string>
   <!-- %s is dollar cost, e.g., $0.10 per 100 hours -->
@@ -267,8 +271,11 @@ Second \"item\" text"</string>
   <string name="morphe_save_to_watch_later_success_toast">Видеото успешно е зачувано на плејлиста „Гледај подоцна“</string>
   <string name="morphe_save_to_watch_later_already_exists_toast">Ова видео веќе е зачувано на плејлистата „Гледај подоцна“</string>
   <string name="morphe_save_to_watch_later_error_toast">Не може да се зачува ова видео во плејлистата „Гледај подоцна“</string>
+  <!-- 'Play next in queue' should be translated using the same localized wording YouTube displays the feed flyout item. -->
+  <string name="morphe_queue_type_entry_1">Стандардно</string>
   <string name="morphe_local_queue_remove">Отстрани</string>
   <!-- "Spoof video streams" must use the same translation as morphe_spoof_video_streams_screen_title -->
+  <!-- interaction.nativeplaylistqueue.nativePlaylistQueuePatch -->
   <!-- interaction.livering.openChannelOfLiveAvatarPatch -->
   <string name="morphe_open_channel_of_live_avatar_title">Отворете канал од аватарот во живо</string>
   <string name="morphe_open_channel_of_live_avatar_summary">Спречува отворање на ливниот пренос кога ќе допрете на аватарот на каналот</string>
@@ -386,8 +393,6 @@ Second \"item\" text"</string>
   <string name="morphe_auto_captions_style_entry_2">Никогаш не покажувај</string>
   <string name="morphe_auto_captions_style_entry_3">Прикажи кога е исклучен звук</string>
   <string name="morphe_auto_captions_style_entry_4">Покажи кога е исклучен звукот</string>
-  <string name="morphe_auto_captions_style_legacy_entry_1">Покажи автоматски титри</string>
-  <string name="morphe_auto_captions_style_legacy_entry_2">Скриј автоматски титри</string>
   <!-- layout.captions.preferredCaptionLanguagePatch -->
   <string name="morphe_preferred_caption_language_entry_off">Исклучено</string>
   <!-- layout.captions.autoTranslateCaptionsPatch -->
@@ -431,6 +436,7 @@ Second \"item\" text"</string>
   <string name="morphe_navigation_bar_animations_summary">Анимира преоди кога се префрлувате меѓу картичките</string>
   <string name="morphe_disable_auto_hide_navigation_bar_title">Исклучи автоматско скривање на навигацискиот панел</string>
   <string name="morphe_disable_auto_hide_navigation_bar_summary">Ја задржува лентата за навигација видлива додека лизгате</string>
+  <string name="morphe_navigation_bar_style_entry_1">Стандардно</string>
   <string name="morphe_toolbar_screen_title">Toolbar</string>
   <string name="morphe_toolbar_screen_summary">Изберете кои компоненти да се појавуваат во лентата со алатки</string>
   <string name="morphe_hide_toolbar_cast_button_title">Прикријте го копчето Cast</string>
@@ -801,4 +807,5 @@ Second \"item\" text"</string>
   <!-- video.series.seriesTrackerPatch -->
   <string name="morphe_series_tracker_ui_cancel">Откажи</string>
   <string name="morphe_series_tracker_undo">Врати</string>
+  <!-- layout.niconicocomments.niconicoCommentsPatch -->
 </resources>

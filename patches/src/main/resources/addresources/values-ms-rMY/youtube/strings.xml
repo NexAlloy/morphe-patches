@@ -101,6 +101,8 @@ Second \"item\" text"</string>
   <!-- Translations of this should not be longer than the original English text, otherwise the text can be clipped and not entirely shown. -->
   <!-- ad.hideAdsPatch -->
   <string name="morphe_hide_video_ads_title">Sorokkan iklan video</string>
+  <!-- layout.flyout.flyoutPatch -->
+  <!-- Shown instead of the text of a flyout menu item while the data it needs is loading. -->
   <!-- Channel whitelist dialog, shared by ad.hideAdsPatch and layout.sponsorblock.sponsorBlockPatch -->
   <string name="morphe_channel_whitelist_current_channel">Saluran semasa:</string>
   <string name="morphe_channel_whitelist_add">Tambahkan ke senarai putih</string>
@@ -119,6 +121,7 @@ Second \"item\" text"</string>
   <string name="morphe_copy_video_link_with_timestamp_button_summary">Membalikkan tindakan ketik serta ketik dan tahan bagi butang \'Salin pautan video\'</string>
   <!-- interaction.copytext.copyTextPatch -->
   <!-- interaction.feedactions.feedVideoActionsPatch -->
+  <!-- interaction.postimages.postImageDownloadPatch -->
   <!-- interaction.ask.askFlyoutMenuPatch -->
   <!-- 'Ask' should be translated using the same localized wording YouTube displays for the Ask button under a video. -->
   <!-- 'Summarize the video' should be translated using the same localized wording YouTube displays for the suggestion of the Ask panel. -->
@@ -131,6 +134,7 @@ Second \"item\" text"</string>
   <!-- layout.hide.signintotv.disableSignInToTVPopupPatch -->
   <!-- interaction.doubletap.disableDoubleTapActionsPatch -->
   <!-- interaction.downloads.downloadsPatch -->
+  <string name="morphe_external_downloader_quick_video">Video</string>
   <!-- video.voiceovertranslation.voiceOverTranslationPatch -->
   <string name="morphe_vot_openrouter_model_custom">Tersuai</string>
   <!-- %s is dollar cost, e.g., $0.10 per 100 hours -->
@@ -141,9 +145,12 @@ Second \"item\" text"</string>
   <!-- interaction.playall.playAllButtonPatch -->
   <!-- interaction.reload.reloadVideoPatch -->
   <!-- interaction.savetowatchlater.saveToWatchLaterPatch -->
+  <!-- 'Play next in queue' should be translated using the same localized wording YouTube displays the feed flyout item. -->
+  <string name="morphe_queue_type_entry_1">Lalai</string>
   <string name="morphe_local_queue_remove">Keluarkan</string>
   <!-- "Spoof video streams" must use the same translation as morphe_spoof_video_streams_screen_title -->
   <string name="morphe_queue_manager_playlist_title">Baris gilir Morphe</string>
+  <!-- interaction.nativeplaylistqueue.nativePlaylistQueuePatch -->
   <!-- interaction.livering.openChannelOfLiveAvatarPatch -->
   <!-- interaction.seekbar.disablePreciseSeekingGesturePatch -->
   <!-- interaction.seekbar.liveStreamDVRPatch -->
@@ -211,6 +218,7 @@ Second \"item\" text"</string>
   <string name="morphe_swap_create_with_notifications_button_summary">Jika mengubah tetapan ini tidak berkesan, cuba tukar ke mod penyamaran</string>
   <string name="morphe_hide_navigation_button_labels_title">Sorokkan label butang pandu arah</string>
   <string name="morphe_hide_navigation_bar_title">Sorokkan bar pandu arah</string>
+  <string name="morphe_navigation_bar_style_entry_1">Lalai</string>
   <!-- layout.hide.player.flyoutmenupanel.hidePlayerFlyoutMenuPatch -->
   <!-- 'Additional settings / More' should be translated using the same localized wording YouTube displays for the menu item. -->
   <!-- 'Ambient mode' should be translated using the same localized wording YouTube displays for the menu item. -->
@@ -271,22 +279,6 @@ Second \"item\" text"</string>
   <!-- layout.sponsorblock.sponsorBlockPatch -->
   <!-- layout.formfactor.changeFormFactorPatch -->
   <string name="morphe_change_form_factor_entry_1">Lalai</string>
-  <string name="morphe_change_form_factor_user_dialog_message">"Changes include:
-
-Tablet layout
-• Community posts are hidden
-• Playback in feeds setting is not available
-• Remix button and Sound button are not available in Shorts
-• 'More videos' overlay may not be available
-• Non collapsed old video action bar is shown
-
-Automotive layout
-• Feed is organized by topics and channels
-• Playback in feeds setting is not available
-• Remix button and Sound button are not available in Shorts
-• 'More videos' overlay may not be available
-• Shorts open in the regular player
-• Non collapsed old video action bar is shown"</string>
   <string name="morphe_tablet_layout_in_player_title">Dayakan tata letak tablet di pemain</string>
   <!-- "Restore old video action bar" must be translated the same as morphe_restore_old_video_action_bar_title -->
   <!-- misc.spoof.appversion.spoofAppVersionPatch -->
@@ -374,4 +366,5 @@ Automotive layout
   <string name="morphe_player_icon_style_entry_custom">Tersuai</string>
   <!-- video.series.seriesTrackerPatch -->
   <string name="morphe_series_tracker_continue">Teruskan</string>
+  <!-- layout.niconicocomments.niconicoCommentsPatch -->
 </resources>

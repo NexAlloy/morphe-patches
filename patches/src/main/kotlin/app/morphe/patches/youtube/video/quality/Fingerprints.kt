@@ -11,6 +11,7 @@
 package app.morphe.patches.youtube.video.quality
 
 import app.morphe.patcher.Fingerprint
+import app.morphe.patcher.InstructionLocation.MatchAfterImmediately
 import app.morphe.patcher.InstructionLocation.MatchAfterWithin
 import app.morphe.patcher.checkCast
 import app.morphe.patcher.fieldAccess
@@ -162,6 +163,52 @@ internal object ShortsQualityChangeObserverSecondaryFeatureFlagFingerprint : Fin
     )
 )
 
+/**
+ * If this flag is off, the qualities of the quality menu have no formats, and the player ignores
+ * the formats of the quality last selected and finds the quality only by its resolution.
+ */
+internal object QualityFormatsFeatureFlagFingerprint : Fingerprint(
+    filters = listOf(
+        literal(45400072)
+    )
+)
+
+/**
+ * The method of the player that sets the video formats to play, and clears the buffered video
+ * if the parameter is true.
+ */
+internal object PlaybackControllerSetVideoFormatsFingerprint : Fingerprint(
+    definingClass = "Lcom/google/android/libraries/youtube/media/player/exo2/platypus/PlaybackControllerWrapper;",
+    accessFlags = listOf(AccessFlags.FINAL),
+    returnType = "Z",
+    parameters = listOf("Z"),
+    filters = listOf(
+        fieldAccess(
+            opcode = Opcode.IGET_OBJECT,
+            type = "Lcom/google/android/libraries/youtube/media/interfaces/PlaybackController;"
+        ),
+        opcode(Opcode.IF_NEZ, location = MatchAfterImmediately()),
+        // The parameter, if the buffered video is cleared.
+        opcode(Opcode.IF_EQZ, location = MatchAfterWithin(3)),
+        opcode(Opcode.SGET_OBJECT, location = MatchAfterImmediately()) // Video track type.
+    )
+)
+
+/**
+ * The method of the async media fetch controller that sets the video formats to play.
+ * If the flag is on, the method sets the formats itself instead of calling
+ * [PlaybackControllerSetVideoFormatsFingerprint], and clears the buffered video
+ * if the boolean parameter is true.
+ */
+internal object AsyncMediaFetchControllerSetVideoFormatsFingerprint : Fingerprint(
+    definingClass = "Lcom/google/android/libraries/youtube/media/player/exo2/platypus/AsyncMediaFetchControllerWrapper;",
+    returnType = "V",
+    parameters = listOf("L", "Z"),
+    filters = listOf(
+        literal(45779716)
+    )
+)
+
 internal fun getCurrentVideoFormatConstructorFingerprint(
     videoQualityArray: String
 ) = object : Fingerprint(
@@ -244,6 +291,33 @@ internal object VideoQualityItemOnClickFingerprint : Fingerprint(
         "Landroid/view/View;",
         "I",
         "J"
+    )
+)
+
+/**
+ * The method of the quality menu that sets the quality by its resolution.
+ */
+internal fun getSetVideoQualityResolutionFingerprint(videoQualityMenuType: String) = Fingerprint(
+    definingClass = videoQualityMenuType,
+    returnType = "V",
+    parameters = listOf("I")
+)
+
+/**
+ * The item click listener of the Shorts quality menu, which sets the selected quality by its resolution.
+ * The listener is either the menu of [VideoQualityItemOnClickFingerprint] or a class it calls.
+ */
+internal fun getVideoQualityItemSetResolutionFingerprint(setResolutionMethod: String) = Fingerprint(
+    name = "onItemClick",
+    returnType = "V",
+    parameters = listOf(
+        "Landroid/widget/AdapterView;",
+        "Landroid/view/View;",
+        "I",
+        "J"
+    ),
+    filters = listOf(
+        methodCall(smali = setResolutionMethod)
     )
 )
 
