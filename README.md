@@ -35,15 +35,15 @@ All modifications made by Morphe, along with their dates, can be found in the Gi
 ## 🩹 Patches list
 
 <!-- PATCHES_START -->
-> **[v1.49.0-dev.10](https://github.com/MorpheApp/morphe-patches/releases/tag/v1.49.0-dev.10)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;193 patches total
+> **[v2.0.0](https://github.com/MorpheApp/morphe-patches/releases/tag/v2.0.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;194 patches total
 <details>
-<summary>📦 YouTube&nbsp;&nbsp;•&nbsp;&nbsp;108 patches</summary>
+<summary>📦 YouTube&nbsp;&nbsp;•&nbsp;&nbsp;109 patches</summary>
 <br>
 
 **🎯 Supported versions:**
 
-| 🧪&nbsp;21.43.523 | 🧪&nbsp;21.42.241 | 🧪&nbsp;21.28.208 | 21.23.492 | 21.20.405 | 21.16.256 | 20.51.39 | 20.26.46 |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 🧪&nbsp;21.43.523 | 🧪&nbsp;21.42.241 | 21.30.216 | 21.28.208 | 21.23.492 | 20.51.39 | 20.26.46 |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
@@ -111,7 +111,7 @@ All modifications made by Morphe, along with their dates, can be found in the Gi
 | [Hide video action buttons](#hide-video-action-buttons) | Adds options to hide video action buttons in fullscreen and portrait modes. |  |
 | [Loop video](#loop-video) | Adds an option to loop videos and display loop video button in the video player. |  |
 | [Media notification controls](#media-notification-controls) | Adds options to disable the seekbar and previous/next buttons in the media notification and headphone controls. |  |
-| [Miniplayer](#miniplayer) | Adds options to change the in-app minimized player. Patching 21.28.206 and lower has more miniplayer types to choose from. |  |
+| [Miniplayer](#miniplayer) | Adds options to change the in-app minimized player. Patching 21.28.208 and lower has more miniplayer types to choose from. |  |
 | [Mute button](#mute-button) | Adds an option to show a player button that mutes the video audio. |  |
 | [Navigation bar](#navigation-bar) | Adds options to hide and change the bottom navigation bar (such as the Shorts button) and the upper navigation toolbar. | • Hide Search app shortcut<br>• Hide Subscriptions app shortcut |
 | [Network proxy](#network-proxy) | Adds settings to route supported network requests through an HTTP or HTTPS proxy. Including this patch may cause connectivity problems on certain devices |  |
@@ -151,6 +151,7 @@ All modifications made by Morphe, along with their dates, can be found in the Gi
 | [Spoof video streams](#spoof-video-streams) | Adds options to spoof the client video streams to fix playback. |  |
 | [Swipe controls](#swipe-controls) | Adds options to enable and configure volume and brightness swipe controls. |  |
 | [Theme](#theme) | Adds options for theming, and settings to change the app foreground and background colors. | • Dark theme color<br>• Light theme color |
+| [Translate posts](#translate-posts) | Adds a menu item to translate the text of posts. |  |
 | [Video delay](#video-delay) | Adds an option to delay the video, to keep it in sync with laggy Bluetooth audio. |  |
 | [Video quality](#video-quality) | Adds options to set default video qualities and always use the advanced video quality menu. |  |
 | [Voice over translation](#voice-over-translation) | Adds additional voice over languages using text-to-speech synchronized to the video playback. |  |
@@ -164,8 +165,8 @@ All modifications made by Morphe, along with their dates, can be found in the Gi
 
 **🎯 Supported versions:**
 
-| 🧪&nbsp;9.43.51 | 🧪&nbsp;9.42.52 | 🧪&nbsp;9.41.52 | 9.20.53 | 9.15.51 |
-| :---: | :---: | :---: | :---: | :---: |
+| 🧪&nbsp;9.43.51 | 🧪&nbsp;9.42.52 | 🧪&nbsp;9.41.52 | 9.30.53 | 9.20.53 | 9.15.51 |
+| :---: | :---: | :---: | :---: | :---: | :---: |
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
@@ -227,7 +228,7 @@ All modifications made by Morphe, along with their dates, can be found in the Gi
 
 **🎯 Supported versions:**
 
-| 🧪&nbsp;2026.43.0 | 🧪&nbsp;2026.42.0 | 🧪&nbsp;2026.41.0 | 2026.40.0 | 2026.24.0 | 2026.10.0 |
+| 🧪&nbsp;2026.44.0 | 🧪&nbsp;2026.43.0 | 🧪&nbsp;2026.42.0 | 2026.40.0 | 2026.24.0 | 2026.10.0 |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |

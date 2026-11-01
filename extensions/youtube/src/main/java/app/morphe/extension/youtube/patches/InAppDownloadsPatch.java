@@ -11,6 +11,7 @@ package app.morphe.extension.youtube.patches;
 import android.net.Uri;
 import android.util.Base64;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.protobuf.ByteString;
@@ -28,6 +29,7 @@ import app.morphe.extension.shared.patches.DownloadMode;
 import app.morphe.extension.shared.spoof.ClientType;
 import app.morphe.extension.shared.spoof.SpoofVideoStreamsPatch;
 import app.morphe.extension.shared.spoof.requests.StreamingDataRequest;
+import app.morphe.extension.shared.sponsorblock.SponsorBlockOfflineStorage;
 import app.morphe.extension.youtube.innertube.Offline.ButtonCommand;
 import app.morphe.extension.youtube.innertube.Offline.DownloadButtonColor;
 import app.morphe.extension.youtube.innertube.Offline.DownloadButtonLayout;
@@ -261,6 +263,30 @@ public final class InAppDownloadsPatch {
     }
 
     /**
+     * Determines whether the given player response proto represents a playable offline video.
+     */
+    public static boolean isOfflinePlayerResponse(@NonNull String videoId, @Nullable Object playerProto) {
+        try {
+            if (playerProto == null) return false;
+            OfflinePlayerResponse response = OfflinePlayerResponse.parseFrom(messageSerializer.apply(playerProto));
+            if (response.hasOfflineState()) {
+                int action = response.getOfflineState().getActionValue();
+                if (action == OfflineStateAction.OFFLINE_STATE_ACTION_OK_VALUE) {
+                    Logger.printDebug(() -> "Detected playable offline video: " + videoId);
+                    return true;
+                } else {
+                    Logger.printDebug(() -> "Offline video state action not OK: " + action + " for: " + videoId);
+                }
+            } else {
+                Logger.printDebug(() -> "OfflinePlayerResponse has no offline state for: " + videoId);
+            }
+        } catch (Exception ex) {
+            Logger.printException(() -> "isOfflinePlayerResponse failure", ex);
+        }
+        return false;
+    }
+
+    /**
      * Injection point.
      * <p>
      * Called off the main thread with the player response the app saves a video with.
@@ -281,13 +307,20 @@ public final class InAppDownloadsPatch {
             if (!original.hasOfflineState()) {
                 return null;
             }
+
+            String videoId = original.hasVideoDetails()
+                    ? original.getVideoDetails().getVideoId()
+                    : "";
+
             final boolean allowed = original.getOfflineState().getActionValue()
                     == OfflineStateAction.OFFLINE_STATE_ACTION_OK_VALUE;
             if (allowed && original.getStreamingData().getAdaptiveFormatsCount() > 0) {
+                if (!videoId.isEmpty()) {
+                    SponsorBlockOfflineStorage.fetchAndSaveSegments(videoId);
+                }
                 return null;
             }
 
-            String videoId = original.getVideoDetails().getVideoId();
             if (videoId.isEmpty()) {
                 Logger.printDebug(() -> "Declined offline player response has no video id");
                 return null;
@@ -314,6 +347,8 @@ public final class InAppDownloadsPatch {
                     : builder.getPlayerConfig();
             builder.setPlayerConfig(playerConfig.toBuilder().setExoPlayerConfig(
                     playerConfig.getExoPlayerConfig().toBuilder().setUseExoPlayer(true)));
+
+            SponsorBlockOfflineStorage.fetchAndSaveSegments(videoId);
 
             Logger.printDebug(() -> "Replaced declined offline player response of: " + videoId
                     + " savable formats: " + countSavableFormats(builder.getStreamingData())

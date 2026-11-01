@@ -29,6 +29,8 @@ Second \"item\" text"</string>
   <string name="morphe_settings_screen_11_misc_title">Divers</string>
   <string name="morphe_settings_screen_12_video_title">Vidéo</string>
   <string name="morphe_restore_old_settings_menus_title">Restaurer les anciens menus de paramètres de YouTube</string>
+  <string name="morphe_native_snackbar_title">Afficher les messages dans la barre de notification YouTube</string>
+  <string name="morphe_native_snackbar_summary">Les messages de Morphe, tels que la confirmation de l\'appui sur un bouton du lecteur, sont affichés dans la barre de notification YouTube plutôt que dans un pop-up</string>
   <!-- misc.backgroundplayback.backgroundPlaybackPatch -->
   <string name="morphe_remove_background_playback_restrictions_title">Supprimer les restrictions de lecture en arrière-plan</string>
   <string name="morphe_shorts_disable_background_playback_title">Désactiver la lecture en arrière-plan</string>
@@ -113,6 +115,9 @@ Les changements incluent :
   <string name="morphe_hide_surveys_title">Masquer les sondages</string>
   <string name="morphe_hide_surveys_summary">Masque les sondages et les incitations concernant la pertinence des recommandations du flux</string>
   <string name="morphe_hide_ticket_shelf_title">Masquer l\'étagère des \'Places de concert\'</string>
+  <!-- 'Unavailable videos are hidden' should be translated using the same localized wording YouTube displays for the banner in playlists. -->
+  <string name="morphe_hide_unavailable_videos_hidden_banner_title">Masquer la bannière \'Les vidéos non disponibles ont été masquées\'</string>
+  <string name="morphe_hide_unavailable_videos_hidden_banner_summary">Masquer la bannière \'Les vidéos non disponibles ont été masquées\' dans les playlists</string>
   <string name="morphe_hide_upload_time_title">Masquer l\'heure de mise en ligne</string>
   <!-- Translations should match the language used in 'morphe_hide_view_count_summary'. -->
   <string name="morphe_hide_upload_time_summary">"Limitations :
@@ -452,6 +457,15 @@ Les signalements sont publics et sont examinés avant qu'une chaîne ne soit ajo
   <string name="morphe_post_image_download_saved_single">Image enregistrée dans %s</string>
   <string name="morphe_post_image_download_failed">Impossible de télécharger l\'image</string>
   <string name="morphe_post_image_download_not_found">Aucune image trouvée dans ce post</string>
+  <!-- interaction.posttranslate.postTranslatePatch -->
+  <string name="morphe_post_translate_title">Traduire les posts</string>
+  <string name="morphe_post_translate_summary">Ajoute un élément au menu déroulant pour traduire les posts des créateurs de contenu</string>
+  <string name="morphe_post_translate_language_title">Langue de traduction des posts</string>
+  <string name="morphe_post_translate_flyout">Traduire</string>
+  <string name="morphe_post_translate_flyout_original">Afficher l\'originale</string>
+  <string name="morphe_post_translate_started">Traduction…</string>
+  <string name="morphe_post_translate_failed">Impossible de traduire le post</string>
+  <string name="morphe_post_translate_same_language">Le post est déjà dans la langue de traduction</string>
   <!-- interaction.ask.askFlyoutMenuPatch -->
   <string name="morphe_ask_summarize_flyout_menu_title">Ajouter l\'élément \'Posez une question\' au menu déroulant</string>
   <string name="morphe_ask_summarize_flyout_menu_summary">Ajoute un élément de résumé vidéo au menu déroulant du flux</string>
@@ -860,6 +874,8 @@ Les 'Cookies des sous-titres' doivent être fournis"</string>
   <string name="morphe_fix_transcript_title">Corriger la transcription</string>
   <string name="morphe_fix_transcript_summary">Résout une erreur de vérification de précondition qui peut empêcher le chargement de la transcription</string>
   <string name="morphe_captions_in_pip_title">Afficher les sous-titres en mode image dans l\'image</string>
+  <string name="morphe_stable_caption_blocks_title">Blocs de sous-titres stables</string>
+  <string name="morphe_stable_caption_blocks_summary">Regroupe les sous-titres automatiques en blocs stables et lisibles. Certains mots peuvent apparaître avant même qu\'ils soient prononcés. Un redémarrage nécessaire.</string>
   <!-- layout.buttons.navigation.navigationButtonsPatch -->
   <string name="morphe_navigation_buttons_screen_title">Boutons de navigation</string>
   <string name="morphe_navigation_buttons_screen_summary">Choisissez les boutons qui apparaissent dans la barre de navigation inférieure</string>
@@ -1209,6 +1225,8 @@ Limitation : Si 'Restaurer l'ancienne barre d'actions vidéo' est désactivé, l
   <string name="morphe_miniplayer_disable_resuming_summary">Désactive le mini-lecteur \'Continuer à regarder\', une fonctionnalité de YouTube Premium qui s\'affiche au démarrage de l\'application</string>
   <string name="morphe_miniplayer_screen_title">Mini-lecteur</string>
   <string name="morphe_miniplayer_screen_summary">Personnalisez l\'apparence et le comportement du mini-lecteur vidéo</string>
+  <string name="morphe_miniplayer_not_available_title">Mini-lecteurs supplémentaires</string>
+  <string name="morphe_miniplayer_not_available_summary">YouTube a supprimé tous les mini-lecteurs supplémentaires. Pour rétablir d\'autres types de mini-lecteurs, veuillez patcher YouTube version 21.28.208 ou antérieure</string>
   <string name="morphe_miniplayer_type_title">Type de mini-lecteur</string>
   <string name="morphe_miniplayer_hide_title_title">Masquer le titre et la chaîne</string>
   <string name="morphe_miniplayer_type_entry_0">Désactivé</string>
@@ -1250,6 +1268,9 @@ Limitation : Si 'Restaurer l'ancienne barre d'actions vidéo' est désactivé, l
   <string name="morphe_fix_status_bar_layout_summary">Maintient une mise en page cohérente de la barre d\'état, afin qu\'elle ne masque pas les barres supérieures et ne laisse aucun espace vide au-dessus du lecteur. Désactivez cette option si l\'application plante ou si les barres supérieures s\'affichent incorrectement</string>
   <!-- layout.theme.themePatch -->
   <string name="morphe_splash_screen_style_entry_6">Lueur</string>
+  <string name="morphe_splash_screen_style_entry_7">Morphe Lueur 1</string>
+  <string name="morphe_splash_screen_style_entry_8">Morphe Lueur 2</string>
+  <string name="morphe_splash_screen_style_glow_not_supported">L\'écran de démarrage lueur n\'est pas pris en charge par cet appareil</string>
   <string name="morphe_theme_color_light_title">Arrière-plan du thème clair</string>
   <string name="morphe_theme_color_light_entry_2">Blanc</string>
   <string name="morphe_theme_color_light_entry_3">Material You (Blanc)</string>

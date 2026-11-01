@@ -29,11 +29,9 @@ import app.morphe.extension.shared.ResourceUtils;
 
 /**
  * Mirrors the currently sung lyric line into the in-app miniplayer: the title shows the current
- * line and the subtitle shows {@code "artist - title"}. When no synced or word-level lyrics are
- * available the app's own title and artist are left untouched.
- *
- * <p>The miniplayer view hierarchy is captured from the constructor injection point, and a ticker
- * updates the two {@link TextView}s as playback progresses.
+ * line and the subtitle shows {@code "artist - title"}. Without synced or word-level lyrics the
+ * app's own title and artist are left untouched. The views are captured at the constructor
+ * injection point and updated from a ticker as playback progresses.
  */
 @SuppressWarnings("unused")
 public final class MiniplayerLyrics {
@@ -74,16 +72,6 @@ public final class MiniplayerLyrics {
     @Nullable
     private static String lastMirrorSubtitle;
 
-    /** Drives the periodic check that mirrors the current line into the mini player. */
-    private static final LyricsTicker ticker = new LyricsTicker(MiniplayerLyrics::tick);
-
-    /** Listener that re-schedules the ticker immediately when lyrics finish loading. */
-    private static final LyricsManager.Listener lyricsListener = (state, lyrics) -> {
-        if (state == LyricsManager.State.LOADED || state == LyricsManager.State.NOT_FOUND) {
-            ticker.schedule();
-        }
-    };
-
     private MiniplayerLyrics() {
     }
 
@@ -92,6 +80,9 @@ public final class MiniplayerLyrics {
         ticker.stop();
         LyricsManager.getInstance().removeListener(lyricsListener);
     }
+
+    /** Drives the periodic check that mirrors the current line into the mini player. */
+    private static final LyricsTicker ticker = new LyricsTicker(MiniplayerLyrics::tick);
 
     /**
      * Starts or stops mirroring to match the current settings. Called when a lyrics setting
@@ -132,6 +123,13 @@ public final class MiniplayerLyrics {
             Logger.printException(() -> "onMediaSessionSetMetadata failure", ex);
         }
     }
+
+    /** Listener that re-schedules the ticker immediately when lyrics finish loading. */
+    private static final LyricsManager.Listener lyricsListener = (state, lyrics) -> {
+        if (state == LyricsManager.State.LOADED || state == LyricsManager.State.NOT_FOUND) {
+            ticker.schedule();
+        }
+    };
 
     /**
      * Injection point. Captures the miniplayer title and subtitle TextViews and (re)starts the
@@ -281,7 +279,7 @@ public final class MiniplayerLyrics {
     }
 
     private static void restoreField(TextView view, @Nullable String lastMirrored,
-            @Nullable CharSequence preMirror, @Nullable String fallback) {
+                                     @Nullable CharSequence preMirror, @Nullable String fallback) {
         final CharSequence current = view.getText();
         if (!TextUtils.equals(current, lastMirrored)) {
             return;
@@ -293,4 +291,6 @@ public final class MiniplayerLyrics {
             view.setText(restore);
         }
     }
+
+
 }

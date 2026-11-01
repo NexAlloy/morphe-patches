@@ -9,6 +9,7 @@ package app.morphe.extension.reddit.settings;
 
 import static app.morphe.extension.shared.StringRef.str;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -108,7 +109,7 @@ public class RedditActivityHook {
             return false;
         }
 
-        return AbstractPreferenceFragment.showRestartDialogIfNeeded(activity, activity::finish);
+        return AbstractPreferenceFragment.showRestartDialogIfNeeded(activity);
     }
 
     /**
@@ -175,6 +176,7 @@ public class RedditActivityHook {
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             return new Dialog(getActivity(), getTheme()) {
                 @Override
+                @SuppressLint("GestureBackNavigation")
                 public void onBackPressed() {
                     closeSettings();
                 }
@@ -185,7 +187,7 @@ public class RedditActivityHook {
          * Closes the settings, after first showing the restart dialog if a changed setting requires it.
          */
         private void closeSettings() {
-            if (!AbstractPreferenceFragment.showRestartDialogIfNeeded(getActivity(), this::dismiss)) {
+            if (!AbstractPreferenceFragment.showRestartDialogIfNeeded(getActivity())) {
                 dismiss();
             }
         }

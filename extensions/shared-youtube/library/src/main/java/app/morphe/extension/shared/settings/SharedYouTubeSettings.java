@@ -2,6 +2,7 @@ package app.morphe.extension.shared.settings;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
+import static app.morphe.extension.shared.StringRef.sf;
 import static app.morphe.extension.shared.settings.Setting.migrateOldSettingToNew;
 import static app.morphe.extension.shared.settings.Setting.parent;
 import static app.morphe.extension.shared.settings.Setting.parentNot;
@@ -18,8 +19,11 @@ import app.morphe.extension.shared.patches.CustomFontPatch.FontType;
 import app.morphe.extension.shared.patches.DownloadMode;
 import app.morphe.extension.shared.patches.PoTokenProviderPatch.PoTokenProviderAvailability;
 import app.morphe.extension.shared.patches.SkipSilencePatch.MinimumPause;
+import app.morphe.extension.shared.patches.SplashAnimationPatch;
 import app.morphe.extension.shared.patches.SplashAnimationPatch.SplashScreenAnimationStyle;
 import app.morphe.extension.shared.settings.preference.ExternalDownloaderPreference.ExternalDownloaderAvailability;
+import app.morphe.extension.shared.settings.preference.SeekBarPreference;
+import app.morphe.extension.shared.settings.preference.SeekBarPreference.SeekBarConfig;
 import app.morphe.extension.shared.spoof.SpoofVideoStreamsPatch.JavaScriptClientAvailability;
 import app.morphe.extension.shared.spoof.js.JavaScriptVariant;
 import app.morphe.extension.shared.theme.ThemeColorPatch.ThemeColorChangeForegroundAvailability;
@@ -39,6 +43,7 @@ public class SharedYouTubeSettings extends BaseSettings {
 
     public static final BooleanSetting SETTINGS_SEARCH_HISTORY = new BooleanSetting("morphe_settings_search_history", TRUE, true);
     public static final StringSetting SETTINGS_SEARCH_ENTRIES = new StringSetting("morphe_settings_search_entries", "");
+    public static final IntegerSetting SETTINGS_NEW_INDICATOR_DAYS = new IntegerSetting("morphe_settings_new_indicator_days", 2);
 
     // Network proxy
     // There are multiple endpoint calls due to the spoof video streams patch. Place the proxy settings first.
@@ -80,7 +85,7 @@ public class SharedYouTubeSettings extends BaseSettings {
     public static final IntegerSetting THEME_LAST_SPLASH_SCREEN_INDEX = new IntegerSetting("morphe_theme_last_splash_screen_index", -1, false, false);
 
     // Custom branding
-    public static final EnumSetting<SplashScreenAnimationStyle> SPLASH_SCREEN_STYLE = new EnumSetting<>("morphe_splash_screen_style", CustomBrandingPatch.isPatchIncluded() ? SplashScreenAnimationStyle.MORPHE_COLOR : SplashScreenAnimationStyle.FPS_60_ONE_SECOND, true);
+    public static final EnumSetting<SplashScreenAnimationStyle> SPLASH_SCREEN_STYLE = new EnumSetting<>("morphe_splash_screen_style", SplashAnimationPatch.getDefaultStyle(), true);
     public static final EnumSetting<BrandingTheme> CUSTOM_BRANDING_ICON = new EnumSetting<>("morphe_custom_branding_icon", CustomBrandingPatch.getDefaultIconStyle(), true, "morphe_custom_branding_icon_user_dialog_message");
     public static final EnumSetting<NotificationIconTheme> CUSTOM_BRANDING_NOTIFICATION_ICON = new EnumSetting<>("morphe_custom_branding_notification_icon", NotificationIconTheme.FOLLOW, true);
     public static final IntegerSetting CUSTOM_BRANDING_NAME = new IntegerSetting("morphe_custom_branding_name", CustomBrandingPatch.getDefaultAppNameIndex(), true);
@@ -146,6 +151,9 @@ public class SharedYouTubeSettings extends BaseSettings {
     private static final EnumSetting<SplashScreenAnimationStyle> DEPRECATED_SPLASH_SCREEN_ANIMATION_STYLE = new EnumSetting<>("morphe_splash_screen_animation_style", SplashScreenAnimationStyle.FPS_60_ONE_SECOND);
 
     static {
+        SeekBarPreference.register(new SeekBarConfig(SETTINGS_NEW_INDICATOR_DAYS,
+                0, 14, 1, "", 1, sf("morphe_settings_new_indicator_days_off"), null));
+
         // TODO: Eventually remove these migrations
         migrateOldSettingToNew(DEPRECATED_SANITIZE_URL_QUERY, SANITIZE_SHARING_LINKS);
 

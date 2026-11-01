@@ -29,6 +29,8 @@ Second \"item\" text"</string>
   <string name="morphe_settings_screen_11_misc_title">Різне</string>
   <string name="morphe_settings_screen_12_video_title">Відео</string>
   <string name="morphe_restore_old_settings_menus_title">Відновити старий екран налаштувань YouTube</string>
+  <string name="morphe_native_snackbar_title">Показувати повідомлення в снекбарі YouTube</string>
+  <string name="morphe_native_snackbar_summary">Повідомлення Morphe, як-от підтвердження дії кнопки плеєра, показуються в снекбарі YouTube замість спливаючого повідомлення</string>
   <!-- misc.backgroundplayback.backgroundPlaybackPatch -->
   <string name="morphe_remove_background_playback_restrictions_title">Зняти обмеження фонового відтворення</string>
   <string name="morphe_shorts_disable_background_playback_title">Вимкнути фонове відтворення</string>
@@ -113,6 +115,9 @@ Second \"item\" text"</string>
   <string name="morphe_hide_surveys_title">Приховати опитування</string>
   <string name="morphe_hide_surveys_summary">Приховує опитування та підказки щодо точності рекомендацій у стрічці</string>
   <string name="morphe_hide_ticket_shelf_title">Приховати панель квитків</string>
+  <!-- 'Unavailable videos are hidden' should be translated using the same localized wording YouTube displays for the banner in playlists. -->
+  <string name="morphe_hide_unavailable_videos_hidden_banner_title">Приховати банер \"Недоступні відео приховано\"</string>
+  <string name="morphe_hide_unavailable_videos_hidden_banner_summary">Приховує банер \"Недоступні відео приховано\" у списках відтворення</string>
   <string name="morphe_hide_upload_time_title">Приховати час завантаження</string>
   <!-- Translations should match the language used in 'morphe_hide_view_count_summary'. -->
   <string name="morphe_hide_upload_time_summary">"Обмеження:
@@ -452,6 +457,15 @@ Second \"item\" text"</string>
   <string name="morphe_post_image_download_saved_single">Зображення збережено у %s</string>
   <string name="morphe_post_image_download_failed">Не вдалося завантажити зображення</string>
   <string name="morphe_post_image_download_not_found">У цьому дописі не знайдено зображення</string>
+  <!-- interaction.posttranslate.postTranslatePatch -->
+  <string name="morphe_post_translate_title">Перекладати дописи</string>
+  <string name="morphe_post_translate_summary">Додає пункт у спливне меню для перекладу дописів авторів контенту</string>
+  <string name="morphe_post_translate_language_title">Мова перекладу дописів</string>
+  <string name="morphe_post_translate_flyout">Перекласти</string>
+  <string name="morphe_post_translate_flyout_original">Оригінал</string>
+  <string name="morphe_post_translate_started">Переклад…</string>
+  <string name="morphe_post_translate_failed">Не вдалося перекласти допис</string>
+  <string name="morphe_post_translate_same_language">Допис уже написано мовою перекладу</string>
   <!-- interaction.ask.askFlyoutMenuPatch -->
   <string name="morphe_ask_summarize_flyout_menu_title">Додати пункт \"Запитати\" у спливне меню</string>
   <string name="morphe_ask_summarize_flyout_menu_summary">Додає пункт підсумовування відео до спливного меню стрічки</string>
@@ -860,6 +874,8 @@ Second \"item\" text"</string>
   <string name="morphe_fix_transcript_title">Виправити транскрипцію</string>
   <string name="morphe_fix_transcript_summary">Усуває помилку перевірки передумов, яка може перешкоджати завантаженню транскрипції</string>
   <string name="morphe_captions_in_pip_title">Показувати субтитри в режимі \"Картинка в картинці\"</string>
+  <string name="morphe_stable_caption_blocks_title">Стабільні блоки субтитрів</string>
+  <string name="morphe_stable_caption_blocks_summary">Групує автоматичні субтитри в стабільні, зручні для читання блоки. Деякі слова можуть з\'являтися до того, як їх вимовлять. Потрібен перезапуск</string>
   <!-- layout.buttons.navigation.navigationButtonsPatch -->
   <string name="morphe_navigation_buttons_screen_title">Кнопки панелі навігації</string>
   <string name="morphe_navigation_buttons_screen_summary">Виберіть, які кнопки будуть показуватися на нижній панелі навігації</string>
@@ -1207,6 +1223,8 @@ Second \"item\" text"</string>
   <string name="morphe_miniplayer_disable_resuming_summary">Вимикає мініплеєр \"Продовжити перегляд\", функцію YouTube Premium, що з\'являється при запуску застосунку</string>
   <string name="morphe_miniplayer_screen_title">Мініплеєр</string>
   <string name="morphe_miniplayer_screen_summary">Налаштування вигляду та поведінки мінімізованого відеоплеєра</string>
+  <string name="morphe_miniplayer_not_available_title">Додаткові мініплеєри</string>
+  <string name="morphe_miniplayer_not_available_summary">YouTube прибрав усі додаткові мініплеєри. Щоб відновити більше типів мініплеєрів, пропатчте YouTube 21.28.208 або старіший</string>
   <string name="morphe_miniplayer_type_title">Тип мініплеєра</string>
   <string name="morphe_miniplayer_hide_title_title">Приховати назву та канал</string>
   <string name="morphe_miniplayer_type_entry_0">Вимкнено</string>
@@ -1248,6 +1266,9 @@ Second \"item\" text"</string>
   <string name="morphe_fix_status_bar_layout_summary">Підтримує сталий макет рядка стану, щоб він не перекривав верхні панелі та не залишав порожнього місця над плеєром. Вимкніть це, якщо застосунок аварійно завершує роботу або верхні панелі виглядають неправильно</string>
   <!-- layout.theme.themePatch -->
   <string name="morphe_splash_screen_style_entry_6">Сяйво</string>
+  <string name="morphe_splash_screen_style_entry_7">Morphe сяйво 1</string>
+  <string name="morphe_splash_screen_style_entry_8">Morphe сяйво 2</string>
+  <string name="morphe_splash_screen_style_glow_not_supported">Заставка \"Сяйво\" не підтримується цим пристроєм</string>
   <string name="morphe_theme_color_light_title">Фон світлої теми</string>
   <string name="morphe_theme_color_light_entry_2">Білий</string>
   <string name="morphe_theme_color_light_entry_3">Material You (білий)</string>
@@ -1270,9 +1291,9 @@ Second \"item\" text"</string>
   <string name="morphe_seekbar_custom_color_accent_summary">Встановлює додатковий колір смуги прогресу відтворення відео</string>
   <string name="morphe_seekbar_custom_color_invalid">Недійсне значення кольору смуги відтворення</string>
   <!-- layout.branding.customBrandingPatch -->
-  <string name="morphe_custom_branding_icon_entry_8">Оригінальний аналог</string>
-  <string name="morphe_custom_branding_icon_entry_9">Оригінальний торт</string>
-  <string name="morphe_custom_branding_icon_entry_10">Оригінальний метал</string>
+  <string name="morphe_custom_branding_icon_entry_8">Оригінальна - аналог</string>
+  <string name="morphe_custom_branding_icon_entry_9">Оригінальна - торт</string>
+  <string name="morphe_custom_branding_icon_entry_10">Оригінальна - метал</string>
   <!-- layout.branding.header.changeHeaderPatch -->
   <string name="morphe_header_logo_title">Логотип заголовка</string>
   <string name="morphe_header_logo_entry_1">Стандартний</string>

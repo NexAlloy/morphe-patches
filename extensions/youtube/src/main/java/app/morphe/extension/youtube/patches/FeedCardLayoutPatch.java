@@ -129,6 +129,7 @@ import app.morphe.extension.youtube.innertube.FeedCardLayoutOuterClass.VideoWith
 import app.morphe.extension.youtube.innertube.FeedCardLayoutOuterClass.VideoWithContextModel;
 import app.morphe.extension.youtube.patches.components.LayoutComponentsFilter;
 import app.morphe.extension.youtube.patches.theme.SeekbarColorPatch;
+import app.morphe.extension.youtube.patches.utils.FeedVideoCardsPatch;
 import app.morphe.extension.youtube.patches.utils.FlyoutUtils;
 import app.morphe.extension.youtube.patches.utils.ProtoNode;
 import app.morphe.extension.youtube.settings.Settings;
@@ -311,18 +312,25 @@ public class FeedCardLayoutPatch {
      */
     private static final Pattern METADATA_SEPARATOR_PATTERN = Pattern.compile(" {2,}| · ");
 
-    private static final ByteTrieSearch elementSearch = new ByteTrieSearch(
-            CARD_LAYOUT
-                    ? ByteTrieSearch.convertStringsToBytes(CLASSIC_TEMPLATE, SHELF_HEADER_TEMPLATE,
-                    HORIZONTAL_SHELF_TEMPLATE, SHORTS_VIDEO_CELL_TEMPLATE, SHORTS_SHELF_TEMPLATE,
-                    GRID_VIDEO_TEMPLATE)
-                    : ByteTrieSearch.convertStringsToBytes(CARD_TEMPLATE)
-    );
+    /**
+     * Templates of the elements that are converted. Every element is searched on the main thread,
+     * so the element is searched as a string in native code, see {@link FeedVideoCardsPatch#getElementText(byte[])}.
+     */
+    private static final String[] elementTemplates = CARD_LAYOUT
+            ? new String[]{CLASSIC_TEMPLATE, SHELF_HEADER_TEMPLATE, HORIZONTAL_SHELF_TEMPLATE,
+            SHORTS_VIDEO_CELL_TEMPLATE, SHORTS_SHELF_TEMPLATE, GRID_VIDEO_TEMPLATE}
+            : new String[]{CARD_TEMPLATE};
     /**
      * Label of the shelf headers, in the bytes of the converted elements.
      */
     private static final ByteTrieSearch shelfHeaderLabelSearch = new ByteTrieSearch(
             ByteTrieSearch.convertStringsToBytes(String.valueOf(SHELF_HEADER_LABEL_MARKER))
+    );
+    /**
+     * Link to the movies page, in the bytes of the movies.
+     */
+    private static final ByteTrieSearch moviesPageSearch = new ByteTrieSearch(
+            ByteTrieSearch.convertStringsToBytes("FEstorefront")
     );
     /**
      * Thumbnails of the Shorts, the same that the Shorts filter looks for.
@@ -551,14 +559,15 @@ public class FeedCardLayoutPatch {
      */
     public static byte[] setFeedCardLayout(byte[] bytes) {
         try {
-            if (!elementSearch.matches(bytes)) {
+            final String elementText = FeedVideoCardsPatch.getElementText(bytes);
+            if (!Utils.containsAny(elementText, elementTemplates)) {
                 // The elements of the layout of the setting give the current version of its template:
                 // the uri and the fields are taken from the element, if it's an element of the template.
                 // After the first element, the elements are checked once in a while, to follow a new version.
                 VideoTemplate template = CARD_LAYOUT ? CARD : CLASSIC;
                 final long now = System.currentTimeMillis();
                 if ((!template.fromElement || now - template.checkTime >= TEMPLATE_CHECK_INTERVAL_MILLIS)
-                        && template.search.matches(bytes)) {
+                        && elementText.contains(template.name)) {
                     ComponentType componentType = Element.parseFrom(bytes).getType().getComponentType();
                     String elementUri = componentType.getTemplateConfig().getUriTemplateConfig().getUri();
                     if (isTemplate(elementUri, template.name)) {
@@ -613,13 +622,17 @@ public class FeedCardLayoutPatch {
                             break toCard;
                         }
 
-                        // The filters find the hidden Shorts, live streams and mix playlists by the classic layout.
+                        // The filters find the hidden Shorts, live streams, mix playlists and movies by the classic layout.
                         if (thumbnail.getBadgeStyle() == THUMBNAIL_BADGE_STYLE_LIVE
                                 && Settings.HIDE_LIVE_STREAMS.get()) {
                             break toCard;
                         }
                         // The mix playlists are found by the url of the mix, which the cards don't have.
                         if (LayoutComponentsFilter.filterMixPlaylists(bytes)) {
+                            break toCard;
+                        }
+                        // The movies are found by the link to the movies page, as in the ads filter.
+                        if (Settings.HIDE_MOVIES_SECTION.get() && moviesPageSearch.matches(bytes)) {
                             break toCard;
                         }
                         if ((Settings.HIDE_SHORTS_HOME.get() || Settings.HIDE_SHORTS_SUBSCRIPTIONS.get()

@@ -71,9 +71,9 @@ public record TrackVersion(String title, String variant) {
     private static boolean isEdgePunctuation(int cp) {
         return switch (Character.getType(cp)) {
             case Character.CONNECTOR_PUNCTUATION, Character.DASH_PUNCTUATION,
-                    Character.START_PUNCTUATION, Character.END_PUNCTUATION,
-                    Character.INITIAL_QUOTE_PUNCTUATION, Character.FINAL_QUOTE_PUNCTUATION,
-                    Character.OTHER_PUNCTUATION -> true;
+                 Character.START_PUNCTUATION, Character.END_PUNCTUATION,
+                 Character.INITIAL_QUOTE_PUNCTUATION, Character.FINAL_QUOTE_PUNCTUATION,
+                 Character.OTHER_PUNCTUATION -> true;
             default -> false;
         };
     }

@@ -58,6 +58,8 @@ Second \"item\" text"</string>
   <string name="morphe_sb_guidelines_popup_already_read">Արդեն կարդացել եմ</string>
   <string name="morphe_sb_guidelines_popup_open">Ցույց տրվի</string>
   <string name="morphe_sb_general_title">Ընդհանուր</string>
+  <string name="morphe_sb_offline_segments_title">Պահպանել ներբեռնված տեսանյութերի հատվածները</string>
+  <string name="morphe_sb_offline_segments_summary">Թույլ է տալիս բաց թողնել ներբեռնված տեսանյութերի հատվածները օֆլայն վիճակում</string>
   <string name="morphe_sb_toast_on_connection_error_title">Ցույց տալ կապի սխալների մասին ծանուցումները</string>
   <string name="morphe_sb_toast_on_connection_error_summary">Ցույց է տալ ծանուցում, երբ SponsorBlock սերվերը հասանելի չէ</string>
   <string name="morphe_sb_track_skip_count_title">Միացնել բաց թողնումների քանակի հետևումը</string>
@@ -217,10 +219,15 @@ Second \"item\" text"</string>
   <string name="morphe_sb_stats_submissions">Դուք ստեղծել եք &lt;b&gt;%s&lt;/b&gt; սեգմենտներ</string>
   <string name="morphe_sb_stats_submissions_summary">Հպեք այստեղ՝ ձեր հատվածները տեսնելու համար</string>
   <string name="morphe_sb_stats_saved_zero">SponsorBlock-ի առաջատարների ցուցակը</string>
+  <string name="morphe_sb_stats_saved">Դուք փրկել եք մարդկանց &lt;b&gt;%s&lt;/b&gt; հատվածներից</string>
   <string name="morphe_sb_stats_saved_summary_zero">Հպեք այստեղ՝ գլոբալ վիճակագրությունը և լավագույն ներդ contribu-տորները տեսնելու համար</string>
   <string name="morphe_sb_stats_saved_summary">Դա նրանց կյանքի &lt;b&gt;%s&lt;/b&gt;-ն է։&lt;br&gt;Հպեք այստեղ՝ առաջատարների ցուցակը տեսնելու համար</string>
+  <string name="morphe_sb_stats_self_saved">Դուք բաց եք թողել &lt;b&gt;%s&lt;/b&gt; հատվածներ</string>
   <string name="morphe_sb_stats_self_saved_summary">Դա &lt;b&gt;%s&lt;/b&gt; է</string>
   <string name="morphe_sb_stats_self_saved_reset_title">Վերակայել բաց թողնված հատվածների հաշվիչը՞</string>
+  <string name="morphe_sb_stats_saved_hour_format">%1$s ժամ %2$s րոպե</string>
+  <string name="morphe_sb_stats_saved_minute_format">%1$s րոպե %2$s վայրկյան</string>
+  <string name="morphe_sb_stats_saved_second_format">%s վայրկյան</string>
   <string name="morphe_sb_color_opacity_label">Թափանցիկություն՝</string>
   <string name="morphe_sb_color_dot_label">Գույն՝</string>
   <string name="morphe_sb_about_api_summary">"SponsorBlock-ը տեսանյութերի հատվածների հանրային տվյալների բազա է, ինչպիսիք են հովናരերը, ներածությունները, եզրափակությունները և բաժանորդագրվելու հիշեցումները: Հատվածները ներկայացվում և քվեարկվում են համայնքի կողմից, իսկ տվյալների բազան բաց է և անվճար ներբեռնման համար

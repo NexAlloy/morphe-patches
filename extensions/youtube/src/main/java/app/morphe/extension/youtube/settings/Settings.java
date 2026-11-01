@@ -12,6 +12,8 @@ import static app.morphe.extension.shared.sponsorblock.objects.CategoryBehaviour
 import static app.morphe.extension.shared.sponsorblock.objects.CategoryBehaviour.SKIP_AUTOMATICALLY;
 import static app.morphe.extension.shared.sponsorblock.objects.CategoryBehaviour.SKIP_AUTOMATICALLY_ONCE;
 
+import android.os.Build;
+
 import java.util.List;
 
 import app.morphe.extension.shared.Logger;
@@ -178,6 +180,7 @@ public class Settings extends SharedYouTubeSettings {
     public static final BooleanSetting HIDE_SUBSCRIBED_CHANNELS_BAR_NAMES = new BooleanSetting("morphe_hide_subscribed_channels_bar_names", FALSE, parentNot(HIDE_SUBSCRIBED_CHANNELS_BAR));
     public static final BooleanSetting HIDE_SURVEYS = new BooleanSetting("morphe_hide_surveys", TRUE);
     public static final BooleanSetting HIDE_TICKET_SHELF = new BooleanSetting("morphe_hide_ticket_shelf", FALSE);
+    public static final BooleanSetting HIDE_UNAVAILABLE_VIDEOS_HIDDEN_BANNER = new BooleanSetting("morphe_hide_unavailable_videos_hidden_banner", FALSE);
     public static final BooleanSetting HIDE_UPLOAD_TIME = new BooleanSetting("morphe_hide_upload_time", FALSE);
     public static final BooleanSetting HIDE_VIDEO_LABELS = new BooleanSetting("morphe_hide_video_labels", TRUE);
     public static final BooleanSetting HIDE_VIDEO_THUMBNAIL = new BooleanSetting("morphe_hide_video_thumbnail", FALSE);
@@ -367,7 +370,11 @@ public class Settings extends SharedYouTubeSettings {
     public static final BooleanSetting VIDEO_QUALITY_DIALOG_BUTTON_RESOLUTION = new BooleanSetting("morphe_video_quality_dialog_button_resolution", FALSE, parent(VIDEO_QUALITY_DIALOG_BUTTON));
 
     // Post image download
-    public static final BooleanSetting POST_IMAGE_DOWNLOAD = new BooleanSetting("morphe_post_image_download", TRUE);
+    public static final BooleanSetting POST_IMAGE_DOWNLOAD = new BooleanSetting("morphe_post_image_download", TRUE, true);
+
+    // Post translate
+    public static final BooleanSetting POST_TRANSLATE = new BooleanSetting("morphe_post_translate", TRUE, true);
+    public static final StringSetting POST_TRANSLATE_LANGUAGE = new StringSetting("morphe_post_translate_language", "default", parent(POST_TRANSLATE));
 
     // Feed view count
     public static final BooleanSetting FEED_VIEW_COUNT = new BooleanSetting("morphe_feed_view_count", FALSE, true);
@@ -405,6 +412,8 @@ public class Settings extends SharedYouTubeSettings {
     public static final StringSetting CAPTION_COOKIES = new StringSetting("morphe_caption_cookies", "", true, parent(SET_CAPTION_COOKIES));
     public static final BooleanSetting FIX_TRANSCRIPT = new BooleanSetting("morphe_fix_transcript", TRUE, true);
     public static final BooleanSetting CAPTIONS_IN_PIP = new BooleanSetting("morphe_captions_in_pip", TRUE);
+    public static final BooleanSetting STABLE_CAPTION_BLOCKS = new BooleanSetting("morphe_stable_caption_blocks", FALSE, true,
+            () -> Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q);
 
     // Miniplayer
     public static final BooleanSetting MINIPLAYER_DISABLE_RESUMING = new BooleanSetting("morphe_miniplayer_disable_resuming", FALSE, true);
@@ -548,11 +557,12 @@ public class Settings extends SharedYouTubeSettings {
     // General (Layout)
     public static final BooleanSetting DISABLE_LAYOUT_UPDATES = new BooleanSetting("morphe_disable_layout_updates", FALSE, true,"morphe_disable_layout_updates_user_dialog_message");
     public static final BooleanSetting RESTORE_OLD_SETTINGS_MENUS = new BooleanSetting("morphe_restore_old_settings_menus", FALSE, true);
+    public static final BooleanSetting NATIVE_SNACKBAR = new BooleanSetting("morphe_native_snackbar", FALSE);
     public static final EnumSetting<FormFactor> CHANGE_FORM_FACTOR = new EnumSetting<>("morphe_change_form_factor", FormFactor.DEFAULT, true, "morphe_change_form_factor_user_dialog_message");
     public static final BooleanSetting TABLET_LAYOUT_IN_PLAYER = new BooleanSetting("morphe_tablet_layout_in_player", FALSE, true, new TabletLayoutInPlayerAvailability());
     public static final BooleanSetting BYPASS_IMAGE_REGION_RESTRICTIONS = new BooleanSetting("morphe_bypass_image_region_restrictions", FALSE, true);
     public static final BooleanSetting GRADIENT_LOADING_SCREEN = new BooleanSetting("morphe_gradient_loading_screen", FALSE, true);
-    public static final BooleanSetting RIVE_SPLASH_SCREEN_SHOWING = new BooleanSetting("morphe_rive_splash_screen_showing", FALSE, false, false);
+    public static final IntegerSetting RIVE_SPLASH_SCREEN_STATE = new IntegerSetting("morphe_rive_splash_screen_state", 0, false, false);
     public static final EnumSetting<HeaderLogo> HEADER_LOGO = new EnumSetting<>("morphe_header_logo", HeaderLogo.DEFAULT, true);
     public static final BooleanSetting DISABLE_SIGN_IN_TO_TV_POPUP = new BooleanSetting("morphe_disable_sign_in_to_tv_popup", FALSE);
     public static final BooleanSetting DISABLE_CONNECT_YOUR_DEVICES_POPUP = new BooleanSetting("morphe_disable_connect_your_devices_popup", FALSE);
@@ -563,6 +573,7 @@ public class Settings extends SharedYouTubeSettings {
     public static final BooleanSetting HIDE_STATUS_BAR = new BooleanSetting("morphe_hide_status_bar", FALSE, true);
     public static final BooleanSetting FIX_STATUS_BAR_LAYOUT = new BooleanSetting("morphe_fix_status_bar_layout", TRUE, true);
     public static final BooleanSetting WINDOW_BELOW_STATUS_BAR = new BooleanSetting("morphe_window_below_status_bar", FALSE, false, false);
+    public static final BooleanSetting WINDOW_ABOVE_NAVIGATION_BAR = new BooleanSetting("morphe_window_above_navigation_bar", FALSE, false, false);
     public static final EnumSetting<AnimationsMode> FORCE_ANIMATIONS = new EnumSetting<>("morphe_force_animations", AnimationsMode.DEFAULT);
 
     // Custom filter
@@ -769,6 +780,7 @@ public class Settings extends SharedYouTubeSettings {
     public static final EnumSetting<SponsorBlockDuration> SB_AUTO_HIDE_SKIP_BUTTON_DURATION = new EnumSetting<>("morphe_sb_auto_hide_skip_button_duration", SponsorBlockDuration.FOUR_SECONDS, parent(SB_ENABLED));
     public static final BooleanSetting SB_TOAST_ON_SKIP = new BooleanSetting("morphe_sb_toast_on_skip", TRUE, parent(SB_ENABLED));
     public static final EnumSetting<SponsorBlockDuration> SB_TOAST_ON_SKIP_DURATION = new EnumSetting<>("morphe_sb_toast_on_skip_duration", SponsorBlockDuration.FOUR_SECONDS, parentsAll(SB_ENABLED, SB_TOAST_ON_SKIP));
+    public static final BooleanSetting SB_OFFLINE_SEGMENTS = new BooleanSetting("morphe_sb_offline_segments", TRUE, parent(SB_ENABLED));
     public static final BooleanSetting SB_TOAST_ON_CONNECTION_ERROR = new BooleanSetting("morphe_sb_toast_on_connection_error", TRUE, parent(SB_ENABLED));
     public static final BooleanSetting SB_TRACK_SKIP_COUNT = new BooleanSetting("morphe_sb_track_skip_count", TRUE, parent(SB_ENABLED));
     public static final FloatSetting SB_SEGMENT_MIN_DURATION = new FloatSetting("morphe_sb_min_segment_duration", 0F, parent(SB_ENABLED));
@@ -1045,9 +1057,10 @@ public class Settings extends SharedYouTubeSettings {
             RESTORE_OLD_PLAYER_BUTTONS.resetToDefault();
         }
 
-        // The Rive startup animation requires 21.39+.
-        if (!VersionCheckPatch.IS_21_39_OR_GREATER
-                && SharedYouTubeSettings.SPLASH_SCREEN_STYLE.get() == SplashScreenAnimationStyle.RIVE_GLOW) {
+        // The glow startup animation requires 21.39+, and Morphe Glow requires 21.30+.
+        SplashScreenAnimationStyle splashScreenStyle = SharedYouTubeSettings.SPLASH_SCREEN_STYLE.get();
+        if (splashScreenStyle == SplashScreenAnimationStyle.RIVE_GLOW && !VersionCheckPatch.IS_21_39_OR_GREATER
+                || splashScreenStyle.isRiveGlowMorphe() && !VersionCheckPatch.IS_21_30_OR_GREATER) {
             Logger.printInfo(() -> "Resetting Rive splash screen animation style");
             SharedYouTubeSettings.SPLASH_SCREEN_STYLE.resetToDefault();
         }

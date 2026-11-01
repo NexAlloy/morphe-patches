@@ -11,13 +11,8 @@ import java.util.Locale;
 
 /** Final, display-only lyric cleanup, including an old-to-new UTF-16 offset map. */
 public final class LyricsTextFormatter {
-    public record Result(String text, int[] offsets) {
-        public int offset(int original) {
-            return original < 0 ? original : offsets[Math.min(original, offsets.length - 1)];
-        }
+    private LyricsTextFormatter() {
     }
-
-    private LyricsTextFormatter() { }
 
     public static Result format(String input, boolean capitalize, boolean strip) {
         final String text = input == null ? "" : input;
@@ -27,7 +22,7 @@ public final class LyricsTextFormatter {
             while (lineStart <= text.length()) {
                 int end = text.indexOf('\n', lineStart);
                 if (end < 0) end = text.length();
-                for (int at = end; at > lineStart;) {
+                for (int at = end; at > lineStart; ) {
                     final int cp = text.codePointBefore(at);
                     final int start = at - Character.charCount(cp);
                     if (!isPunctuation(cp) && !Character.isWhitespace(cp)
@@ -44,7 +39,7 @@ public final class LyricsTextFormatter {
         final StringBuilder out = new StringBuilder(text.length());
         final int[] offsets = new int[text.length() + 1];
         boolean firstCased = true;
-        for (int at = 0; at < text.length();) {
+        for (int at = 0; at < text.length(); ) {
             final int cp = text.codePointAt(at);
             final int end = at + Character.charCount(cp);
             for (int i = at; i < end; i++) offsets[i] = out.length();
@@ -68,9 +63,9 @@ public final class LyricsTextFormatter {
     private static boolean isPunctuation(int cp) {
         return switch (Character.getType(cp)) {
             case Character.CONNECTOR_PUNCTUATION, Character.DASH_PUNCTUATION,
-                    Character.START_PUNCTUATION, Character.END_PUNCTUATION,
-                    Character.INITIAL_QUOTE_PUNCTUATION, Character.FINAL_QUOTE_PUNCTUATION,
-                    Character.OTHER_PUNCTUATION -> true;
+                 Character.START_PUNCTUATION, Character.END_PUNCTUATION,
+                 Character.INITIAL_QUOTE_PUNCTUATION, Character.FINAL_QUOTE_PUNCTUATION,
+                 Character.OTHER_PUNCTUATION -> true;
             default -> false;
         };
     }
@@ -93,5 +88,11 @@ public final class LyricsTextFormatter {
         if (cp != 0x2024 && (name == null || !name.contains("FULL STOP"))) return false;
         return (start > 0 && text.codePointBefore(start) == cp)
                 || (end < text.length() && text.codePointAt(end) == cp);
+    }
+
+    public record Result(String text, int[] offsets) {
+        public int offset(int original) {
+            return original < 0 ? original : offsets[Math.min(original, offsets.length - 1)];
+        }
     }
 }

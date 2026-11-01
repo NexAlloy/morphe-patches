@@ -130,7 +130,7 @@ public class LyricsAiPromptPreference extends SwitchPreference {
         promptInput.setMinLines(4);
         promptInput.setMaxLines(8);
         promptInput.setVerticalScrollBarEnabled(true);
-        promptInput.setHint(str("morphe_music_lyrics_ai_prompt_dialog_title"));
+        promptInput.setHint(str("morphe_music_lyrics_ai_prompt_dialog_hint"));
         String currentPrompt = promptSetting.get();
         if (!currentPrompt.isEmpty()) {
             promptInput.setText(currentPrompt);
@@ -139,16 +139,6 @@ public class LyricsAiPromptPreference extends SwitchPreference {
         content.addView(promptInput, new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
-
-        TextView caption = new TextView(context);
-        caption.setText(str("morphe_music_lyrics_ai_prompt_dialog_hint"));
-        caption.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-        caption.setTextColor(ThemeUtils.getAppForegroundColor() & 0xAAFFFFFF);
-        LinearLayout.LayoutParams captionParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-        captionParams.topMargin = Dim.dp8;
-        content.addView(caption, captionParams);
 
         LinearLayout.LayoutParams reasoningParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
