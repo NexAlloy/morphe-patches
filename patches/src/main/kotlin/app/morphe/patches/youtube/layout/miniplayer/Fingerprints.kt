@@ -52,20 +52,35 @@ internal object MiniplayerModernConstructorFingerprint : Fingerprint(
     )
 )
 
+private val miniplayerRoundedCornersFilters = listOf(
+    methodCall(
+        opcode = Opcode.INVOKE_VIRTUAL,
+        smali = "Landroid/view/View;->setClipToOutline(Z)V"
+    ),
+    methodCall(
+        opcode = Opcode.INVOKE_VIRTUAL,
+        smali = "Landroid/view/View;->setOutlineProvider(Landroid/view/ViewOutlineProvider;)V"
+    )
+)
+
+/**
+ * 21.45+
+ */
 internal object MiniplayerRoundedCornersFingerprint : Fingerprint(
     accessFlags = listOf(AccessFlags.PRIVATE, AccessFlags.FINAL),
     returnType = "V",
+    parameters = listOf("Landroid/view/View;", "Z", "Z"),
+    filters = miniplayerRoundedCornersFilters
+)
+
+/**
+ * 21.44.
+ */
+internal object MiniplayerRoundedCorners2144Fingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PRIVATE, AccessFlags.FINAL),
+    returnType = "V",
     parameters = listOf("Landroid/view/View;", "Z"),
-    filters = listOf(
-        methodCall(
-            opcode = Opcode.INVOKE_VIRTUAL,
-            smali = "Landroid/view/View;->setClipToOutline(Z)V"
-        ),
-        methodCall(
-            opcode = Opcode.INVOKE_VIRTUAL,
-            smali = "Landroid/view/View;->setOutlineProvider(Landroid/view/ViewOutlineProvider;)V"
-        )
-    )
+    filters = miniplayerRoundedCornersFilters
 )
 
 /**
@@ -543,5 +558,19 @@ internal object MiniplayerControlsVisibilityFingerprint : Fingerprint(
             smali = "Landroid/view/ViewGroup;->setVisibility(I)V",
             location = MatchAfterImmediately()
         )
+    )
+)
+
+/**
+ * Reports the height the snackbars and the other bottom messages take, for every frame they slide.
+ * The first call passes it on, once every check has allowed it. YouTube moves its own miniplayer
+ * up by it.
+ */
+internal object BottomUiContainerReportHeightFingerprint : Fingerprint(
+    definingClass = "Lcom/google/android/apps/youtube/app/common/ui/bottomui/BottomUiContainer;",
+    returnType = "V",
+    parameters = listOf("I"),
+    filters = listOf(
+        methodCall(parameters = listOf("L", "I"), returnType = "V")
     )
 )

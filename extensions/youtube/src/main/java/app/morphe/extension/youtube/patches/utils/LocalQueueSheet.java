@@ -567,7 +567,7 @@ public final class LocalQueueSheet {
                 row.root.getParent().requestDisallowInterceptTouchEvent(true);
                 beginInteraction();
                 drag = new DragSession(row, event.getRawY());
-                row.foreground.setElevation(Dim.dp8);
+                row.root.setElevation(Dim.dp8);
                 row.root.setScaleX(1.02f);
                 row.root.setScaleY(1.02f);
                 scrollView.postOnAnimation(drag.autoScroll);
@@ -612,7 +612,9 @@ public final class LocalQueueSheet {
                 others[n++] = session.tops[j] + session.heights[j] / 2f;
             }
         }
-        session.target = dropIndex(center, others);
+        // At maxY, dropIndex() can still return the second-to-last position,
+        // so select last explicitly.
+        session.target = finger >= maxY ? last : dropIndex(center, others);
 
         final float draggedHeight = session.heights[origin];
         for (int j = 0; j <= last; j++) {
@@ -658,7 +660,7 @@ public final class LocalQueueSheet {
                             row.root.setTranslationY(0);
                             row.shift = 0;
                         }
-                        session.row.foreground.setElevation(0);
+                        session.row.root.setElevation(0);
                         if (drag == session) {
                             drag = null;
                         }
@@ -831,10 +833,14 @@ public final class LocalQueueSheet {
         }
     }
 
-    private static final class DragHandleView extends View {
+    /**
+     * Drag handle with three lines, also used by the navigation buttons order setting.
+     */
+    @SuppressLint("ViewConstructor")
+    public static final class DragHandleView extends View {
         private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-        DragHandleView(Context context, int color) {
+        public DragHandleView(Context context, int color) {
             super(context);
             paint.setColor(color);
             paint.setStrokeWidth(2.2f * context.getResources().getDisplayMetrics().density);

@@ -9,13 +9,14 @@ package app.morphe.patches.youtube.video.format
 
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
-import app.morphe.patcher.patch.bytecodePatch
+import app.morphe.patcher.patch.patch
 import app.morphe.patcher.util.cloneParameters
 import app.morphe.patcher.util.findFreeRegister
 import app.morphe.patcher.util.numberOfParameterRegistersLogical
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
 import app.morphe.patches.shared.FormatStreamModelToStringFingerprint
+import app.morphe.patches.shared.VideoStreamingDataConstructorFingerprint
 import app.morphe.patches.youtube.misc.extension.sharedExtensionPatch
 import app.morphe.util.findMethodFromToString
 import com.android.tools.smali.dexlib2.AccessFlags
@@ -33,7 +34,7 @@ private const val EXTENSION_FORMAT_INTERFACE =
 
 private lateinit var adaptiveFormatMethod : WeakReference<MutableMethod>
 
-val videoFormatPatch = bytecodePatch(
+val videoFormatPatch = patch(
     description = "Hooks YouTube to get format about the current playing video.",
 ) {
     dependsOn(sharedExtensionPatch)

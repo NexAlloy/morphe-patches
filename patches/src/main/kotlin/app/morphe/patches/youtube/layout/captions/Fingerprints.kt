@@ -20,10 +20,10 @@ import app.morphe.patcher.literal
 import app.morphe.patcher.methodCall
 import app.morphe.patcher.newInstance
 import app.morphe.patcher.opcode
-import app.morphe.patcher.patch.BytecodePatchContext
 import app.morphe.patcher.resource.ResourceType
 import app.morphe.patcher.resourceLiteral
 import app.morphe.patcher.string
+import app.morphe.patches.youtube.shared.PlayerTypeEnumFingerprint
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
@@ -334,10 +334,10 @@ internal object CaptionTracksManagerTranslationSourceFingerprint : Fingerprint(
 /**
  * Calls of the caption tracks manager auto-translate getter inside the subtitle manager.
  */
-internal class AutoTranslateTracksCallFingerprint(autoTranslateTracksMethod: MethodReference) : Fingerprint(
+internal object AutoTranslateTracksCallFingerprint : Fingerprint(
     classFingerprint = DefaultCaptionTrackFingerprint,
     filters = listOf(
-        methodCall(reference = autoTranslateTracksMethod)
+        methodCall(reference = { CaptionTracksManagerAutoTranslateTracksFingerprint.method })
     )
 )
 
@@ -392,7 +392,7 @@ internal class CaptionTrackBuilderSetterFingerprint(nullValueMessage: String) : 
  *
  * @param directTracksMethod Caption tracks manager method that returns the direct tracks.
  */
-internal class SubtitleManagerDirectTracksFingerprint(directTracksMethod: MethodReference) : Fingerprint(
+internal object SubtitleManagerDirectTracksFingerprint : Fingerprint(
     classFingerprint = SubtitleManagerFingerprintClassFingerprint,
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
     returnType = "Ljava/util/List;",
@@ -402,10 +402,10 @@ internal class SubtitleManagerDirectTracksFingerprint(directTracksMethod: Method
         fieldAccess(
             opcode = Opcode.IGET_OBJECT,
             definingClass = "this",
-            type = directTracksMethod.definingClass
+            type = { CaptionTracksManagerDirectTracksFingerprint.method.definingClass }
         ),
         opcode(Opcode.IF_EQZ, location = MatchAfterImmediately()),
-        methodCall(reference = directTracksMethod, location = MatchAfterImmediately())
+        methodCall(reference = { CaptionTracksManagerDirectTracksFingerprint.method }, location = MatchAfterImmediately())
     )
 )
 
@@ -418,7 +418,6 @@ internal object DefaultCaptionTrackFingerprint : Fingerprint(
     )
 )
 
-context(patchContext: BytecodePatchContext)
 internal fun preferredCaptionsTrackFingerprint() = Fingerprint(
     classFingerprint = DefaultCaptionTrackFingerprint,
     // 21.23+ also has a method without parameters that calls the default track method.
@@ -460,12 +459,12 @@ internal fun captionDefaultSelectionFingerprint(enumType: String) = Fingerprint(
 
 /**
  * Native caption track handler, matched at the failure callback of its requests.
+ * The source file name of the handler is only in 21.20+.
  */
 internal object CaptionTrackHandlerErrorFingerprint : Fingerprint(
     returnType = "V",
     parameters = listOf("Ljava/lang/Object;", "Ljava/lang/Exception;"),
     filters = listOf(
-        string("CabrSubtitleTrackHandler.java"),
         string("error retrieving subtitle"),
     )
 )
@@ -474,16 +473,58 @@ internal object CaptionTrackHandlerErrorFingerprint : Fingerprint(
  * Track selection of the native caption track handler, which creates the track request.
  *
  * @param requestTrack Caption track field of the track request.
+ * @param trackType Class of the caption track, which the field of the track request
+ *                  can declare as an Object.
+ * @param subtitleManagerType Class of [SubtitleManagerFingerprint].
  */
-internal class CaptionTrackHandlerSelectFingerprint(requestTrack: FieldReference) : Fingerprint(
+internal class CaptionTrackHandlerSelectFingerprint(
+    requestTrack: FieldReference,
+    trackType: String,
+    subtitleManagerType: String
+) : Fingerprint(
     classFingerprint = CaptionTrackHandlerErrorFingerprint,
     returnType = "V",
-    parameters = listOf(requestTrack.type),
+    parameters = listOf(trackType),
     filters = listOf(
+        // Loader of the track requests.
+        fieldAccess(opcode = Opcode.IGET_OBJECT, definingClass = "this"),
         methodCall(
             definingClass = requestTrack.definingClass,
             name = "<init>",
-            parameters = listOf(requestTrack.type)
+            parameters = listOf(trackType),
+            location = MatchAfterWithin(4)
+        ),
+        // Request of the loader, with the request and its callback.
+        methodCall(
+            opcode = Opcode.INVOKE_INTERFACE,
+            parameters = listOf(requestTrack.definingClass, "L"),
+            returnType = "V",
+            location = MatchAfterWithin(4)
+        ),
+        fieldAccess(opcode = Opcode.IGET_OBJECT, definingClass = "this", type = subtitleManagerType)
+    )
+)
+
+/**
+ * Track selection event of the subtitle manager, the same method as [SubtitleManagerFingerprint].
+ * Matches at the field of the selected track.
+ *
+ * @param trackType Caption track class.
+ */
+internal class SubtitleManagerSelectedTrackFingerprint(trackType: String) : Fingerprint(
+    classFingerprint = SubtitleManagerFingerprintClassFingerprint,
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "V",
+    parameters = listOf("L"),
+    filters = listOf(
+        string(""),
+        // Track of the selection event.
+        fieldAccess(opcode = Opcode.IGET_OBJECT, type = trackType, location = MatchAfterWithin(5)),
+        fieldAccess(
+            opcode = Opcode.IPUT_OBJECT,
+            definingClass = "this",
+            type = trackType,
+            location = MatchAfterWithin(3)
         )
     )
 )
@@ -491,10 +532,23 @@ internal class CaptionTrackHandlerSelectFingerprint(requestTrack: FieldReference
 /**
  * Result callback of the requests of the native caption track handler.
  */
-internal object CaptionTrackHandlerResultFingerprint : Fingerprint(
+internal class CaptionTrackHandlerResultFingerprint(requestTrack: FieldReference) : Fingerprint(
     classFingerprint = CaptionTrackHandlerErrorFingerprint,
     returnType = "V",
     parameters = listOf("Ljava/lang/Object;", "Ljava/lang/Object;"),
+    filters = listOf(checkCast(requestTrack.definingClass))
+)
+
+/**
+ * Updates the installed caption renderer with the playback time and speed.
+ */
+internal object CaptionTrackHandlerTimeFingerprint : Fingerprint(
+    classFingerprint = CaptionTrackHandlerErrorFingerprint,
+    returnType = "V",
+    parameters = listOf("J", "F"),
+    filters = listOf(
+        methodCall(parameters = listOf("J", "F"), returnType = "V")
+    )
 )
 
 /**
@@ -555,34 +609,34 @@ internal object PlayerOverlayStateToStringFingerprint : Fingerprint(
 /**
  * Creates the player state and asks an overlay if it is shown. More than one overlay layout does this.
  */
-internal fun getPlayerOverlayVisibilityFingerprint(stateType: String) = object : Fingerprint(
+internal object PlayerOverlayVisibilityFingerprint : Fingerprint(
     filters = listOf(
-        methodCall(definingClass = stateType, name = "<init>"),
+        methodCall(definingClass = { PlayerOverlayStateToStringFingerprint.originalClassDef }, name = "<init>"),
         methodCall(
             opcode = Opcode.INVOKE_INTERFACE,
-            parameters = listOf(stateType),
+            parameters = { listOf(PlayerOverlayStateToStringFingerprint.originalClassDef) },
             returnType = "Z",
             location = MatchAfterImmediately()
         )
     )
-) {}
+)
 
 /**
  * Asks an overlay if it is shown for the player type, which can be picture-in-picture.
  * Used instead of the player state by older versions.
  */
-internal fun getPlayerTypeOverlayVisibilityFingerprint(playerType: String) = object : Fingerprint(
+internal object PlayerTypeOverlayVisibilityFingerprint : Fingerprint(
     definingClass = "Lcom/google/android/apps/youtube/app/common/player/overlay/YouTubePlayerOverlaysLayout;",
     returnType = "Z",
     filters = listOf(
         methodCall(
             opcode = Opcode.INVOKE_INTERFACE,
-            parameters = listOf(playerType),
+            parameters = { listOf(PlayerTypeEnumFingerprint.originalClassDef) },
             returnType = "Z"
         ),
         opcode(Opcode.MOVE_RESULT, location = MatchAfterImmediately())
     )
-) {}
+)
 
 /**
  * Name of the captions overlay.
@@ -642,17 +696,17 @@ internal object EnterCueRangeOnAddFeatureFlagFingerprint : Fingerprint(
 /**
  * Adds a list of cue ranges. Matches at the cast of each cue range and the flag check.
  */
-internal fun getAddCueRangesFingerprint(enterCueRangeOnAddFlagMethod: MethodReference) = object : Fingerprint(
+internal object AddCueRangesFingerprint : Fingerprint(
     classFingerprint = CueRangeManagerSeekFingerprint,
     returnType = "V",
     parameters = listOf("Ljava/util/List;"),
     filters = listOf(
         methodCall(smali = "Ljava/util/Iterator;->next()Ljava/lang/Object;"),
         opcode(Opcode.CHECK_CAST, MatchAfterWithin(2)),
-        methodCall(reference = enterCueRangeOnAddFlagMethod),
+        methodCall(reference = { EnterCueRangeOnAddFeatureFlagFingerprint.originalMethod }),
         opcode(Opcode.MOVE_RESULT, MatchAfterImmediately())
     )
-) {}
+)
 
 /**
  * Caption cue, a cue range with the caption windows it shows when it starts.
@@ -768,6 +822,18 @@ internal object CaptionCueConstructorFingerprint : Fingerprint(
     parameters = listOf("I", "J", "Ljava/lang/CharSequence;", "Ljava/lang/CharSequence;", "L")
 )
 
+/** Caption window visibility is independent from its nonempty styled text. */
+internal fun getCaptionSettingsVisibilityFingerprint(settingsType: String) = object : Fingerprint(
+    definingClass = settingsType,
+    name = "toString",
+    returnType = "Ljava/lang/String;",
+    parameters = listOf(),
+    filters = listOf(
+        fieldAccess(opcode = Opcode.IGET_BOOLEAN, definingClass = "this", type = "Z"),
+        string("ap=%d, ah=%d, av=%d, vs=%b, sd=%b")
+    )
+) {}
+
 /**
  * Matches at the default caption window settings.
  */
@@ -789,6 +855,7 @@ internal fun getCaptionSamplerFingerprint(cueType: String) = object : Fingerprin
     returnType = "Ljava/util/List;",
     parameters = listOf("J"),
     filters = listOf(
+        fieldAccess(opcode = Opcode.IGET_OBJECT, definingClass = "this", type = "Ljava/util/List;"),
         newInstance(cueType),
         methodCall(definingClass = cueType, name = "<init>")
     )
@@ -837,15 +904,15 @@ internal fun getCaptionWindowSetterFingerprint(cueType: String) = object : Finge
 /**
  * Subtitle window constructor. Matches at the row used to measure caption text.
  */
-internal fun getCaptionWindowConstructorFingerprint(rowType: String) = object : Fingerprint(
+internal object CaptionWindowConstructorFingerprint : Fingerprint(
     definingClass = SUBTITLE_WINDOW_VIEW_CLASS,
     name = "<init>",
     returnType = "V",
     parameters = listOf("Landroid/content/Context;"),
     filters = listOf(
-        fieldAccess(opcode = Opcode.IPUT_OBJECT, definingClass = "this", type = rowType)
+        fieldAccess(opcode = Opcode.IPUT_OBJECT, definingClass = "this", type = { CaptionRowLayoutFingerprint.classDef })
     )
-) {}
+)
 
 /**
  * The height measure spec branch incorrectly checks the width measure mode.
@@ -947,6 +1014,16 @@ internal fun getCaptionOverlayPresenterFingerprint(cueType: String) = object : F
             returnType = "V"
         )
     )
+) {}
+
+/**
+ * Layout of the subtitle overlay, which contains the caption windows.
+ */
+internal fun getCaptionOverlayLayoutFingerprint(cueType: String) = object : Fingerprint(
+    classFingerprint = getCaptionOverlayPresenterFingerprint(cueType),
+    name = "onLayout",
+    returnType = "V",
+    parameters = listOf("Z", "I", "I", "I", "I")
 ) {}
 
 /**

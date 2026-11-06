@@ -7,7 +7,7 @@
 
 package app.morphe.patches.youtube.layout.livechat
 
-import app.morphe.patcher.patch.bytecodePatch
+import app.morphe.patcher.patch.patch
 import app.morphe.patches.all.misc.resources.addResourcesPatch
 import app.morphe.patches.shared.misc.litho.relayout.lithoRelayoutPatch
 import app.morphe.patches.shared.misc.settings.preference.InputType
@@ -27,7 +27,7 @@ private const val EXTENSION_CLASS =
     "Lapp/morphe/extension/youtube/patches/LiveChatTranslatePatch;"
 
 @Suppress("unused")
-val liveChatTranslatePatch = bytecodePatch(
+val liveChatTranslatePatch = patch(
     name = "Translate live chat",
     description = "Adds an option to translate live chat and live chat replay messages.",
 ) {
@@ -55,6 +55,8 @@ val liveChatTranslatePatch = bytecodePatch(
                         entryValuesKey = "morphe_post_translate_language_entry_values",
                     ),
                     TextPreference("morphe_live_chat_translate_exclude"),
+                    ListPreference("morphe_live_chat_translate_provider"),
+                    TextPreference("morphe_live_chat_translate_deepl_api_key"),
                     SwitchPreference("morphe_live_chat_translate_copy_button", summary = true),
                     ListPreference("morphe_live_chat_translate_style"),
                     SwitchPreference("morphe_live_chat_translate_bold", summary = true),

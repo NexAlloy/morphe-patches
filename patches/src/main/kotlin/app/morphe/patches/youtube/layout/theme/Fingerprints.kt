@@ -60,6 +60,12 @@ internal object RiveSplashScreenFeatureFlagFingerprint : Fingerprint(
     )
 )
 
+/**
+ * 21.44+ bootstrap flag to use the 'rive-android-v1' library instead of the Rive library
+ * of the startup animation. If it is on, the app does not play the Rive startup animation.
+ */
+internal const val RIVE_V1_LIBRARY_BOOTSTRAP_FLAG = 1073831080
+
 internal const val RIVE_THEMED_SPLASH_SCREEN_FEATURE_FLAG = 1073830411L
 
 /**
@@ -135,7 +141,7 @@ internal object RiveSplashScreenAnimationViewFingerprint : Fingerprint(
 )
 
 /**
- * 21.32 - 21.34 sets the view that the Rive animation is drawn in,
+ * 21.31 - 21.34 sets the view that the Rive animation is drawn in,
  * with a resource id that was loaded earlier for another view.
  */
 internal object RiveSplashScreenAnimationViewLegacyFingerprint : Fingerprint(
@@ -188,13 +194,15 @@ internal object SplashScreenOnStopFingerprint : Fingerprint(
  * Schedules the splash screen to close after a timeout of 2.5 seconds.
  * Must be matched against the method of [SplashScreenStyleFingerprint] or [SplashScreenStyleDelegateFingerprint].
  */
+internal val SPLASH_SCREEN_TIMEOUT_CALL = methodCall(
+    parameters = listOf("Ljava/lang/Runnable;", "J", "Ljava/util/concurrent/TimeUnit;")
+)
+
 internal object SplashScreenTimeoutFingerprint : Fingerprint(
     returnType = "V",
     filters = listOf(
         literal(2500L),
-        methodCall(
-            parameters = listOf("Ljava/lang/Runnable;", "J", "Ljava/util/concurrent/TimeUnit;")
-        )
+        SPLASH_SCREEN_TIMEOUT_CALL
     )
 )
 
@@ -412,5 +420,24 @@ internal object SpinnerThemeHookFingerprint : Fingerprint(
             opcode = Opcode.CHECK_CAST,
             location = MatchAfterWithin(3)
         )
+    )
+)
+
+/**
+ * If the status bar shows dark icons on a color, which it does only above a luminance of 0.8.
+ */
+internal object StatusBarDarkIconsFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.STATIC),
+    returnType = "Z",
+    parameters = listOf("I"),
+    filters = listOf(
+        methodCall(
+            opcode = Opcode.INVOKE_STATIC,
+            parameters = listOf("I"),
+            returnType = "D"
+        ),
+        opcode(Opcode.MOVE_RESULT_WIDE, MatchAfterImmediately()),
+        literal(0.8, location = MatchAfterImmediately()),
+        opcode(Opcode.CMPL_DOUBLE, MatchAfterImmediately())
     )
 )

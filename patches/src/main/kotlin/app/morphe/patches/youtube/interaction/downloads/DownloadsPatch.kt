@@ -12,9 +12,8 @@ package app.morphe.patches.youtube.interaction.downloads
 
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
-import app.morphe.patcher.patch.BytecodePatchContext
-import app.morphe.patcher.patch.bytecodePatch
-import app.morphe.patcher.patch.resourcePatch
+import app.morphe.patcher.patch.classDefBy
+import app.morphe.patcher.patch.patch
 import app.morphe.patcher.util.cloneParameters
 import app.morphe.patcher.util.getReference
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
@@ -50,7 +49,7 @@ import com.android.tools.smali.dexlib2.iface.reference.TypeReference
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethod
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethodParameter
 
-private val downloadsResourcePatch = resourcePatch {
+private val downloadsResourcePatch = patch {
     dependsOn(
         legacyPlayerControlsPatch,
         settingsPatch
@@ -122,11 +121,11 @@ private const val GET_GENERATED_REGISTRY =
 /**
  * @return The default instance field of a proto message, which the message is parsed with.
  */
-private fun BytecodePatchContext.protoDefaultInstance(messageType: String) =
+private fun protoDefaultInstance(messageType: String) =
     protoDefaultInstanceFingerprint(messageType).instructionMatches.first().fieldReference
 
 @Suppress("unused")
-val downloadsPatch = bytecodePatch(
+val downloadsPatch = patch(
     name = "Downloads",
     description = "Adds support to download videos with an external downloader app " +
         "using the in-app download button or a video player action button, " +
@@ -151,7 +150,7 @@ val downloadsPatch = bytecodePatch(
         setExtensionIsPatchIncluded(EXTENSION_SHORTS_DOWNLOAD_BUTTON)
         setExtensionIsPatchIncluded(EXTENSION_EXPORT_DOWNLOAD_BUTTON)
 
-        OfflineVideoEndpointFingerprint.method.addInstructionsWithLabels(
+        YouTubeOfflineVideoEndpointFingerprint.method.addInstructionsWithLabels(
             0,
             """
                 invoke-static/range { p3 .. p3 }, $EXTENSION_CLASS->inAppDownloadButtonOnClick(Ljava/lang/String;)Z
@@ -164,7 +163,7 @@ val downloadsPatch = bytecodePatch(
         )
 
         // Open the external downloader with the playlist link, instead of saving the playlist.
-        OfflinePlaylistEndpointFingerprint.method.addInstructionsWithLabels(
+        YouTubeOfflinePlaylistEndpointFingerprint.method.addInstructionsWithLabels(
             0,
             """
                 # The parameter registers can be higher than 15.
@@ -360,8 +359,9 @@ val downloadsPatch = bytecodePatch(
 
         // Commands run by the extension have no interaction logger, which saving a video
         // can use without checking it is set. The logger interface has a logger that logs nothing.
-        val interactionLoggerType = InteractionLoggerContextFingerprint.instructionMatches.last()
-            .instruction.getReference<TypeReference>()!!.type
+        // Everything reading the logger from a context uses the same type, so any match will do.
+        val interactionLoggerType = InteractionLoggerContextFingerprint.matchAll().first()
+            .instructionMatches.last().instruction.getReference<TypeReference>()!!.type
         val noOpInteractionLogger = classDefBy(interactionLoggerType).fields.single { field ->
             AccessFlags.STATIC.isSet(field.accessFlags) && field.type == interactionLoggerType
         }
