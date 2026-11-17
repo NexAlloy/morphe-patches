@@ -58,13 +58,17 @@ public final class SavePushNotificationsPatch {
      * @param renderers PushNotificationSupportedRenderers of a received push notification.
      */
     public static void savePushNotification(MessageLite renderers) {
+        savePushNotificationBytes(renderers.toByteArray());
+    }
+
+    public static void savePushNotificationBytes(byte[] bytes) {
         if (!Settings.DEBUG_SAVE_PUSH_NOTIFICATIONS.get()) {
             return;
         }
 
         try {
             String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z", Locale.US).format(new Date());
-            String proto = Base64.getEncoder().encodeToString(renderers.toByteArray());
+            String proto = Base64.getEncoder().encodeToString(bytes);
 
             append(getDirectory(), date + " " + proto + "\n");
         } catch (Exception ex) {

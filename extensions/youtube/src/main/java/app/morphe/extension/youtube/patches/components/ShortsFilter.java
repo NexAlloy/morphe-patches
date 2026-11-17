@@ -918,12 +918,16 @@ public final class ShortsFilter extends Filter {
      * @return If the notification opens a Short and is not shown.
      */
     public static boolean hideShortsNotification(@Nullable MessageLite renderers) {
+        return renderers != null && hideShortsNotificationBytes(renderers.toByteArray());
+    }
+
+    public static boolean hideShortsNotificationBytes(@Nullable byte[] renderers) {
         if (!Settings.HIDE_SHORTS_NOTIFICATIONS.get() || renderers == null) {
             return false;
         }
 
         try {
-            NavigationEndpoint endpoint = PushNotificationSupportedRenderers.parseFrom(renderers.toByteArray())
+            NavigationEndpoint endpoint = PushNotificationSupportedRenderers.parseFrom(renderers)
                     .getAndroidPushNotificationRenderer()
                     .getNavigationEndpoint();
             if (endpoint.hasReelWatchEndpoint()) {
