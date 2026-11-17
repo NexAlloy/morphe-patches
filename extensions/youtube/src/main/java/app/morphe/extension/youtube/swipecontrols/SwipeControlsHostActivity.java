@@ -168,6 +168,7 @@ public class SwipeControlsHostActivity {
      * @param event The event to dispatch.
      * @return Whether the event was consumed.
      */
+    @SuppressWarnings("UnusedReturnValue")
     public boolean dispatchDownstreamTouchEvent(MotionEvent event) {
         return downstreamTouchEvent.dispatch(event);
     }
@@ -208,7 +209,7 @@ public class SwipeControlsHostActivity {
     /**
      * Ensures that swipe controllers are initialized and attached.
      * On some ROMs with SDK <= 23, {@link #onCreate} and {@link #onStart} may not be called correctly.
-     * See https://github.com/revanced/revanced-patches/issues/446
+     * See <a href="https://github.com/revanced/revanced-patches/issues/446">revanced-patches issue 446</a>
      */
     private void ensureInitialized() {
         if (config == null) {

@@ -193,6 +193,7 @@ public final class PostTranslatePatch {
         drawableAdapter = drawables;
     }
 
+    @SuppressWarnings("SameReturnValue")
     public static boolean isPatchIncluded() {
         return false; // Modified during patching.
     }
@@ -232,7 +233,7 @@ public final class PostTranslatePatch {
      * Called when an element is parsed. The element is not changed.
      */
     public static byte[] onElementLoaded(byte[] bytes) {
-        if (!ENABLED || bytes == null || !FeedVideoCardsPatch.emlTextMayContain(bytes, POST)) {
+        if (!ENABLED || bytes == null || FeedVideoCardsPatch.emlTextLacks(bytes, POST)) {
             return bytes;
         }
         try {
@@ -587,7 +588,6 @@ public final class PostTranslatePatch {
                     continue;
                 }
                 // The text of the post is the first text below the header, such as above a poll.
-                //noinspection ConstantConditions
                 if (best == null || bounds.top < best.shown().bounds().top) {
                     best = candidate;
                 }
@@ -600,6 +600,7 @@ public final class PostTranslatePatch {
         Logger.printDebug(() -> {
             StringBuilder builder = new StringBuilder();
             for (PostText candidate : candidates) {
+                //noinspection SizeReplaceableByIsEmpty
                 if (builder.length() > 0) builder.append('\n');
                 builder.append(candidate == chosen ? "Post text: " : "Other post text: ")
                         .append(candidate.shown().bounds())
