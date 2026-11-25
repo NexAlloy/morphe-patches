@@ -2,6 +2,7 @@
  * Copyright 2026 Morphe.
  * https://github.com/MorpheApp/morphe-patches/pull/340
  * https://github.com/MorpheApp/morphe-patches/pull/3655
+ * https://github.com/MorpheApp/morphe-patches/pull/5170
  *
  * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
  */
@@ -10,7 +11,13 @@ package app.morphe.extension.shared.spoof.js;
 
 import static app.morphe.extension.shared.Utils.isNotEmpty;
 
+import android.util.Pair;
+
 import androidx.annotation.Nullable;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,6 +30,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -39,6 +47,7 @@ import app.morphe.extension.shared.settings.BaseSettings;
 import app.morphe.extension.shared.settings.LongSetting;
 import app.morphe.extension.shared.settings.SharedYouTubeSettings;
 import app.morphe.extension.shared.settings.StringSetting;
+
 
 /**
  * The functions used in this class are referenced below:
@@ -80,10 +89,18 @@ public final class JavaScriptManager {
     private static final StringSetting PLAYER_JS_HASH =
             SharedYouTubeSettings.SPOOF_VIDEO_STREAMS_PLAYER_JS_HASH_VALUE;
     /**
-     * Variant of JavaScript url.
+     * Whether to use QuackJS instead of yt-dlp-ejs.
      */
-    private static final JavaScriptVariant PLAYER_JS_VARIANT =
-            SharedYouTubeSettings.SPOOF_VIDEO_STREAMS_PLAYER_JS_VARIANT.get();
+    private static final boolean USE_QUACK_JS =
+            false; // NexAlloy does not implement the stream spoofing patch or QuackJS.
+    /**
+     * Variant of JavaScript url.
+     * If {@link #USE_QUACK_JS} is true, the player hints are fetched from the MetrolistGroup/faraday repository,
+     * which supports only {@link JavaScriptVariant#WEB}.
+     */
+    private static final JavaScriptVariant PLAYER_JS_VARIANT = USE_QUACK_JS
+            ? JavaScriptVariant.WEB
+            : SharedYouTubeSettings.SPOOF_VIDEO_STREAMS_PLAYER_JS_VARIANT.get();
     /**
      * Format of JavaScript url.
      */
@@ -95,10 +112,10 @@ public final class JavaScriptManager {
     /**
      * Player JavaScript is approximately 3MB in size,
      * So downloading it every time the app is launched results in unnecessary data usage.
-     * Player JavaScript has a lifespan of approximately one month, and new versions are released from the server every 3 days.
-     * Downloaded player JavaScript is saved in the cache directory and remains valid for approximately 3 days.
+     * Player JavaScript has a lifespan of approximately one month.
+     * Downloaded player JavaScript is saved in the cache directory and remains valid for approximately 7 days.
      */
-    private static final long PLAYER_JS_CACHE_EXPIRATION_MILLISECONDS = 3 * 24 * 60 * 60 * 1000L; // 3 days.
+    private static final long PLAYER_JS_CACHE_EXPIRATION_MILLISECONDS = 7 * 24 * 60 * 60 * 1000L; // 7 days.
     /**
      * User-agent of the Mobile client.
      */
@@ -208,7 +225,7 @@ public final class JavaScriptManager {
                 String cacheFileName = cacheFile.getName();
                 long currentTime = System.currentTimeMillis();
 
-                // There is a player JavaScript saved in the cache, and it was saved within 3 days.
+                // There is a player JavaScript saved in the cache, and it was saved within 7 days.
                 // Use the player JavaScript saved in the cache.
                 if (cacheFile.exists() && (currentTime - cacheFile.lastModified()) < PLAYER_JS_CACHE_EXPIRATION_MILLISECONDS) {
                     String cachedData = readFromFile(cacheFile);
@@ -220,13 +237,8 @@ public final class JavaScriptManager {
                 }
 
                 // There is no player JavaScript save in the cache,
-                // or if there is a player JavaScript, it has been more than 3 days since it was last saved.
+                // or if there is a player JavaScript, it has been more than 7 days since it was last saved.
                 // Download the latest player JavaScript.
-                if (!Utils.isNetworkConnected()) {
-                    Logger.printInfo(() -> "Cannot download playerJs (network disconnected)");
-                    return null;
-                }
-
                 String playerJs = downloadUrl(playerJsUrl);
                 if (isNotEmpty(playerJs)) {
                     cachedPlayerJs = playerJs;
@@ -250,14 +262,14 @@ public final class JavaScriptManager {
 
             if (!PLAYER_JS_HASH.get().isEmpty()
                     && currentTime - lastSavedTime < PLAYER_JS_CACHE_EXPIRATION_MILLISECONDS) {
-                // There is a hash saved in the settings and it was saved within 3 days.
+                // There is a hash saved in the settings and it was saved within 7 days.
                 // Use the hash saved in the settings.
                 cachedPlayerJsHash = PLAYER_JS_HASH.get();
                 String playerJsHash = cachedPlayerJsHash;
                 Logger.printDebug(() -> "Player js hash found in cache: " + playerJsHash);
             } else {
                 // There is no hash save in the settings,
-                // or if there is a hash, it has been more than 3 days since it was last saved.
+                // or if there is a hash, it has been more than 7 days since it was last saved.
                 // To get the latest hash, fetch the iframe API.
                 String iframeContent = downloadUrl(IFRAME_API_URL);
                 if (isNotEmpty(iframeContent)) {
@@ -313,6 +325,10 @@ public final class JavaScriptManager {
     @Nullable
     public static String getJavaScriptHash() {
         return cachedPlayerJsHash;
+    }
+
+    public static boolean isUseQuackJs() {
+        return USE_QUACK_JS;
     }
 
     public static String getJavaScriptVariant() {
@@ -438,15 +454,13 @@ public final class JavaScriptManager {
                                              String poToken,
                                              boolean isAdaptiveFormats,
                                              boolean requireSABR) {
-        PlayerDataExtractor playerDataExtractor = getPlayerDataExtractor();
-
         if (!isAdaptiveFormats) {
             // Since formats aren't used for playback, there's no problem using the default instance.
             streamingDataBuilder.addFormats(Format.newBuilder().build());
             return true;
         }
 
-        if (playerDataExtractor != null && formats != null && !formats.isEmpty()) {
+        if (formats != null && !formats.isEmpty()) {
             // In streamingData, all n-parameters have the same value.
             String obfuscatedNParameter = null;
 
@@ -493,18 +507,11 @@ public final class JavaScriptManager {
 
             // streamingData always has one n-parameter.
             if (isNotEmpty(obfuscatedNParameter)) {
-                var results = playerDataExtractor.bulkSigExtract(
-                        Collections.singletonList(obfuscatedNParameter),
-                        obfuscatedSParameters
-                );
-
-                // Since there is only one obfuscated n-parameter, there is also only one deobfuscated n-parameter
-                List<String> deobfuscatedNParameters = results.first;
-                if (deobfuscatedNParameters.isEmpty()) {
-                    handleDebugToast("Debug: Failed to deobfuscate n-parameter");
+                Pair<String, List<String>> results = deobfuscateParameters(obfuscatedNParameter, obfuscatedSParameters);
+                if (results == null) {
                     return false;
                 }
-                String deobfuscatedNParameter = deobfuscatedNParameters.get(0);
+                String deobfuscatedNParameter = results.first;
                 List<String> deobfuscatedSParameters = results.second;
                 if (hasSignatureCipher && deobfuscatedSParameters.isEmpty()) {
                     handleDebugToast("Debug: Failed to deobfuscate signatureCipher");
@@ -547,6 +554,31 @@ public final class JavaScriptManager {
         }
 
         return false;
+    }
+
+    /**
+     * @return The deobfuscated n-parameter and s-parameters, or null if the n-parameter could not be deobfuscated.
+     */
+    @Nullable
+    private static Pair<String, List<String>> deobfuscateParameters(String obfuscatedNParameter,
+                                                                    List<String> obfuscatedSParameters) {
+        PlayerDataExtractor playerDataExtractor = getPlayerDataExtractor();
+        if (playerDataExtractor == null) {
+            return null;
+        }
+
+        var results = playerDataExtractor.bulkSigExtract(
+                Collections.singletonList(obfuscatedNParameter),
+                obfuscatedSParameters
+        );
+
+        // Since there is only one obfuscated n-parameter, there is also only one deobfuscated n-parameter
+        List<String> deobfuscatedNParameters = results.first;
+        if (deobfuscatedNParameters.isEmpty()) {
+            handleDebugToast("Debug: Failed to deobfuscate n-parameter");
+            return null;
+        }
+        return new Pair<>(deobfuscatedNParameters.get(0), results.second);
     }
 
     private static String getNQueryParameter(String url) {

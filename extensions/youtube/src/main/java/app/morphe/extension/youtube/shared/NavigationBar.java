@@ -37,7 +37,11 @@ import app.morphe.extension.shared.ResourceType;
 import app.morphe.extension.shared.ResourceUtils;
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.patches.components.ContextInterface;
+import app.morphe.extension.shared.spoof.SpoofAppVersionPatch;
+import app.morphe.extension.youtube.patches.ClassicSubscriptionsLayoutPatch;
 import app.morphe.extension.youtube.patches.VersionCheckPatch;
+import app.morphe.extension.youtube.patches.ghostplay.GhostPlayPatch;
+import app.morphe.extension.youtube.patches.ghostplay.GhostPlayToolbarButton;
 import app.morphe.extension.youtube.settings.Settings;
 
 @SuppressWarnings("unused")
@@ -135,6 +139,10 @@ public final class NavigationBar {
         }
 
         toolbarResultsRef = new WeakReference<>(toolbar);
+
+        if (GhostPlayPatch.isPatchIncluded()) {
+            GhostPlayToolbarButton.attachToToolbar(layout);
+        }
     }
 
     /**
@@ -160,6 +168,22 @@ public final class NavigationBar {
                 && searchbarResults != closingSearchBarResultsRef.get()
                 && isSearchBarAttached
                 && searchbarResults.isShown();
+    }
+
+    /**
+     * @return If the search results are behind the Shorts player, such as the search results a Short
+     *         was opened from. The Shorts player hides the search bar while it's open,
+     *         and the feed behind it can be laid out again meanwhile.
+     */
+    public static boolean isSearchBarBehindShortsPlayer() {
+        return isSearchBarBehindShortsPlayer;
+    }
+
+    private static volatile boolean isSearchBarBehindShortsPlayer;
+
+    static {
+        ShortsPlayerState.getOnChange().addObserver(isOpen ->
+                isSearchBarBehindShortsPlayer = isOpen && isSearchBarActive());
     }
 
     /**
@@ -616,6 +640,55 @@ public final class NavigationBar {
                 : null;
     }
 
+    //
+    // Tabs at the top of Home.
+    //
+
+    /**
+     * Tab list of the Home page that has its Subscriptions tab selected, with the A/B layout that moves
+     * Subscriptions from the navigation bar to a tab at the top of Home.
+     * Each page with tabs has its own tab list, so the tabs of other pages (such as a channel opened
+     * from the Subscriptions tab) do not change it, and it is cleared when the Home page is closed.
+     */
+    private static volatile WeakReference<Object> subscriptionsTabListRef = new WeakReference<>(null);
+
+    /**
+     * Tab identifier of the Subscriptions tab at the top of Home. Like the category tabs of Home,
+     * the identifier is a filter type, and only the endpoint of the tab has the Subscriptions browse id.
+     */
+    private static final String SUBSCRIPTIONS_HOME_TAB_IDENTIFIER = "ATTRIBUTE_FILTER_TYPE_BROWSE_FEED_SUBSCRIPTIONS";
+
+    /**
+     * Injection point.
+     * <p>
+     * A tab is selected in a page with tabs, such as the tabs at the top of Home or the tabs of a channel.
+     *
+     * @param tabList       Tab list of the page.
+     * @param tabIdentifier Tab identifier of the selected tab.
+     */
+    public static void browseTabSelected(Object tabList, @Nullable String tabIdentifier) {
+        try {
+            // The Subscriptions feed opened by its navigation button can have the same tabs as Home,
+            // with its own tab selected.
+            if (NavigationButton.selectedNavigationButton == NavigationButton.SUBSCRIPTIONS) {
+                return;
+            }
+
+            Logger.printDebug(() -> "Tab selected: " + tabIdentifier);
+
+            if (SUBSCRIPTIONS_HOME_TAB_IDENTIFIER.equals(tabIdentifier)
+                    || ClassicSubscriptionsLayoutPatch.SUBSCRIPTIONS_BROWSE_ID.equals(tabIdentifier)) {
+                subscriptionsTabListRef = new WeakReference<>(tabList);
+            } else if (tabList == subscriptionsTabListRef.get()
+                    // A Home page that is opened again starts with its Home tab selected.
+                    || ClassicSubscriptionsLayoutPatch.HOME_BROWSE_ID.equals(tabIdentifier)) {
+                subscriptionsTabListRef = new WeakReference<>(null);
+            }
+        } catch (Exception ex) {
+            Logger.printException(() -> "browseTabSelected failure", ex);
+        }
+    }
+
     /** @noinspection EmptyMethod*/
     private static void navigationTabCreatedCallback(NavigationButton button, View tabView) {
         // custom change
@@ -725,11 +798,24 @@ public final class NavigationBar {
          * @return The active navigation tab.
          *         If the user is in the upload video UI, this returns tab that is still visually
          *         selected on screen (whatever tab the user was on before tapping the upload button).
+         *         The Subscriptions tab at the top of Home is the {@link #SUBSCRIPTIONS} tab,
+         *         the same as the Subscriptions navigation button.
          */
         @Nullable
         public static NavigationButton getSelectedNavigationButton() {
             waitForNavButtonLatchIfNeeded();
-            return selectedNavigationButton;
+            return getFeedNavigationButton(selectedNavigationButton);
+        }
+
+        /**
+         * @return {@link #SUBSCRIPTIONS} if the button is {@link #HOME} and the Subscriptions tab
+         *         at the top of Home is selected, otherwise the button.
+         */
+        @Nullable
+        private static NavigationButton getFeedNavigationButton(@Nullable NavigationButton button) {
+            return button == HOME && subscriptionsTabListRef.get() != null
+                    ? SUBSCRIPTIONS
+                    : button;
         }
 
         /**
@@ -746,7 +832,7 @@ public final class NavigationBar {
                 waitForNavButtonLatchIfNeeded();
                 NavigationButton goingBackButton = getGoingBackNavigationButton();
                 if (goingBackButton != null) {
-                    return goingBackButton;
+                    return getFeedNavigationButton(goingBackButton);
                 }
             }
 
