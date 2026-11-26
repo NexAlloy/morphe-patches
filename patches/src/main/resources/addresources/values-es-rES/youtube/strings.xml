@@ -202,7 +202,6 @@ Los reportes son públicos y se revisan antes de añadir un canal a una lista. L
   <string name="morphe_hide_links_preview_title">Ocultar vista previa de enlaces</string>
   <string name="morphe_hide_links_preview_summary">Oculta los enlaces web en la cabecera del canal</string>
   <string name="morphe_hide_members_only_chip_title">Ocultar etiqueta \'Solo para miembros\'</string>
-  <string name="morphe_hide_members_only_chip_summary">Oculta la etiqueta \'Solo para miembros\' en la barra de filtro del canal</string>
   <string name="morphe_hide_members_shelf_title">Ocultar estantería de miembros</string>
   <string name="morphe_hide_members_shelf_summary">Oculta la lista de miembros del canal</string>
   <string name="morphe_hide_posts_shelf_title">Ocultar estantería Publicaciones</string>
@@ -1385,10 +1384,16 @@ Configuración → Reproducción (o Reproducción automática) → Reproducción
   <string name="morphe_fullscreen_video_scale_entry_default">Predeterminado</string>
   <string name="morphe_fullscreen_video_scale_entry_stretch">Estirar (rellenar pantalla)</string>
   <string name="morphe_fullscreen_video_scale_entry_zoom">Zoom (recortar para rellenar)</string>
+  <string name="morphe_fullscreen_video_alignment_title">Alineación de vídeo en pantalla completa</string>
+  <string name="morphe_fullscreen_video_alignment_entry_top">Arriba</string>
+  <string name="morphe_fullscreen_video_alignment_entry_center">Centro</string>
+  <string name="morphe_fullscreen_video_alignment_entry_bottom">Abajo</string>
   <string name="morphe_fullscreen_video_scale_button_title">Mostrar botón de escala de vídeo</string>
   <string name="morphe_fullscreen_video_scale_button_summary">Pulsa para alternar entre Predeterminado, Estirar y Zoom</string>
   <string name="morphe_fullscreen_video_scale_button_fullscreen_only_title">Mostrar solo en pantalla completa</string>
   <string name="morphe_fullscreen_video_scale_button_fullscreen_only_summary">Oculta el botón de escala de vídeo en el reproductor vertical</string>
+  <string name="morphe_fullscreen_video_alignment_button_title">Mostrar botón de alineación de vídeo</string>
+  <string name="morphe_fullscreen_video_alignment_button_summary">Toca para alternar entre Superior, Centro e Inferior en pantalla completa</string>
   <!-- video.speed.replay.replayVideoPatch -->
   <string name="morphe_replay_video_button_title">Mostrar botón \"Reproducir más lento\"</string>
   <string name="morphe_replay_video_button_summary">Retrocede y ralentiza temporalmente el video. Toca de nuevo para cancelar</string>
@@ -1573,6 +1578,8 @@ Diseño para automóviles
   <!-- layout.statusbar.hideStatusBarPatch -->
   <string name="morphe_hide_status_bar_title">Ocultar barra de estado</string>
   <string name="morphe_hide_status_bar_summary">Oculta la barra de estado del sistema. Desliza hacia abajo desde el borde superior para mostrarla un momento</string>
+  <string name="morphe_hide_status_bar_avoid_cutout_title">Mantener el reproductor debajo del recorte de pantalla</string>
+  <string name="morphe_hide_status_bar_avoid_cutout_summary">Mueve el reproductor de video en modo retrato debajo del recorte de pantalla cuando la barra de estado está oculta, dejando una barra vacía en la parte superior. Desactiva esto para permitir que el video llene la pantalla detrás del recorte</string>
   <string name="morphe_fix_status_bar_layout_title">Corregir barra de estado que cubre barras superiores</string>
   <string name="morphe_fix_status_bar_layout_summary">Mantiene la uniformidad del diseño de la barra de estado, de modo que no cubra las barras superiores y no deje ningún espacio vacío encima del reproductor. Desactiva esta opción si la aplicación se bloquea o las barras superiores no se ven bien.</string>
   <!-- layout.theme.themePatch -->
@@ -2139,6 +2146,7 @@ La grabación automática es opcional. Se detiene en modo incógnito o cuando ca
   <string name="morphe_ghost_play_auto_search_summary">Ve automáticamente en modo Ghost los videos abiertos desde los resultados de búsqueda</string>
   <string name="morphe_ghost_play_manage_channels_title">Auto-ghost de canales</string>
   <string name="morphe_ghost_play_manage_channels_summary">Busca, añade, inspecciona y gestiona los canales que siempre se reproducen en modo Ghost</string>
+  <string name="morphe_ghost_play_manage_channels_summary_count">%d canales configurados: toca para buscar, revisar o eliminar</string>
   <string name="morphe_ghost_play_local_history_title">Mantener historial local de Ghost</string>
   <string name="morphe_ghost_play_local_history_summary">Recuerda los vídeos del modo Ghost y las posiciones de reproducción solo en este dispositivo (nunca se envían a YouTube)</string>
   <string name="morphe_ghost_play_history_limit_title">Límite del historial local de Ghost</string>
@@ -2151,6 +2159,7 @@ La grabación automática es opcional. Se detiene en modo incógnito o cuando ca
   <string name="morphe_ghost_play_history_limit_unlimited">Ilimitado</string>
   <string name="morphe_ghost_play_view_history_title">Abrir historial local de Ghost</string>
   <string name="morphe_ghost_play_view_history_summary">Ver, buscar, reanudar en modo Ghost o borrar el historial del dispositivo</string>
+  <string name="morphe_ghost_play_view_history_summary_count">%1$d vídeos almacenados en el dispositivo (%2$s): pulsa para verlos o reanudarlos</string>
   <string name="morphe_ghost_play_view_history_summary_empty">Aún no hay videos grabados (almacenados solo en este dispositivo)</string>
   <string name="morphe_ghost_play_toolbar_timed_badge">%dm</string>
   <string name="morphe_ghost_play_flyout_action">Reproducir en modo Ghost</string>
@@ -2178,10 +2187,12 @@ La grabación automática es opcional. Se detiene en modo incógnito o cuando ca
   <string name="morphe_ghost_play_timer_custom_set">Establecer</string>
   <string name="morphe_ghost_play_quick_channel_state_on">Auto-ghost ACTIVADO para este canal</string>
   <string name="morphe_ghost_play_quick_channel_state_off">Auto-ghost DESACTIVADO para este canal</string>
+  <string name="morphe_ghost_play_quick_channel_count">%d canales configurados</string>
   <string name="morphe_ghost_play_quick_channel_manage_btn">Lista (%d)</string>
   <string name="morphe_ghost_play_channel_added_toast">Se añadió \"%s\" a los canales de auto-ghost</string>
   <string name="morphe_ghost_play_channel_removed_toast">Se eliminó \"%s\" de los canales de auto-ghost</string>
   <string name="morphe_ghost_play_history_title">Historial local de Ghost</string>
+  <string name="morphe_ghost_play_history_subtitle_size">%d vídeos (%s) · toca para reanudar en modo Fantasma; mantén pulsado para eliminarlos</string>
   <string name="morphe_ghost_play_history_search_hint">Filtrar por título de video o canal…</string>
   <string name="morphe_ghost_play_history_no_match">No hay videos coincidentes en el historial local de Ghost</string>
   <string name="morphe_ghost_play_history_empty">Aún no hay historial local de Ghost</string>
@@ -2206,6 +2217,7 @@ La grabación automática es opcional. Se detiene en modo incógnito o cuando ca
   <string name="morphe_ghost_play_channels_searching">Buscando canales de YouTube…</string>
   <string name="morphe_ghost_play_channels_search_error">Error en la búsqueda. Comprueba tu conexión e inténtalo de nuevo.</string>
   <string name="morphe_ghost_play_channels_search_no_results">No se han encontrado canales para esa consulta</string>
+  <string name="morphe_ghost_play_channels_search_count">Se han encontrado %d canales: pulsa en Añadir para activar auto-fantasma</string>
   <string name="morphe_ghost_play_channels_recent_videos">Vídeos recientes</string>
   <string name="morphe_ghost_play_channels_loading_details">Cargando vídeos recientes…</string>
   <string name="morphe_ghost_play_channels_no_recent_videos">No se han encontrado vídeos recientes (pulsa para reintentar)</string>

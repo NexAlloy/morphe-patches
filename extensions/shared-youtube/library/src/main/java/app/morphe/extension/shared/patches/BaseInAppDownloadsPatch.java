@@ -46,6 +46,7 @@ import app.morphe.extension.shared.innertube.Offline.OfflineVideoEndpoint;
 import app.morphe.extension.shared.innertube.Offline.OfflineabilityContainer;
 import app.morphe.extension.shared.innertube.Offline.OfflineabilityRenderer;
 import app.morphe.extension.shared.innertube.PlayerResponseOuterClass.PlayerGestureConfig;
+import app.morphe.extension.shared.innertube.PlayerResponseOuterClass.VideoDetails;
 import app.morphe.extension.shared.innertube.SavedVideo.OfflineState;
 import app.morphe.extension.shared.innertube.SavedVideo.OfflineStateAction;
 import app.morphe.extension.shared.settings.SharedYouTubeSettings;
@@ -578,7 +579,8 @@ public class BaseInAppDownloadsPatch {
      * Injection point.
      * <p>
      * Called off the main thread with the player response the app saves a video with.
-     * If the server declines to save the video, the streams are fetched with another client.
+     * If the server declines to save the video, or allows it but has no formats the app can save,
+     * the streams are fetched with another client.
      *
      * @param playerResponse Player response proto of the video.
      * @param saveStoryboards If the saved video needs the storyboards, which the seekbar thumbnails are made of.
@@ -604,11 +606,16 @@ public class BaseInAppDownloadsPatch {
 
             final boolean allowed = original.getOfflineState().getActionValue()
                     == OfflineStateAction.OFFLINE_STATE_ACTION_OK_VALUE;
-            if (allowed && original.getStreamingData().getAdaptiveFormatsCount() > 0) {
+            final int adaptiveFormatsCount = original.getStreamingData().getAdaptiveFormatsCount();
+            final int savableFormatsCount = countSavableFormats(original.getStreamingData());
+            if (allowed && adaptiveFormatsCount > 0 && savableFormatsCount > 0) {
                 if (!videoId.isEmpty()) {
                     SponsorBlockOfflineStorage.fetchAndSaveSegments(videoId);
                 }
                 return null;
+            }
+            if (allowed && adaptiveFormatsCount > 0) {
+                Logger.printDebug(() -> "Allowed offline player response has no savable formats, replacing: " + videoId);
             }
 
             if (videoId.isEmpty()) {
@@ -633,7 +640,12 @@ public class BaseInAppDownloadsPatch {
             // The video details of other clients lack the music video type, and YouTube Music
             // then shows a black player background instead of the colors of the album artwork.
             // The video details of the app's own response are kept, including the fields the proto does not declare.
-            builder.setVideoDetails(original.getVideoDetails());
+            VideoDetails details = original.getVideoDetails();
+            final int replacementLength = builder.getVideoDetails().getLengthSeconds();
+            if (details.getLengthSeconds() <= 0 && replacementLength > 0) {
+                details = details.toBuilder().setLengthSeconds(replacementLength).build();
+            }
+            builder.setVideoDetails(details);
             if (builder.hasCaptions()) {
                 builder.setCaptions(srv3Captions(builder.getCaptions()));
             }
