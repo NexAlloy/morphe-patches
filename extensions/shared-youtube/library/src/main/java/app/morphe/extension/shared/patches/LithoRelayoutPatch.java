@@ -67,6 +67,14 @@ public final class LithoRelayoutPatch {
      */
     public interface LithoViewInterface {
         /**
+         * @return The underlying view, or null if a runtime adapter's view has been collected.
+         */
+        @Nullable
+        default View patch_getView() {
+            return (View) this;
+        }
+
+        /**
          * @return The component tree that calculates the layout of the Litho view, or null if none.
          */
         @Nullable
@@ -533,21 +541,23 @@ public final class LithoRelayoutPatch {
             }
             LithoViewInterface lithoView = iterator.next();
             iterator.remove();
-            View view = (View) lithoView;
-            if (remount && isShownOrInBackground(view) && !isRemountedMeanwhile(view)) {
-                lithoView.patch_forceRemount();
-                remountedViews.add(view);
-            }
-            // A recycled view that is no longer attached is laid out again when it's bound again.
-            if ((!remount || pendingRelayoutViews.remove(lithoView)) && view.isAttachedToWindow()) {
-                ComponentTreeInterface componentTree = lithoView.patch_getComponentTree();
-                if (remount) {
-                    // The image requests of a view are created when it's laid out, such as with the
-                    // thumbnail of a video whose DeArrow icon was tapped. A view mounted again is laid out
-                    // again before it's mounted, in the same frame, so it loads the images of the new layout.
-                    lithoView.patch_forceRelayout();
-                } else if (componentTree != null && countRelayout(componentTree)) {
-                    componentTree.patch_forceLayoutAsync();
+            View view = lithoView.patch_getView();
+            if (view != null) {
+                if (remount && isShownOrInBackground(view) && !isRemountedMeanwhile(view)) {
+                    lithoView.patch_forceRemount();
+                    remountedViews.add(view);
+                }
+                // A recycled view that is no longer attached is laid out again when it's bound again.
+                if ((!remount || pendingRelayoutViews.remove(lithoView)) && view.isAttachedToWindow()) {
+                    ComponentTreeInterface componentTree = lithoView.patch_getComponentTree();
+                    if (remount) {
+                        // The image requests of a view are created when it's laid out, such as with the
+                        // thumbnail of a video whose DeArrow icon was tapped. A view mounted again is laid out
+                        // again before it's mounted, in the same frame, so it loads the images of the new layout.
+                        lithoView.patch_forceRelayout();
+                    } else if (componentTree != null && countRelayout(componentTree)) {
+                        componentTree.patch_forceLayoutAsync();
+                    }
                 }
             }
             pendingViewsFrameCallbackPosted = true;
